@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Moki</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .about-page {
+            flex: 1;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 120px 2rem 5rem;
+        }
+
+        /* ── Header ─────────────────────────────────── */
+        .about-header {
+            margin-bottom: 5rem;
+        }
+
+        .about-eyebrow {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.7;
+            margin-bottom: 1.2rem;
+        }
+
+        .about-header h1 {
+            font-size: 5rem;
+            margin-bottom: 0;
+        }
+
+        /* ── Two-column bio layout ───────────────────── */
+        .about-bio {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            gap: 5rem;
+            margin-bottom: 5rem;
+            align-items: start;
+        }
+
+        .about-portrait {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        .portrait-placeholder {
+            font-family: var(--font-h2);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.3;
+        }
+
+        .about-text {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+            padding-top: 0.4rem;
+        }
+
+        .about-text p {
+            max-width: 560px;
+        }
+
+        .about-text p.placeholder {
+            opacity: 0.25;
+            font-style: italic;
+        }
+
+        /* ── Divider ─────────────────────────────────── */
+        .section-divider {
+            width: 100%;
+            height: 1px;
+            background: var(--glass-border);
+            margin-bottom: 4rem;
+        }
+
+        /* ── Quick Facts / Tags row ──────────────────── */
+        .about-facts {
+            margin-bottom: 5rem;
+        }
+
+        .section-label {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0;
+        }
+
+        .fact-item {
+            border: 1px solid var(--glass-border);
+            margin: -1px 0 0 -1px;
+            padding: 1.4rem 1.6rem;
+        }
+
+        .fact-label {
+            font-family: var(--font-h2);
+            font-size: 0.65rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.5;
+            margin-bottom: 0.5rem;
+        }
+
+        .fact-value {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .fact-value.placeholder {
+            opacity: 0.25;
+            font-style: italic;
+        }
+
+        /* ── Links / Find Me section ─────────────────── */
+        .about-links {
+            margin-bottom: 4rem;
+        }
+
+        .link-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.1rem 0;
+            border-top: 1px solid var(--glass-border);
+            text-decoration: none;
+            transition: padding-left 0.2s ease;
+        }
+
+        .link-row:last-child {
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .link-row:hover {
+            padding-left: 0.6rem;
+        }
+
+        .link-row-name {
+            font-family: var(--font-h2);
+            font-size: 0.85rem;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .link-row-handle {
+            font-family: var(--font-h2);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            transition: color 0.2s ease;
+        }
+
+        .link-row:hover .link-row-handle {
+            color: var(--accent);
+        }
+
+        /* ── Responsive ──────────────────────────────── */
+        @media (max-width: 768px) {
+            .about-header h1 { font-size: 3.5rem; }
+
+            .about-bio {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .about-portrait {
+                max-width: 240px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Effect -->
+    <div id="loader">
+        <div class="loader-line"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="index.html" class="nav-brand">MOKI.</a>
+        <div class="nav-links">
+            <a href="about.html" class="active">About Me</a>
+            <a href="presets.html">Presets</a>
+            <a href="wip.html">Utilities</a>
+            <a href="aesthetics.html">Aesthetics</a>
+        </div>
+    </nav>
+
+    <main class="about-page">
+
+        <!-- Header -->
+        <div class="about-header">
+            <div class="about-eyebrow">About Me</div>
+            <h1>Hi, I'm Moki.</h1>
+        </div>
+
+        <!-- Bio -->
+        <div class="about-bio">
+            <div class="about-portrait">
+                <img src="images/portrait.png" alt="Portrait of Moki">
+            </div>
+
+            <div class="about-text">
+                <p class="placeholder">Why am I here</p>
+                <p class="placeholder">What am I doing</p>
+                <p class="placeholder">Why do my deepest thoughts keep happening in the bathroom</p>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- Quick Facts -->
+        <div class="about-facts">
+            <div class="section-label">Quick Facts</div>
+            <div class="facts-grid">
+                <div class="fact-item">
+                    <div class="fact-label">Based In</div>
+                    <div class="fact-value placeholder">US</div>
+                </div>
+                <div class="fact-item">
+                    <div class="fact-label">Primary Models</div>
+                    <div class="fact-value placeholder">GLM, Kimi</div>
+                </div>
+                <div class="fact-item">
+                    <div class="fact-label">RP Genres</div>
+                    <div class="fact-value placeholder">Fantasy, Xianxia/Wuxia, Drama, Tragedy, Romance</div>
+                </div>
+                <div class="fact-item">
+                    <div class="fact-label">Also Into</div>
+                    <div class="fact-value placeholder">Reading, writing, playing with cats (everyone's)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- Find Me -->
+        <div class="about-links">
+            <div class="section-label">Find Me</div>
+
+            <a href="#" class="link-row">
+                <span class="link-row-name">GitHub</span>
+                <span class="link-row-handle">mokimoko  →</span>
+            </a>
+        </div>
+
+    </main>
+
+    <footer class="subtle-footer">
+        <p>&copy; 2026 Moki.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

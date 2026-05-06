@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Oswald:wght@500;700&family=Space+Mono&display=swap');
+
+:root {
+    --bg-color: #070707;
+    --text-main: #ffffff;
+    --text-muted: #d0d0d0;
+    --accent: #c7b583; 
+    
+    /* Typography Variety */
+    --font-h1: 'Oswald', sans-serif;
+    --font-h2: 'Space Mono', monospace;
+    --font-body: 'Inter', sans-serif;
+    
+    /* Transparency Effects */
+    --glass-bg: rgba(255, 255, 255, 0.02);
+    --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+}
+
+/* 
+ * 1. BULLETPROOF BODY SETUP
+ * This forces the footer to the bottom permanently.
+ */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Typography */
+h1 {
+    font-family: var(--font-h1);
+    font-size: 5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 1.1;
+}
+
+h2 {
+    font-family: var(--font-h2);
+    font-size: 1.2rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+}
+
+/* Loading Effect */
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--bg-color);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.6s ease;
+}
+
+.loader-line {
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 1s cubic-bezier(0.8, 0, 0.2, 1);
+}
+
+.loaded #loader {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Navigation */
+#navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem 4rem;
+    background: rgba(7, 7, 7, 0.75);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 1000;
+    border-bottom: 1px solid var(--glass-border);
+    transition: transform 0.3s ease;
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+.nav-hidden {
+    transform: translateY(-100%);
+}
+
+.nav-brand {
+    font-family: var(--font-h1);
+    font-size: 1.5rem;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 4px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: var(--font-h2);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--accent);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 1rem 2.5rem;
+    background: transparent;
+    color: var(--accent);
+    font-family: var(--font-h2);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    border: 1px solid var(--accent);
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: var(--accent);
+    color: var(--bg-color);
+}
+
+/* Layout Classes (For your internal pages like presets) */
+.container {
+    flex: 1; /* Automatically pushes footer to bottom of these pages too */
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 80px 2rem 4rem 2rem;
+}
+
+/* 
+ * 2. HERO LANDING AREA 
+ */
+.hero {
+    flex: 1; /* Fills empty space perfectly between Nav and Footer */
+    display: flex;
+    flex-direction: column;
+    padding: 0 4rem;
+}
+
+.hero-content {
+    /* 
+       THIS IS YOUR CONTROL LEVER. 
+       32vh means it drops exactly 32% of the way down your screen. 
+       Want it LOWER? Change it to 38vh or 45vh. 
+    */
+    margin-top: 24vh; 
+}
+
+.hero-content p {
+    max-width: 500px;
+    margin-top: 1.5rem;
+}
+
+/* Grid & Cards for Presets/Content */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 360px));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 2rem;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.card:hover {
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* Container adjusted for 600x400 (3:2 ratio) */
+.img-container {
+    width: 100%;
+    /* 
+       600px width / 400px height = 1.5 ratio 
+       So, Height = Width / 1.5. 
+       Using aspect-ratio is the modern way to keep it sharp:
+    */
+    aspect-ratio: 11 / 7; 
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    margin-bottom: 1.5rem;
+}
+
+/* The actual image */
+.img-container img {
+    width: 100%;
+    height: 100%;
+    display: block; /* Removes tiny extra space under the image */
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.5s ease;
+}
+
+/* Optional: Add a subtle zoom on hover for a high-end feel */
+.card:hover .img-container img {
+    transform: scale(1.05);
+}
+
+/* If no image exists, this will still look good */
+.img-placeholder {
+    width: 100%;
+    height: 200px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-muted);
+    font-family: var(--font-h2);
+    font-size: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+/* 
+ * 3. SUBTLE FOOTER 
+ * No absolute positioning. Native document flow handles it cleanly.
+ */
+.subtle-footer {
+    width: 100%;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: auto; 
+}
+
+.subtle-footer p {
+    font-family: var(--font-h2);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+}
+
+.subtle-footer p:hover {
+    opacity: 0.8;
+}

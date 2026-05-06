@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon | Moki</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .wip-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0 4rem;
+            padding-top: 80px;
+        }
+
+        .wip-label {
+            font-family: var(--font-h2);
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+            opacity: 0.7;
+        }
+
+        .wip-container h1 {
+            font-size: 6rem;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .wip-container p {
+            max-width: 420px;
+            margin-bottom: 2rem;
+        }
+
+        .wip-bar {
+            width: 60px;
+            height: 1px;
+            background: var(--accent);
+            margin-bottom: 2rem;
+            opacity: 0.4;
+        }
+
+        .back-link {
+            font-family: var(--font-h2);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .back-link::before {
+            content: '← ';
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Effect -->
+    <div id="loader">
+        <div class="loader-line"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="index.html" class="nav-brand">MOKI.</a>
+        <div class="nav-links">
+            <a href="about.html">About Me</a>
+            <a href="presets.html">Presets</a>
+            <a href="utilities.html">Utilities</a>
+            <a href="aesthetics.html">Aesthetics</a>
+        </div>
+    </nav>
+
+    <main class="wip-container">
+        <div class="wip-label">Work In Progress</div>
+        <h1>Not Yet.</h1>
+        <div class="wip-bar"></div>
+        <p>This page is still being built. Check back later!</p>
+        <a href="javascript:history.back()" class="back-link">Go back</a>
+    </main>
+
+    <footer class="subtle-footer">
+        <p>&copy; 2026 Moki.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

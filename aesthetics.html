@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aesthetics | Moki</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .aesthetics-page {
+            flex: 1;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 120px 2rem 5rem;
+        }
+
+        .aesthetics-page h1 {
+            margin-bottom: 4rem;
+        }
+
+        /* ── Section ─────────────────────────────────── */
+        .theme-section {
+            margin-bottom: 5rem;
+        }
+
+        .section-label {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.6;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ── Theme Grid ──────────────────────────────── */
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 360px));
+            gap: 2rem;
+        }
+
+        /* ── Theme Card ──────────────────────────────── */
+        .theme-card {
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+
+        .theme-card:hover {
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .theme-img {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .theme-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .theme-card:hover .theme-img img {
+            transform: scale(1.04);
+        }
+
+        .theme-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem 1.5rem;
+            gap: 1rem;
+        }
+
+        .theme-name {
+            font-family: var(--font-h2);
+            font-size: 0.85rem;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-sm {
+            display: inline-block;
+            padding: 0.55rem 1.2rem;
+            background: transparent;
+            color: var(--accent);
+            font-family: var(--font-h2);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            border: 1px solid var(--accent);
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .btn-sm:hover {
+            background: var(--accent);
+            color: var(--bg-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Effect -->
+    <div id="loader">
+        <div class="loader-line"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="index.html" class="nav-brand">MOKI.</a>
+        <div class="nav-links">
+            <a href="about.html">About Me</a>
+            <a href="presets.html">Presets</a>
+            <a href="wip.html">Utilities</a>
+            <a href="aesthetics.html" class="active">Aesthetics</a>
+        </div>
+    </nav>
+
+    <main class="aesthetics-page">
+
+        <h1>Aesthetics</h1>
+
+        <!-- SillyTavern Themes -->
+        <div class="theme-section">
+            <div class="section-label">SillyTavern</div>
+            <div class="theme-grid">
+
+                <div class="theme-card">
+                    <div class="theme-img">
+                        <img src="images/themes/nebula-dark.png" alt="Nebula Dark">
+                    </div>
+                    <div class="theme-footer">
+                        <span class="theme-name">Nebula Dark</span>
+                        <a href="downloads/themes/nebula-dark.json" download class="btn-sm">Download</a>
+                    </div>
+                </div>
+
+                <div class="theme-card">
+                    <div class="theme-img">
+                        <img src="images/themes/nebula-cappuccino.png" alt="Nebula Cappuccino">
+                    </div>
+                    <div class="theme-footer">
+                        <span class="theme-name">Nebula Cappuccino</span>
+                        <a href="downloads/themes/nebula-cappuccino.json" download class="btn-sm">Download</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Marinara Engine Themes -->
+        <div class="theme-section">
+            <div class="section-label">Marinara Engine</div>
+            <div class="theme-grid">
+
+                <div class="theme-card">
+                    <div class="theme-img">
+                        <img src="images/themes/chaotic-neutral.png" alt="Chaotic Neutral">
+                    </div>
+                    <div class="theme-footer">
+                        <span class="theme-name">Chaotic Neutral</span>
+                        <a href="downloads/themes/chaotic-neutral.json" download class="btn-sm">Download</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="subtle-footer">
+        <p>&copy; 2026 Moki.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

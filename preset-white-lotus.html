@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Lotus | Moki</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ── Page Layout ────────────────────────────── */
+        .preset-page {
+            flex: 1;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 120px 2rem 5rem;
+        }
+
+        /* ── Back Crumb ─────────────────────────────── */
+        .breadcrumb {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 3rem;
+            transition: color 0.2s ease;
+        }
+        .breadcrumb::before { content: '← '; }
+        .breadcrumb:hover { color: var(--accent); }
+
+        /* ── Hero Row ───────────────────────────────── */
+        .preset-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-bottom: 5rem;
+        }
+
+        .preset-hero-image {
+            width: 100%;
+            aspect-ratio: 11 / 7;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+
+        .preset-hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        .preset-hero-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            padding-top: 0.5rem;
+        }
+
+        .preset-eyebrow {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.7;
+        }
+
+        .preset-hero-meta h1 {
+            font-size: 3.5rem;
+        }
+
+        .preset-hero-meta .tagline {
+            font-family: var(--font-h2);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            max-width: 380px;
+        }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
+            opacity: 0.3;
+            margin: 0.5rem 0;
+        }
+
+        /* ── About Section ──────────────────────────── */
+        .section-label {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.6;
+            margin-bottom: 1rem;
+        }
+
+        .about-block {
+            margin-bottom: 4rem;
+        }
+
+        .about-block p {
+            max-width: 680px;
+            margin-bottom: 1rem;
+        }
+
+        /* ── Models / Parameters Table ──────────────── */
+        .models-block {
+            margin-bottom: 4rem;
+        }
+
+        .model-row {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 1rem 2rem;
+            border-top: 1px solid var(--glass-border);
+            padding: 1.2rem 0;
+            align-items: start;
+        }
+
+        .model-row:last-child {
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .model-name {
+            font-family: var(--font-h2);
+            font-size: 0.8rem;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding-top: 0.1rem;
+        }
+
+        .model-params {
+            font-family: var(--font-h2);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.9;
+        }
+
+        .model-params span {
+            color: var(--accent);
+            opacity: 0.8;
+        }
+
+        /* ── How To Use ─────────────────────────────── */
+        .howto-block {
+            margin-bottom: 5rem;
+        }
+
+        .howto-list {
+            list-style: none;
+            max-width: 680px;
+        }
+
+        .howto-list li {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+            padding: 0.6rem 0;
+            border-top: 1px solid var(--glass-border);
+            display: grid;
+            grid-template-columns: 24px 1fr;
+            gap: 1rem;
+        }
+
+        .howto-list li:last-child {
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .howto-list .step-num {
+            font-family: var(--font-h2);
+            font-size: 0.65rem;
+            color: var(--accent);
+            opacity: 0.5;
+            padding-top: 0.25rem;
+        }
+
+        /* ── Download Bar ───────────────────────────── */
+        .download-bar {
+            border: 1px solid var(--glass-border);
+            padding: 2rem 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            background: var(--glass-bg);
+        }
+
+        .download-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .download-info .file-name {
+            font-family: var(--font-h2);
+            font-size: 0.85rem;
+            color: var(--text-main);
+        }
+
+        .download-info .file-meta {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .preset-hero {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .preset-hero-meta h1 {
+                font-size: 2.8rem;
+            }
+
+            .model-row {
+                grid-template-columns: 1fr;
+                gap: 0.4rem;
+            }
+
+            .download-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Effect -->
+    <div id="loader">
+        <div class="loader-line"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="index.html" class="nav-brand">MOKI.</a>
+        <div class="nav-links">
+            <a href="about.html">About Me</a>
+            <a href="presets.html" class="active">Presets</a>
+            <a href="wip.html">Utilities</a>
+            <a href="aesthetics.html">Aesthetics</a>
+        </div>
+    </nav>
+
+    <main class="preset-page">
+
+        <a href="presets.html" class="breadcrumb">Presets</a>
+
+        <!-- Hero -->
+        <div class="preset-hero">
+            <div class="preset-hero-image">
+                <img src="images/White Lotus.png" alt="White Lotus Preset">
+            </div>
+            <div class="preset-hero-meta">
+                <div class="preset-eyebrow">SillyTavern Preset</div>
+                <h1>White Lotus</h1>
+                <div class="tagline">A preset built to get LLMs out of their own way — more initiative, more creativity, fewer stalled scenes.</div>
+                <div class="divider"></div>
+                <p>Tested on GLM, Kimi, Deepseek, and Gemma. Best suited for character-driven and plot-focused roleplay.</p>
+            </div>
+        </div>
+
+        <!-- About -->
+        <div class="about-block">
+            <div class="section-label">About</div>
+            <p>
+                A longstanding annoyance with AI roleplay is models refusing to take initiative or be creative. They write beautiful prose, set up vivid scenes, even offer some internal commentary — but when it comes to actually introducing unexpected elements or pushing the scene forward without the user guiding? It's a struggle.
+            </p>
+            <p>
+                White Lotus aims to fix that. It's less "instruction-heavy" than most presets, which is intentional — the tradeoff between token efficiency and more flawed, human-sounding output is worth it. It includes a Variety Toggle that randomizes additional tags to introduce unexpected elements, and optional CoT prompting for thinking models that want to really chew on the scene before responding.
+            </p>
+            <p>
+                This preset is built for roleplay that cares about plot and characters. It's probably terrible for RPG-mechanic-style roleplay — fair warning.
+            </p>
+        </div>
+
+        <!-- Tested Models -->
+        <div class="models-block">
+            <div class="section-label">Tested Models & Parameters</div>
+
+            <div class="model-row">
+                <div class="model-name">GLM 5 / Kimi 2.5<br>Kimi 2.6 / DS4 (Thinking)</div>
+                <div class="model-params">
+                    <span>Temp</span> 1.0 &nbsp;·&nbsp; <span>Freq</span> 0.2 &nbsp;·&nbsp; <span>Pres</span> 0.3 &nbsp;·&nbsp; <span>Top K</span> 25 &nbsp;·&nbsp; <span>Top P</span> 0.9 &nbsp;·&nbsp; <span>Top A</span> 1<br>
+                    Kimi also: <span>Temp</span> 1.0 &nbsp;·&nbsp; <span>Freq</span> 0 &nbsp;·&nbsp; <span>Pres</span> 0 &nbsp;·&nbsp; <span>Top K</span> 0 &nbsp;·&nbsp; <span>Top P</span> 1 &nbsp;·&nbsp; <span>Top A</span> 1
+                </div>
+            </div>
+
+            <div class="model-row">
+                <div class="model-name">Gemma 4</div>
+                <div class="model-params">
+                    <span>Temp</span> 1.0 &nbsp;·&nbsp; <span>Freq</span> 0.2 &nbsp;·&nbsp; <span>Pres</span> 0.3 &nbsp;·&nbsp; <span>Top K</span> 0 &nbsp;·&nbsp; <span>Top P</span> 0.9 &nbsp;·&nbsp; <span>Top A</span> 1
+                </div>
+            </div>
+
+            <div class="model-row">
+                <div class="model-name">Deepseek 4 Flash</div>
+                <div class="model-params">
+                    <span>Temp</span> 1.0 &nbsp;·&nbsp; <span>Freq</span> 0.2 &nbsp;·&nbsp; <span>Pres</span> 0.3 &nbsp;·&nbsp; <span>Top K</span> 0 &nbsp;·&nbsp; <span>Top P</span> 0.9 &nbsp;·&nbsp; <span>Top A</span> 1
+                </div>
+            </div>
+
+            <div class="model-row">
+                <div class="model-name">GLM 4.7</div>
+                <div class="model-params">
+                    <span>Temp</span> 0.9 &nbsp;·&nbsp; <span>Freq</span> 0 &nbsp;·&nbsp; <span>Pres</span> 0 &nbsp;·&nbsp; <span>Top K</span> 0 &nbsp;·&nbsp; <span>Top P</span> 0.95 &nbsp;·&nbsp; <span>Rep</span> 1 &nbsp;·&nbsp; <span>Min P</span> 0 &nbsp;·&nbsp; <span>Top A</span> 1
+                </div>
+            </div>
+        </div>
+
+        <!-- How to Use -->
+        <div class="howto-block">
+            <div class="section-label">How To Use</div>
+            <ul class="howto-list">
+                <li>
+                    <span class="step-num">01</span>
+                    <span>Set your variables — tense, POV, and cultural setting. These drive the style outputs.</span>
+                </li>
+                <li>
+                    <span class="step-num">02</span>
+                    <span>Fill in <strong>CORE</strong> with your character card, persona info, and scenario as usual.</span>
+                </li>
+                <li>
+                    <span class="step-num">03</span>
+                    <span>Pick your optional modules from <strong>MODULES</strong>. Anti-Slop, Anti-Positivity, and Anti-Roboticism are good starting points.</span>
+                </li>
+                <li>
+                    <span class="step-num">04</span>
+                    <span>Toggle <strong>Variety Toggle</strong> when you want more dynamic, unpredictable responses. It adds a randomized element to the next generation — great for breaking out of repetitive loops.</span>
+                </li>
+                <li>
+                    <span class="step-num">05</span>
+                    <span><strong>Untamed CoT</strong> (Chain of Thought) works best with thinking models. It prompts the AI to work through the scene before responding, which noticeably improves initiative and creativity.</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Download -->
+        <div class="download-bar">
+            <div class="download-info">
+                <div class="file-name">WHITE_LOTUS__2_0_.json</div>
+                <div class="file-meta">SillyTavern Preset &nbsp;·&nbsp; JSON</div>
+            </div>
+            <a href="downloads/presets/WHITE_LOTUS__2_0_.json" download class="btn" style="margin-top:0;">Download</a>
+        </div>
+
+    </main>
+
+    <footer class="subtle-footer">
+        <p>&copy; 2026 Moki.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

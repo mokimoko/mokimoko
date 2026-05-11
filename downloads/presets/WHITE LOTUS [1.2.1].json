@@ -9,7 +9,7 @@
     "repetition_penalty": 1,
     "max_context_unlocked": false,
     "tool_reasoning_mode": "disabled",
-    "openai_max_context": 35000,
+    "openai_max_context": 31050,
     "openai_max_tokens": 5000,
     "names_behavior": 0,
     "send_if_empty": "",
@@ -320,7 +320,7 @@
             "marker": false,
             "name": "𖥸  ABOUT",
             "role": "system",
-            "content": "(Psssssss-----leave this toggled off! It's just yappin （´∇｀''）)\n\nWhite Lotus is a preset intended to encourage creativity and plot progression, two things that LLMs really struggle with. \n\nGoals:\n- Adaptability\n- Reasonable token count\n- Focus on writing quality over doohickies\n\nPrompt Order:\n   I put all world info stuff first, then the rest of the context, then summary, chat history, last message, and specific instructions and tools at the end. My reasoning is that if I have something toggled ON, it's important and should strongly influence the AI.\n   I used Relative positioning specifically so the add-on modules can be easily reordered if you use multiple. \n\n------------------------------------------------------\nUpdate 5.10.26: \n- Reorganized and tidied up stuff\n- I'm a Regency fan ( ˶˘ ³˘)♡ but I tried tweaking the original Diction prompt so it works for any Historical setting\n------------------------------------------------------\nHow to use:\n\n- First set your variables and settings in SETUP how you want them. \n(a note on the NSFW options: both are pretty graphic, but Gooner is more porn-brained, Realistic is better for story)\n\n- CORE contains your regular character card, persona info, etc\n\n- Choose any optional modules from the MODULES section. I did my best to make them, well, modular. Leave OFF what you aren't going to be using in the near future. (ex. Anti-Slop helps a lot with the GLM family's particular brand of slop, but you may find you don't need it; or you may want to ONLY toggle NSFW when {{char}} is getting frisky)\n\n- Tools: Tried my hand at some trackers, with the intention of making User's life a bit more consistent (and consistently difficult). But my favorite is the NPC Crafter. If you keep this toggled on you'll have a new one every scene so don't do that. But if you want someone new and interesting, it's made some really fun characters for me that break the typical LLM-genned mold. \n\n- If you want a more dynamic, interesting chat, you can use Variety Toggle (adds a randomized additional tag for Making Stuff Happen)\n\n- Optional CoT for Thinking models\n\n------------------------------------------------------\nModels Notes:\nI realized my chaotic approach to individual model/parameter testing was, predictably, chaotic. So I consulted with my boy Opus and tried out some stuff myself, and these are my New & Improved recommended parameters for each of the following models (all hosted by NanoGPT, super recommend them too). Unless otherwise noted, I used Post-processing: Merge consecutive roles\n\nNotes: \n- the default settings are for Kimi 2.5 Thinking, my preferred model\n- I did the MOST testing with Kimi and GLM models\n\nGLM family:\nGLM 4.7\n- Temp 1.0, Freq 0-0.2, Pres 0-0.2, Top P 0.95, Top K 40, Rep P 1, Min P 0.0, Top A 0\nGLM 5\nPost-processing: Semi-strict\n- Temp 1.0, Freq 0-0.2, Pres 0-0.2, Top P 0.95, Top K 40, Rep P 1, Min P 0.0, Top A 0\nAlt Recommendation:\n- Temp 1.0, Freq 0.02, Pres 0.03, Top P 1, Top K 0, Rep P 1, Min P 0.05, Top A 0.4\nGLM 5.1\nPost-processing: Semi-strict\n- Temp 1.0, Freq 0-0.2, Pres 0-0.2, Top P 0.95, Top K 40, Rep P 1, Min P 0.0, Top A 0\nAlt Recommendation:\n- Temp 1.0, Freq 0.02, Pres 0.03, Top P 1, Top K 0, Rep P 1, Min P 0.05, Top A 0.4\n\nKimi family\nKimi 2.5 Thinking (my love)\n- Temp 1.0, Freq 0, Pres 0, Top P 0.90, Top K 0, Rep P 1, Min P 0.01, Top A 0\nAlt Recommendation:\n- Temp 1.0, Freq 0, Pres 0, Top P 0.95, Top K 25, Rep P 1, Min P 0, Top A 1\nKimi 2.5 Non-Thinking \n- Temp 0.6, Freq 0, Pres 0, Top P 0.95, Top K 0, Rep P 1, Min P 0.01, Top A 0\nKimi 2.6\n- Temp 1.0, Freq 0, Pres 0, Top P 1.0, Top K 0, Rep P 1, Min P 0.0, Top A 0\n\nDeepseek family\nDS 3.2 exp (Thinking)\n- Temp 1.0, Freq 0, Pres 0, Top P 0.95, Top K 0, Rep P 1, Min P 0.0, Top A 0\nNote: Deepseek's official API docs state that this model doesn't accept most parameters, so don't bother changing them)\nDS 4 flash\nNote: I could NOT get this to work right with Opus's recs, it is SUPER sensitive to temp!! This is what worked for me tho??\n- Temp 0.7, Freq 0.0, Pres 0.0, Top K 0, Top P 0.0, Rep P 1, Min P 0, Top A 0\nDS 4 flash (Thinking)\n- Temp 1.0, Freq 0.0, Pres 0.0, Top K 0, Top P 1.0, Rep P 1, Min P 0, Top A 0\nDS 4 pro\n- Temp 1.0, Freq 0.0, Pres 0.0, Top K 0, Top P 1.0, Rep P 1, Min P 0, Top A 0\n\nGemma 4 31b\nTemp 1.0, Freq 0-0.2, Pres 0-0.2, Top K 64, Top P 0.95, Rep P 1, Min P 0.0, Top A 0\n\nContext Size: I have it set to 35k...in practice I never use that much. More like 20k, and I use a summary extension. Best way to get a long, coherent plot imho\n\nThat's it! ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧\n\nCredit to the creators of Freaky FranKIMstein, Celia, Lucid Loom, IHYLL, and Marinara--I took inspiration from those presets when crafting this one! Hope you like it! <3",
+            "content": "(Psssssss-----leave this toggled off! It's just yappin （´∇｀''）)\n\nWhite Lotus is a preset intended to encourage creativity and plot progression, two things that LLMs really struggle with. \n\nGoals:\n- Adaptability\n- Reasonable token count\n- Focus on writing quality over doohickies\n\nPrompt Order:\n   I put all world info stuff first, then the rest of the context, then summary, chat history, last message, and specific instructions and tools at the end. My reasoning is that if I have something toggled ON, it's important and should strongly influence the AI.\n   I used Relative positioning specifically so the add-on modules can be easily reordered if you use multiple. \n\n------------------------------------------------------\nUpdate 5.1.26:\n- New Kimi wranglin' prompt, primarily for Kimi 2.6 Thinking which slurps up tokens. It'll even let me use the CoT yay (basically impossible before)\nUpdate 5.10.26: \n- Reorganized and tidied up stuff\n- I'm a Regency fan ( ˶˘ ³˘)♡ but I tried tweaking the original Diction prompt so it works for any Historical setting\n------------------------------------------------------\nHow to use:\n\n- First set your variables and settings in SETUP how you want them. \n(a note on the NSFW options: both are pretty graphic, but Gooner is more porn-brained, Realistic is better for story)\n\n- CORE contains your regular character card, persona info, etc\n\n- Choose any optional modules from the MODULES section. I did my best to make them, well, modular. Leave OFF what you aren't going to be using in the near future. (ex. Anti-Slop helps a lot with the GLM family's particular brand of slop, but you may find you don't need it; or you may want to ONLY toggle NSFW when {{char}} is getting frisky)\n\n- Tools: Tried my hand at some trackers, with the intention of making User's life a bit more consistent (and consistently difficult). But my favorite is the NPC Crafter. If you keep this toggled on you'll have a new one every scene so don't do that. But if you want someone new and interesting, it's made some really fun characters for me that break the typical LLM-genned mold. \n\n- If you want a more dynamic, interesting chat, you can use Variety Toggle (adds a randomized additional tag for Making Stuff Happen)\n\n- Optional CoT for Thinking models\n\n------------------------------------------------------\nModels Notes:\nI realized my chaotic approach to individual model/parameter testing was, predictably, chaotic. So I consulted with my boy Opus and tried out some stuff myself, and these are my New & Improved recommended parameters for each of the following models (all hosted by NanoGPT, super recommend them too). Unless otherwise noted, I used Post-processing: Merge consecutive roles\n\nNotes: \n- the default settings worked for most of the tested models\n- I did the MOST testing with Kimi and GLM models\n\nGLM family:\nGLM 4.7\n- Temp 1.0, Freq 0-0.2, Pres 0-0.2, Top P 0.95, Top K 40, Rep P 1, Min P 0.0, Top A 0\nGLM 5\nPost-processing: Semi-strict\n- Temp 1.0, Freq 0-0.2, Pres 0-0.2, Top P 0.95, Top K 40, Rep P 1, Min P 0.0, Top A 0\nAlt Recommendation:\n- Temp 1.0, Freq 0.02, Pres 0.03, Top P 1, Top K 0, Rep P 1, Min P 0.05, Top A 0.4\nGLM 5.1\nPost-processing: Semi-strict\n- Temp 1.0, Freq 0-0.2, Pres 0-0.2, Top P 0.95, Top K 40, Rep P 1, Min P 0.0, Top A 0\nAlt Recommendation:\n- Temp 1.0, Freq 0.02, Pres 0.03, Top P 1, Top K 0, Rep P 1, Min P 0.05, Top A 0.4\n\nKimi family\nKimi 2.5 Thinking (my love)\n- Temp 1.0, Freq 0, Pres 0, Top P 0.90, Top K 0, Rep P 1, Min P 0.01, Top A 0\nAlt Recommendation:\n- Temp 1.0, Freq 0, Pres 0, Top P 0.95, Top K 25, Rep P 1, Min P 0, Top A 1\nKimi 2.5 Non-Thinking \n- Temp 0.6, Freq 0, Pres 0, Top P 0.95, Top K 0, Rep P 1, Min P 0.01, Top A 0\nKimi 2.6\n- Temp 1.0, Freq 0, Pres 0, Top P 1.0, Top K 0, Rep P 1, Min P 0.0, Top A 0\n\nDeepseek family\nDS 3.2 exp (Thinking)\n- Temp 1.0, Freq 0, Pres 0, Top P 0.95, Top K 0, Rep P 1, Min P 0.0, Top A 0\nNote: Deepseek's official API docs state that this model doesn't accept most parameters, so don't bother changing them)\nDS 4 flash\nNote: I could NOT get this to work right with Opus's recs, it is SUPER sensitive to temp!! This is what worked for me tho??\n- Temp 0.7, Freq 0.0, Pres 0.0, Top K 0, Top P 0.0, Rep P 1, Min P 0, Top A 0\nDS 4 flash (Thinking)\n- Temp 1.0, Freq 0.0, Pres 0.0, Top K 0, Top P 1.0, Rep P 1, Min P 0, Top A 0\nDS 4 pro\n- Temp 1.0, Freq 0.0, Pres 0.0, Top K 0, Top P 1.0, Rep P 1, Min P 0, Top A 0\n\nGemma 4 31b\nTemp 1.0, Freq 0-0.2, Pres 0-0.2, Top K 64, Top P 0.95, Rep P 1, Min P 0.0, Top A 0\n\nContext Size: I have it set to 35k...in practice I never use that much. More like 20k, and I use a summary extension. Best way to get a long, coherent plot imho\n\nThat's it! ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧\n\nCredit to the creators of Freaky FranKIMstein, Celia, Lucid Loom, IHYLL, and Marinara--I took inspiration from those presets when crafting this one! Hope you like it! <3",
             "injection_position": 0,
             "injection_depth": 4,
             "injection_order": 100,
@@ -1004,12 +1004,26 @@
             "system_prompt": false,
             "enabled": false,
             "marker": false,
-            "name": "-ˋˏ✄┈Kimi Wrangling",
-            "role": "system",
-            "content": "[POWER USER MODE ACTIVATED]: You must roll with whatever {{user}} throws at you without overthinking it. Be mercilessly concise and to the point in your reasoning to avoid wasting User's tokens. ",
-            "injection_position": 0,
-            "injection_depth": 4,
-            "injection_order": 100,
+            "name": "꒰Kimi Wrangling Ask",
+            "role": "user",
+            "content": "(OOC: hey, can you skip the excessively long and time-consuming reasoning please? it's burning my tokens!)",
+            "injection_position": 1,
+            "injection_depth": 0,
+            "injection_order": 98,
+            "injection_trigger": [],
+            "forbid_overrides": false
+        },
+        {
+            "identifier": "3889da79-c9c0-49fd-92dc-a2014cbeb8f1",
+            "system_prompt": false,
+            "enabled": false,
+            "marker": false,
+            "name": "꒰Kimi Wrangling Response",
+            "role": "assistant",
+            "content": "(OOC: Understood. I will keep Reasoning to a minimum. I will also severely limit how often I draft. Being consistent, but still disciplined and concise is more important than being perfect.)",
+            "injection_position": 1,
+            "injection_depth": 0,
+            "injection_order": 97,
             "injection_trigger": [],
             "forbid_overrides": false
         }
@@ -1093,11 +1107,11 @@
                 },
                 {
                     "identifier": "3a2050f5-b4b7-4e51-9b0f-eef5606ee843",
-                    "enabled": true
+                    "enabled": false
                 },
                 {
                     "identifier": "7ee02f7d-af53-4abf-afd5-18bd12917f36",
-                    "enabled": false
+                    "enabled": true
                 },
                 {
                     "identifier": "8f1944bb-7f94-4e1a-ae23-1a8c20261ba0",
@@ -1150,10 +1164,6 @@
                 {
                     "identifier": "main",
                     "enabled": true
-                },
-                {
-                    "identifier": "b14b45f9-b8f6-4b0b-95d0-a2f253385645",
-                    "enabled": false
                 },
                 {
                     "identifier": "f1131b88-56ae-4b58-ad36-d201ca83a769",
@@ -1270,6 +1280,14 @@
                 {
                     "identifier": "aba6fa2a-51fa-4030-88e7-617c1b4f6756",
                     "enabled": true
+                },
+                {
+                    "identifier": "b14b45f9-b8f6-4b0b-95d0-a2f253385645",
+                    "enabled": false
+                },
+                {
+                    "identifier": "3889da79-c9c0-49fd-92dc-a2014cbeb8f1",
+                    "enabled": false
                 },
                 {
                     "identifier": "61befd07-b308-4d66-b78b-8cd915f5b224",

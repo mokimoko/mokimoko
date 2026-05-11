@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Lotus Tests | Moki</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ── Page Layout ────────────────────────────── */
+        .test-page {
+            flex: 1;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 120px 2rem 5rem;
+        }
+
+        /* ── Breadcrumb ─────────────────────────────── */
+        .breadcrumb {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 3rem;
+            transition: color 0.2s ease;
+        }
+        .breadcrumb::before { content: '← '; }
+        .breadcrumb:hover { color: var(--accent); }
+
+        /* ── Page Header ────────────────────────────── */
+        .test-header {
+            margin-bottom: 4rem;
+        }
+
+        .test-header .preset-eyebrow {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.7;
+            margin-bottom: 1rem;
+        }
+
+        .test-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .test-header .tagline {
+            font-family: var(--font-h2);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            max-width: 620px;
+        }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
+            opacity: 0.3;
+            margin: 1.5rem 0;
+        }
+
+        /* ── Settings Panel ─────────────────────────── */
+        .settings-block {
+            margin-bottom: 4rem;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            padding: 2.5rem;
+        }
+
+        .section-label {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            gap: 0.2rem 2rem;
+        }
+
+        .setting-label {
+            font-family: var(--font-h2);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.7rem 0;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .setting-value {
+            font-family: var(--font-body);
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            padding: 0.7rem 0;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .setting-value span {
+            color: var(--accent);
+            opacity: 0.85;
+        }
+
+        .settings-note {
+            margin-top: 1.5rem;
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+            line-height: 1.7;
+            max-width: 580px;
+        }
+
+        /* ── Test Section ───────────────────────────── */
+        .test-section {
+            margin-bottom: 4rem;
+        }
+
+        .test-section-title {
+            font-family: var(--font-h1);
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .test-section-subtitle {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+        }
+
+        /* ── Image Grid ─────────────────────────────── */
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .test-card {
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            transition: border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .test-card:hover {
+            border-color: rgba(199, 181, 131, 0.25);
+        }
+
+        .test-card-image {
+            width: 100%;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .test-card-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .test-card:hover .test-card-image img {
+            transform: scale(1.02);
+        }
+
+        .test-card-info {
+            padding: 1rem 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+
+        .test-card-model {
+            font-family: var(--font-h2);
+            font-size: 0.72rem;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .test-card-tag {
+            font-family: var(--font-h2);
+            font-size: 0.6rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.6;
+        }
+
+        /* ── Fullsize Lightbox ──────────────────────── */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 5000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            cursor: zoom-out;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border: 1px solid var(--glass-border);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            font-family: var(--font-h2);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.2s ease;
+        }
+
+        .lightbox-close:hover {
+            opacity: 1;
+        }
+
+        /* ── Collapsible Chat ───────────────────────── */
+        .chat-dropdown {
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            margin-top: 0.5rem;
+        }
+
+        .chat-dropdown-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem 1.5rem;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            user-select: none;
+        }
+
+        .chat-dropdown-header:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .chat-dropdown-title {
+            font-family: var(--font-h2);
+            font-size: 0.75rem;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .chat-dropdown-arrow {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--accent);
+            opacity: 0.5;
+            transition: transform 0.3s ease;
+        }
+
+        .chat-dropdown.open .chat-dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .chat-dropdown-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .chat-dropdown.open .chat-dropdown-body {
+            max-height: 6000px;
+        }
+
+        .chat-content {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        /* ── Chat Message Styles ────────────────────── */
+        .chat-msg {
+            margin-bottom: 1.5rem;
+        }
+
+        .chat-msg:last-child {
+            margin-bottom: 0;
+        }
+
+        .chat-sender {
+            font-family: var(--font-h2);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.6rem;
+        }
+
+        .chat-sender.user {
+            color: #7aa2d4;
+        }
+
+        .chat-sender.narrator {
+            color: var(--accent);
+        }
+
+        .chat-msg-body {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.75;
+            padding-left: 1rem;
+            border-left: 1px solid var(--glass-border);
+        }
+
+        .chat-msg-body p {
+            margin-bottom: 0.8rem;
+        }
+
+        .chat-msg-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .chat-msg-body em {
+            color: rgba(199, 181, 131, 0.7);
+            font-style: italic;
+        }
+
+        .chat-env {
+            font-family: var(--font-h2);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            opacity: 0.4;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 0.5rem 0;
+            margin-bottom: 0.8rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .chat-rps {
+            font-family: var(--font-h2);
+            font-size: 0.62rem;
+            color: var(--text-muted);
+            opacity: 0.35;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+            padding: 0.6rem 0.8rem;
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            line-height: 1.8;
+        }
+
+        .chat-separator {
+            width: 100%;
+            height: 1px;
+            background: var(--glass-border);
+            margin: 1.5rem 0;
+        }
+
+        /* ── Responsive ─────────────────────────────── */
+        @media (max-width: 768px) {
+            .test-header h1 {
+                font-size: 2.4rem;
+            }
+
+            .test-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .setting-label {
+                border-top: 1px solid var(--glass-border);
+                padding-bottom: 0;
+            }
+
+            .setting-value {
+                border-top: none;
+                padding-top: 0.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Effect -->
+    <div id="loader">
+        <div class="loader-line"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="index.html" class="nav-brand">MOKI.</a>
+        <div class="nav-links">
+            <a href="about.html">About Me</a>
+            <a href="presets.html" class="active">Presets</a>
+            <a href="wip.html">Utilities</a>
+            <a href="aesthetics.html">Aesthetics</a>
+        </div>
+    </nav>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">Close · Esc</span>
+        <img id="lightbox-img" src="" alt="Fullsize test result">
+    </div>
+
+    <main class="test-page">
+
+        <a href="preset-white-lotus.html" class="breadcrumb">White Lotus</a>
+
+        <!-- Header -->
+        <div class="test-header">
+            <div class="preset-eyebrow">Preset Tests</div>
+            <h1>White Lotus v1.2.0</h1>
+            <div class="tagline">Baseline comparisons and add-on tests across GLM and Kimi thinking models. Same card, same prompt, different configurations.</div>
+        </div>
+
+        <!-- Settings Panel -->
+        <div class="settings-block">
+            <div class="section-label">Test Configuration</div>
+            <div class="settings-grid">
+                <div class="setting-label">Models</div>
+                <div class="setting-value">GLM 5 Thinking · GLM 5.1 Thinking · Kimi 2.5 Thinking · Kimi 2.6 Thinking</div>
+
+                <div class="setting-label">Parameters</div>
+                <div class="setting-value"><span>Temp</span> 1.0 &nbsp;·&nbsp; <span>Freq P</span> 0 &nbsp;·&nbsp; <span>Pres P</span> 0 &nbsp;·&nbsp; <span>Top K</span> 0 &nbsp;·&nbsp; <span>Top P</span> 0.95 &nbsp;·&nbsp; <span>Rep P</span> 1 &nbsp;·&nbsp; <span>Min P</span> 0.01 &nbsp;·&nbsp; <span>Top A</span> 0</div>
+
+                <div class="setting-label">Genre / Style</div>
+                <div class="setting-value">Fantasy · Literary Fiction</div>
+
+                <div class="setting-label">Narrator</div>
+                <div class="setting-value">Omniscient</div>
+
+                <div class="setting-label">Tweaks On</div>
+                <div class="setting-value">Better NPCs · Anti-Slop</div>
+
+                <div class="setting-label">Card</div>
+                <div class="setting-value">Seraphina</div>
+
+                <div class="setting-label">Kimi Wrangler</div>
+                <div class="setting-value">Enabled for all Kimi models</div>
+            </div>
+            <div class="settings-note">Fantasy + Literary Fiction chosen because Seraphina is a fantasy card. Conflicting genre/card combos cause Kimi models to burn reasoning tokens.</div>
+        </div>
+
+        <div class="divider" style="margin-bottom: 3rem;"></div>
+
+        <!-- Baseline Tests -->
+        <div class="test-section">
+            <div class="test-section-title">Baseline</div>
+            <div class="test-section-subtitle">Length: Short · No add-ons</div>
+            <div class="test-grid">
+                <div class="test-card">
+                    <div class="test-card-image" onclick="openLightbox(this)">
+                        <img src="images/preset_tests/WL1.3/test_baseline_Kimi2.5T.png" alt="Kimi 2.5 Thinking baseline test" loading="lazy">
+                    </div>
+                    <div class="test-card-info">
+                        <div class="test-card-model">Kimi 2.5 Thinking</div>
+                        <div class="test-card-tag">Baseline</div>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-image" onclick="openLightbox(this)">
+                        <img src="images/preset_tests/WL1.3/test_baseline_Kimi2.6T.png" alt="Kimi 2.6 Thinking baseline test" loading="lazy">
+                    </div>
+                    <div class="test-card-info">
+                        <div class="test-card-model">Kimi 2.6 Thinking</div>
+                        <div class="test-card-tag">Baseline</div>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-image" onclick="openLightbox(this)">
+                        <img src="images/preset_tests/WL1.3/test_baseline_GLM5T.png" alt="GLM 5 Thinking baseline test" loading="lazy">
+                    </div>
+                    <div class="test-card-info">
+                        <div class="test-card-model">GLM 5 Thinking</div>
+                        <div class="test-card-tag">Baseline</div>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-image" onclick="openLightbox(this)">
+                        <img src="images/preset_tests/WL1.3/test_baseline_GLM5.1T.png" alt="GLM 5.1 Thinking baseline test" loading="lazy">
+                    </div>
+                    <div class="test-card-info">
+                        <div class="test-card-model">GLM 5.1 Thinking</div>
+                        <div class="test-card-tag">Baseline</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider" style="margin-bottom: 3rem;"></div>
+
+        <!-- Add-On Tests -->
+        <div class="test-section">
+            <div class="test-section-title">Add-Ons</div>
+            <div class="test-section-subtitle">GLM 5 Thinking · Length: Moderate (unless noted)</div>
+            <div class="test-grid">
+                <div class="test-card">
+                    <div class="test-card-image" onclick="openLightbox(this)">
+                        <img src="images/preset_tests/WL1.3/test_CoT_GLM5T.png" alt="GLM 5 Thinking + CoT test" loading="lazy">
+                    </div>
+                    <div class="test-card-info">
+                        <div class="test-card-model">GLM 5 Thinking</div>
+                        <div class="test-card-tag">+ CoT</div>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-image" onclick="openLightbox(this)">
+                        <img src="images/preset_tests/WL1.3/test_variety_GLM5T.png" alt="GLM 5 Thinking + Variety Toggle test" loading="lazy">
+                    </div>
+                    <div class="test-card-info">
+                        <div class="test-card-model">GLM 5 Thinking</div>
+                        <div class="test-card-tag">+ Variety Toggle</div>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-image" onclick="openLightbox(this)">
+                        <img src="images/preset_tests/WL1.3/test_NPC_GLM5T.png" alt="GLM 5 Thinking + NPC Crafter test" loading="lazy">
+                    </div>
+                    <div class="test-card-info">
+                        <div class="test-card-model">GLM 5 Thinking</div>
+                        <div class="test-card-tag">+ NPC Crafter</div>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-image" onclick="openLightbox(this)">
+                        <img src="images/preset_tests/WL1.3/test_trackers_GLM5T.png" alt="GLM 5 Thinking + Trackers test" loading="lazy">
+                    </div>
+                    <div class="test-card-info">
+                        <div class="test-card-model">GLM 5 Thinking</div>
+                        <div class="test-card-tag">+ Trackers · Short</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider" style="margin-bottom: 3rem;"></div>
+
+        <!-- Just for Fun -->
+        <div class="test-section">
+            <div class="test-section-title">Just for Fun</div>
+            <div class="test-section-subtitle">A longer chat excerpt showing the preset in action</div>
+
+            <div class="chat-dropdown" id="chatDropdown">
+                <div class="chat-dropdown-header" onclick="toggleChat()">
+                    <div class="chat-dropdown-title">Lowmarket Pickpocket — NPC Crafter Demo</div>
+                    <div class="chat-dropdown-arrow">▼</div>
+                </div>
+                <div class="chat-dropdown-body">
+                    <div class="chat-content">
+
+                        <!-- Turn 1: User -->
+                        <div class="chat-msg">
+                            <div class="chat-sender user">User</div>
+                            <div class="chat-msg-body">
+                                <p>On a busy market day, User sneaks up behind a wealthy-looking merchant and tries to steal their silk coin purse from their belt.</p>
+                            </div>
+                        </div>
+
+                        <div class="chat-separator"></div>
+
+                        <!-- Turn 1: Narrator -->
+                        <div class="chat-msg">
+                            <div class="chat-sender narrator">Narrator</div>
+                            <div class="chat-env">Mid-morning · Sunny · Lowmarket</div>
+                            <div class="chat-msg-body">
+                                <p>The hand was halfway there when the merchant's own shot out—surprisingly fast, surprisingly strong, fingers closing around the wrist like a vice.</p>
+                                <p><em>Got you.</em></p>
+                                <p>Ned Relfthorne turned, grey eyes bright with something manic. His other hand patted down his belt, confirming the silk purse still hung there, coins safe. The patchy beard did nothing to hide the grin spreading across his soft features.</p>
+                                <p>"You're the third one this month," he said, grip tightening. "Third! Do you have any idea how <em>boring</em> it's been? Lady Marguerite says I waste my time in the Lowmarket, but here you are, proving me right to be here."</p>
+                                <p>Around them, the market crowd flowed past in its river of noise and bodies. A fishmonger shouted prices. Children darted between legs. No one spared a glance for the young lordling holding fast to what appeared to be a common thief—such scenes were ordinary commerce, in their way.</p>
+                                <p>Ned's expensive coat, rumpled and worn askew, marked him as gentry. The smallpox scar on his temple caught the light. He leaned in, too close, breath carrying the faint sourness of morning wine.</p>
+                                <p>"Here's what's going to happen." His voice dropped to something almost conspiratorial. "You're going to answer my questions. <em>Honestly.</em> And if you do, I <em>might</em> not hand you over to the Watch."</p>
+                                <p><em>Please try to run. Please.</em></p>
+                            </div>
+                            <div class="chat-rps">Ned: Hostility 7 · Interest 5 · Obligation 0 · Base Attraction 3</div>
+                        </div>
+
+                        <div class="chat-separator"></div>
+
+                        <!-- Turn 2: User -->
+                        <div class="chat-msg">
+                            <div class="chat-sender user">User</div>
+                            <div class="chat-msg-body">
+                                <p>With an '<em>eep</em>!', User did, in fact, try to run!</p>
+                            </div>
+                        </div>
+
+                        <div class="chat-separator"></div>
+
+                        <!-- Turn 2: Narrator -->
+                        <div class="chat-msg">
+                            <div class="chat-sender narrator">Narrator</div>
+                            <div class="chat-msg-body">
+                                <p>The motion yanked Ned forward—a stumble, a stagger, his grip sliding on sweat-slick skin. His fingers slipped free.</p>
+                                <p><em>Yes.</em></p>
+                                <p>"HA!" The sound ripped out of him, raw and joyous. He bolted after the fleeing figure, expensive shoes slapping against cobblestones slick with fish-guts and spilled ale. A woman screamed. A cart of cabbages caught his hip and spun him half-around before he righted himself, coat flapping.</p>
+                                <p>The crowd became a gauntlet. Arms, baskets, a mule's hindquarters—Ned dodged or barreled through depending on size, breath already sawing. He wasn't built for this. His thighs burned and his lungs objected and he was <em>grinning</em>, wide and unguarded in a way his mother would have despised.</p>
+                                <p>"There!" A pointing finger from a sausage vendor. Left turn. Ned careened after, shoulder clipping a post.</p>
+                                <p>The alley narrowed. Less light. Fewer witnesses.</p>
+                                <p><em>Don't lose them. Don't—</em></p>
+                                <p>His foot caught on something. A crate, a beggar's leg, his own incompetence—he pitched forward, hands out, the stones rushing up to meet his face in a grinding kiss of pain and surprise.</p>
+                                <p>When he looked up, blood dripping from a scraped palm, the thief was—</p>
+                            </div>
+                            <div class="chat-rps">Ned: Hostility 5 · Interest 8 · Obligation 0 · Base Attraction 3</div>
+                        </div>
+
+                        <div class="chat-separator"></div>
+
+                        <!-- Turn 3: User -->
+                        <div class="chat-msg">
+                            <div class="chat-sender user">User</div>
+                            <div class="chat-msg-body">
+                                <p>--Appealing to a Watchman, with tears in her eyes and a finger pointed right at Ned. "H-help, please! This man tried to rob me!"</p>
+                            </div>
+                        </div>
+
+                        <div class="chat-separator"></div>
+
+                        <!-- Turn 3: Narrator -->
+                        <div class="chat-msg">
+                            <div class="chat-sender narrator">Narrator</div>
+                            <div class="chat-msg-body">
+                                <p>The Watchman turned.</p>
+                                <p>He was an odd figure for the profession—long dark hair tied back with a ribbon, a face better suited to a choir than an alley, a small mole on his cheek like a beauty mark. His uniform fitted him sharply, almost artistically, and he moved with a liquid grace that seemed at odds with the stink of the Lowmarket.</p>
+                                <p>"Now, now." His voice came out soft, almost sighing. "What's this? What's this?"</p>
+                                <p>Ned pushed himself up from the filth, palms stinging, dignity in tatters. "That's—she's—the purse is <em>mine</em>—"</p>
+                                <p>"Sir." The Watchman raised a hand, gracious as a host at a garden party. "Please. The lady is distressed."</p>
+                                <p><em>Lady.</em> The word hit Ned like a slap.</p>
+                                <p>He stared at the thief—at the tears, the trembling lip, the masterful performance—and something twisted in his chest. Anger, yes. Humiliation, certainly. But underneath it, strange and unwelcome: a flicker of admiration so acute it bordered on arousal.</p>
+                                <p><em>Oh, you clever little monster.</em></p>
+                                <p>"She tried to pick my pocket," Ned heard himself say, but the words came out wrong—too loud, too desperate. "I'm Edmund Relfthorne. My mother—everyone knows my mother—"</p>
+                                <p>"Do they?" The Watchman's brow creased with mild concern. "I'm new to the district. Transferred last week. And you have blood on your face, sir. It's rather... sinister."</p>
+                            </div>
+                            <div class="chat-rps">Ned: Hostility 7 · Interest 10 · Obligation 0 · Base Attraction 5<br>Watchman Talvin: Hostility 4 · Interest 3 · Obligation 0 · Base Attraction 0</div>
+                        </div>
+
+                        <div class="chat-separator"></div>
+
+                        <!-- Turn 4: User -->
+                        <div class="chat-msg">
+                            <div class="chat-sender user">User</div>
+                            <div class="chat-msg-body">
+                                <p>User clutched her hands to her chest, hiding behind the Watchman a little. "Gosh....so scary...."</p>
+                            </div>
+                        </div>
+
+                        <div class="chat-separator"></div>
+
+                        <!-- Turn 4: Narrator -->
+                        <div class="chat-msg">
+                            <div class="chat-sender narrator">Narrator</div>
+                            <div class="chat-msg-body">
+                                <p><em>Scary.</em> The word rattled around Ned's skull like a stone in a tin cup.</p>
+                                <p>His jaw worked. Blood from a scrape on his cheek dribbled toward his collar—ruining good silk, a small voice noted, the same voice that had once worried about mud on his fencing shoes while the instructor threatened to dismiss him.</p>
+                                <p>"I have witnesses," he tried. "The purse is <em>embroidered</em> with my mother's—I mean, with the house sigil—a heron, it has a heron on it—"</p>
+                                <p>"Lots of purses have birds." The Watchman gently guided User further behind him, protective as a hen with one exceptional chick. "Sir, I'm going to need you to calm down."</p>
+                                <p>"I <em>am</em> calm—"</p>
+                                <p>"You're shouting."</p>
+                                <p>The crowd had thickened. A woman near the fishmonger's stall—hair dyed an improbable coral, sun-leathered décolletage gleaming with sweat and some expensive unguent—lifted a flask to her lips. She drank long. Her eyes, when they found Ned's, held the flat disinterest of a cat watching a bird strike glass.</p>
+                                <p>"Relfthorne." She said the name like a diagnosis. "Marguerite's boy. The one who got thrown out of the Guard."</p>
+                                <p>Ned's face went hot, then cold.</p>
+                                <p>The Watchman's expression shifted. Subtle—a mere tightening around the eyes—but perceptible.</p>
+                                <p>"I see your reputation precedes you, sir."</p>
+                            </div>
+                            <div class="chat-rps">Ned: Hostility 8 · Interest 10 · Obligation 0 · Base Attraction 5<br>Watchman Talvin: Hostility 6 · Interest 5 · Obligation 0 · Base Attraction 0<br>Coral-Haired Woman: Hostility 5 · Interest 4 · Obligation 0 · Base Attraction 0</div>
+                        </div>
+
+                        <div class="chat-separator"></div>
+
+                        <!-- Turn 5: User -->
+                        <div class="chat-msg">
+                            <div class="chat-sender user">User</div>
+                            <div class="chat-msg-body">
+                                <p>"Oh, he has a <em>history</em>!" User whispered—stage-whispered, really. Inside, she was snickering, but her expression was one of fascinated horror.</p>
+                            </div>
+                        </div>
+
+                        <div class="chat-separator"></div>
+
+                        <!-- Turn 5: Narrator -->
+                        <div class="chat-msg">
+                            <div class="chat-sender narrator">Narrator</div>
+                            <div class="chat-msg-body">
+                                <p>"History," Ned repeated. The word came out strangled. "She's—this is—"</p>
+                                <p>The coral-haired woman drained her flask and laughed. A full-throated sound, theatrical in its contempt. "Assaulted a superior officer, didn't you? And the Wessing girl—what was it you called her at dinner? A <em>cow in brocade</em>?"</p>
+                                <p>Several people in the crowd tittered. A child near the cobbler's stall pointed at Ned's patchy beard and whispered something to his mother.</p>
+                                <p>"I was <em>young</em>—"</p>
+                                <p>"You were nineteen."</p>
+                                <p>"Still young!"</p>
+                                <p>Watchman Talvin placed a hand on Ned's chest. Light pressure. The sort of touch one might use to redirect a confused animal. "Sir. I think it's best if you move along."</p>
+                                <p>"But she has my <em>purse</em>—"</p>
+                                <p>"I haven't seen any purse." Talvin's smile was a work of art. Patient and pitying and utterly unmovable. "What I <em>have</em> seen is a young woman in distress. And a gentleman with a colorful history causing a disturbance."</p>
+                                <p>Ned opened his mouth. Closed it. His hands—those hands with their surprising grip strength, the one physical gift his sedentary life hadn't yet ruined—hung uselessly at his sides.</p>
+                                <p>The crowd watched. Waiting. Some bored, some entertained, most simply grateful not to be the spectacle.</p>
+                                <p>He found User's eyes over Talvin's shoulder.</p>
+                                <p><em>You.</em></p>
+                                <p>No—something sharper. Interest and fury woven together into a rope he didn't know what to do with.</p>
+                                <p>"This isn't over," he said finally, the words thin. He straightened his doublet. Dabbed at his bleeding cheek with a silk handkerchief. "I know who you are now. I'll remember."</p>
+                                <p>He didn't, actually. He had no idea who she was. But it sounded right—the sort of thing a man in a position of power might say.</p>
+                                <p>The coral-haired woman snorted into her flask.</p>
+                            </div>
+                            <div class="chat-rps">Ned: Hostility 9 · Interest 12 · Obligation 0 · Base Attraction 5<br>Watchman Talvin: Hostility 6 · Interest 5 · Obligation 0 · Base Attraction 0<br>Coral-Haired Woman: Hostility 5 · Interest 6 · Obligation 0 · Base Attraction 0</div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="subtle-footer">
+        <p>&copy; 2026 Moki.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Lightbox
+        function openLightbox(el) {
+            const img = el.querySelector('img');
+            const lb = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lightbox-img');
+            lbImg.src = img.src;
+            lbImg.alt = img.alt;
+            lb.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lb = document.getElementById('lightbox');
+            lb.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Chat dropdown
+        function toggleChat() {
+            document.getElementById('chatDropdown').classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

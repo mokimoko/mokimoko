@@ -90,7 +90,7 @@
             margin: 0.5rem 0;
         }
 
-        /* ── About Section ──────────────────────────── */
+        /* ── Section Label (shared) ─────────────────── */
         .section-label {
             font-family: var(--font-h2);
             font-size: 0.7rem;
@@ -101,88 +101,11 @@
             margin-bottom: 1rem;
         }
 
-        .about-block {
-            margin-bottom: 4rem;
-        }
-
-        .about-block p {
-            max-width: 680px;
-            margin-bottom: 1rem;
-        }
-
-        /* ── Models / Parameters Table ──────────────── */
-        .models-block {
-            margin-bottom: 4rem;
-        }
-
-        .model-row {
-            display: grid;
-            grid-template-columns: 200px 1fr;
-            gap: 1rem 2rem;
-            border-top: 1px solid var(--glass-border);
-            padding: 1.2rem 0;
-            align-items: start;
-        }
-
-        .model-row:last-child {
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .model-name {
-            font-family: var(--font-h2);
-            font-size: 0.8rem;
-            color: var(--text-main);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding-top: 0.1rem;
-        }
-
-        .model-params {
-            font-family: var(--font-h2);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            line-height: 1.9;
-        }
-
-        .model-params span {
-            color: var(--accent);
-            opacity: 0.8;
-        }
-
-        /* ── How To Use ─────────────────────────────── */
-        .howto-block {
+        /* ── Download Area ──────────────────────────── */
+        .download-area {
             margin-bottom: 5rem;
         }
 
-        .howto-list {
-            list-style: none;
-            max-width: 680px;
-        }
-
-        .howto-list li {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            color: var(--text-muted);
-            padding: 0.6rem 0;
-            border-top: 1px solid var(--glass-border);
-            display: grid;
-            grid-template-columns: 24px 1fr;
-            gap: 1rem;
-        }
-
-        .howto-list li:last-child {
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .howto-list .step-num {
-            font-family: var(--font-h2);
-            font-size: 0.65rem;
-            color: var(--accent);
-            opacity: 0.5;
-            padding-top: 0.25rem;
-        }
-
-        /* ── Download Bar ───────────────────────────── */
         .download-bar {
             border: 1px solid var(--glass-border);
             padding: 2rem 2.5rem;
@@ -214,6 +137,211 @@
             letter-spacing: 1px;
         }
 
+        .older-versions {
+            margin-top: 1rem;
+            font-family: var(--font-h2);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            opacity: 0.4;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .older-versions a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease, opacity 0.2s ease;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 1px;
+        }
+
+        .older-versions a:hover {
+            color: var(--accent);
+            opacity: 1;
+        }
+
+        /* ── Models / Parameters Table ──────────────── */
+        .models-block {
+            margin-bottom: 5rem;
+        }
+
+        .models-note {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+            line-height: 1.7;
+            max-width: 680px;
+            margin-bottom: 1.5rem;
+        }
+
+        .model-row {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 1rem 2rem;
+            border-top: 1px solid var(--glass-border);
+            padding: 1.2rem 0;
+            align-items: start;
+        }
+
+        .model-row:last-child {
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .model-name {
+            font-family: var(--font-h2);
+            font-size: 0.8rem;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding-top: 0.1rem;
+        }
+
+        .model-name .model-note {
+            display: block;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+            margin-top: 0.3rem;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .model-params {
+            font-family: var(--font-h2);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            line-height: 1.9;
+        }
+
+        .model-params span {
+            color: var(--accent);
+            opacity: 0.8;
+        }
+
+        .model-params .alt-label {
+            display: inline-block;
+            font-size: 0.6rem;
+            color: var(--accent);
+            opacity: 0.4;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-right: 0.5rem;
+        }
+
+        /* ── About Section ──────────────────────────── */
+        .about-block {
+            margin-bottom: 5rem;
+        }
+
+        .about-block p {
+            max-width: 680px;
+            margin-bottom: 1rem;
+        }
+
+        /* ── Tests Link ─────────────────────────────── */
+        .tests-callout {
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            padding: 1.8rem 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            margin-bottom: 5rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .tests-callout:hover {
+            border-color: rgba(199, 181, 131, 0.2);
+        }
+
+        .tests-callout-text {
+            font-family: var(--font-h2);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ── What's Inside ──────────────────────────── */
+        .features-block {
+            margin-bottom: 5rem;
+        }
+
+        .feature-group {
+            margin-bottom: 2.5rem;
+        }
+
+        .feature-group-title {
+            font-family: var(--font-h1);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .feature-group p {
+            max-width: 680px;
+            margin-bottom: 0.8rem;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+            max-width: 680px;
+        }
+
+        .feature-item {
+            font-family: var(--font-h2);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.6rem 0;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .feature-item span {
+            color: var(--accent);
+            opacity: 0.5;
+            margin-right: 0.5rem;
+        }
+
+        /* ── How To Use ─────────────────────────────── */
+        .howto-block {
+            margin-bottom: 4rem;
+        }
+
+        .howto-list {
+            list-style: none;
+            max-width: 680px;
+        }
+
+        .howto-list li {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+            padding: 0.6rem 0;
+            border-top: 1px solid var(--glass-border);
+            display: grid;
+            grid-template-columns: 24px 1fr;
+            gap: 1rem;
+        }
+
+        .howto-list li:last-child {
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .howto-list .step-num {
+            font-family: var(--font-h2);
+            font-size: 0.65rem;
+            color: var(--accent);
+            opacity: 0.5;
+            padding-top: 0.25rem;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .preset-hero {
@@ -233,6 +361,15 @@
             .download-bar {
                 flex-direction: column;
                 align-items: flex-start;
+            }
+
+            .tests-callout {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .feature-list {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -272,51 +409,168 @@
             </div>
         </div>
 
-        <!-- About -->
-        <div class="about-block">
-            <div class="section-label">About</div>
-            <p>
-                A longstanding annoyance with AI roleplay is models refusing to take initiative or be creative. They write beautiful prose, set up vivid scenes, even offer some internal commentary — but when it comes to actually introducing unexpected elements or pushing the scene forward without the user guiding? It's a struggle.
-            </p>
-            <p>
-                White Lotus aims to fix that. It's less "instruction-voiced" than most presets, which is intentional — the tradeoff between token efficiency and more flawed, human-sounding output is worth it. It includes a Variety Toggle that randomizes additional tags to introduce unexpected elements, and optional CoT prompting for thinking models that want to really chew on the scene before responding.
-            </p>
-            <p>
-                This preset is built for roleplay that cares about plot and characters. It's probably terrible for RPG-mechanic-style roleplay — fair warning.
-            </p>
+        <!-- Downloads -->
+        <div class="download-area">
+            <div class="download-bar">
+                <div class="download-info">
+                    <div class="file-name">WHITE LOTUS [1.2.0].json</div>
+                    <div class="file-meta">Latest &nbsp;·&nbsp; SillyTavern Preset &nbsp;·&nbsp; JSON</div>
+                </div>
+                <a href="downloads/presets/WHITE LOTUS [1.2.0].json" download class="btn" style="margin-top:0;">Download</a>
+            </div>
+            <div class="older-versions">
+                Previous: <a href="downloads/presets/WHITE LOTUS [1.1.0].json" download>v1.1.0</a>
+            </div>
         </div>
 
-        <!-- Tested Models -->
+        <!-- Recommended Parameters -->
         <div class="models-block">
-            <div class="section-label">Tested Models & Parameters</div>
+            <div class="section-label">Recommended Parameters</div>
+            <div class="models-note">All hosted via NanoGPT unless noted. Post-processing: Merge consecutive roles (Semi-strict for GLM 5/5.1). Context: 35k set, ~20k practical with summary extension.</div>
 
             <div class="model-row">
-                <div class="model-name">GLM 5 / Kimi 2.5<br>Kimi 2.6 / DS4 (Thinking)</div>
+                <div class="model-name">Kimi 2.5 Thinking
+                    <span class="model-note">Default model. My love.</span>
+                </div>
                 <div class="model-params">
-                    <span>Temp</span> 1.0 &nbsp;·&nbsp; <span>Freq</span> 0.2 &nbsp;·&nbsp; <span>Pres</span> 0.3 &nbsp;·&nbsp; <span>Top K</span> 25 &nbsp;·&nbsp; <span>Top P</span> 0.9 &nbsp;·&nbsp; <span>Top A</span> 1<br>
-                    Kimi also: <span>Temp</span> 1.0 &nbsp;·&nbsp; <span>Freq</span> 0 &nbsp;·&nbsp; <span>Pres</span> 0 &nbsp;·&nbsp; <span>Top K</span> 0 &nbsp;·&nbsp; <span>Top P</span> 1 &nbsp;·&nbsp; <span>Top A</span> 1
+                    <span>Temp</span> 1.0 · <span>Freq</span> 0 · <span>Pres</span> 0 · <span>Top P</span> 0.90 · <span>Top K</span> 0 · <span>Rep P</span> 1 · <span>Min P</span> 0.01 · <span>Top A</span> 0<br>
+                    <span class="alt-label">Alt</span> <span>Temp</span> 1.0 · <span>Freq</span> 0 · <span>Pres</span> 0 · <span>Top P</span> 0.95 · <span>Top K</span> 25 · <span>Rep P</span> 1 · <span>Min P</span> 0 · <span>Top A</span> 1
                 </div>
             </div>
 
             <div class="model-row">
-                <div class="model-name">Gemma 4</div>
+                <div class="model-name">Kimi 2.5 (Non-Think)</div>
                 <div class="model-params">
-                    <span>Temp</span> 1.0 &nbsp;·&nbsp; <span>Freq</span> 0.2 &nbsp;·&nbsp; <span>Pres</span> 0.3 &nbsp;·&nbsp; <span>Top K</span> 0 &nbsp;·&nbsp; <span>Top P</span> 0.9 &nbsp;·&nbsp; <span>Top A</span> 1
+                    <span>Temp</span> 0.6 · <span>Freq</span> 0 · <span>Pres</span> 0 · <span>Top P</span> 0.95 · <span>Top K</span> 0 · <span>Rep P</span> 1 · <span>Min P</span> 0.01 · <span>Top A</span> 0
                 </div>
             </div>
 
             <div class="model-row">
-                <div class="model-name">Deepseek 4 Flash</div>
+                <div class="model-name">Kimi 2.6</div>
                 <div class="model-params">
-                    <span>Temp</span> 1.0 &nbsp;·&nbsp; <span>Freq</span> 0.2 &nbsp;·&nbsp; <span>Pres</span> 0.3 &nbsp;·&nbsp; <span>Top K</span> 0 &nbsp;·&nbsp; <span>Top P</span> 0.9 &nbsp;·&nbsp; <span>Top A</span> 1
+                    <span>Temp</span> 1.0 · <span>Freq</span> 0 · <span>Pres</span> 0 · <span>Top P</span> 1.0 · <span>Top K</span> 0 · <span>Rep P</span> 1 · <span>Min P</span> 0 · <span>Top A</span> 0
+                </div>
+            </div>
+
+            <div class="model-row">
+                <div class="model-name">GLM 5 / 5.1
+                    <span class="model-note">Semi-strict post-processing</span>
+                </div>
+                <div class="model-params">
+                    <span>Temp</span> 1.0 · <span>Freq</span> 0–0.2 · <span>Pres</span> 0–0.2 · <span>Top P</span> 0.95 · <span>Top K</span> 40 · <span>Rep P</span> 1 · <span>Min P</span> 0 · <span>Top A</span> 0<br>
+                    <span class="alt-label">Alt</span> <span>Temp</span> 1.0 · <span>Freq</span> 0.02 · <span>Pres</span> 0.03 · <span>Top P</span> 1 · <span>Top K</span> 0 · <span>Rep P</span> 1 · <span>Min P</span> 0.05 · <span>Top A</span> 0.4
                 </div>
             </div>
 
             <div class="model-row">
                 <div class="model-name">GLM 4.7</div>
                 <div class="model-params">
-                    <span>Temp</span> 0.9 &nbsp;·&nbsp; <span>Freq</span> 0 &nbsp;·&nbsp; <span>Pres</span> 0 &nbsp;·&nbsp; <span>Top K</span> 0 &nbsp;·&nbsp; <span>Top P</span> 0.95 &nbsp;·&nbsp; <span>Rep</span> 1 &nbsp;·&nbsp; <span>Min P</span> 0 &nbsp;·&nbsp; <span>Top A</span> 1
+                    <span>Temp</span> 1.0 · <span>Freq</span> 0–0.2 · <span>Pres</span> 0–0.2 · <span>Top P</span> 0.95 · <span>Top K</span> 40 · <span>Rep P</span> 1 · <span>Min P</span> 0 · <span>Top A</span> 0
                 </div>
+            </div>
+
+            <div class="model-row">
+                <div class="model-name">Deepseek 3.2 Exp
+                    <span class="model-note">Thinking — DS docs say most params are ignored</span>
+                </div>
+                <div class="model-params">
+                    <span>Temp</span> 1.0 · <span>Freq</span> 0 · <span>Pres</span> 0 · <span>Top P</span> 0.95 · <span>Top K</span> 0 · <span>Rep P</span> 1 · <span>Min P</span> 0 · <span>Top A</span> 0
+                </div>
+            </div>
+
+            <div class="model-row">
+                <div class="model-name">Deepseek 4 Flash
+                    <span class="model-note">Super sensitive to temp!</span>
+                </div>
+                <div class="model-params">
+                    <span>Temp</span> 0.7 · <span>Freq</span> 0 · <span>Pres</span> 0 · <span>Top P</span> 0 · <span>Top K</span> 0 · <span>Rep P</span> 1 · <span>Min P</span> 0 · <span>Top A</span> 0
+                </div>
+            </div>
+
+            <div class="model-row">
+                <div class="model-name">DS 4 Flash (Think)<br>DS 4 Pro</div>
+                <div class="model-params">
+                    <span>Temp</span> 1.0 · <span>Freq</span> 0 · <span>Pres</span> 0 · <span>Top P</span> 1.0 · <span>Top K</span> 0 · <span>Rep P</span> 1 · <span>Min P</span> 0 · <span>Top A</span> 0
+                </div>
+            </div>
+
+            <div class="model-row">
+                <div class="model-name">Gemma 4 31B</div>
+                <div class="model-params">
+                    <span>Temp</span> 1.0 · <span>Freq</span> 0–0.2 · <span>Pres</span> 0–0.2 · <span>Top P</span> 0.95 · <span>Top K</span> 64 · <span>Rep P</span> 1 · <span>Min P</span> 0 · <span>Top A</span> 0
+                </div>
+            </div>
+        </div>
+
+        <!-- About -->
+        <div class="about-block">
+            <div class="section-label">About</div>
+            <p>
+                LLMs love to write beautiful prose. They'll set up vivid scenes, offer gorgeous internal commentary, describe the way light falls on a character's face like they're angling for a literary prize. But actually <em>doing</em> something? Introducing an unexpected element? Pushing the story forward without holding your hand? That's where they choke.
+            </p>
+            <p>
+                White Lotus is my attempt to fix that. The focus is on writing quality, adaptability, and keeping the token count reasonable — no bloated instruction walls. It's deliberately less "instruction-voiced" than most presets, which is a conscious tradeoff. The output sounds more human and less like a model following orders, even if it's slightly less token-efficient.
+            </p>
+            <p>
+                This preset is built for roleplay that cares about plot and characters. It's probably terrible for RPG-mechanic-style stuff — fair warning. But if you want NPCs that feel like actual people, a world that keeps moving whether or not you're paying attention, and characters who make choices based on what <em>they</em> want rather than what's convenient? That's what this is for.
+            </p>
+        </div>
+
+        <!-- Tests -->
+        <div class="tests-callout">
+            <div class="tests-callout-text">See how v1.2.0 performs across GLM and Kimi models — baselines, add-ons, and a full chat demo.</div>
+            <a href="preset-white-lotus-tests.html" class="btn" style="margin-top: 0;">View Tests</a>
+        </div>
+
+        <!-- What's Inside -->
+        <div class="features-block">
+            <div class="section-label">What's Inside</div>
+
+            <div class="feature-group">
+                <div class="feature-group-title">Core</div>
+                <p>
+                    The Lotus Engine handles the fundamentals: characters have lives outside of the current scene, make choices based on their own wants and needs, can lie or deceive when it makes sense, and develop slowly (with room to regress). It enforces knowledge boundaries — characters only know what they've seen or heard — and keeps the user's agency sacred.
+                </p>
+            </div>
+
+            <div class="feature-group">
+                <div class="feature-group-title">Setup</div>
+                <p>
+                    Variables you set once and forget about: tense, POV, genre, style, subgenre, diction, and narrator type. Narrator can be Omniscient (knows everyone's inner world except the user's) or Character (becomes the character — biases, blind spots, and all). Diction options for Chinese, Japanese, or Historical settings add culturally appropriate idioms, honorifics, and metaphors.
+                </p>
+            </div>
+
+            <div class="feature-group">
+                <div class="feature-group-title">Modules</div>
+                <p>
+                    Toggle on what you need, leave off what you don't. These are designed to be genuinely modular — no dependencies, no conflicts. Only turn on NSFW when things are getting frisky; only use Anti-Slop if your model needs it (looking at you, GLM).
+                </p>
+                <div class="feature-list">
+                    <div class="feature-item"><span>→</span> Anti-Slop</div>
+                    <div class="feature-item"><span>→</span> Better NPCs</div>
+                    <div class="feature-item"><span>→</span> Romance</div>
+                    <div class="feature-item"><span>→</span> Descriptions</div>
+                    <div class="feature-item"><span>→</span> Disabilities</div>
+                    <div class="feature-item"><span>→</span> Consent</div>
+                    <div class="feature-item"><span>→</span> NSFW (Realistic)</div>
+                    <div class="feature-item"><span>→</span> NSFW (Gooner)</div>
+                    <div class="feature-item"><span>→</span> Intense Violence</div>
+                    <div class="feature-item"><span>→</span> Abuse / Toxic</div>
+                </div>
+            </div>
+
+            <div class="feature-group">
+                <div class="feature-group-title">Direction</div>
+                <p>
+                    The fun stuff. Variety Toggle randomizes an additional story element each turn — a memory from the character's past, an intrusive thought, a sudden commotion, a misunderstanding being planted for later. Great for breaking repetitive loops. CoT (Brainstorm) prompts thinking models to work through character motivation, scene setup, and interpersonal dynamics before writing. There's also a Hyper-Mode for CoT that adds thematic reasoning on top.
+                </p>
+            </div>
+
+            <div class="feature-group">
+                <div class="feature-group-title">Tools</div>
+                <p>
+                    NPC Crafter generates randomized character descriptions with specific physical traits, fashion sense, speaking style, personality, and a quirk — produces way more interesting characters than letting the model default to "tall, handsome, mysterious." Relationship Tracker and Temporal Tracker keep stats on hostility, interest, obligation, attraction, time, weather, and location. All come with styled regex scripts for the UI.
+                </p>
             </div>
         </div>
 
@@ -326,30 +580,29 @@
             <ul class="howto-list">
                 <li>
                     <span class="step-num">01</span>
-                    <span>Set your variables — tense, POV, and cultural setting. These drive the style outputs.</span>
+                    <span>Set your variables in <strong>SETUP</strong> — tense, POV, genre, style, narrator type, diction, and length. These drive everything downstream.</span>
+                </li>
+                <li>
+                    <span class="step-num">02</span>
+                    <span><strong>CORE</strong> is where your character card, persona info, scenario, and lore live. The usual SillyTavern stuff.</span>
                 </li>
                 <li>
                     <span class="step-num">03</span>
-                    <span>Pick your optional modules from <strong>MODULES</strong>.</span>
+                    <span>Pick your optional modules from <strong>MODULES</strong>. Leave off what you aren't using in the near future — if your character isn't getting frisky, don't toggle NSFW. If your model doesn't slop, skip Anti-Slop.</span>
                 </li>
                 <li>
                     <span class="step-num">04</span>
-                    <span>Toggle <strong>Variety Toggle</strong> when you want more dynamic, unpredictable responses. It adds a randomized element to the next generation — great for breaking out of repetitive loops.</span>
+                    <span>Toggle <strong>Variety Toggle</strong> when you want unpredictable responses. It randomly injects a story element — a memory, a misunderstanding, an intrusive thought, a commotion — to keep things fresh.</span>
                 </li>
                 <li>
                     <span class="step-num">05</span>
-                    <span><strong>CoT</strong> (Chain of Thought) works best with thinking models. It prompts the AI to work through the scene before responding, which noticeably improves initiative and creativity.</span>
+                    <span><strong>CoT</strong> works best with thinking models. It walks the AI through character motivation, scene setup, and dynamics before writing. Hyper-Mode adds thematic reasoning on top if you want to go deep.</span>
+                </li>
+                <li>
+                    <span class="step-num">06</span>
+                    <span><strong>Tools</strong> like NPC Crafter are one-shot — toggle on when you want one, toggle off after. Keep it on and you'll get a new NPC every single turn (don't do that). Trackers can stay on.</span>
                 </li>
             </ul>
-        </div>
-
-        <!-- Download -->
-        <div class="download-bar">
-            <div class="download-info">
-                <div class="file-name">WHITE LOTUS [1.1.0].json</div>
-                <div class="file-meta">SillyTavern Preset &nbsp;·&nbsp; JSON</div>
-            </div>
-            <a href="downloads/presets/WHITE LOTUS [1.1.0].json" download class="btn" style="margin-top:0;">Download</a>
         </div>
 
     </main>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Characters | Moki</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ── Page Layout ────────────────────────────── */
+        .characters-page {
+            flex: 1;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 120px 2rem 5rem;
+        }
+
+        /* ── Header ─────────────────────────────────── */
+        .characters-header {
+            margin-bottom: 4rem;
+        }
+
+        .characters-header h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .characters-header p {
+            max-width: 580px;
+            line-height: 1.7;
+        }
+
+        /* ── Category Section ───────────────────────── */
+        .category-section {
+            margin-bottom: 5rem;
+        }
+
+        .category-label {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.6;
+            margin-bottom: 2rem;
+        }
+
+        /* ── Character Grid ─────────────────────────── */
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 220px));
+            gap: 1.5rem;
+        }
+
+        /* ── Character Card ─────────────────────────── */
+        .character-card {
+            display: block;
+            position: relative;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            overflow: hidden;
+            text-decoration: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .character-card:hover {
+            border-color: rgba(199, 181, 131, 0.3);
+        }
+
+        .character-portrait {
+            width: 100%;
+            aspect-ratio: 2 / 3;
+            overflow: hidden;
+        }
+
+        .character-portrait img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: top center;
+            transition: transform 0.5s ease;
+        }
+
+        .character-card:hover .character-portrait img {
+            transform: scale(1.05);
+        }
+
+        /* ── Hover Overlay ──────────────────────────── */
+        .character-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(7, 7, 7, 0.88);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .character-card:hover .character-overlay {
+            opacity: 1;
+        }
+
+        .character-overlay .overlay-desc {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .character-overlay .overlay-action {
+            font-family: var(--font-h2);
+            font-size: 0.6rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.7;
+        }
+
+        /* ── Name Bar ───────────────────────────────── */
+        .character-name {
+            padding: 0.8rem 1rem;
+            font-family: var(--font-h2);
+            font-size: 0.75rem;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ── Responsive ─────────────────────────────── */
+        @media (max-width: 768px) {
+            .characters-header h1 {
+                font-size: 3rem;
+            }
+
+            .character-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 420px) {
+            .character-grid {
+                grid-template-columns: 1fr;
+                max-width: 240px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Effect -->
+    <div id="loader">
+        <div class="loader-line"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="index.html" class="nav-brand">MOKI.</a>
+        <div class="nav-links">
+            <a href="about.html">About Me</a>
+            <a href="presets.html">Presets</a>
+            <a href="characters.html" class="active">Characters</a>
+            <a href="wip.html">Utilities</a>
+            <a href="aesthetics.html">Aesthetics</a>
+        </div>
+    </nav>
+
+    <main class="characters-page">
+
+        <div class="characters-header">
+            <h1>Characters</h1>
+            <p>Character cards for SillyTavern. Click any portrait to download the card.</p>
+        </div>
+
+        <!-- One-Offs -->
+        <div class="category-section">
+            <div class="category-label">One-Offs</div>
+            <div class="character-grid">
+
+                <a href="downloads/characters/one-offs/Ned.png" download class="character-card">
+                    <div class="character-portrait">
+                        <img src="downloads/characters/one-offs/Ned.png" alt="Ned — Edmund Relfthorne" loading="lazy">
+                    </div>
+                    <div class="character-overlay">
+                        <div class="overlay-desc">Heir to the Relfthorne trading house. Haughty, aimless, and chronically unemployed — currently playing at catching thieves in the Lowmarket.</div>
+                        <div class="overlay-action">↓ Download Card</div>
+                    </div>
+                    <div class="character-name">Ned</div>
+                </a>
+
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="subtle-footer">
+        <p>&copy; 2026 Moki.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

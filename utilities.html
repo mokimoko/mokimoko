@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utilities | Moki</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .util-section {
+            margin-bottom: 4rem;
+        }
+
+        .util-section h2 {
+            margin-bottom: 2rem;
+        }
+
+        .ext-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .ext-link {
+            display: block;
+            max-width: 480px;
+            border: 1px solid var(--glass-border);
+            transition: border-color 0.3s ease, transform 0.2s ease;
+            overflow: hidden;
+        }
+
+        .ext-link:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .ext-link img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .ext-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Effect -->
+    <div id="loader">
+        <div class="loader-line"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="index.html" class="nav-brand">MOKI.</a>
+        <div class="nav-links">
+            <a href="about.html">About Me</a>
+            <a href="presets.html">Presets</a>
+            <a href="characters.html">Characters</a>
+            <a href="utilities.html" class="active">Utilities</a>
+            <a href="aesthetics.html">Aesthetics</a>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <main class="container">
+        <h1>Utilities</h1>
+        <p>Tools and extensions I've built for SillyTavern.</p>
+
+        <!-- Extensions Section -->
+        <section class="util-section" style="margin-top: 3rem;">
+            <h2>Extensions</h2>
+            <div class="ext-grid">
+                <a href="https://github.com/mokimoko/SillyTavern-WhiteLotus" target="_blank" rel="noopener" class="ext-link">
+                    <img src="images/extensions/cover-white-lotus.png" alt="White Lotus Extension">
+                </a>
+                <a href="https://github.com/mokimoko/SillyTavern-UIBedazzler" target="_blank" rel="noopener" class="ext-link">
+                    <img src="images/extensions/cover-bedazzler.png" alt="UI Bedazzler Extension">
+                </a>
+                <a href="https://github.com/mokimoko/SillyTavern-ScenarioCrafter" target="_blank" rel="noopener" class="ext-link">
+                    <img src="images/extensions/cover-scenario-crafter.png" alt="Scenario Crafter Extension">
+                </a>
+                <a href="https://github.com/mokimoko/SillyTavern-ScenarioSprites" target="_blank" rel="noopener" class="ext-link">
+                    <img src="images/extensions/cover-scenario-sprites.png" alt="Scenario Sprites Extension">
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="subtle-footer">
+        <p>&copy; 2026 Moki.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

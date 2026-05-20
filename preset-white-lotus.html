@@ -387,7 +387,7 @@
             <a href="about.html">About Me</a>
             <a href="presets.html" class="active">Presets</a>
             <a href="characters.html">Characters</a>
-            <a href="wip.html">Utilities</a>
+            <a href="utilities.html">Utilities</a>
             <a href="aesthetics.html">Aesthetics</a>
         </div>
     </nav>
@@ -414,13 +414,13 @@
         <div class="download-area">
             <div class="download-bar">
                 <div class="download-info">
-                    <div class="file-name">WHITE LOTUS [1.2.1].json</div>
+                    <div class="file-name">WHITE LOTUS [2.0.0].json</div>
                     <div class="file-meta">Latest &nbsp;·&nbsp; SillyTavern Preset &nbsp;·&nbsp; JSON</div>
                 </div>
-                <a href="downloads/presets/WHITE LOTUS [1.2.1].json" download class="btn" style="margin-top:0;">Download</a>
+                <a href="downloads/presets/WHITE LOTUS [2.0.0].json" download class="btn" style="margin-top:0;">Download</a>
             </div>
             <div class="older-versions">
-                Previous: <a href="downloads/presets/WHITE LOTUS [1.1.0].json" download>v1.1.0</a>
+                Previous: <a href="downloads/presets/WHITE LOTUS [1.2.1].json" download>v1.2.1</a> · <a href="downloads/presets/WHITE LOTUS [1.1.0].json" download>v1.1.0</a>
             </div>
         </div>
 
@@ -519,7 +519,7 @@
 
         <!-- Tests -->
         <div class="tests-callout">
-            <div class="tests-callout-text">See how v1.2.0 performs across GLM and Kimi models — baselines, add-ons, and a full chat demo.</div>
+            <div class="tests-callout-text">See how White Lotus performs across GLM and Kimi models — baselines, add-ons, and a full chat demo.</div>
             <a href="preset-white-lotus-tests.html" class="btn" style="margin-top: 0;">View Tests</a>
         </div>
 
@@ -537,7 +537,10 @@
             <div class="feature-group">
                 <div class="feature-group-title">Setup</div>
                 <p>
-                    Variables you set once and forget about: tense, POV, genre, style, subgenre, diction, and narrator type. Narrator can be Omniscient (knows everyone's inner world except the user's) or Character (becomes the character — biases, blind spots, and all). Diction options for Chinese, Japanese, or Historical settings add culturally appropriate idioms, honorifics, and metaphors.
+                    Variables you set once and forget about: tense, POV, diction, length, and narrator type. Narrator can be Omniscient (knows everyone's inner world except the user's) or Character (becomes the character — biases, blind spots, and all). Diction options for Chinese, Japanese, or Historical settings add culturally appropriate idioms, honorifics, and metaphors.
+                </p>
+                <p>
+                    New in 2.0: genre presets. Pick from Contemporary, Slice of Life, Southern Gothic, Science Fiction, Dark Fantasy, Regency Historical, Historical Danmei, Modern Danmei, or LitRPG — each one sets the primary genre, subgenre, tone, and reference style in one toggle. There's also a <a href="utilities.html">companion extension</a> that makes managing toggles and settings easier, with some bonus UI tweaks and chat styling.
                 </p>
             </div>
 
@@ -549,10 +552,9 @@
                 <div class="feature-list">
                     <div class="feature-item"><span>→</span> Anti-Slop</div>
                     <div class="feature-item"><span>→</span> Better NPCs</div>
-                    <div class="feature-item"><span>→</span> Romance</div>
-                    <div class="feature-item"><span>→</span> Descriptions</div>
                     <div class="feature-item"><span>→</span> Disabilities</div>
                     <div class="feature-item"><span>→</span> Consent</div>
+                    <div class="feature-item"><span>→</span> Negativity Bias</div>
                     <div class="feature-item"><span>→</span> NSFW (Realistic)</div>
                     <div class="feature-item"><span>→</span> NSFW (Gooner)</div>
                     <div class="feature-item"><span>→</span> Intense Violence</div>
@@ -563,14 +565,14 @@
             <div class="feature-group">
                 <div class="feature-group-title">Direction</div>
                 <p>
-                    The fun stuff. Variety Toggle randomizes an additional story element each turn — a memory from the character's past, an intrusive thought, a sudden commotion, a misunderstanding being planted for later. Great for breaking repetitive loops. CoT (Brainstorm) prompts thinking models to work through character motivation, scene setup, and interpersonal dynamics before writing. There's also a Hyper-Mode for CoT that adds thematic reasoning on top.
+                    Narrative Direction handles prose style, pacing, and scene management — matching style to genre, keeping things kinetic, giving every character distinct dialogue and thought patterns, and starting new scenes in media res. Variety Toggle randomizes an additional story element each turn — a memory from the character's past, an intrusive thought, a sudden commotion, a misunderstanding being planted for later. Great for breaking repetitive loops. CoT (Brainstorm) prompts thinking models to work through character motivation, scene setup, and interpersonal dynamics before writing. There's also a Hyper-Mode for CoT that adds thematic reasoning on top.
                 </p>
             </div>
 
             <div class="feature-group">
                 <div class="feature-group-title">Tools</div>
                 <p>
-                    NPC Crafter generates randomized character descriptions with specific physical traits, fashion sense, speaking style, personality, and a quirk — produces way more interesting characters than letting the model default to "tall, handsome, mysterious." Relationship Tracker and Temporal Tracker keep stats on hostility, interest, obligation, attraction, time, weather, and location. All come with styled regex scripts for the UI.
+                    NPC Crafter generates randomized character descriptions with specific physical traits, fashion sense, speaking style, personality, and a quirk — produces way more interesting characters than letting the model default to "tall, handsome, mysterious." Relationship Tracker and Temporal Tracker keep stats on hostility, interest, obligation, attraction, time, weather, and location. Status Board tracks each character's health, hunger, energy, hygiene, arousal, mood, and a private thought. If you use any trackers, toggle on Tracker Rules to keep the output format consistent. All come with styled regex scripts for the UI.
                 </p>
             </div>
         </div>
@@ -581,7 +583,7 @@
             <ul class="howto-list">
                 <li>
                     <span class="step-num">01</span>
-                    <span>Set your variables in <strong>SETUP</strong> — tense, POV, genre, style, narrator type, diction, and length. These drive everything downstream.</span>
+                    <span>Set your variables in <strong>SETUP</strong> — tense, POV, narrator type, diction, length, and genre. Genre presets come with pre-configured tone and style, so just pick the one that fits. You can manage all of this manually through SillyTavern's prompt manager, or use the <a href="utilities.html">companion extension</a> for an easier toggle experience.</span>
                 </li>
                 <li>
                     <span class="step-num">02</span>
@@ -601,7 +603,7 @@
                 </li>
                 <li>
                     <span class="step-num">06</span>
-                    <span><strong>Tools</strong> like NPC Crafter are one-shot — toggle on when you want one, toggle off after. Keep it on and you'll get a new NPC every single turn (don't do that). Trackers can stay on.</span>
+                    <span><strong>Tools</strong> like NPC Crafter are one-shot — toggle on when you want one, toggle off after. Keep it on and you'll get a new NPC every single turn (don't do that). Trackers (Relationship, Temporal, Status Board) can stay on — just make sure to enable <strong>Tracker Rules</strong> alongside them for consistent formatting.</span>
                 </li>
             </ul>
         </div>

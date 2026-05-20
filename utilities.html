@@ -16,8 +16,9 @@
 
         .ext-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
+            grid-template-columns: repeat(2, auto);
+            gap: 1.2rem;
+            justify-content: start;
         }
 
         .ext-link {
@@ -37,6 +38,32 @@
             display: block;
             width: 100%;
             height: auto;
+        }
+
+        .misc-link {
+            display: inline-block;
+            font-family: var(--font-h2);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 0.8rem 1.4rem;
+            border: 1px solid var(--glass-border);
+            transition: color 0.2s ease, border-color 0.3s ease;
+        }
+
+        .misc-link:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .misc-link-desc {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+            margin-top: 0.6rem;
         }
 
         @media (max-width: 768px) {
@@ -85,6 +112,15 @@
                 <a href="https://github.com/mokimoko/SillyTavern-ScenarioSprites" target="_blank" rel="noopener" class="ext-link">
                     <img src="images/extensions/cover-scenario-sprites.png" alt="Scenario Sprites Extension">
                 </a>
+            </div>
+        </section>
+
+        <!-- Misc Section -->
+        <section class="util-section">
+            <h2>Misc</h2>
+            <div>
+                <a href="extractor.html" class="misc-link">Character Card Extractor</a>
+                <div class="misc-link-desc">Extract text from character cards and lorebooks · download as TXT, JSON, or PDF</div>
             </div>
         </section>
     </main>

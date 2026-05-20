@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Card Extractor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Oswald:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
+    <style>
+/* ════════════════════════════════════════════════════════
+   DESIGN SYSTEM — mokimoko dark/gold
+   ════════════════════════════════════════════════════════ */
+:root {
+    --bg: #070707;
+    --bg-raised: #0d0d0d;
+    --bg-surface: #111111;
+    --text-main: #ffffff;
+    --text-muted: #a0a0a0;
+    --text-dim: #606060;
+    --accent: #c7b583;
+    --accent-dim: rgba(199,181,131,0.15);
+    --accent-glow: rgba(199,181,131,0.06);
+    --glass-bg: rgba(255,255,255,0.02);
+    --glass-border: rgba(255,255,255,0.08);
+    --glass-border-hover: rgba(255,255,255,0.15);
+    --error: #e05a5a;
+    --success: #5ec78a;
+    --font-h1: 'Oswald', sans-serif;
+    --font-h2: 'Space Mono', monospace;
+    --font-body: 'Inter', sans-serif;
+    --radius: 2px;
+    --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+
+body {
+    background: var(--bg);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* ── Loader ────────────────────────────────────────── */
+#loader {
+    position: fixed; inset: 0;
+    background: var(--bg);
+    z-index: 9999;
+    display: flex; justify-content: center; align-items: center;
+    transition: opacity 0.6s ease;
+}
+#loader.done { opacity: 0; pointer-events: none; }
+.loader-line {
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width 0.8s cubic-bezier(0.8, 0, 0.2, 1);
+}
+#loader.go .loader-line { width: 120px; }
+
+/* ── Layout ────────────────────────────────────────── */
+.app-shell {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Header ────────────────────────────────────────── */
+.app-header {
+    padding: 2rem 0 1.5rem;
+    border-bottom: 1px solid var(--glass-border);
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+}
+.app-header h1 {
+    font-family: var(--font-h1);
+    font-size: 2.4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    line-height: 1.1;
+}
+.app-header h1 span { color: var(--accent); }
+.app-header .tagline {
+    font-family: var(--font-h2);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 0.6rem;
+}
+
+/* ── Drop Zone ─────────────────────────────────────── */
+.drop-zone {
+    border: 1px dashed var(--glass-border);
+    background: var(--glass-bg);
+    padding: 3rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.6s ease 0.1s both;
+}
+.drop-zone::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity var(--transition);
+}
+.drop-zone:hover, .drop-zone.dragover {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+}
+.drop-zone:hover::before, .drop-zone.dragover::before { opacity: 1; }
+.drop-zone .icon {
+    font-family: var(--font-h1);
+    font-size: 2rem;
+    color: var(--accent);
+    opacity: 0.5;
+    margin-bottom: 0.8rem;
+    transition: opacity var(--transition);
+}
+.drop-zone:hover .icon { opacity: 1; }
+.drop-zone .label {
+    font-family: var(--font-h2);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+}
+.drop-zone .sublabel {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-top: 0.5rem;
+}
+
+/* ── File Cards ────────────────────────────────────── */
+.file-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    animation: fadeUp 0.3s ease both;
+}
+.file-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 0.6rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-h2);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    animation: fadeUp 0.3s ease both;
+}
+.file-card .file-type {
+    color: var(--accent);
+    font-weight: 700;
+    white-space: nowrap;
+}
+.file-card .file-name {
+    color: var(--text-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 200px;
+}
+.file-card .remove-btn {
+    background: none; border: none; color: var(--text-dim);
+    cursor: pointer; font-size: 1rem; line-height: 1;
+    transition: color var(--transition);
+    padding: 0 0.2rem;
+}
+.file-card .remove-btn:hover { color: var(--error); }
+
+/* ── Controls ──────────────────────────────────────── */
+.controls {
+    margin-top: 2rem;
+    animation: fadeUp 0.6s ease 0.2s both;
+}
+.controls-header {
+    font-family: var(--font-h2);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+.field-toggles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.5rem;
+}
+.field-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0.8rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    cursor: pointer;
+    transition: all var(--transition);
+    user-select: none;
+}
+.field-toggle:hover { border-color: var(--glass-border-hover); }
+.field-toggle.active { border-color: var(--accent); background: var(--accent-dim); }
+.field-toggle .toggle-track {
+    width: 28px; height: 14px;
+    background: var(--text-dim);
+    border-radius: 7px;
+    position: relative;
+    transition: background var(--transition);
+    flex-shrink: 0;
+}
+.field-toggle.active .toggle-track { background: var(--accent); }
+.field-toggle .toggle-thumb {
+    width: 10px; height: 10px;
+    background: var(--text-main);
+    border-radius: 50%;
+    position: absolute;
+    top: 2px; left: 2px;
+    transition: transform var(--transition);
+}
+.field-toggle.active .toggle-thumb { transform: translateX(14px); }
+.field-toggle .toggle-label {
+    font-family: var(--font-h2);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    transition: color var(--transition);
+}
+.field-toggle.active .toggle-label { color: var(--text-main); }
+
+/* ── Action Buttons ────────────────────────────────── */
+.actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s ease 0.3s both;
+}
+.btn {
+    font-family: var(--font-h2);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 0.8rem 1.8rem;
+    border: 1px solid var(--glass-border);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all var(--transition);
+}
+.btn:hover {
+    border-color: var(--glass-border-hover);
+    color: var(--text-main);
+}
+.btn-primary {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+.btn-primary:hover {
+    background: var(--accent);
+    color: var(--bg);
+}
+.btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+.btn:disabled:hover {
+    border-color: var(--glass-border);
+    color: var(--text-muted);
+    background: transparent;
+}
+
+/* ── Preview ───────────────────────────────────────── */
+.preview-section {
+    margin-top: 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    animation: fadeUp 0.6s ease 0.15s both;
+}
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+.preview-header h2 {
+    font-family: var(--font-h2);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+}
+.preview-stats {
+    font-family: var(--font-h2);
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+}
+.preview-container {
+    flex: 1;
+    min-height: 400px;
+    max-height: 70vh;
+    overflow-y: auto;
+    border: 1px solid var(--glass-border);
+    background: var(--bg-raised);
+    padding: 2rem;
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+.preview-container::-webkit-scrollbar { width: 6px; }
+.preview-container::-webkit-scrollbar-track { background: transparent; }
+.preview-container::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 3px; }
+.preview-container::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+
+/* Preview content styling */
+.preview-container .card-separator {
+    text-align: center;
+    padding: 1.5rem 0;
+    color: var(--accent);
+    font-family: var(--font-h1);
+    font-size: 0.8rem;
+    letter-spacing: 6px;
+    opacity: 0.4;
+}
+.preview-container .char-name {
+    font-family: var(--font-h1);
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    padding: 0.5rem 0 1.5rem;
+    color: var(--text-main);
+}
+.preview-container .section-title {
+    font-family: var(--font-h2);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin: 2rem 0 0.5rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--glass-border);
+}
+.preview-container .section-content {
+    color: var(--text-muted);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin-bottom: 0.5rem;
+}
+.preview-container .entry-title {
+    font-family: var(--font-h2);
+    font-size: 0.75rem;
+    color: var(--text-main);
+    margin: 1.2rem 0 0.3rem;
+    padding-left: 0.8rem;
+    border-left: 2px solid var(--accent);
+}
+.preview-container .entry-keys {
+    font-family: var(--font-h2);
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+    margin-bottom: 0.3rem;
+    padding-left: 0.8rem;
+}
+.preview-container .entry-content {
+    color: var(--text-muted);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    padding-left: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+.preview-container .greeting-label {
+    font-family: var(--font-h2);
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 1rem 0 0.3rem;
+}
+.preview-container .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-dim);
+    font-family: var(--font-h2);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* ── Export Panel ───────────────────────────────────── */
+.export-panel {
+    margin-top: 1.5rem;
+    padding: 1.2rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.export-panel .export-label {
+    font-family: var(--font-h2);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    margin-right: 0.5rem;
+}
+.export-btn {
+    font-family: var(--font-h2);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 0.5rem 1.2rem;
+    border: 1px solid var(--glass-border);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all var(--transition);
+}
+.export-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+.export-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.export-btn:disabled:hover { border-color: var(--glass-border); color: var(--text-muted); }
+
+/* ── Footer ────────────────────────────────────────── */
+.app-footer {
+    text-align: center;
+    padding: 2rem 0 1.5rem;
+    margin-top: auto;
+}
+.app-footer p {
+    font-family: var(--font-h2);
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+}
+.app-footer p:hover { opacity: 0.8; }
+
+/* ── Notification Toast ────────────────────────────── */
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 0.8rem 1.4rem;
+    font-family: var(--font-h2);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid var(--glass-border);
+    background: var(--bg-surface);
+    color: var(--text-main);
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast.success { border-color: var(--success); color: var(--success); }
+.toast.error { border-color: var(--error); color: var(--error); }
+
+/* ── Animations ────────────────────────────────────── */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Hidden ────────────────────────────────────────── */
+.hidden { display: none !important; }
+
+/* ── Responsive ────────────────────────────────────── */
+@media (max-width: 600px) {
+    .app-shell { padding: 1rem; }
+    .app-header h1 { font-size: 1.6rem; }
+    .field-toggles { grid-template-columns: 1fr; }
+    .preview-container { padding: 1rem; min-height: 300px; }
+    .actions { flex-direction: column; }
+    .btn { width: 100%; text-align: center; }
+}
+    </style>
+</head>
+<body>
+
+<!-- Loader -->
+<div id="loader"><div class="loader-line"></div></div>
+
+<!-- App -->
+<div class="app-shell">
+
+    <!-- Header -->
+    <header class="app-header">
+        <h1>Card <span>Extractor</span></h1>
+        <p class="tagline">Extract &middot; Format &middot; Export</p>
+    </header>
+
+    <!-- Drop Zone -->
+    <div class="drop-zone" id="dropZone">
+        <div class="icon">↓</div>
+        <div class="label">Drop files here or click to browse</div>
+        <div class="sublabel">JSON &middot; PNG &middot; CHARX &mdash; character cards &amp; lorebooks</div>
+        <input type="file" id="fileInput" multiple accept=".json,.png,.charx" style="display:none">
+    </div>
+
+    <!-- File Cards -->
+    <div class="file-cards hidden" id="fileCards"></div>
+
+    <!-- Field Controls -->
+    <div class="controls hidden" id="controls">
+        <div class="controls-header">Fields to Extract</div>
+        <div class="field-toggles" id="fieldToggles"></div>
+        <div class="actions">
+            <button class="btn btn-primary" id="extractBtn">Extract</button>
+            <button class="btn" id="clearBtn">Clear All</button>
+        </div>
+    </div>
+
+    <!-- Preview -->
+    <div class="preview-section">
+        <div class="preview-header">
+            <h2>Preview</h2>
+            <span class="preview-stats" id="previewStats"></span>
+        </div>
+        <div class="preview-container" id="preview">
+            <div class="empty-state">Import files to begin</div>
+        </div>
+        <div class="export-panel hidden" id="exportPanel">
+            <span class="export-label">Export as</span>
+            <button class="export-btn" onclick="exportAs('txt')">TXT</button>
+            <button class="export-btn" onclick="exportAs('md')">Markdown</button>
+            <button class="export-btn" onclick="exportAs('pdf')">PDF</button>
+            <button class="export-btn" onclick="exportAs('json')">Clean JSON</button>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="app-footer">
+    <p>Character Card Extractor &middot; mokimoko</p>
+</footer>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════
+const state = {
+    files: [],         // { name, type:'character'|'lorebook', data:{}, source:'json'|'png'|'charx' }
+    fields: {},        // { fieldKey: boolean }
+    extracted: null,   // extracted HTML string
+    extractedPlain: null,
+    extractedMd: null,
+    extractedJson: null,
+};
+
+// ── Character card fields ──
+const CHAR_FIELDS = {
+    description:         'Character Definition',
+    personality:         'Personality',
+    system_prompt:       'System Prompt',
+    post_history_instructions: 'Post-History Instructions',
+    scenario:            'Scenario',
+    first_mes:           'First Message',
+    mes_example:         'Example Messages',
+    alternate_greetings: 'Alternate Greetings',
+    character_book:      'Character Book',
+    creator_notes:       'Creator Notes',
+};
+
+// ── Lorebook fields ──
+const LORE_FIELDS = {
+    label:   'Entry Labels',
+    content: 'Content',
+    key:     'Keys',
+};
+
+// ═══════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+    const loader = document.getElementById('loader');
+    requestAnimationFrame(() => loader.classList.add('go'));
+    setTimeout(() => loader.classList.add('done'), 900);
+    setupDropZone();
+    setupButtons();
+});
+
+// ═══════════════════════════════════════════════════════════════
+// DROP ZONE
+// ═══════════════════════════════════════════════════════════════
+function setupDropZone() {
+    const zone = document.getElementById('dropZone');
+    const input = document.getElementById('fileInput');
+
+    zone.addEventListener('click', () => input.click());
+    input.addEventListener('change', (e) => handleFiles(e.target.files));
+
+    zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('dragover'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+    zone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        zone.classList.remove('dragover');
+        handleFiles(e.dataTransfer.files);
+    });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// FILE HANDLING
+// ═══════════════════════════════════════════════════════════════
+async function handleFiles(fileList) {
+    for (const file of fileList) {
+        try {
+            const ext = file.name.split('.').pop().toLowerCase();
+            let parsed;
+
+            if (ext === 'json') {
+                parsed = await parseJSON(file);
+            } else if (ext === 'png') {
+                parsed = await parsePNG(file);
+            } else if (ext === 'charx') {
+                parsed = await parseCHARX(file);
+            } else {
+                toast(`Unsupported: ${file.name}`, 'error');
+                continue;
+            }
+
+            if (parsed) {
+                state.files.push({ name: file.name, ...parsed });
+            }
+        } catch (err) {
+            console.error(`Error processing ${file.name}:`, err);
+            toast(`Failed: ${file.name}`, 'error');
+        }
+    }
+    refreshUI();
+}
+
+async function parseJSON(file) {
+    const text = await file.text();
+    const data = JSON.parse(text);
+    const type = detectType(data);
+    if (type === 'unknown') {
+        toast(`Unknown format: ${file.name}`, 'error');
+        return null;
+    }
+    return { type, data, source: 'json' };
+}
+
+async function parsePNG(file) {
+    const buf = await file.arrayBuffer();
+    const bytes = new Uint8Array(buf);
+
+    // Parse PNG chunks looking for tEXt with ccv3 or chara
+    let offset = 8; // skip PNG signature
+    let cardJson = null;
+
+    while (offset < bytes.length) {
+        const len = (bytes[offset] << 24) | (bytes[offset+1] << 16) | (bytes[offset+2] << 8) | bytes[offset+3];
+        const typeBytes = bytes.slice(offset+4, offset+8);
+        const chunkType = String.fromCharCode(...typeBytes);
+
+        if (chunkType === 'tEXt' || chunkType === 'iTXt') {
+            const chunkData = bytes.slice(offset+8, offset+8+len);
+            // Find null separator
+            let nullIdx = 0;
+            while (nullIdx < chunkData.length && chunkData[nullIdx] !== 0) nullIdx++;
+            const keyword = String.fromCharCode(...chunkData.slice(0, nullIdx));
+
+            if (keyword === 'ccv3' || keyword === 'chara') {
+                let valueStart = nullIdx + 1;
+                // iTXt has additional null-separated fields before the text
+                if (chunkType === 'iTXt' && keyword === 'ccv3') {
+                    // Skip compression flag, compression method
+                    valueStart = nullIdx + 1;
+                    // Skip past compression flag (1 byte) + compression method (1 byte)
+                    valueStart += 2;
+                    // Skip language tag (null-terminated)
+                    while (valueStart < chunkData.length && chunkData[valueStart] !== 0) valueStart++;
+                    valueStart++;
+                    // Skip translated keyword (null-terminated)
+                    while (valueStart < chunkData.length && chunkData[valueStart] !== 0) valueStart++;
+                    valueStart++;
+                }
+                const b64 = String.fromCharCode(...chunkData.slice(valueStart));
+                try {
+                    const decoded = atob(b64.trim());
+                    cardJson = JSON.parse(decoded);
+                    if (keyword === 'ccv3') break; // prefer ccv3
+                } catch (e) {
+                    console.warn(`Failed to decode ${keyword} chunk`, e);
+                }
+            }
+        }
+        offset += 12 + len; // 4 len + 4 type + data + 4 crc
+    }
+
+    if (!cardJson) {
+        toast(`No card data in PNG: ${file.name}`, 'error');
+        return null;
+    }
+    const type = detectType(cardJson);
+    return { type, data: cardJson, source: 'png' };
+}
+
+async function parseCHARX(file) {
+    // CHARX is a zip. Use JSZip-lite approach with DecompressionStream
+    try {
+        const buf = await file.arrayBuffer();
+        const entries = parseZipEntries(new Uint8Array(buf));
+        const cardEntry = entries.find(e => e.name === 'card.json');
+        if (!cardEntry) {
+            toast(`No card.json in CHARX: ${file.name}`, 'error');
+            return null;
+        }
+        const text = new TextDecoder().decode(cardEntry.data);
+        const data = JSON.parse(text);
+        const type = detectType(data);
+        return { type, data, source: 'charx' };
+    } catch (e) {
+        console.error('CHARX parse error:', e);
+        toast(`Failed to read CHARX: ${file.name}`, 'error');
+        return null;
+    }
+}
+
+// Minimal zip parser for CHARX (stored/deflate)
+function parseZipEntries(bytes) {
+    const entries = [];
+    let i = 0;
+    while (i < bytes.length - 4) {
+        if (bytes[i]===0x50 && bytes[i+1]===0x4B && bytes[i+2]===0x03 && bytes[i+3]===0x04) {
+            const compression = bytes[i+8] | (bytes[i+9]<<8);
+            const compSize = bytes[i+18] | (bytes[i+19]<<8) | (bytes[i+20]<<16) | (bytes[i+21]<<24);
+            const uncompSize = bytes[i+22] | (bytes[i+23]<<8) | (bytes[i+24]<<16) | (bytes[i+25]<<24);
+            const nameLen = bytes[i+26] | (bytes[i+27]<<8);
+            const extraLen = bytes[i+28] | (bytes[i+29]<<8);
+            const name = new TextDecoder().decode(bytes.slice(i+30, i+30+nameLen));
+            const dataStart = i + 30 + nameLen + extraLen;
+            const rawData = bytes.slice(dataStart, dataStart + compSize);
+
+            if (compression === 0) {
+                entries.push({ name, data: rawData });
+            } else if (compression === 8) {
+                try {
+                    const inflated = decompressDeflateSync(rawData);
+                    entries.push({ name, data: inflated });
+                } catch(e) {
+                    console.warn(`Could not decompress ${name}`);
+                }
+            }
+            i = dataStart + compSize;
+        } else {
+            i++;
+        }
+    }
+    return entries;
+}
+
+function decompressDeflateSync(data) {
+    // Use DecompressionStream API
+    const ds = new DecompressionStream('raw');
+    const writer = ds.writable.getWriter();
+    writer.write(data);
+    writer.close();
+    const reader = ds.readable.getReader();
+    const chunks = [];
+    return new Promise(async (resolve) => {
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            chunks.push(value);
+        }
+        const total = chunks.reduce((s, c) => s + c.length, 0);
+        const result = new Uint8Array(total);
+        let off = 0;
+        for (const c of chunks) { result.set(c, off); off += c.length; }
+        resolve(result);
+    });
+}
+
+function detectType(data) {
+    // Check lorebook
+    if (data.entries && typeof data.entries === 'object') {
+        const first = Object.values(data.entries)[0];
+        if (first && ('key' in first || 'content' in first || 'comment' in first)) {
+            return 'lorebook';
+        }
+    }
+    // Check character card
+    const check = (d) => {
+        const fields = ['name','first_mes','description','personality','char_name','char_persona','char_greeting','mes_example','avatar','greeting','system_prompt'];
+        return fields.some(f => f in d);
+    };
+    if (data.spec && typeof data.spec === 'string' && data.spec.toLowerCase().includes('chara_card')) return 'character';
+    if (check(data)) return 'character';
+    if (data.data && typeof data.data === 'object' && check(data.data)) return 'character';
+    return 'unknown';
+}
+
+// ═══════════════════════════════════════════════════════════════
+// UI REFRESH
+// ═══════════════════════════════════════════════════════════════
+function refreshUI() {
+    renderFileCards();
+    renderFieldToggles();
+    updateButtonStates();
+}
+
+function renderFileCards() {
+    const container = document.getElementById('fileCards');
+    if (state.files.length === 0) {
+        container.classList.add('hidden');
+        return;
+    }
+    container.classList.remove('hidden');
+    container.innerHTML = state.files.map((f, i) => `
+        <div class="file-card" style="animation-delay:${i * 0.05}s">
+            <span class="file-type">${f.type === 'character' ? 'CARD' : 'LORE'}</span>
+            <span class="file-name" title="${esc(f.name)}">${esc(f.name)}</span>
+            <button class="remove-btn" onclick="removeFile(${i})" title="Remove">&times;</button>
+        </div>
+    `).join('');
+}
+
+function renderFieldToggles() {
+    const container = document.getElementById('fieldToggles');
+    const controls = document.getElementById('controls');
+
+    if (state.files.length === 0) {
+        controls.classList.add('hidden');
+        return;
+    }
+    controls.classList.remove('hidden');
+
+    const hasCards = state.files.some(f => f.type === 'character');
+    const hasLore = state.files.some(f => f.type === 'lorebook');
+    const fields = {};
+    if (hasCards) Object.assign(fields, CHAR_FIELDS);
+    if (hasLore) Object.assign(fields, LORE_FIELDS);
+
+    // Init fields state
+    for (const key in fields) {
+        if (!(key in state.fields)) state.fields[key] = true;
+    }
+
+    container.innerHTML = Object.entries(fields).map(([key, label]) => `
+        <div class="field-toggle ${state.fields[key] ? 'active' : ''}" onclick="toggleField('${key}')">
+            <div class="toggle-track"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label">${esc(label)}</span>
+        </div>
+    `).join('');
+}
+
+function toggleField(key) {
+    state.fields[key] = !state.fields[key];
+    renderFieldToggles();
+}
+
+function removeFile(idx) {
+    state.files.splice(idx, 1);
+    state.extracted = null;
+    document.getElementById('exportPanel').classList.add('hidden');
+    refreshUI();
+    if (state.files.length === 0) {
+        document.getElementById('preview').innerHTML = '<div class="empty-state">Import files to begin</div>';
+        document.getElementById('previewStats').textContent = '';
+    }
+}
+
+function updateButtonStates() {
+    document.getElementById('extractBtn').disabled = state.files.length === 0;
+    document.getElementById('clearBtn').disabled = state.files.length === 0;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// EXTRACTION
+// ═══════════════════════════════════════════════════════════════
+function setupButtons() {
+    document.getElementById('extractBtn').addEventListener('click', extract);
+    document.getElementById('clearBtn').addEventListener('click', clearAll);
+}
+
+function extract() {
+    const preview = document.getElementById('preview');
+    let html = '';
+    let plain = '';
+    let md = '';
+    let jsonOut = [];
+
+    state.files.forEach((file, idx) => {
+        if (file.type === 'character') {
+            const result = extractCharacter(file.data, idx > 0);
+            html += result.html;
+            plain += result.plain;
+            md += result.md;
+            jsonOut.push(result.json);
+        } else if (file.type === 'lorebook') {
+            const result = extractLorebook(file.data, idx > 0);
+            html += result.html;
+            plain += result.plain;
+            md += result.md;
+            jsonOut.push(result.json);
+        }
+    });
+
+    preview.innerHTML = html || '<div class="empty-state">No content extracted with selected fields</div>';
+    state.extracted = html;
+    state.extractedPlain = plain;
+    state.extractedMd = md;
+    state.extractedJson = jsonOut;
+
+    // Stats
+    const charCount = plain.length;
+    const wordCount = plain.trim().split(/\s+/).filter(Boolean).length;
+    const tokenEst = Math.round(charCount / 3.5);
+    document.getElementById('previewStats').textContent = `${wordCount.toLocaleString()} words · ~${tokenEst.toLocaleString()} tokens`;
+
+    document.getElementById('exportPanel').classList.remove('hidden');
+    toast('Extraction complete', 'success');
+}
+
+function getVal(data, field) {
+    // Search nested data structures
+    if (data[field] !== undefined && data[field] !== null && data[field] !== '') return data[field];
+    if (data.data && typeof data.data === 'object') {
+        if (data.data[field] !== undefined && data.data[field] !== null && data.data[field] !== '') return data.data[field];
+    }
+    // Special: character note in extensions.depth_prompt.prompt
+    if (field === 'prompt' || field === 'character_note') {
+        const ext = data.extensions || data.data?.extensions;
+        if (ext?.depth_prompt?.prompt) return ext.depth_prompt.prompt;
+    }
+    return null;
+}
+
+function getName(data) {
+    return getVal(data, 'name') || 'Unnamed';
+}
+
+function extractCharacter(data, addSep) {
+    const name = getName(data);
+    let html = '', plain = '', md = '';
+    const jsonObj = { name };
+
+    if (addSep) {
+        html += '<div class="card-separator">· · ·</div>';
+        plain += '\n\n' + '='.repeat(60) + '\n\n';
+        md += '\n\n---\n\n';
+    }
+
+    html += `<div class="char-name">${esc(name)}</div>`;
+    plain += '='.repeat(50) + '\n' + name + '\n' + '='.repeat(50) + '\n';
+    md += `# ${name}\n\n`;
+
+    const sections = [
+        ['description',         'Character Definition'],
+        ['personality',         'Personality'],
+        ['system_prompt',       'System Prompt'],
+        ['post_history_instructions', 'Post-History Instructions'],
+        ['scenario',            'Scenario'],
+        ['first_mes',           'First Message'],
+        ['mes_example',         'Example Messages'],
+        ['creator_notes',       'Creator Notes'],
+    ];
+
+    for (const [field, title] of sections) {
+        if (!state.fields[field]) continue;
+        const val = getVal(data, field);
+        if (!val) continue;
+
+        html += `<div class="section-title">${esc(title)}</div><div class="section-content">${esc(val)}</div>`;
+        plain += `\n${title.toUpperCase()}\n${'─'.repeat(50)}\n${val}\n`;
+        md += `## ${title}\n\n${val}\n\n`;
+        jsonObj[field] = val;
+    }
+
+    // Alternate greetings
+    if (state.fields.alternate_greetings) {
+        const greetings = getVal(data, 'alternate_greetings');
+        if (greetings && Array.isArray(greetings) && greetings.length) {
+            html += '<div class="section-title">Alternate Greetings</div>';
+            plain += '\nALTERNATE GREETINGS\n' + '─'.repeat(50) + '\n';
+            md += '## Alternate Greetings\n\n';
+            jsonObj.alternate_greetings = [];
+
+            greetings.forEach((g, i) => {
+                const trimmed = g.trim();
+                if (!trimmed) return;
+                html += `<div class="greeting-label">Greeting ${i+1}</div><div class="section-content">${esc(trimmed)}</div>`;
+                plain += `\nGreeting ${i+1}\n${trimmed}\n`;
+                md += `### Greeting ${i+1}\n\n${trimmed}\n\n`;
+                jsonObj.alternate_greetings.push(trimmed);
+            });
+        }
+    }
+
+    // Character book
+    if (state.fields.character_book) {
+        const book = getVal(data, 'character_book');
+        if (book && book.entries) {
+            const entries = Array.isArray(book.entries) ? book.entries : Object.values(book.entries);
+            if (entries.length) {
+                html += '<div class="section-title">Character Book</div>';
+                plain += '\nCHARACTER BOOK\n' + '─'.repeat(50) + '\n';
+                md += '## Character Book\n\n';
+                jsonObj.character_book = [];
+
+                entries.forEach(entry => {
+                    const title = entry.name || entry.comment || 'Untitled';
+                    const content = entry.content || '';
+                    const keys = entry.key || entry.keys || [];
+                    const keyArr = Array.isArray(keys) ? keys : [keys];
+
+                    html += `<div class="entry-title">${esc(title)}</div>`;
+                    if (keyArr.length) html += `<div class="entry-keys">Keys: ${esc(keyArr.join(', '))}</div>`;
+                    if (content) html += `<div class="entry-content">${esc(content)}</div>`;
+
+                    plain += `\n► ${title}\n`;
+                    if (keyArr.length) plain += `Keys: ${keyArr.join(', ')}\n`;
+                    if (content) plain += `${content}\n`;
+
+                    md += `### ${title}\n`;
+                    if (keyArr.length) md += `**Keys:** ${keyArr.join(', ')}\n\n`;
+                    if (content) md += `${content}\n\n`;
+
+                    jsonObj.character_book.push({ title, keys: keyArr, content });
+                });
+            }
+        }
+    }
+
+    return { html, plain, md, json: jsonObj };
+}
+
+function extractLorebook(data, addSep) {
+    let html = '', plain = '', md = '';
+    const jsonObj = { type: 'lorebook', entries: [] };
+
+    if (addSep) {
+        html += '<div class="card-separator">· · ·</div>';
+        plain += '\n\n' + '='.repeat(60) + '\n\n';
+        md += '\n\n---\n\n';
+    }
+
+    html += '<div class="char-name">Lorebook</div>';
+    plain += 'LOREBOOK\n' + '='.repeat(50) + '\n';
+    md += '# Lorebook\n\n';
+
+    const entries = Array.isArray(data.entries) ? data.entries : Object.values(data.entries || {});
+
+    entries.forEach(entry => {
+        const label = entry.name || entry.comment || 'Untitled';
+        const content = entry.content || '';
+        const keys = entry.key || entry.keys || [];
+        const keyArr = Array.isArray(keys) ? keys : [keys];
+        const entryObj = {};
+
+        if (state.fields.label) {
+            html += `<div class="entry-title">${esc(label)}</div>`;
+            plain += `\n${label}\n${'─'.repeat(50)}\n`;
+            md += `## ${label}\n\n`;
+            entryObj.label = label;
+        }
+        if (state.fields.key && keyArr.length) {
+            html += `<div class="entry-keys">Keys: ${esc(keyArr.join(', '))}</div>`;
+            plain += `Keys: ${keyArr.join(', ')}\n`;
+            md += `**Keys:** ${keyArr.join(', ')}\n\n`;
+            entryObj.keys = keyArr;
+        }
+        if (state.fields.content && content) {
+            html += `<div class="entry-content">${esc(content)}</div>`;
+            plain += `${content}\n`;
+            md += `${content}\n\n`;
+            entryObj.content = content;
+        }
+        jsonObj.entries.push(entryObj);
+    });
+
+    return { html, plain, md, json: jsonObj };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// EXPORT
+// ═══════════════════════════════════════════════════════════════
+function exportAs(format) {
+    if (!state.extracted) return;
+    const baseName = state.files.length === 1
+        ? state.files[0].name.replace(/\.[^.]+$/, '')
+        : 'extracted_cards';
+
+    if (format === 'txt') {
+        download(baseName + '.txt', state.extractedPlain, 'text/plain');
+        toast('Saved as TXT', 'success');
+    } else if (format === 'md') {
+        download(baseName + '.md', state.extractedMd, 'text/markdown');
+        toast('Saved as Markdown', 'success');
+    } else if (format === 'json') {
+        const out = state.extractedJson.length === 1 ? state.extractedJson[0] : state.extractedJson;
+        download(baseName + '_clean.json', JSON.stringify(out, null, 2), 'application/json');
+        toast('Saved as JSON', 'success');
+    } else if (format === 'pdf') {
+        exportPDF(baseName);
+    }
+}
+
+function download(filename, content, mime) {
+    const blob = new Blob([content], { type: mime + ';charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+function exportPDF(baseName) {
+    try {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+        const pageW = doc.internal.pageSize.getWidth();
+        const margin = 20;
+        const maxW = pageW - margin * 2;
+        let y = margin;
+
+        const lines = state.extractedPlain.split('\n');
+
+        for (const line of lines) {
+            const trimmed = line;
+
+            // Check for page break need
+            if (y > 270) {
+                doc.addPage();
+                y = margin;
+            }
+
+            // Section headers (all caps, followed by ─)
+            if (/^[A-Z][A-Z\s\-]+$/.test(trimmed.trim()) && trimmed.trim().length > 3) {
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(12);
+                doc.setTextColor(150, 130, 80);
+                y += 4;
+                doc.text(trimmed.trim(), margin, y);
+                y += 6;
+                continue;
+            }
+
+            // Separator lines
+            if (/^[═─=]{10,}$/.test(trimmed.trim())) {
+                doc.setDrawColor(200, 200, 200);
+                doc.line(margin, y, pageW - margin, y);
+                y += 3;
+                continue;
+            }
+
+            // Character name blocks
+            if (/^={20,}$/.test(trimmed.trim())) continue;
+
+            // Entry titles (►)
+            if (trimmed.startsWith('►')) {
+                doc.setFont('helvetica', 'bolditalic');
+                doc.setFontSize(10);
+                doc.setTextColor(100, 80, 50);
+                const wrapped = doc.splitTextToSize(trimmed, maxW);
+                for (const wl of wrapped) {
+                    if (y > 270) { doc.addPage(); y = margin; }
+                    doc.text(wl, margin, y);
+                    y += 5;
+                }
+                continue;
+            }
+
+            // Regular content
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(10);
+            doc.setTextColor(60, 60, 60);
+            const wrapped = doc.splitTextToSize(trimmed, maxW);
+            for (const wl of wrapped) {
+                if (y > 270) { doc.addPage(); y = margin; }
+                doc.text(wl, margin, y);
+                y += 4.5;
+            }
+        }
+
+        doc.save(baseName + '.pdf');
+        toast('Saved as PDF', 'success');
+    } catch (e) {
+        console.error('PDF export error:', e);
+        toast('PDF export failed', 'error');
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════════════════════════════
+function clearAll() {
+    state.files = [];
+    state.fields = {};
+    state.extracted = null;
+    document.getElementById('preview').innerHTML = '<div class="empty-state">Import files to begin</div>';
+    document.getElementById('previewStats').textContent = '';
+    document.getElementById('exportPanel').classList.add('hidden');
+    document.getElementById('fileInput').value = '';
+    refreshUI();
+}
+
+function esc(str) {
+    const d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
+}
+
+function toast(msg, type = '') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show ' + type;
+    clearTimeout(toast._timer);
+    toast._timer = setTimeout(() => t.className = 'toast', 2500);
+}
+</script>
+</body>
+</html>

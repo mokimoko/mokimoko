@@ -4,28 +4,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const loaderLine = document.querySelector('.loader-line');
 
     if (loader && loaderLine) {
-        // Animate the line width instantly on load
         setTimeout(() => {
             loaderLine.style.width = '100vw';
         }, 50);
 
-        // Fade out the overlay cleanly
         setTimeout(() => {
             document.body.classList.add('loaded');
         }, 1000);
     }
 
-    // 2. Unobtrusive Navigation Menu
-    let lastScrollY = window.scrollY;
+    // 2. Hover-Reveal Navigation (only on pages that opt in with .nav-autohide)
     const navbar = document.getElementById('navbar');
+    if (navbar && document.body.classList.contains('nav-autohide')) {
+        // Create invisible trigger zone at top of viewport
+        const trigger = document.createElement('div');
+        trigger.id = 'nav-trigger';
+        document.body.prepend(trigger);
 
-    window.addEventListener('scroll', () => {
-        // If scrolling down, hide the nav. If scrolling up, show it.
-        if (window.scrollY > lastScrollY && window.scrollY > 80) {
-            navbar.classList.add('nav-hidden');
-        } else {
-            navbar.classList.remove('nav-hidden');
-        }
-        lastScrollY = window.scrollY;
-    }, { passive: true });
+        let hideTimeout;
+
+        const showNav = () => {
+            clearTimeout(hideTimeout);
+            navbar.classList.add('nav-visible');
+        };
+
+        const hideNav = () => {
+            hideTimeout = setTimeout(() => {
+                navbar.classList.remove('nav-visible');
+            }, 300);
+        };
+
+        trigger.addEventListener('mouseenter', showNav);
+        trigger.addEventListener('mouseleave', hideNav);
+        navbar.addEventListener('mouseenter', showNav);
+        navbar.addEventListener('mouseleave', hideNav);
+    }
 });

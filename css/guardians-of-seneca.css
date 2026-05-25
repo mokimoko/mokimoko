@@ -1,0 +1,490 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Cinzel:wght@400;500;600;700&display=swap');
+
+/* ── Seneca Theme Variables ─────────────────────── */
+:root {
+    --sen-bg: #0a0908;
+    --sen-surface: #131110;
+    --sen-brass: #c9a84c;
+    --sen-brass-dim: rgba(201, 168, 76, 0.4);
+    --sen-brass-glow: rgba(201, 168, 76, 0.12);
+    --sen-copper: #b87333;
+    --sen-warm-white: #e8e0d0;
+    --sen-muted: #a89e8c;
+    --sen-dark-border: rgba(201, 168, 76, 0.1);
+    --sen-glass: rgba(201, 168, 76, 0.04);
+    --font-display: 'Cinzel', serif;
+    --font-serif: 'Crimson Text', serif;
+}
+
+/* ── Page Base ──────────────────────────────────── */
+.seneca-page {
+    flex: 1;
+    background: var(--sen-bg);
+    color: var(--sen-warm-white);
+    font-family: var(--font-serif);
+}
+/* ── Hero Banner ────────────────────────────────── */
+.sen-hero {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.sen-hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.sen-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 30%,
+        rgba(10, 9, 8, 0.6) 65%,
+        var(--sen-bg) 100%
+    );
+}
+
+.sen-hero-content {
+    text-align: center;
+    margin-top: -4rem;
+    position: relative;
+    z-index: 2;
+    padding: 0 2rem 1rem;
+}
+
+.sen-hero-title {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 500;
+    color: var(--sen-warm-white);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+}
+
+.sen-hero-tagline {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--sen-muted);
+    letter-spacing: 1px;
+}
+/* ── Content Container ──────────────────────────── */
+.sen-content {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+}
+
+/* ── Ornamental Divider ─────────────────────────── */
+.sen-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3.5rem 0 2.5rem;
+}
+
+.sen-divider::before,
+.sen-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        var(--sen-brass-dim),
+        transparent
+    );
+}
+.sen-divider-icon {
+    font-size: 0.9rem;
+    color: var(--sen-brass);
+    opacity: 0.5;
+}
+
+/* ── Section Headers ────────────────────────────── */
+.sen-section-title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--sen-brass);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+}
+
+/* ── Overview Section ───────────────────────────── */
+.sen-overview {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--sen-muted);
+    max-width: 760px;
+}
+
+.sen-overview strong {
+    color: var(--sen-warm-white);
+    font-weight: 600;
+}
+/* ── Download Items (Lorebook, Backgrounds) ─────── */
+.sen-downloads {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.sen-download-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    background: var(--sen-glass);
+    border: 1px solid var(--sen-dark-border);
+    text-decoration: none;
+    color: var(--sen-warm-white);
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.sen-download-item:hover {
+    border-color: var(--sen-brass-dim);
+    background: rgba(201, 168, 76, 0.06);
+}
+
+.sen-download-icon {
+    font-size: 1.2rem;
+    color: var(--sen-brass);
+    opacity: 0.7;
+    flex-shrink: 0;
+}
+.sen-download-info {
+    flex: 1;
+}
+
+.sen-download-name {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+}
+
+.sen-download-desc {
+    font-family: var(--font-serif);
+    font-size: 0.82rem;
+    color: var(--sen-muted);
+    font-style: italic;
+}
+
+.sen-download-arrow {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    color: var(--sen-brass);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    flex-shrink: 0;
+}
+
+.sen-download-item:hover .sen-download-arrow {
+    opacity: 0.7;
+}
+/* ── Character Cards (Portrait with context menu) ── */
+.sen-char-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 200px));
+    gap: 1.5rem;
+}
+
+.sen-char-card {
+    position: relative;
+    border: 1px solid var(--sen-dark-border);
+    background: var(--sen-glass);
+    overflow: visible;
+    transition: border-color 0.3s ease;
+    cursor: pointer;
+}
+
+.sen-char-card:hover {
+    border-color: var(--sen-brass-dim);
+}
+
+.sen-char-portrait {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+}
+
+.sen-char-portrait img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.5s ease;
+}
+.sen-char-card:hover .sen-char-portrait img {
+    transform: scale(1.05);
+}
+
+.sen-char-name {
+    padding: 0.7rem 0.9rem;
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    color: var(--sen-warm-white);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.sen-char-role {
+    padding: 0 0.9rem 0.7rem;
+    font-family: var(--font-serif);
+    font-size: 0.78rem;
+    color: var(--sen-muted);
+    font-style: italic;
+}
+
+/* Coming Soon state */
+.sen-char-card.coming-soon {
+    cursor: default;
+}
+
+.sen-char-card.coming-soon .sen-char-portrait {
+    filter: grayscale(0.6) brightness(0.5);
+}
+
+.sen-char-soon-badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-display);
+    font-size: 0.6rem;
+    color: var(--sen-muted);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    background: rgba(10, 9, 8, 0.85);
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--sen-dark-border);
+    pointer-events: none;
+}
+/* ── Character Download Context Menu ────────────── */
+.sen-char-menu {
+    position: fixed;
+    background: var(--sen-surface);
+    border: 1px solid var(--sen-brass-dim);
+    min-width: 180px;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+}
+
+.sen-char-menu.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sen-char-menu a {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1rem;
+    text-decoration: none;
+    color: var(--sen-warm-white);
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    transition: background 0.15s ease;
+}
+
+.sen-char-menu a:hover {
+    background: var(--sen-brass-glow);
+}
+
+.sen-char-menu a .menu-icon {
+    font-size: 0.75rem;
+    color: var(--sen-brass);
+    opacity: 0.6;
+    width: 1rem;
+    text-align: center;
+}
+
+.sen-char-menu a + a {
+    border-top: 1px solid var(--sen-dark-border);
+}
+/* ── Bundle Button ──────────────────────────────── */
+.sen-bundle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 2rem;
+    padding: 0.9rem 2rem;
+    background: transparent;
+    color: var(--sen-brass);
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 1px solid var(--sen-brass);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sen-bundle-btn:hover:not(:disabled) {
+    background: var(--sen-brass);
+    color: var(--sen-bg);
+}
+
+.sen-bundle-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    border-color: var(--sen-muted);
+    color: var(--sen-muted);
+}
+
+.sen-bundle-note {
+    font-family: var(--font-serif);
+    font-size: 0.8rem;
+    color: var(--sen-muted);
+    font-style: italic;
+    margin-top: 0.6rem;
+    opacity: 0.6;
+}
+/* ── Background Preview Cards ───────────────────── */
+.sen-bg-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 280px));
+    gap: 1.5rem;
+}
+
+.sen-bg-card {
+    display: block;
+    border: 1px solid var(--sen-dark-border);
+    background: var(--sen-glass);
+    overflow: hidden;
+    text-decoration: none;
+    transition: border-color 0.3s ease;
+}
+
+.sen-bg-card:hover {
+    border-color: var(--sen-brass-dim);
+}
+
+.sen-bg-thumb {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+
+.sen-bg-thumb img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.sen-bg-card:hover .sen-bg-thumb img {
+    transform: scale(1.05);
+}
+
+.sen-bg-info {
+    padding: 0.6rem 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sen-bg-name {
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    color: var(--sen-warm-white);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.sen-bg-dl {
+    font-family: var(--font-serif);
+    font-size: 0.75rem;
+    color: var(--sen-brass);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sen-bg-card:hover .sen-bg-dl {
+    opacity: 0.7;
+}
+
+/* ── Info Block Image ───────────────────────────── */
+.sen-info-block {
+    margin: 2rem 0;
+    border: 1px solid var(--sen-dark-border);
+    overflow: hidden;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.sen-info-block img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ── Back Link ──────────────────────────────────── */
+.sen-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    color: var(--sen-muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    transition: color 0.3s ease;
+}
+
+.sen-back:hover {
+    color: var(--sen-brass);
+}
+/* ── Sub-section Label ──────────────────────────── */
+.sen-subsection {
+    margin-bottom: 2.5rem;
+}
+
+.sen-subsection-label {
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    color: var(--sen-brass);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    opacity: 0.5;
+    margin-bottom: 1rem;
+}
+
+/* ── Responsive ─────────────────────────────────── */
+@media (max-width: 768px) {
+    .sen-hero-title {
+        font-size: 2.2rem;
+        letter-spacing: 3px;
+    }
+
+    .sen-char-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 420px) {
+    .sen-hero-title {
+        font-size: 1.6rem;
+    }
+
+    .sen-char-grid {
+        grid-template-columns: 1fr;
+        max-width: 220px;
+    }
+}

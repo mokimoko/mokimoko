@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guardians of Seneca | Moki</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/guardians-of-seneca.css">
+</head>
+<body class="nav-autohide">
+    <!-- Loading Effect -->
+    <div id="loader">
+        <div class="loader-line"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="index.html" class="nav-brand">MOKI.</a>
+        <div class="nav-links">
+            <a href="about.html">About Me</a>
+            <a href="presets.html">Presets</a>
+            <a href="characters.html" class="active">Characters</a>
+            <a href="utilities.html">Utilities</a>
+            <a href="aesthetics.html">Aesthetics</a>
+        </div>
+    </nav>
+    <!-- Hero Banner -->
+    <div class="sen-hero">
+        <img src="images/misc/guardians-of-seneca/header.png" alt="Guardians of Seneca">
+    </div>
+
+    <main class="seneca-page">
+        <div class="sen-content">
+
+            <div class="sen-hero-content">
+                <h1 class="sen-hero-title">Guardians of Seneca</h1>
+                <p class="sen-hero-tagline">A Victorian steampunk fantasy — four relics, four territories, one prophecy</p>
+            </div>
+
+            <a href="characters.html" class="sen-back">← Back to Characters</a>
+
+            <!-- Overview -->
+            <div class="sen-overview">
+                <p>
+                    <strong>Seneca</strong> is a kingdom where steampower and magic collide. Twin moons hang over clockwork towers and enchanted airships, 
+                    while tears in reality called <strong>rifts</strong> spawn wraiths that plague the land. Four sacred relics — 
+                    a key, a lyre, a compass, and an hourglass — can temporarily close these rifts, each wielded by a 
+                    <strong>Guardian</strong> sworn to protect their territory. A prophecy speaks of the Auspice, 
+                    who will unite the relics and close the rifts for good.
+                </p>
+            </div>
+            <div class="sen-info-block">
+                <img src="images/misc/guardians-of-seneca/info-block.png" alt="The Kingdom of Seneca" loading="lazy">
+            </div>
+
+            <!-- ═══ Lorebook ═══ -->
+            <div class="sen-divider">
+                <span class="sen-divider-icon">⚙</span>
+            </div>
+
+            <h2 class="sen-section-title">Lorebook</h2>
+            <div class="sen-subsection">
+                <div class="sen-subsection-label">Core Setting</div>
+                <div class="sen-downloads">
+                    <a href="downloads/characters/seneca/Setting - Guardians of Seneca v2.0.json" download class="sen-download-item">
+                        <span class="sen-download-icon">📖</span>
+                        <div class="sen-download-info">
+                            <div class="sen-download-name">Guardians of Seneca v2.0</div>
+                            <div class="sen-download-desc">Full world lorebook — territories, relics, creatures, politics, and more</div>
+                        </div>
+                        <span class="sen-download-arrow">↓</span>
+                    </a>
+                </div>
+            </div>
+            <!-- ═══ Characters ═══ -->
+            <div class="sen-divider">
+                <span class="sen-divider-icon">⚙</span>
+            </div>
+
+            <h2 class="sen-section-title">Characters</h2>
+            <p class="sen-overview" style="margin-bottom: 1.5rem; font-size: 0.95rem;">Click a character to see download options.</p>
+
+            <div class="sen-char-grid">
+
+                <!-- Fenris -->
+                <div class="sen-char-card" onclick="toggleCharMenu(this, event)">
+                    <div class="sen-char-portrait">
+                        <img src="downloads/characters/seneca/Fenris.png" alt="Sir Fenris Kearney" loading="lazy">
+                    </div>
+                    <div class="sen-char-name">Fenris</div>
+                    <div class="sen-char-role">Guardian of the West</div>
+                    <div class="sen-char-menu">
+                        <a href="downloads/characters/seneca/Fenris.png" download onclick="event.stopPropagation()">
+                            <span class="menu-icon">↓</span> Download Card
+                        </a>
+                        <!-- TODO: Replace href with zipped sprites file -->
+                        <a href="downloads/characters/seneca/Fenris.zip" download onclick="event.stopPropagation()">
+                            <span class="menu-icon">📁</span> Download Sprites
+                        </a>
+                    </div>
+                </div>
+                <!-- Azrael -->
+                <div class="sen-char-card" onclick="toggleCharMenu(this, event)">
+                    <div class="sen-char-portrait">
+                        <img src="downloads/characters/seneca/Azrael.png" alt="Azrael Locksend" loading="lazy">
+                    </div>
+                    <div class="sen-char-name">Azrael</div>
+                    <div class="sen-char-role">Guardian of the East</div>
+<div class="sen-char-menu">
+                        <a href="downloads/characters/seneca/Azrael.png" download onclick="event.stopPropagation()">
+                            <span class="menu-icon">↓</span> Download Card
+                        </a>
+                        <!-- TODO: Replace href with zipped sprites file -->
+                        <a href="downloads/characters/seneca/Azrael.zip" download onclick="event.stopPropagation()">
+                            <span class="menu-icon">📁</span> Download Sprites
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Elias -->
+                <div class="sen-char-card" onclick="toggleCharMenu(this, event)">
+                    <div class="sen-char-portrait">
+                        <img src="downloads/characters/seneca/Elias.png" alt="Elias" loading="lazy">
+                    </div>
+                    <div class="sen-char-name">Elias</div>
+                    <div class="sen-char-role">Guardian of the North</div>
+                    <div class="sen-char-menu">
+                        <a href="downloads/characters/seneca/Elias.png" download onclick="event.stopPropagation()">
+                            <span class="menu-icon">↓</span> Download Card
+                        </a>
+                        <a href="downloads/characters/seneca/Elias.zip" download onclick="event.stopPropagation()">
+                            <span class="menu-icon">📁</span> Download Sprites
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Malachi -->
+                <div class="sen-char-card" onclick="toggleCharMenu(this, event)">
+                    <div class="sen-char-portrait">
+                        <img src="downloads/characters/seneca/Malachi.png" alt="Malachi" loading="lazy">
+                    </div>
+                    <div class="sen-char-name">Malachi</div>
+                    <div class="sen-char-role">Guardian of the South</div>
+                    <div class="sen-char-menu">
+                        <a href="downloads/characters/seneca/Malachi.png" download onclick="event.stopPropagation()">
+                            <span class="menu-icon">↓</span> Download Card
+                        </a>
+                        <a href="downloads/characters/seneca/Malachi.zip" download onclick="event.stopPropagation()">
+                            <span class="menu-icon">📁</span> Download Sprites
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            <!-- ═══ Backgrounds ═══ -->
+            <div class="sen-divider">
+                <span class="sen-divider-icon">⚙</span>
+            </div>
+
+            <h2 class="sen-section-title">Backgrounds</h2>
+            <div class="sen-subsection">
+                <div class="sen-bg-grid">
+                    <a href="downloads/characters/seneca/backgrounds/Seneca World.png" download class="sen-bg-card">
+                        <div class="sen-bg-thumb">
+                            <img src="downloads/characters/seneca/backgrounds/Seneca World.png" alt="Seneca World" loading="lazy">
+                        </div>
+                        <div class="sen-bg-info">
+                            <span class="sen-bg-name">Seneca World</span>
+                            <span class="sen-bg-dl">↓</span>
+                        </div>
+                    </a>
+                    <a href="downloads/characters/seneca/backgrounds/Seneca Twilight.png" download class="sen-bg-card">
+                        <div class="sen-bg-thumb">
+                            <img src="downloads/characters/seneca/backgrounds/Seneca Twilight.png" alt="Seneca Twilight" loading="lazy">
+                        </div>
+                        <div class="sen-bg-info">
+                            <span class="sen-bg-name">Seneca Twilight</span>
+                            <span class="sen-bg-dl">↓</span>
+                        </div>
+                    </a>
+                    <a href="downloads/characters/seneca/backgrounds/Seneca Azrael's Workshop.png" download class="sen-bg-card">
+                        <div class="sen-bg-thumb">
+                            <img src="downloads/characters/seneca/backgrounds/Seneca Azrael's Workshop.png" alt="Azrael's Workshop" loading="lazy">
+                        </div>
+                        <div class="sen-bg-info">
+                            <span class="sen-bg-name">Azrael's Workshop</span>
+                            <span class="sen-bg-dl">↓</span>
+                        </div>
+                    </a>
+                    <a href="downloads/characters/seneca/backgrounds/Seneca Study Interior.png" download class="sen-bg-card">
+                        <div class="sen-bg-thumb">
+                            <img src="downloads/characters/seneca/backgrounds/Seneca Study Interior.png" alt="Study Interior" loading="lazy">
+                        </div>
+                        <div class="sen-bg-info">
+                            <span class="sen-bg-name">Study Interior</span>
+                            <span class="sen-bg-dl">↓</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="subtle-footer">
+        <p>&copy; 2026 Moki.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Character card context menu at cursor position
+        function toggleCharMenu(card, event) {
+            const menu = card.querySelector('.sen-char-menu');
+            if (!menu) return;
+            const wasActive = menu.classList.contains('active');
+            // Close all menus first
+            document.querySelectorAll('.sen-char-menu.active').forEach(m => m.classList.remove('active'));
+            if (!wasActive) {
+                // Position at cursor
+                let x = event.clientX;
+                let y = event.clientY;
+                // Prevent overflow off right/bottom edge
+                const menuRect = { width: 200, height: 90 };
+                if (x + menuRect.width > window.innerWidth) x = window.innerWidth - menuRect.width - 8;
+                if (y + menuRect.height > window.innerHeight) y = y - menuRect.height;
+                menu.style.left = x + 'px';
+                menu.style.top = y + 'px';
+                menu.classList.add('active');
+            }
+        }
+
+        // Close menus on outside click
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.sen-char-card')) {
+                document.querySelectorAll('.sen-char-menu.active').forEach(m => m.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+</html>

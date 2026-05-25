@@ -71,6 +71,20 @@
             width: 100%;
             aspect-ratio: 2 / 3;
             overflow: hidden;
+            position: relative;
+        }
+
+        .character-portrait::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(7, 7, 7, 0.25);
+            pointer-events: none;
+            transition: background 0.3s ease;
+        }
+
+        .character-card:hover .character-portrait::after {
+            background: transparent;
         }
 
         .character-portrait img {
@@ -130,6 +144,91 @@
             letter-spacing: 1px;
         }
 
+        /* ── World Grid ──────────────────────────────── */
+        .world-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 480px));
+            gap: 1.5rem;
+        }
+
+        /* ── World Card (Landscape) ─────────────────── */
+        .world-card {
+            display: block;
+            position: relative;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            overflow: hidden;
+            text-decoration: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .world-card:hover {
+            border-color: rgba(199, 181, 131, 0.3);
+        }
+
+        .world-thumbnail {
+            width: 100%;
+            aspect-ratio: 16 / 11;
+            overflow: hidden;
+        }
+
+        .world-thumbnail img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.5s ease;
+        }
+
+        .world-card:hover .world-thumbnail img {
+            transform: scale(1.05);
+        }
+
+        /* ── World Hover Overlay ────────────────────── */
+        .world-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(7, 7, 7, 0.85);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .world-card:hover .world-overlay {
+            opacity: 1;
+        }
+
+        .world-overlay .overlay-desc {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .world-overlay .overlay-action {
+            font-family: var(--font-h2);
+            font-size: 0.6rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.7;
+        }
+
+        /* ── World Name Bar ─────────────────────────── */
+        .world-name {
+            padding: 0.8rem 1rem;
+            font-family: var(--font-h2);
+            font-size: 0.75rem;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
         /* ── Responsive ─────────────────────────────── */
         @media (max-width: 768px) {
             .characters-header h1 {
@@ -138,6 +237,10 @@
 
             .character-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+
+            .world-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -172,6 +275,24 @@
         <div class="characters-header">
             <h1>Characters</h1>
             <p>Character cards for SillyTavern. Click any portrait to download the card.</p>
+        </div>
+
+        <!-- Worlds -->
+        <div class="category-section">
+            <div class="category-label">Worlds</div>
+            <div class="world-grid">
+
+                <a href="guardians-of-seneca.html" class="world-card">
+                    <div class="world-thumbnail">
+                        <img src="images/misc/guardians-of-seneca/gos-main.png" alt="Guardians of Seneca" loading="lazy">
+                    </div>
+                    <div class="world-overlay">
+                        <div class="overlay-desc">A Victorian steampunk kingdom under siege. Four Guardians, four sacred relics, and a prophecy that could close the rifts forever.</div>
+                        <div class="overlay-action">→ Explore Setting</div>
+                    </div>
+                </a>
+
+            </div>
         </div>
 
         <!-- One-Offs -->

@@ -1150,14 +1150,21 @@ function exportPDF(baseName) {
 
         const lines = state.extractedPlain.split('\n');
 
-        for (const line of lines) {
-            const trimmed = line;
+        for (const rawLine of lines) {
+            const raw = String(rawLine);
+            // Strip characters jsPDF's WinAnsi font can't encode
+            // (box-drawing ─ ═, arrow ►, etc.) which otherwise throw inside doc.text()
+            const trimmed = raw.replace(/[^\x00-\xFF]/g, '');
+            const isEntryTitle = raw.trimStart().startsWith('\u25BA'); // ► before stripping
 
             // Check for page break need
             if (y > 270) {
                 doc.addPage();
                 y = margin;
             }
+
+            // Skip blank lines (advance spacing, don't render)
+            if (trimmed.trim() === '') { y += 3; continue; }
 
             // Section headers (all caps, followed by ─)
             if (/^[A-Z][A-Z\s\-]+$/.test(trimmed.trim()) && trimmed.trim().length > 3) {
@@ -1182,11 +1189,11 @@ function exportPDF(baseName) {
             if (/^={20,}$/.test(trimmed.trim())) continue;
 
             // Entry titles (►)
-            if (trimmed.startsWith('►')) {
+            if (isEntryTitle) {
                 doc.setFont('helvetica', 'bolditalic');
                 doc.setFontSize(10);
                 doc.setTextColor(100, 80, 50);
-                const wrapped = doc.splitTextToSize(trimmed, maxW);
+                const wrapped = doc.splitTextToSize(trimmed.trim(), maxW);
                 for (const wl of wrapped) {
                     if (y > 270) { doc.addPage(); y = margin; }
                     doc.text(wl, margin, y);

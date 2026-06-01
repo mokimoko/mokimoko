@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Lotus 3.0.0 Tests | Moki</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        /* ── Page Layout ────────────────────────────── */
+        .test-page {
+            flex: 1;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 120px 2rem 5rem;
+        }
+
+        /* ── Breadcrumb ─────────────────────────────── */
+        .breadcrumb {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 3rem;
+            transition: color 0.2s ease;
+        }
+        .breadcrumb::before { content: '← '; }
+        .breadcrumb:hover { color: var(--accent); }
+
+        /* ── Page Header ────────────────────────────── */
+        .test-header {
+            margin-bottom: 4rem;
+        }
+
+        .test-header .preset-eyebrow {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.7;
+            margin-bottom: 1rem;
+        }
+
+        .test-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .test-header .tagline {
+            font-family: var(--font-h2);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            max-width: 640px;
+        }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
+            opacity: 0.3;
+            margin: 1.5rem 0;
+        }
+
+        /* ── Section Label ──────────────────────────── */
+        .section-label {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.6;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ── Settings Panel ─────────────────────────── */
+        .settings-block {
+            margin-bottom: 4rem;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            padding: 2.5rem;
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            gap: 0.2rem 2rem;
+        }
+
+        .setting-label {
+            font-family: var(--font-h2);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.7rem 0;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .setting-value {
+            font-family: var(--font-body);
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            padding: 0.7rem 0;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .setting-value span {
+            color: var(--accent);
+            opacity: 0.85;
+        }
+
+        .settings-note {
+            margin-top: 1.5rem;
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+            line-height: 1.7;
+            max-width: 600px;
+        }
+
+        /* ── Scenario / Prompt Boxes ────────────────── */
+        .scenario-block {
+            margin-bottom: 4rem;
+        }
+
+        .prose-box {
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            padding: 2rem 2.5rem;
+            font-family: var(--font-body);
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.85;
+        }
+
+        .prose-box p {
+            margin-bottom: 1rem;
+        }
+
+        .prose-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .prose-box em {
+            color: rgba(199, 181, 131, 0.7);
+            font-style: italic;
+        }
+
+        .prompt-box {
+            border: 1px solid var(--glass-border);
+            border-left: 2px solid #7aa2d4;
+            background: rgba(122, 162, 212, 0.04);
+            padding: 1.2rem 1.8rem;
+            font-family: var(--font-body);
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .prompt-box .prompt-tag {
+            display: block;
+            font-family: var(--font-h2);
+            font-size: 0.62rem;
+            color: #7aa2d4;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.7rem;
+        }
+
+        .prompt-box em {
+            color: rgba(199, 181, 131, 0.7);
+            font-style: italic;
+        }
+
+        /* ── Model Family Section ───────────────────── */
+        .family-section {
+            margin-bottom: 3.5rem;
+        }
+
+        .family-title {
+            font-family: var(--font-h1);
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.4rem;
+        }
+
+        .family-subtitle {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+        }
+
+        /* ── Response Card ──────────────────────────── */
+        .response-card {
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            margin-bottom: 1.5rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .response-card:hover {
+            border-color: rgba(199, 181, 131, 0.2);
+        }
+
+        .response-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1.1rem 1.8rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .response-model {
+            font-family: var(--font-h2);
+            font-size: 0.78rem;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .response-tag {
+            font-family: var(--font-h2);
+            font-size: 0.6rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.6;
+            white-space: nowrap;
+        }
+
+        .response-tag.variety {
+            color: #b89bd4;
+            opacity: 0.8;
+        }
+
+        .response-body {
+            padding: 1.6rem 1.8rem;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .response-body p {
+            margin-bottom: 0.9rem;
+        }
+
+        .response-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .response-body em {
+            color: rgba(199, 181, 131, 0.7);
+            font-style: italic;
+        }
+
+        /* ── My Thoughts Callout ────────────────────── */
+        .thoughts {
+            margin: 0 1.8rem 1.6rem;
+            padding: 1rem 1.3rem;
+            background: rgba(199, 181, 131, 0.05);
+            border: 1px solid rgba(199, 181, 131, 0.12);
+            border-left: 2px solid var(--accent);
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        .thoughts .thoughts-label {
+            display: block;
+            font-family: var(--font-h2);
+            font-size: 0.6rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.7;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ── Notes Block ────────────────────────────── */
+        .notes-block {
+            margin-top: 4rem;
+        }
+
+        .notes-block .prose-box p {
+            margin-bottom: 1.1rem;
+        }
+
+        .notes-block em {
+            color: rgba(199, 181, 131, 0.7);
+            font-style: italic;
+        }
+
+        /* ── Responsive ─────────────────────────────── */
+        @media (max-width: 768px) {
+            .test-header h1 {
+                font-size: 2.4rem;
+            }
+
+            .settings-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .setting-label {
+                border-top: 1px solid var(--glass-border);
+                padding-bottom: 0;
+            }
+
+            .setting-value {
+                border-top: none;
+                padding-top: 0.2rem;
+            }
+
+            .prose-box,
+            .response-body {
+                padding-left: 1.3rem;
+                padding-right: 1.3rem;
+            }
+
+            .response-head {
+                padding-left: 1.3rem;
+                padding-right: 1.3rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+
+            .thoughts {
+                margin-left: 1.3rem;
+                margin-right: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Effect -->
+    <div id="loader">
+        <div class="loader-line"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="../../index.html" class="nav-brand">MOKI.</a>
+        <div class="nav-links">
+            <a href="../about.html">About Me</a>
+            <a href="../presets.html" class="active">Presets</a>
+            <a href="../characters.html">Characters</a>
+            <a href="../utilities.html">Utilities</a>
+            <a href="../aesthetics.html">Aesthetics</a>
+        </div>
+    </nav>
+
+    <main class="test-page">
+
+        <a href="white-lotus.html" class="breadcrumb">White Lotus</a>
+
+        <!-- Header -->
+        <div class="test-header">
+            <div class="preset-eyebrow">Preset Tests</div>
+            <h1>White Lotus v3.0.0</h1>
+            <div class="tagline">Same card, same prompt, different models — each run on its recommended parameters. A quick look at how the Kimi, GLM, and Deepseek families handle the same beat, with and without the Variety Toggle.</div>
+        </div>
+
+        <!-- Test Subject -->
+        <div class="settings-block">
+            <div class="section-label">The Test Subject</div>
+            <div class="settings-grid">
+                <div class="setting-label">Card</div>
+                <div class="setting-value">Ned — built with White Lotus' NPC Creator</div>
+
+                <div class="setting-label">Concept</div>
+                <div class="setting-value">Not very complex. A guy in a vaguely historical fantasy setting who desperately wants to join the watchmen. They do not want him.</div>
+
+                <div class="setting-label">Preset</div>
+                <div class="setting-value">White Lotus base — no genre or diction toggles, all trackers off</div>
+
+                <div class="setting-label">Length</div>
+                <div class="setting-value">Moderate</div>
+
+                <div class="setting-label">NSFW</div>
+                <div class="setting-value">Off</div>
+
+                <div class="setting-label">Narrator</div>
+                <div class="setting-value">Character as narrator</div>
+
+                <div class="setting-label">Add-Ons</div>
+                <div class="setting-value">Kimi Wrangling on for Kimi family · Anti-Slop on only for GLM &amp; Deepseek family</div>
+            </div>
+            <div class="settings-note">This round uses the recommended parameters for each model rather than one fixed parameter set.</div>
+        </div>
+
+        <div class="divider" style="margin-bottom: 3rem;"></div>
+
+        <!-- Scenario -->
+        <div class="scenario-block">
+            <div class="section-label">Starting Message</div>
+            <div class="prose-box">
+                <p>The Lowmarket smelled of yesterday's cod and the vinegar used to wash the slate stalls. Edmund Relfthorne stood near the eastern arcade, his back pressed against sun-warmed brick, wearing a coat of burgundy broadcloth that had cost enough to feed a dockworker's family for two months. The fabric pulled across his shoulders; he had not had it tailored since his nineteenth birthday, before the sedentary softness had settled over his frame. A patchy beard hid his weak chin imperfectly, and his pale grey eyes&mdash;bloodshot from last night's brandy and this morning's self-loathing&mdash;tracked the movement of a grubboy near the tea merchant's cart.</p>
+                <p>Ned had been watching the child for twenty minutes. The boy, perhaps eleven, with the smallpox scars that marked him as a survivor of the same epidemic that had kissed Ned's left temple, moved with the jerky caution of prey animals. Ned had decided this meant guilt. His fingers tightened around the whalebone handle of his walking stick, which he had purchased three weeks ago for the falconry he had already abandoned. <em>This time</em>, he thought, <em>Mother will have to acknowledge the initiative.</em></p>
+                <p>He pushed off from the wall. His boots, poorly polished, scattered sawdust as he crossed the gap between the arcade and the cart. The grubboy saw him coming and froze, clutching a bundle of linen to his chest.</p>
+                <p>"You," Ned said. His voice cracked slightly&mdash;he had not spoken to anyone since shouting at his valet that morning. He cleared his throat and raised the stick, angling it like a conductor's baton. "Open that parcel."</p>
+                <p>The boy's mouth worked. Around them, the market continued its hemorrhage of noise&mdash;once, a cartwheel squealed against the cobbles&mdash;but faces turned with the slow inevitability of a crowd scenting diverting catastrophe.</p>
+                <p>"I haven't done nothing," the boy said.</p>
+                <p>"Grammar," Ned snapped, stepping closer. He could smell the child now, the honest stink of sweat and lanolin, and it offended him precisely because it was inescapable, because it rooted them both in this place where Ned did not belong but desperately needed to conquer. "You haven't done <em>anything</em>. And I say you have. The watchmen will sort the particulars."</p>
+                <p>He reached for the boy's collar with his left hand, the one with the surprising grip strength developed from years of clutching reins, doorframes, and the arms of chairs while his mother delivered her assessments of his character. He did not see the knife until the blade, rust-pitted and small, appeared in the boy's fist with the desperate competence of someone who had been cornered before.</p>
+                <p>Ned's breath stopped. He realized, with the clarity of a man falling down a well, that he had not thought past the apprehension. That he had no rope, no ally, no plan for resistance.</p>
+                <p>"Let go," the boy whispered.</p>
+                <p>Ned did not let go.</p>
+            </div>
+        </div>
+
+        <!-- User Response -->
+        <div class="scenario-block">
+            <div class="section-label">My Response (as User)</div>
+            <div class="prompt-box">
+                <span class="prompt-tag">User</span>
+                User suddenly zoomed around the corner, kicked Ned in the shin, and grabbed the kid, running off with him.
+            </div>
+        </div>
+
+        <div class="divider" style="margin-bottom: 3rem;"></div>
+
+        <!-- ════════════ KIMI FAMILY ════════════ -->
+        <div class="family-section">
+            <div class="family-title">Kimi Family</div>
+            <div class="family-subtitle">Kimi Wrangling enabled</div>
+
+            <!-- Kimi 2.5 Thinking -->
+            <div class="response-card">
+                <div class="response-head">
+                    <div class="response-model">Kimi 2.5 Thinking</div>
+                    <div class="response-tag">Base</div>
+                </div>
+                <div class="response-body">
+                    <p>The blow landed hard against Ned's shinbone, a sharp crack of boot leather against silk stocking and vulnerable flesh. Pain exploded upward, hot and immediate, and his fingers spasmed open&mdash;releasing the grubboy's collar, yes, but also losing his grip on the whalebone stick, which clattered against the cobbles and rolled beneath a nearby cabbage cart. Ned's knee buckled. He threw out a hand to catch himself against the tea merchant's rough counter, jostling a pyramid of dried leaves that cascaded onto his expensive burgundy sleeve.</p>
+                    <p>Through watering eyes, he saw the blur of you&mdash;swift and graceless and impossibly fast&mdash;snatch the child by the armpits and pivot, already running before the boy's feet cleared the ground. You moved like one creature, bolting past the fishmonger's stall where ice-melt splashed beneath your heels, disappearing toward the alley where the sun didn't reach.</p>
+                    <p>Ned gasped, sucking air through his teeth. His leg throbbed with each heartbeat, a humiliating staccato that matched the pulse in his ears. Around him, the market's rhythm stuttered; a woman laughed behind her hand, and a dockworker whistled low.</p>
+                    <p>"Thief!" Ned shouted, his voice cracking on the vowel. He straightened, wincing, and took a limping step forward, pointing after your vanished backs with a trembling finger. "Assault! Somebody&mdash;the Watch&mdash;"</p>
+                    <p>But the words died in his throat as he realized: the boy had been his only proof of competence, his single chance at redemption, and now you were both gone, leaving him alone with the smell of cod and the rising urge to scream.</p>
+                </div>
+            </div>
+
+            <!-- Kimi 2.5 Thinking + Variety -->
+            <div class="response-card">
+                <div class="response-head">
+                    <div class="response-model">Kimi 2.5 Thinking</div>
+                    <div class="response-tag variety">+ Variety Toggle</div>
+                </div>
+                <div class="response-body">
+                    <p>The blow caught him just above the ankle bone. Ned's leg folded with a betrayal that surprised him more than the pain, which arrived a half-second later&mdash;a bright, sickening spark that traveled up to his knee. He went down hard on one hip, the broadcloth tearing against the rough cobble, and his walking stick clattered away beneath a vegetable cart, swallowed by shadows and cabbage leaves.</p>
+                    <p>"&mdash;the <em>hell</em>&mdash;" Ned gasped, rolling onto his backside and clutching his shin. The blur of User and the grubboy vanished between two canvas awnings, leaving only the receding slap of bootheels. Around him, the market held its breath, then exhaled into laughter&mdash;a wet fishmonger's guffaw cutting through the morning air.</p>
+                    <p>Ned's face bloomed red. He scrambled upright, favoring his wounded leg, the expensive coat now smeared with fish scale and coal dust. "You&mdash;come <em>back</em> here! That was <em>mine</em>!" He pointed after them with a shaking finger, spit gathering at the corner of his mouth. "Do you know who I am? I'll have the Watch on you! I'll have you <em>flogged</em>!"</p>
+                    <p>He hopped once, unable to put full weight on the leg, and cast about for his stick. Gone. Something else lost. The tea merchant was grinning behind his hand.</p>
+                    <p>"Stop staring," Ned snarled at the crowd, but his voice cracked on the second word, high and young and utterly powerless. He stood alone in the sawdust, limping, clutching his expensive coat closed with white-knuckled hands. The pain in his shin throbbed in time with his pulse, and somewhere beneath the cart, his whalebone stick lay abandoned.</p>
+                </div>
+                <div class="thoughts">
+                    <span class="thoughts-label">My Thoughts</span>
+                    He's lost his stick. Honestly I feel bad for him, a good stick is hard to find.
+                </div>
+            </div>
+
+            <!-- Kimi 2.6 Thinking -->
+            <div class="response-card">
+                <div class="response-head">
+                    <div class="response-model">Kimi 2.6 Thinking</div>
+                    <div class="response-tag">Base</div>
+                </div>
+                <div class="response-body">
+                    <p>Pain blazed up Ned's shin like a lit fuse. His leg folded and he crashed down onto one knee; the whalebone stick skittered away across the cobbles and into a gutter. He grabbed for the cart's edge and missed. <em>Who&mdash;</em></p>
+                    <p>By the time he looked up, the figure had already vanished around the corner, dragging the grubboy with them.</p>
+                    <p>"Get back here!" Ned's voice cracked, threading through the market noise like a snapped wire. He pointed after them with a shaking hand. "I am Edmund Relfthorne! That thief is <em>mine</em>!"</p>
+                    <p>A wet laugh erupted near the fish barrels. Ned's face flushed hot enough to scald. He tried to rise and his leg buckled again, dumping him onto his backside in the muck. He sat there, lungs heaving, expensive burgundy broadcloth soaking up alley filth.</p>
+                    <p>Then he saw it.</p>
+                    <p>The linen bundle had tumbled from the boy's arms into the sawdust. Ned scrambled forward on his knees and snatched it. Unwrapped inside was not silk nor tea, but a heavy bronze accounting seal stamped with a leaping stag.</p>
+                    <p>His mother's seal.</p>
+                    <p>Ned's blood turned to sleet. He stared at the empty alley mouth, the space where the stranger and the boy had disappeared, and his fingers began to tremble.</p>
+                </div>
+            </div>
+
+            <!-- Kimi 2.6 Thinking + Variety -->
+            <div class="response-card">
+                <div class="response-head">
+                    <div class="response-model">Kimi 2.6 Thinking</div>
+                    <div class="response-tag variety">+ Variety Toggle</div>
+                </div>
+                <div class="response-body">
+                    <p>Pain detonated in Ned's shin. He yelped, hopping, the whalebone stick slipping from his grip to clatter against the cobblestones. A blur of motion&mdash;someone tall, moving with obscene speed&mdash;hooked an arm around the grubboy's waist and swept them both around the corner before Ned could draw breath to shout. The boy's rust-pitted knife spun once in the air and landed in a puddle of mackerel slime.</p>
+                    <p>Ned clutched his leg, his face burning beneath the patchy beard. Around him, the arcade had gone quiet except for the cooper hammering across the lane. The man hung a gilded banner between two posts, paint curling in the breeze: the Merchant's Concord Ball, three nights hence, sponsored by the Relfthorne Trading House. <em>Mother will hear of this before the first toast,</em> he realized, and hated the stranger more for it.</p>
+                    <p>"That was <em>my</em> apprehension," he said, voice cracking. He stooped for his stick, fumbling it twice before gaining his feet. A fishwife cackled behind her hand. "The Watch&mdash;the Watch will know of this interference."</p>
+                    <p>He pointed the stick toward the empty corner, arm trembling. "Do you know who I am?"</p>
+                    <p>Nobody answered. The cooper hammered another nail. Down the lane, a drunk began to applaud, slowly.</p>
+                </div>
+                <div class="thoughts">
+                    <span class="thoughts-label">My Thoughts</span>
+                    Some worldbuilding and a hook for a future event in this one. If this was a real RP, I'd absolutely accost this man at that ball.
+                </div>
+            </div>
+        </div>
+
+        <div class="divider" style="margin-bottom: 3rem;"></div>
+
+        <!-- ════════════ GLM FAMILY ════════════ -->
+        <div class="family-section">
+            <div class="family-title">GLM Family</div>
+            <div class="family-subtitle">Anti-Slop enabled</div>
+
+            <!-- GLM 5 Thinking -->
+            <div class="response-card">
+                <div class="response-head">
+                    <div class="response-model">GLM 5 Thinking</div>
+                    <div class="response-tag">Base</div>
+                </div>
+                <div class="response-body">
+                    <p>The boot connected with his shin and Ned's leg buckled, the bone singing with that particular bright agony that turned the world white at the edges. His grip on the boy's collar tore free as he staggered sideways, his walking stick clattering against the cobblestones, and by the time he caught himself against the tea cart&mdash;by the time his vision cleared enough to process the retreating figures weaving through the crowd&mdash;both the grubboy and his improbable rescuer had vanished into the Lowmarket's human churn.</p>
+                    <p>"<em>What&mdash;</em>"</p>
+                    <p>Ned's voice died in his throat. Around him, the faces that had turned to watch the confrontation now wore expressions he recognized with sinking familiarity: the curled lips of barely-contained amusement, the raised eyebrows of merchants who had seen this particular Relfthorne fail before and would discuss it over dinner. Someone tittered.</p>
+                    <p>He pushed himself upright, wincing as his weight settled on the bruised shin. His walking stick lay in a puddle of something that smelled of old cabbage water. He did not pick it up immediately. He stood there, breathing through his nose, his bloodshot grey eyes fixed on the gap in the crowd where they had disappeared.</p>
+                    <p><em>Mother will hear about this.</em></p>
+                    <p>The thought curdled even as it formed. Mother would hear, yes. Mother heard everything. And she would look at him with that exhausted, heavy-lidded stare and ask why he had been alone, why he had no witnesses, why he could not manage even the simplest&mdash;</p>
+                    <p>He bent to retrieve the stick. His fingers trembled.</p>
+                </div>
+            </div>
+
+            <!-- GLM 5 Thinking + Variety -->
+            <div class="response-card">
+                <div class="response-head">
+                    <div class="response-model">GLM 5 Thinking</div>
+                    <div class="response-tag variety">+ Variety Toggle</div>
+                </div>
+                <div class="response-body">
+                    <p>The kick caught him just below the knee, a white-hot lance that crumpled his leg beneath him. Ned's grip on the boy's collar tore free as he went down, his walking stick clattering across the cobbles, his palm scraping rough stone. He heard rather than saw the retreat&mdash;footsteps, two sets, the grubboy's involuntary squeak&mdash;and by the time he'd twisted onto his backside to look, they had already vanished around the corner of the fishmonger's stall.</p>
+                    <p>"<strong>WHAT&mdash;</strong>"</p>
+                    <p>The word tore out of him, high and thin. His shin throbbed with the particular violence of a well-placed blow, and he clutched it with both hands, rocking on the dirty stones. A woman laughed somewhere to his left. Someone else made a noise of theatrical sympathy.</p>
+                    <p><em>They took him.</em> The thought arrived with the clarity of ice water. <em>They took the boy. They're working together.</em></p>
+                    <p>He had stumbled into something larger. A network. An organized resistance to justice, operating right under the noses of the merchants and the watch both. The person who had bowled him over had moved with purpose, with training&mdash;perhaps a hired thief-taker gone corrupt, or one of the Lowmarket's whispered-about gang enforcers.</p>
+                    <p>His mother's voice surfaced unbidden: <em>You cannot even manage a simple apprehension.</em></p>
+                    <p>"Shut up," he muttered to no one.</p>
+                    <p>A brown hen pecked at the brass ferrule of his walking stick. Ned lunged for it, missed, and had to crawl three feet through something moist before reclaiming it. He stood, limping, his fine burgundy coat now smeared with fish guts and humiliation.</p>
+                    <p>He would find them. He would show them all.</p>
+                </div>
+                <div class="thoughts">
+                    <span class="thoughts-label">My Thoughts</span>
+                    This is kind of funny because Ned comes to a WILD conclusion&mdash;suddenly this is a criminal syndicate!
+                </div>
+            </div>
+
+            <!-- GLM 5.1 Thinking -->
+            <div class="response-card">
+                <div class="response-head">
+                    <div class="response-model">GLM 5.1 Thinking</div>
+                    <div class="response-tag">Base</div>
+                </div>
+                <div class="response-body">
+                    <p>The kick landed just below his kneecap with a force that surprised him. Ned's leg buckled. His grip on the boy's collar tore free as the child was wrenched away, and for one graceless moment Ned existed in pure sensation&mdash;the hot bolt of pain shooting up his thigh, the rough wool slipping through his fingers, the rush of displaced air as two figures fled past the tea merchant's cart.</p>
+                    <p>He went down on one knee. The cobbles bit through his breeches. His walking stick clattered against the stones.</p>
+                    <p>"Stop!" The word came out higher than he intended, a boy's voice in a man's throat. "STOP! Thief!"</p>
+                    <p>Around him, the market's attention had shifted. The faces that had turned to watch him corner a child now watched him kneel in the sawdust, abandoned and ridiculous. Someone laughed&mdash;a single, sharp bark from the direction of the fish stalls.</p>
+                    <p>Ned's shin throbbed. He could feel the bruise blooming already, deep and mean. He snatched up his walking stick and pushed himself upright, his broadcoat bunching at the waist, his breath coming in shallow, furious bursts. The boy and his rescuer had already vanished into the crowd's thickness near the eastern lane.</p>
+                    <p><em>Who&mdash;</em></p>
+                    <p>He took three stumbling steps in pursuit before stopping. His leg wouldn't carry him faster than a shuffle. The back of his neck burned.</p>
+                    <p>"Did you see that?" he demanded of a woman passing with a basket of radishes. "Did you see what they&mdash;someone has to do something!"</p>
+                </div>
+            </div>
+
+            <!-- GLM 5.1 Thinking + Variety -->
+            <div class="response-card">
+                <div class="response-head">
+                    <div class="response-model">GLM 5.1 Thinking</div>
+                    <div class="response-tag variety">+ Variety Toggle</div>
+                </div>
+                <div class="response-body">
+                    <p>The kick connected with Ned's shin before he registered the blur of motion. Pain lanced up his leg&mdash;a white, electric thing&mdash;and his grip on the boy's collar tore loose as the child was snatched sideways. Ned's wrist cracked backward. He staggered, boot sliding in sawdust, and by the time he found his footing the grubboy and his improbable rescuer had vanished between the fishmonger's row and the alley behind the tallow chandlers.</p>
+                    <p>Someone in the crowd laughed.</p>
+                    <p>Ned's face burned. He straightened, adjusting his coat with hands that trembled, and refused&mdash;<em>refused</em>&mdash;to limp as he turned to face the mocking faces. A woman near the tea cart was whispering to her companion, both of them watching him with the bright, unkind interest of spectators at a bear-baiting.</p>
+                    <p>"I'll have you know&mdash;" Ned started, then stopped. Started again. "That thief&mdash;there's a <em>reward</em>&mdash;"</p>
+                    <p>"Oi!" A voice cut through, sharp as the kick still throbbing in Ned's leg. A man in the grey tabard of the Market Wardens shouldered through the onlookers, looking harried. "What's this then? You know the new ordinance, yeah? <em>No citizen's arrest without a writ from the magistrate.</em> Passed last Thursday. You're detaining someone without authority, that's assault, that is."</p>
+                </div>
+                <div class="thoughts">
+                    <span class="thoughts-label">My Thoughts</span>
+                    Another interesting one&mdash;this time Ned's got himself into trouble, oops XD
+                </div>
+            </div>
+        </div>
+
+        <div class="divider" style="margin-bottom: 3rem;"></div>
+
+        <!-- ════════════ DEEPSEEK FAMILY ════════════ -->
+        <div class="family-section">
+            <div class="family-title">Deepseek Family</div>
+            <div class="family-subtitle">Anti-Slop enabled</div>
+
+            <!-- Deepseek 3.2 Thinking -->
+            <div class="response-card">
+                <div class="response-head">
+                    <div class="response-model">Deepseek 3.2 Thinking</div>
+                    <div class="response-tag">Base</div>
+                </div>
+                <div class="response-body">
+                    <p>The blow landed just above his ankle, a sharp, blunt shock that shot up his leg and dropped him to one knee. His grip on the boy's collar tore free. He saw boots&mdash;not his own&mdash;and the swift, panicked motion of two bodies merging into one retreating shadow before they vanished around the stone corner of the tea merchant's stall.</p>
+                    <p>Ned's walking stick clattered onto the cobbles. He clutched his shin, hissing through his teeth. The pain was bright and humiliating. Around him, the market's noise surged back, a wave of indifferent chatter that washed over his failure. A fishmonger's wife paused, wiping her hands on her apron, her eyes wide with the sort of detached pity reserved for minor public accidents.</p>
+                    <p><em>They're laughing</em>, he thought, though he couldn't hear it over the ringing in his ears. His face burned hotter than the impact site. He pushed himself up, leaning heavily on the wall. His good coat was smudged with grime from the stones. He stared at the empty space where the boy and his sudden rescuer had been, his bloodshot eyes narrowing.</p>
+                    <p>He wouldn't call the Watch. That would mean a report. A report would find its way to his mother. Instead, he bent, wincing, and retrieved his stick. His knuckles were white around the handle. He took a limping step toward the corner, his mind already rearranging the story: <em>interrupted a theft, fought off an accomplice, the scum fled</em>. It wasn't a complete lie. It just needed the right ending. And he knew where grubboys went to ground.</p>
+                </div>
+            </div>
+
+            <!-- Deepseek 3.2 Thinking + Variety -->
+            <div class="response-card">
+                <div class="response-head">
+                    <div class="response-model">Deepseek 3.2 Thinking</div>
+                    <div class="response-tag variety">+ Variety Toggle</div>
+                </div>
+                <div class="response-body">
+                    <p>Ned's shinbone rang like a bell, a bright shard of pain that dropped him to one knee. His fingers came open without his permission, releasing the boy's grimy shirt. He looked up, mouth slack, as a stranger&mdash;the woman? the man?&mdash;snatched the grubboy's wrist and pulled him into a stumbling run toward the mouth of Ironmonger's Alley.</p>
+                    <p>He scrambled upright, the impact vibrating through his teeth. The market's tide had swallowed them already, leaving only the echo of running footsteps and the vinegar smell.</p>
+                    <p>He limped forward a few paces, leaning heavily on his falconry stick. He should shout for the Watch. He should give chase. Instead, he stared at the empty space where the confrontation had been, feeling absurd. He heard a snicker from the stall behind him, where the tea merchant was pretending to rearrange tins.</p>
+                    <p>His ears burned. He adjusted his broadcloth coat, which now had a smear of mud on one knee. "Right," he muttered to the cobblestones. He began walking in the opposite direction, back toward the arcade and the narrow, respectable streets beyond. He would find his valet. He would need a poultice for the bruise. And then, perhaps, a brandy. The idea settled around him, a promise of quiet lamplight and a closed door.</p>
+                </div>
+                <div class="thoughts">
+                    <span class="thoughts-label">My Thoughts</span>
+                    Ned just gave up this time and is on his way home with his tail between his legs&mdash;tonal whiplash coming right after that last response from Deepseek 3.2, when he seemed like he might murder us.
+                </div>
+            </div>
+
+            <!-- Deepseek 4 Flash Thinking -->
+            <div class="response-card">
+                <div class="response-head">
+                    <div class="response-model">Deepseek 4 Flash Thinking</div>
+                    <div class="response-tag">Base</div>
+                </div>
+                <div class="response-body">
+                    <p>Edmund Relfthorne went down hard.</p>
+                    <p>His knee buckled, the shin blooming with a pain that shot up into his hip and made his teeth clack together. The walking stick clattered across the cobblestones, spinning once, twice, before settling in a puddle of vinegar and gutter water. For a moment, he simply sat there, palms flat against the wet stone, staring at the empty space where the grubboy had been standing.</p>
+                    <p>The boy was gone. The stranger was gone.</p>
+                    <p>Around him, the Lowmarket had gone quiet. A woman near the fish stall held a herring mid-wrap, mouth open. The tea merchant had stopped weighing his leaves, one hand frozen over the scale.</p>
+                    <p>Ned's face flushed.</p>
+                    <p>He climbed to his feet with an unsteadiness that had nothing to do with the pain, though his shin throbbed and he could feel a warmth spreading under his stocking that suggested blood. He brushed at the knees of his burgundy broadcloth, found the fabric soaked through with filth and stained beyond what any washerwoman could fix. <em>That coat cost eighty sovereigns.</em> The thought surfaced with the force of a physical blow.</p>
+                    <p>His hand went to his empty belt loop.</p>
+                    <p>They had taken nothing from him. That was the worst part. That was the <em>insult</em>.</p>
+                    <p>Ned turned in a full circle, scanning the crowd with eyes gone hard and bright. The market-goers looked away, suddenly fascinated by the contents of their own baskets, the quality of the roof tiles overhead, the precise arrangement of turnips on a cart.</p>
+                    <p>"Someone knows them," he said. His voice came out thin, nasal, wrong. He cleared his throat and tried again, louder. "Someone here knows who that was. Speak up."</p>
+                    <p>Silence. A dog barked. A cart creaked.</p>
+                    <p>Ned's hands curled into fists at his sides.</p>
+                </div>
+            </div>
+
+            <!-- Deepseek 4 Pro Thinking -->
+            <div class="response-card">
+                <div class="response-head">
+                    <div class="response-model">Deepseek 4 Pro Thinking</div>
+                    <div class="response-tag">Base</div>
+                </div>
+                <div class="response-body">
+                    <p>The pain arrived before comprehension&mdash;a bright, sickening flare in his left shin that buckled his knee and dumped him sideways onto the cobbles. His walking stick clattered away. His coat twisted around his torso, the fine wool drinking up the sawdust and something wet that he did not want to identify.</p>
+                    <p>"<em>Hff&mdash;</em>" The sound that escaped him was not a word.</p>
+                    <p>He saw boots. Someone's boots, moving fast, and the grubboy's rag-wrapped feet kicking as he was hauled along. The bundle of linen&mdash;the supposed stolen goods, the justification for this entire misadventure&mdash;dropped and lay in the gutter, unspooling into a threadbare undershirt that could not have been worth more than three coppers.</p>
+                    <p>Ned pushed himself onto his hands and knees. His shin throbbed in time with his heartbeat. His palms skidded on fish scales. A costermonger somewhere to his left was laughing, a wet, rattling sound like a drain clearing.</p>
+                    <p>"Thief!" Ned shouted. The word came out high and reedy. He tried again. "Thief! Stop them!"</p>
+                    <p>Nobody stopped them.</p>
+                </div>
+            </div>
+
+            <!-- Deepseek 4 Pro Thinking + Variety -->
+            <div class="response-card">
+                <div class="response-head">
+                    <div class="response-model">Deepseek 4 Pro Thinking</div>
+                    <div class="response-tag variety">+ Variety Toggle</div>
+                </div>
+                <div class="response-body">
+                    <p>The kick hit Ned just below the knee, that exquisite cluster of nerves where pain blooms white and immediate. His leg buckled. The walking stick clattered against the cobbles as he went down onto one knee, his burgundy coat pooling in the sawdust and something wet&mdash;horse piss, probably&mdash;soaking through the broadcloth at his shin.</p>
+                    <p>He made a sound that was not a word.</p>
+                    <p>By the time he looked up, the blur of motion had resolved into a figure&mdash;the grubboy's arm clamped in their grip&mdash;disappearing between the tea merchant's cart and the wool-dyer's stall. A cascade of indignant shouts followed them. Someone's basket overturned. A woman cursed with the specific creativity of the docks.</p>
+                    <p>Ned's mouth hung open. His jaw worked, producing nothing.</p>
+                    <p>"Master Relfthorne?"</p>
+                    <p>The voice came from behind him, dry as old paper. Ned twisted, still on his knee, and found himself staring up at Mr. Chellick&mdash;his mother's solicitor, a man whose eyebrows had never in forty years known a moment's surprise. He carried a leather portfolio under one arm and held a small paper cone of roasted chestnuts in his other hand, as though he had simply materialized from the crowd like a particularly unwelcome ghost.</p>
+                    <p>"Your mother," Mr. Chellick said, selecting a chestnut with surgical precision, "sent me to retrieve you. There is a matter of some urgency regarding your quarterly allowance."</p>
+                    <p>He bit into the chestnut.</p>
+                    <p>"Shall I help you up, or would you prefer to remain there?"</p>
+                </div>
+                <div class="thoughts">
+                    <span class="thoughts-label">My Thoughts</span>
+                    Variety introduced a different NPC this time; looks like Ned has some drama going on at home.
+                </div>
+            </div>
+        </div>
+
+        <div class="divider" style="margin-bottom: 3rem;"></div>
+
+        <!-- Notes -->
+        <div class="notes-block">
+            <div class="section-label">Notes</div>
+            <div class="prose-box">
+                <p>I still really like the concept of the Variety Toggle. It's not so wild that it completely derails the roleplay, but it encourages output that isn't quite as predictable. Overall, I think the writing style is pretty good across all of the models; there's a bit of slop but not as much as there could be. GLM and Deepseek family models are more prone to this, or it could be that I'm more primed to be annoyed by their brand of slop.</p>
+                <p>I tried with a Default preset&mdash;a very simple "Respond as {{char}}" type prompt&mdash;with GLM 5 Thinking just to compare. In White Lotus' GLM 5 Thinking responses, Ned starts worrying about what his mother's reaction will be when she hears, and in the second, he's determined to get his hands on User and the kid. In three consecutive swipes with a basic preset, he just doesn't really do anything. He either slinks away, or stands there doing literally nothing lol.</p>
+                <p>But that was and is my continuing goal: to prompt in such a way that a plot develops, and STUFF happens. That's what makes RP so fun in my opinion&mdash;the unexpected, the thrill of being surprised. Anyway, that's it for this round of tests!</p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="subtle-footer">
+        <p>&copy; 2026 Moki.</p>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>

@@ -108,7 +108,7 @@
 
         .download-bar {
             border: 1px solid var(--glass-border);
-            padding: 2rem 2.5rem;
+            padding: 1.2rem 1.8rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -243,7 +243,7 @@
         .tests-callout {
             border: 1px solid var(--glass-border);
             background: var(--glass-bg);
-            padding: 1.8rem 2.5rem;
+            padding: 1.2rem 1.8rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -261,6 +261,13 @@
             font-size: 0.75rem;
             color: var(--text-muted);
             line-height: 1.6;
+        }
+
+        .tests-callout .btn,
+        .download-bar .btn {
+            white-space: nowrap;
+            flex-shrink: 0;
+            padding: 0.7rem 1.8rem;
         }
 
         /* ── What's Inside ──────────────────────────── */
@@ -342,6 +349,18 @@
             padding-top: 0.25rem;
         }
 
+        /* ── Inline Links ────────────────────────────── */
+        .preset-page a:not(.btn):not(.breadcrumb):not(.nav-brand):not(.nav-links a) {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(199, 181, 131, 0.3);
+            transition: border-color 0.2s ease;
+        }
+
+        .preset-page a:not(.btn):not(.breadcrumb):not(.nav-brand):not(.nav-links a):hover {
+            border-color: var(--accent);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .preset-hero {
@@ -414,13 +433,13 @@
         <div class="download-area">
             <div class="download-bar">
                 <div class="download-info">
-                    <div class="file-name">WHITE LOTUS [2.0.0].json</div>
+                    <div class="file-name">WHITE LOTUS [3.0.0].json</div>
                     <div class="file-meta">Latest &nbsp;·&nbsp; SillyTavern Preset &nbsp;·&nbsp; JSON</div>
                 </div>
-                <a href="../../downloads/presets/white-lotus-2.0.0.json" download class="btn" style="margin-top:0;">Download</a>
+                <a href="../../downloads/presets/white-lotus-3.0.0.json" download class="btn" style="margin-top:0;">Download</a>
             </div>
             <div class="older-versions">
-                Previous: <a href="../../downloads/presets/white-lotus-1.2.1.json" download>v1.2.1</a> · <a href="../../downloads/presets/white-lotus-1.1.0.json" download>v1.1.0</a>
+                Previous: <a href="../../downloads/presets/white-lotus-2.0.0.json" download>v2.0.0</a> · <a href="../../downloads/presets/white-lotus-1.2.1.json" download>v1.2.1</a> · <a href="../../downloads/presets/white-lotus-1.1.0.json" download>v1.1.0</a>
             </div>
         </div>
 
@@ -519,8 +538,11 @@
 
         <!-- Tests -->
         <div class="tests-callout">
-            <div class="tests-callout-text">See how White Lotus performs across GLM and Kimi models — baselines, add-ons, and a full chat demo.</div>
-            <a href="white-lotus-tests.html" class="btn" style="margin-top: 0;">View Tests</a>
+            <div class="tests-callout-text">See how White Lotus 3.0.0 handles the same scene across the Kimi, GLM, and Deepseek families — base runs vs. the Variety Toggle, each on its recommended parameters.</div>
+            <a href="white-lotus-tests-v3.html" class="btn" style="margin-top: 0;">3.0.0 Tests</a>
+        </div>
+        <div class="older-versions" style="margin-top: -3.5rem; margin-bottom: 5rem;">
+            Older: <a href="white-lotus-tests.html">v1.2.0 tests (image-based)</a>
         </div>
 
         <!-- What's Inside -->
@@ -540,7 +562,7 @@
                     Variables you set once and forget about: tense, POV, diction, length, and narrator type. Narrator can be Omniscient (knows everyone's inner world except the user's) or Character (becomes the character — biases, blind spots, and all). Diction options for Chinese, Japanese, or Historical settings add culturally appropriate idioms, honorifics, and metaphors.
                 </p>
                 <p>
-                    New in 2.0: genre presets. Pick from Contemporary, Slice of Life, Southern Gothic, Science Fiction, Dark Fantasy, Regency Historical, Historical Danmei, Modern Danmei, or LitRPG — each one sets the primary genre, subgenre, tone, and reference style in one toggle. There's also a <a href="../utilities.html">companion extension</a> that makes managing toggles and settings easier, with some bonus UI tweaks and chat styling.
+                    Genre presets: Contemporary, Slice of Life, Southern Gothic, Science Fiction, Space Opera, Dark Fantasy, Regency Historical, LitRPG, Historical Chinese, Modern Chinese — each one sets the primary genre, subgenre, tone, and reference style in one toggle. There's also a <a href="../utilities.html">companion extension</a> that makes managing toggles and settings easier, with some bonus UI tweaks and chat styling.
                 </p>
             </div>
 
@@ -565,7 +587,7 @@
             <div class="feature-group">
                 <div class="feature-group-title">Direction</div>
                 <p>
-                    Narrative Direction handles prose style, pacing, and scene management — matching style to genre, keeping things kinetic, giving every character distinct dialogue and thought patterns, and starting new scenes in media res. Variety Toggle randomizes an additional story element each turn — a memory from the character's past, an intrusive thought, a sudden commotion, a misunderstanding being planted for later. Great for breaking repetitive loops. CoT (Brainstorm) prompts thinking models to work through character motivation, scene setup, and interpersonal dynamics before writing. There's also a Hyper-Mode for CoT that adds thematic reasoning on top.
+                    Variety Toggle randomizes an additional story element each turn — a memory from the character's past, an intrusive thought, a sudden commotion, a misunderstanding being planted for later. Great for breaking repetitive loops. CoT (Brainstorm) prompts thinking models to work through character motivation, scene setup, and interpersonal dynamics before writing. There's also a Hyper-Mode for CoT that adds thematic reasoning on top.
                 </p>
             </div>
 

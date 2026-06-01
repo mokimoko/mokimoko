@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Templates | Moki</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .subpage {
+            flex: 1;
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 120px 2rem 5rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.5;
+            margin-bottom: 2.5rem;
+            transition: opacity 0.2s ease, color 0.2s ease;
+        }
+
+        .back-link:hover { opacity: 1; color: var(--accent); }
+
+        .subpage h1 { font-size: 3rem; margin-bottom: 0.8rem; }
+
+        .subpage-section { margin-bottom: 3rem; }
+        .subpage-section h2 { margin-bottom: 1.2rem; }
+
+        .subpage-section h3 {
+            font-family: var(--font-h2);
+            font-size: 0.8rem;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .subpage-section p { margin-bottom: 1rem; }
+
+        .code-block {
+            font-family: var(--font-h2);
+            font-size: 0.8rem;
+            color: var(--accent);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 1rem 1.4rem;
+            margin: 1rem 0;
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+
+        .format-tag {
+            display: inline-block;
+            font-family: var(--font-h2);
+            font-size: 0.65rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.3rem 0.6rem;
+            border: 1px solid var(--glass-border);
+            margin-bottom: 0.4rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div id="loader"><div class="loader-line"></div></div>
+
+    <nav id="navbar">
+        <a href="../../index.html" class="nav-brand">MOKI.</a>
+        <div class="nav-links">
+            <a href="../about.html">About Me</a>
+            <a href="../presets.html">Presets</a>
+            <a href="../characters.html">Characters</a>
+            <a href="../utilities.html">Utilities</a>
+            <a href="../aesthetics.html">Aesthetics</a>
+        </div>
+    </nav>
+
+    <main class="subpage">
+        <a href="../about.html" class="back-link">← Back to About</a>
+        <h1>Character Templates</h1>
+
+        <section class="subpage-section">
+            <h2>Format Overview</h2>
+            <p>There is lots of debate over what the best format is. I've tried a bunch of them, and in my opinion:</p>
+
+            <h3>AliChat + PList</h3>
+            <p>Great for establishing writing style and speech patterns. The characters stay in character for a long time. But it can be token heavy and difficult to do since it requires a lot of writing. In trying to limit tokens, you end up giving less particular information. Also easy for the character to fall into behavior patterns if you aren't careful to show a variety of situations.</p>
+
+            <h3>Plaintext</h3>
+            <p>Honestly difficult for me. More difficult than AliChat lol. I struggle with organization, so this is usually a nonstarter for me, but it can work really well in skilled hands!</p>
+
+            <h3>List / Profile</h3>
+            <p>Easiest to do. It's just a list of stuff. Can be fine for characters without distinct speech patterns, but I've found that the characters made in this format are a bit "dry", and the LLM is prone to falling into stereotypes. Struggles with complex characterization. A lot of people really like this format, though.</p>
+
+            <h3>Mix (What I Use)</h3>
+            <p>I'm currently using a mix of profile/short example dialogues in the card description. I've had interesting results. It's less precise than AliChat + PList, but good at inferring possible behaviors and specific speech patterns. Still testing for longterm RP efficacy.</p>
+
+            <p>There's no right or wrong way to make a character card (except W++ — don't use that). At the end of the day, it's all text, and it comes down to preference. The important thing is choosing information by relevance and the likelihood that the LLM will use it. For example: it's better to say a character is slim and tall than to give a height and weight alone; the numbers don't mean much to the LLM and it's unlikely to come up in roleplay, or if it is, it'll be really hamfisted and awkward. The TONE you write in can make a difference, which is why handwritten cards are better than AI generated ones. The quirks of human writing make the output more interesting and less prone to "slop".</p>
+
+            <p>Token count is important, but with context sizes having increased so much, less so than it used to be. I used to aim for ~800 permanent tokens. These days my cards are much bigger, with my Faebane cards averaging ~1800 tokens. It's a matter of opinion whether it's better to aim smaller (or larger).</p>
+        </section>
+
+        <section class="subpage-section">
+            <h2>Character Card Template</h2>
+            <p><span class="format-tag">Mixed Format</span></p>
+            <p>This is the "mixed" template I've been using. I picked up a lot from looking through other creators' cards, so props to them.</p>
+            <div class="code-block">&lt;Character Name&gt;
+Brief one-line introduction to the character.
+
+&lt;background&gt;
+&lt;/background&gt;
+
+&lt;appearance&gt;
+&lt;/appearance&gt;
+
+&lt;interpersonal&gt;
+  &lt;notableRelationships&gt;
+  - NPC 1: one-line of must-know info (more detailed info goes in lorebook)
+  &lt;/notableRelationships&gt;
+  &lt;user&gt;
+  Character's relationship with {{user}}.
+  &lt;/user&gt;
+  &lt;relationshipStyle&gt;
+  How the character acts in platonic and romantic relationships.
+  &lt;/relationshipStyle&gt;
+  &lt;sex&gt;
+  Basic info about the character's approach to sex (detailed info in lorebook).
+  &lt;/sex&gt;
+&lt;/interpersonal&gt;
+
+&lt;dialogueStyle&gt;
+One-line description of speaking style, maybe a few short examples if distinctive.
+&lt;/dialogueStyle&gt;
+
+&lt;personality&gt;
+Description of personality, goals, beliefs, etc.
+
+**Behavioral Guide**
+When [emotion or situation]: How the character acts.
+&lt;/personality&gt;
+&lt;/Character Name&gt;</div>
+        </section>
+
+        <section class="subpage-section">
+            <h2>Persona Profile Template</h2>
+            <p>For most frontends, you can create a user persona. This information is sent to the LLM along with everything else and tells the LLM who you, the user, are. This template is short and sweet, meant to just give basic, easily "observable" information about the character you're playing as.</p>
+            <div class="code-block">[Full Name: your persona's full name
+Goes by: nicknames, aliases, etc
+Age: self-explanatory
+Species: if relevant
+Nationality: if relevant
+Physical Appearance: a list of attributes the character might notice
+Clothing Style: a description of style rather than a specific outfit
+Personality: a list of traits the character might notice]</div>
+            <p>Feel free to add or remove sections based on what's most important for your particular persona concept! Sometimes I'll include a "Backstory:" field if that's relevant to the roleplay, for example.</p>
+        </section>
+    </main>
+
+    <footer class="subtle-footer"><p>&copy; 2026 Moki.</p></footer>
+    <script src="../../js/main.js"></script>
+</body>
+</html>

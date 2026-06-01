@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Moki</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .about-page {
+            flex: 1;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 120px 2rem 5rem;
+        }
+
+        /* ── Header ─────────────────────────────────── */
+        .about-header {
+            margin-bottom: 5rem;
+        }
+
+        .about-eyebrow {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.7;
+            margin-bottom: 1.2rem;
+        }
+
+        .about-header h1 {
+            font-size: 5rem;
+            margin-bottom: 0;
+        }
+
+        /* ── Two-column bio layout ───────────────────── */
+        .about-bio {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            gap: 5rem;
+            margin-bottom: 2.5rem;
+            align-items: start;
+        }
+
+        .about-portrait {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        .portrait-placeholder {
+            font-family: var(--font-h2);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.3;
+        }
+
+        .about-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            padding-top: 0.4rem;
+        }
+
+        .about-text p {
+            max-width: 560px;
+        }
+
+        .about-text p.placeholder {
+            opacity: 0.25;
+            font-style: italic;
+        }
+
+        /* ── Divider ─────────────────────────────────── */
+        .section-divider {
+            width: 100%;
+            height: 1px;
+            background: var(--glass-border);
+            margin-bottom: 4rem;
+        }
+
+        /* ── Quick Facts / Tags row ──────────────────── */
+        .about-facts {
+            margin-top: 1rem;
+        }
+
+        .about-facts .section-label {
+            margin-bottom: 0.6rem;
+        }
+
+        .section-label {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(4, auto);
+            gap: 0;
+        }
+
+        .fact-item {
+            border: 1px solid var(--glass-border);
+            margin: -1px 0 0 -1px;
+            padding: 0.8rem 1rem;
+        }
+
+        .fact-label {
+            font-family: var(--font-h2);
+            font-size: 0.65rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.5;
+            margin-bottom: 0.5rem;
+        }
+
+        .fact-value {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .fact-value.placeholder {
+            opacity: 0.25;
+            font-style: italic;
+        }
+
+        /* ── Links / Find Me section ─────────────────── */
+        .about-links {
+            margin-bottom: 4rem;
+        }
+
+        /* ── Responsive ──────────────────────────────── */
+
+        /* ── Collapsible Section ─────────────────────── */
+        .about-collapsible {
+            margin-bottom: 5rem;
+        }
+
+        .about-collapsible summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            list-style: none;
+            padding: 0.8rem 1.2rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+        }
+
+        .about-collapsible summary::-webkit-details-marker { display: none; }
+
+        .about-collapsible summary .section-label {
+            margin-bottom: 0;
+        }
+
+        .collapse-icon {
+            font-family: var(--font-h2);
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            opacity: 0.4;
+            transition: transform 0.3s ease, opacity 0.2s ease;
+            line-height: 1;
+        }
+
+        .about-collapsible summary:hover .collapse-icon {
+            opacity: 0.7;
+        }
+
+        .about-collapsible[open] .collapse-icon {
+            transform: rotate(45deg);
+        }
+
+        .collapse-body {
+            padding-top: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .collapse-body p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .collapse-body p.disclaimer {
+            opacity: 0.55;
+            font-size: 0.85rem;
+        }
+
+        .about-sublinks {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2.5rem;
+        }
+
+        .about-sublink {
+            font-family: var(--font-h2);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 0.6rem 1.2rem;
+            border: 1px solid var(--glass-border);
+            transition: color 0.2s ease, border-color 0.3s ease;
+        }
+
+        .about-sublink:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .about-header h1 { font-size: 3.5rem; }
+
+            .about-bio {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .about-portrait {
+                max-width: 240px;
+            }
+
+            .facts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Effect -->
+    <div id="loader">
+        <div class="loader-line"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="../index.html" class="nav-brand">MOKI.</a>
+        <div class="nav-links">
+            <a href="about.html" class="active">About Me</a>
+            <a href="presets.html">Presets</a>
+            <a href="characters.html">Characters</a>
+            <a href="utilities.html">Utilities</a>
+            <a href="aesthetics.html">Aesthetics</a>
+        </div>
+    </nav>
+
+    <main class="about-page">
+
+        <!-- Header -->
+        <div class="about-header">
+            <div class="about-eyebrow">About Me</div>
+            <h1>Hi, I'm Moki.</h1>
+        </div>
+
+        <!-- Bio -->
+        <div class="about-bio">
+            <div class="about-portrait">
+                <img src="../images/portrait.png" alt="Portrait of Moki">
+            </div>
+
+            <div class="about-text">
+                <p class="placeholder">Why am I here</p>
+                <p class="placeholder">What am I doing</p>
+                <p class="placeholder">Why do my deepest thoughts keep happening in the bathroom</p>
+
+                <!-- Quick Facts -->
+                <div class="about-facts">
+                    <div class="section-label">Quick Facts</div>
+                    <div class="facts-grid">
+                        <div class="fact-item">
+                            <div class="fact-label">Based In</div>
+                            <div class="fact-value placeholder">US</div>
+                        </div>
+                        <div class="fact-item">
+                            <div class="fact-label">Primary Models</div>
+                            <div class="fact-value placeholder">GLM, Kimi</div>
+                        </div>
+                        <div class="fact-item">
+                            <div class="fact-label">RP Genres</div>
+                            <div class="fact-value placeholder">Fantasy, Xianxia/Wuxia, Drama, Tragedy, Romance</div>
+                        </div>
+                        <div class="fact-item">
+                            <div class="fact-label">Also Into</div>
+                            <div class="fact-value placeholder">Reading, writing, playing with cats (everyone's)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botmaking Philosophy -->
+        <details class="about-collapsible">
+            <summary>
+                <div class="section-label">Botmaking Philosophy</div>
+                <span class="collapse-icon">+</span>
+            </summary>
+            <div class="collapse-body">
+                <p>That sounds really fancy, huh? But I know different creators have different goals in mind when they're writing their characters—some people excel at making NSFW bots, some at making scenario bots, etc.</p>
+                <p>It's important to me to be able to RP with my bots without having TOO strong of a NSFW bias. I'm interested in complex characterization (to the extent of my own ability, and the ability of the model I'm using), interesting backstories, and maintaining a certain level of consistency. But I also want my bots to be able to switch to NSFW scenarios and keep those interesting, too.</p>
+                <p class="disclaimer"><strong>Disclaimer and Warning:</strong> I do like dark or taboo relationships/scenarios, even though I live a pretty vanilla life and even think a lot of the topics I write about are morally wrong. You can think something is kind of gross and still find it fun to roleplay, you know? There's just an inherent level of drama there imho. So please don't take the existence of certain topics in my cards to mean that I in any way endorse those things (like, I'm not thirsting over siblings IRL and no one else should either lol PLS—I just fell in love with Angel Sanctuary way back in the dark ages and I like that dynamic in fiction). Likewise, I don't mean to insult anyone's real-life faith with my demon and angel cards, I just got deep into Catholic theology in college. The worldbuilding of Thomas Aquinas is godtier <em>*badumtss*</em></p>
+            </div>
+        </details>
+
+        <div class="about-sublinks">
+            <a href="guides/roleplay-tips.html" class="about-sublink">Roleplay Tips</a>
+            <a href="guides/guides.html" class="about-sublink">Guides</a>
+            <a href="guides/character-templates.html" class="about-sublink">Character Templates</a>
+        </div>
+
+        <div class="section-divider" style="margin-top: 3rem;"></div>
+
+        <!-- Find Me -->
+        <div class="about-links">
+            <div class="section-label">Find Me</div>
+            <div class="about-sublinks">
+                <a href="https://github.com/mokimoko" target="_blank" rel="noopener" class="about-sublink">GitHub</a>
+                <a href="https://chub.ai/users/Mokiikitty" target="_blank" rel="noopener" class="about-sublink">Chub</a>
+                <a href="https://janitorai.com/profiles/5cf75eab-5fe9-40a7-9663-1be48f2d8864_profile-of-mokimoko" target="_blank" rel="noopener" class="about-sublink">JanitorAI</a>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="subtle-footer">
+        <p>&copy; 2026 Moki.</p>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

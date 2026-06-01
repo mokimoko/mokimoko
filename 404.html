@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moki | 404</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .lost-hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 4rem;
+            text-align: center;
+        }
+
+        .error-code {
+            font-family: var(--font-h1);
+            font-size: clamp(8rem, 20vw, 16rem);
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            line-height: 1;
+            color: var(--text-main);
+            opacity: 0.06;
+            position: absolute;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .lost-hero h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .lost-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 5rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .lost-hero p {
+            max-width: 440px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Effect -->
+    <div id="loader">
+        <div class="loader-line"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="/index.html" class="nav-brand">MOKI.</a>
+        <div class="nav-links">
+            <a href="/pages/about.html">About Me</a>
+            <a href="/pages/presets.html">Presets</a>
+            <a href="/pages/characters.html">Characters</a>
+            <a href="/pages/utilities.html">Utilities</a>
+            <a href="/pages/aesthetics.html">Aesthetics</a>
+        </div>
+    </nav>
+
+    <!-- 404 Content -->
+    <main class="lost-hero">
+        <span class="error-code">404</span>
+        <h2>Signal Lost</h2>
+        <h1>Nothing Here.</h1>
+        <p>Whatever you were looking for, it's not at this address. Might've been moved, might've never existed. Either way — dead end.</p>
+        <a href="/index.html" class="btn">Back to Base</a>
+    </main>
+
+    <!-- Footer -->
+    <footer class="subtle-footer">
+        <p>&copy; 2026 Moki.</p>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guides | Moki</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .subpage {
+            flex: 1;
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 120px 2rem 5rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.5;
+            margin-bottom: 2.5rem;
+            transition: opacity 0.2s ease, color 0.2s ease;
+        }
+
+        .back-link:hover { opacity: 1; color: var(--accent); }
+
+        .subpage h1 { font-size: 3rem; margin-bottom: 0.8rem; }
+
+        .subpage-intro {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-style: italic;
+            opacity: 0.6;
+        }
+
+        .subpage-section { margin-bottom: 3rem; }
+        .subpage-section h2 { margin-bottom: 1.2rem; }
+
+        .guide-item {
+            padding: 1.1rem 0;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .guide-item:last-child {
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .guide-item a {
+            font-family: var(--font-h2);
+            font-size: 0.85rem;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .guide-item a:hover { color: var(--accent); }
+
+        .guide-item .guide-note {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            opacity: 0.6;
+            margin-top: 0.3rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div id="loader"><div class="loader-line"></div></div>
+
+    <nav id="navbar">
+        <a href="../../index.html" class="nav-brand">MOKI.</a>
+        <div class="nav-links">
+            <a href="../about.html">About Me</a>
+            <a href="../presets.html">Presets</a>
+            <a href="../characters.html">Characters</a>
+            <a href="../utilities.html">Utilities</a>
+            <a href="../aesthetics.html">Aesthetics</a>
+        </div>
+    </nav>
+
+    <main class="subpage">
+        <a href="../about.html" class="back-link">← Back to About</a>
+        <h1>Guides</h1>
+        <p class="subpage-intro">I'm an idiot, these guides are great.</p>
+
+        <section class="subpage-section">
+            <h2>Guides</h2>
+            <div class="guide-item">
+                <a href="https://rentry.co/world-info-encyclopedia" target="_blank" rel="noopener">World Info Encyclopedia →</a>
+                <div class="guide-note">This is it. The guide that FINALLY made some stuff about lorebooks click for me. Ohmygod it took me so long. Bless them.</div>
+            </div>
+            <div class="guide-item">
+                <a href="https://wikia.schneedc.com/bot-creation/trappu/creation" target="_blank" rel="noopener">PygmalionAI Wiki Character Writing Guide →</a>
+            </div>
+            <div class="guide-item">
+                <a href="https://rentry.co/statuobotmakie" target="_blank" rel="noopener">Statuo's Guide to Making Bots →</a>
+                <div class="guide-note">This guy is way smarter than me, his guide is amazing and I've read through it so many times! He gets into some really advanced stuff which is way above my current level, but trust me, it's interesting even if you aren't sure how to implement this stuff yet.</div>
+            </div>
+            <div class="guide-item">
+                <a href="https://rentry.org/Sukino-Guides" target="_blank" rel="noopener">Sukino's Guides and Tips →</a>
+                <div class="guide-note">Tons of useful stuff here; the Guides section links to a whole boatload of, well, guides.</div>
+            </div>
+            <div class="guide-item">
+                <a href="https://docs.google.com/spreadsheets/d/1Jfxf10C_s8n4dcWYQ-kW_X1lVZEkz_ORSuEs-F3-v1U/edit?gid=1099421859#gid=1099421859" target="_blank" rel="noopener">Tag Database →</a>
+                <div class="guide-note">A comprehensive list of useful tags.</div>
+            </div>
+        </section>
+
+        <section class="subpage-section">
+            <h2>Resources</h2>
+            <div class="guide-item">
+                <a href="https://rentry.org/ClaudeWorldbooks" target="_blank" rel="noopener">Quick Lorebooks →</a>
+                <div class="guide-note">Shows how to prompt Claude for creating lorebooks fast; I haven't used it for big general lorebooks, but I've used it for making character-specific lorebooks and with a little rewriting, it works pretty well.</div>
+            </div>
+            <div class="guide-item">
+                <a href="https://pixai.art" target="_blank" rel="noopener">PixAI →</a>
+                <div class="guide-note">Art generator.</div>
+            </div>
+            <div class="guide-item">
+                <a href="https://moescape.ai" target="_blank" rel="noopener">Moescape →</a>
+                <div class="guide-note">Another art generator, used to be Yodayo.</div>
+            </div>
+            <div class="guide-item">
+                <a href="https://perchance.org/ai-text-to-image-generator" target="_blank" rel="noopener">Perchance Image Gen →</a>
+                <div class="guide-note">Totally free. I like making simple backgrounds with this and persona avatars.</div>
+            </div>
+            <div class="guide-item">
+                <a href="https://perchance.org/ai-lorebook-converter" target="_blank" rel="noopener">Lorebook Converter →</a>
+                <div class="guide-note">Ever needed to convert a lorebook to plaintext? Well this does just that; my Extractor program does the same thing for lorebooks AND character cards btw.</div>
+            </div>
+            <div class="guide-item">
+                <a href="https://fyrean.itch.io/bgbye-background-remover" target="_blank" rel="noopener">BG Remover →</a>
+                <div class="guide-note">Does what it says on the tin.</div>
+            </div>
+            <div class="guide-item">
+                <a href="https://www.remove.bg" target="_blank" rel="noopener">Remove BG →</a>
+                <div class="guide-note">Another background remover. I've been using this to make character expression sprites.</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="subtle-footer"><p>&copy; 2026 Moki.</p></footer>
+    <script src="../../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hell, inc. ◊ corporate afterlife</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: 
+                linear-gradient(165deg, 
+                    rgba(20, 5, 35, 0.85) 0%, 
+                    rgba(45, 15, 25, 0.75) 30%, 
+                    rgba(15, 25, 45, 0.85) 70%, 
+                    rgba(5, 15, 35, 0.9) 100%),
+                repeating-linear-gradient(90deg, 
+                    transparent 0px, 
+                    rgba(255, 255, 255, 0.008) 1px, 
+                    transparent 2px),
+                repeating-linear-gradient(0deg, 
+                    transparent 0px, 
+                    rgba(255, 255, 255, 0.003) 1px, 
+                    transparent 2px),
+                url('images/background.png');
+            background-attachment: scroll, fixed, fixed, fixed;
+            background-size: cover, auto, auto, cover;
+            background-position: center, 0% 0%, 0% 0%, center;
+            background-repeat: no-repeat, repeat, repeat, no-repeat;
+            color: #e8e3f0;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Floating particles effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 100, 100, 0.03) 0%, transparent 25%),
+                radial-gradient(circle at 75% 75%, rgba(255, 200, 50, 0.02) 0%, transparent 25%),
+                radial-gradient(circle at 50% 10%, rgba(100, 150, 255, 0.02) 0%, transparent 25%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Main Layout */
+        .hellsite-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Header Banner */
+        .hellsite-banner {
+            width: 100%;
+            height: 100px;
+            background-image: url('images/banner.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Navigation Header */
+        .hellsite-nav-header {
+            background: 
+                linear-gradient(180deg, 
+                    rgba(25, 20, 40, 0.3) 0%, 
+                    rgba(25, 20, 40, 0.5) 30%, 
+                    rgba(25, 20, 40, 0.7) 100%),
+                url('images/menubg.png');
+            background-size: cover, cover;
+            background-position: center, center;
+            background-repeat: no-repeat, no-repeat;
+            backdrop-filter: blur(12px);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hellsite-nav-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 16px;
+            padding: 2px;
+            background: linear-gradient(135deg, 
+                rgba(255, 100, 100, 0.3) 0%, 
+                rgba(255, 200, 50, 0.2) 50%, 
+                rgba(100, 150, 255, 0.3) 100%);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            z-index: -1;
+        }
+
+        .hellsite-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 600;
+            letter-spacing: 0.2rem;
+            margin-bottom: 0.25rem;
+            background: linear-gradient(45deg, 
+                #ff6464 0%, 
+                #ffb347 30%, 
+                #4a9eff 70%, 
+                #ff6464 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: hellsite-gradient-shift 8s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255, 100, 100, 0.3);
+        }
+
+        .hellsite-subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.15rem;
+            color: #b8a8c8;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .hellsite-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .hellsite-nav-btn {
+            background: rgba(40, 30, 60, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #d8c8e8;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.05rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .hellsite-nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 100, 100, 0.1), 
+                transparent);
+            transition: left 0.5s ease;
+        }
+
+        .hellsite-nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .hellsite-nav-btn:hover {
+            background: rgba(60, 40, 80, 0.8);
+            border-color: rgba(255, 100, 100, 0.4);
+            color: #f0e8f8;
+            transform: translateY(-2px);
+        }
+
+        .hellsite-nav-btn.active {
+            background: rgba(255, 100, 100, 0.15);
+            border-color: rgba(255, 100, 100, 0.5);
+            color: #ff8080;
+        }
+
+        /* Page Sections */
+        .hellsite-page {
+            display: none;
+        }
+
+        .hellsite-page.active {
+            display: block;
+        }
+
+        /* Home/Memo Page */
+        .hellsite-memo {
+            background: rgba(255, 245, 225, 0.95);
+            color: #2a2a2a;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hellsite-memo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 60px;
+            width: 2px;
+            height: 100%;
+            background: rgba(255, 100, 100, 0.3);
+        }
+
+        .hellsite-memo-header {
+            background: rgba(255, 100, 100, 0.1);
+            padding: 1.5rem 2rem 1.5rem 80px;
+            border-bottom: 2px solid rgba(255, 100, 100, 0.2);
+        }
+
+        .hellsite-memo-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #d62d20;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hellsite-memo-from {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .hellsite-memo-content {
+            padding: 2rem 2rem 2rem 80px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: #3a3a3a;
+        }
+
+        .hellsite-memo-content p {
+            margin-bottom: 1.2rem;
+        }
+
+        .hellsite-memo-content .highlight {
+            background: rgba(255, 200, 50, 0.2);
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+        }
+
+        /* Personnel Files Section */
+        .hellsite-section {
+            background: rgba(20, 15, 35, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hellsite-section-header {
+            background: linear-gradient(135deg, 
+                rgba(255, 100, 100, 0.1) 0%, 
+                rgba(40, 30, 60, 0.3) 100%);
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hellsite-section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 500;
+            color: #ff8080;
+            letter-spacing: 0.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .hellsite-section-subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: #a090b0;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+        }
+
+        /* Character Files */
+        .hellsite-character-grid {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .hellsite-character-file {
+            background: rgba(30, 25, 45, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .hellsite-character-header {
+            background: rgba(40, 35, 55, 0.6);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .hellsite-character-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .hellsite-character-filename {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            color: #e8d8f8;
+            font-weight: 500;
+        }
+
+        .hellsite-character-extension {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: #a090b0;
+            margin-left: auto;
+        }
+
+        .hellsite-character-content {
+            display: flex;
+            gap: 2rem;
+            padding: 2rem 1.5rem;
+            align-items: flex-start;
+        }
+
+        .hellsite-character-image {
+            flex: 0 0 200px;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #ff8080;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hellsite-character-image.placeholder {
+            background: linear-gradient(135deg, 
+                rgba(255, 100, 100, 0.15) 0%, 
+                rgba(40, 30, 60, 0.4) 100%);
+        }
+
+        .hellsite-character-image.placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent 0px,
+                rgba(255, 255, 255, 0.02) 1px,
+                transparent 2px,
+                transparent 10px
+            );
+        }
+
+        .hellsite-character-image:not(.placeholder) {
+            font-size: 0;
+        }
+
+        .hellsite-character-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .hellsite-character-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #ffb380;
+            letter-spacing: 0.05rem;
+        }
+
+        .hellsite-character-role {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: #8090c0;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            background: rgba(80, 90, 120, 0.15);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            align-self: flex-start;
+        }
+
+        .hellsite-character-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #c8b8d8;
+            margin-bottom: 1rem;
+        }
+
+        /* Character Card Links */
+        .hellsite-character-links {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .hellsite-character-link {
+            background: rgba(50, 40, 70, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #d8c8e8;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.05rem;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hellsite-character-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 200, 50, 0.1), 
+                transparent);
+            transition: left 0.4s ease;
+        }
+
+        .hellsite-character-link:hover::before {
+            left: 100%;
+        }
+
+        .hellsite-character-link:hover {
+            background: rgba(70, 50, 90, 0.8);
+            border-color: rgba(255, 200, 50, 0.4);
+            color: #f0e8f8;
+            transform: translateY(-1px);
+        }
+
+        .hellsite-character-link.download {
+            border-color: rgba(100, 255, 100, 0.3);
+        }
+
+        .hellsite-character-link.download:hover {
+            border-color: rgba(100, 255, 100, 0.6);
+            background: rgba(100, 255, 100, 0.1);
+        }
+
+        .hellsite-character-link.coming-soon {
+            border-color: rgba(255, 255, 255, 0.08);
+            color: #807090;
+            cursor: default;
+            opacity: 0.6;
+        }
+
+        /* Database Terminal */
+        .hellsite-terminal {
+            background: rgba(10, 5, 20, 0.8);
+            border: 1px solid rgba(100, 255, 100, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .hellsite-terminal-header {
+            background: rgba(100, 255, 100, 0.1);
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(100, 255, 100, 0.2);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: #80ff80;
+        }
+
+        .hellsite-terminal-content {
+            padding: 1.5rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            color: #a0ffa0;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .hellsite-terminal-prompt {
+            color: #60d060;
+        }
+
+        .hellsite-terminal-output {
+            color: #c0c0c0;
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hellsite-terminal-output.classified {
+            color: #ff8080;
+        }
+
+        /* Terminal Separator */
+        .hellsite-terminal-separator {
+            color: #4a6a4a;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        /* Lorebook Access */
+        .hellsite-lorebook-access {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            border: 2px dashed rgba(100, 255, 100, 0.3);
+            border-radius: 8px;
+            background: rgba(100, 255, 100, 0.05);
+        }
+
+        .hellsite-lorebook-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(100, 255, 100, 0.1);
+            border: 1px solid rgba(100, 255, 100, 0.4);
+            border-radius: 6px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hellsite-lorebook-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(100, 255, 100, 0.15), 
+                transparent);
+            transition: left 0.5s ease;
+        }
+
+        .hellsite-lorebook-link:hover::before {
+            left: 100%;
+        }
+
+        .hellsite-lorebook-link:hover {
+            background: rgba(100, 255, 100, 0.15);
+            border-color: rgba(100, 255, 100, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(100, 255, 100, 0.2);
+        }
+
+        .hellsite-lorebook-icon {
+            flex: 0 0 auto;
+            width: 40px;
+            height: 40px;
+            background: rgba(100, 255, 100, 0.2);
+            border: 1px solid rgba(100, 255, 100, 0.5);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #80ff80;
+        }
+
+        .hellsite-lorebook-text {
+            flex: 1;
+        }
+
+        .hellsite-lorebook-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #a0ffa0;
+            letter-spacing: 0.05rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .hellsite-lorebook-subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: #70d070;
+            opacity: 0.8;
+        }
+
+        .hellsite-lorebook-status {
+            flex: 0 0 auto;
+            text-align: right;
+        }
+
+        .hellsite-lorebook-size {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: #a0ffa0;
+            margin-bottom: 0.25rem;
+        }
+
+        .hellsite-lorebook-access-level {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            color: #60d060;
+            background: rgba(100, 255, 100, 0.2);
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            border: 1px solid rgba(100, 255, 100, 0.4);
+        }
+
+        /* Homepage Link - Contract Signature Style */
+        .hellsite-footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+        }
+
+        .hellsite-homepage-link {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: 0.1rem;
+            color: #d8c8e8;
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+            padding: 0.5rem 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .hellsite-homepage-link:hover {
+            color: #f0e8f8;
+            border-color: rgba(255, 100, 100, 0.4);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .hellsite-homepage-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0.2rem;
+            left: 1.5rem;
+            right: 1.5rem;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 100, 100, 0.4) 20%, 
+                rgba(255, 100, 100, 0.6) 50%, 
+                rgba(255, 100, 100, 0.4) 80%, 
+                transparent 100%);
+            border-radius: 1px;
+        }
+
+        .hellsite-homepage-link::after {
+            content: '✦';
+            position: absolute;
+            right: 0.5rem;
+            bottom: -0.2rem;
+            font-size: 0.8rem;
+            color: rgba(255, 100, 100, 0.6);
+            animation: hellsite-signature-glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes hellsite-signature-glow {
+            0% { 
+                color: rgba(255, 100, 100, 0.4);
+                text-shadow: 0 0 2px rgba(255, 100, 100, 0.3);
+            }
+            100% { 
+                color: rgba(255, 100, 100, 0.8);
+                text-shadow: 0 0 8px rgba(255, 100, 100, 0.4);
+            }
+        }
+
+        /* Animations */
+        @keyframes hellsite-gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hellsite-wrapper {
+                padding: 1rem;
+            }
+            
+            .hellsite-title {
+                font-size: 2.5rem;
+            }
+            
+            .hellsite-character-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .hellsite-character-image {
+                flex: 0 0 150px;
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hellsite-wrapper">
+        <!-- Banner Image -->
+        <div class="hellsite-banner"></div>
+
+        <!-- Navigation Header -->
+        <header class="hellsite-nav-header">
+            <h1 class="hellsite-title">hell, inc.</h1>
+            <p class="hellsite-subtitle">◊ corporate afterlife division ◊</p>
+            <nav class="hellsite-nav">
+                <button class="hellsite-nav-btn active" data-page="home">
+                    <i class="fas fa-home"></i> headquarters
+                </button>
+                <button class="hellsite-nav-btn" data-page="personnel">
+                    <i class="fas fa-folder"></i> personnel files
+                </button>
+                <button class="hellsite-nav-btn" data-page="database">
+                    <i class="fas fa-database"></i> system database
+                </button>
+                <button class="hellsite-nav-btn" data-page="locations">
+                    <i class="fas fa-map"></i> territories
+                </button>
+            </nav>
+        </header>
+
+        <!-- Home/Memo Page -->
+        <div id="home" class="hellsite-page active">
+            <div class="hellsite-memo">
+                <div class="hellsite-memo-header">
+                    <div class="hellsite-memo-title">internal memo: project documentation</div>
+                    <div class="hellsite-memo-from">FROM: universe.documentation@hell-inc.void</div>
+                </div>
+                <div class="hellsite-memo-content">
+                    <p>
+                        <strong>SUBJECT:</strong> Hell, Inc. Universe Documentation & Personnel Database
+                    </p>
+                    <p>
+                        This central repository serves as documentation for the Hell, Inc. universe - a personal worldbuilding project exploring what happens when the afterlife operates like a modern corporation, complete with <span class="highlight">bureaucratic inefficiency</span>, office politics, and departmental rivalries that span millennia.
+                    </p>
+                    <p>
+                        The setting combines urban fantasy elements with corporate satire, following characters who navigate the absurdity of celestial bureaucracy while dealing with very real supernatural consequences. Current operational focus includes exploring the tension between individual agency and institutional expectations, the possibility of redemption in systems designed to categorize people as "good" or "evil," and what happens when a reformed demon has to work customer service for eternity.
+                    </p>
+                    <p>
+                        <strong>WARNING:</strong> Expect morally complex characters, redemption arcs, found family dynamics, enemies-to-lovers tension, and probably too many jokes about filing paperwork in triplicate. Side effects may include existential questions about the nature of good and evil, an inexplicable urge to organize your own afterlife bureaucracy, and sudden sympathy for supernatural middle management.
+                    </p>
+                    <p>
+                        <strong>CURRENT STATUS:</strong> Active development. New personnel files and territorial documentation added regularly.
+                    </p>
+                    <p>
+                        Use the navigation above to access specific departments and documentation.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personnel Files Page -->
+        <div id="personnel" class="hellsite-page">
+            <div class="hellsite-section">
+                <div class="hellsite-section-header">
+                    <h2 class="hellsite-section-title">personnel files</h2>
+                    <p class="hellsite-section-subtitle">active agents & entities - main cast</p>
+                </div>
+                
+                <div class="hellsite-character-grid">
+                    <div class="hellsite-character-file">
+                        <div class="hellsite-character-header">
+                            <div class="hellsite-character-icon">👼</div>
+                            <div class="hellsite-character-filename">kazimir_dmitri</div>
+                            <div class="hellsite-character-extension">.guardian</div>
+                        </div>
+                        <div class="hellsite-character-content">
+                            <div class="hellsite-character-image" style="background-image: url('../../../downloads/characters/hell-inc/kazimir.png');">
+                            </div>
+                            <div class="hellsite-character-info">
+                                <h3 class="hellsite-character-name">kazimir</h3>
+                                <div class="hellsite-character-role">guardian angel / reformed</div>
+                                <p class="hellsite-character-desc">
+                                    Former Russian revolutionary (deceased 1890s) who served nearly a century in Hell's infantry before his unprecedented defection to Heaven. Currently assigned to guardian duties despite his... unconventional background. Known issues: anger management, nicotine addiction, general disregard for celestial protocol. Status: probationary but effective.
+                                </p>
+                                <div class="hellsite-character-links">
+                                    <a href="../../../downloads/characters/hell-inc/kazimir.png" download class="hellsite-character-link download">
+                                        <i class="fas fa-download"></i> download card
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hellsite-character-file">
+                        <div class="hellsite-character-header">
+                            <div class="hellsite-character-icon">🔥</div>
+                            <div class="hellsite-character-filename">pyralis_nova</div>
+                            <div class="hellsite-character-extension">.guardian</div>
+                        </div>
+                        <div class="hellsite-character-content">
+                            <div class="hellsite-character-image placeholder">
+                            </div>
+                            <div class="hellsite-character-info">
+                                <h3 class="hellsite-character-name">pyralis</h3>
+                                <div class="hellsite-character-role">guardian angel / junior</div>
+                                <p class="hellsite-character-desc">
+                                    Rookie guardian angel representing the new generation of celestial personnel. Petite redhead with an optimistic outlook that has yet to be crushed by bureaucratic reality. Demonstrates unwavering faith in The Guidelines despite constant demonic harassment. Frequently clashes with senior staff over "proper procedure."
+                                </p>
+                                <div class="hellsite-character-links">
+                                    <span class="hellsite-character-link coming-soon">
+                                        <i class="fas fa-clock"></i> card coming soon
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hellsite-character-file">
+                        <div class="hellsite-character-header">
+                            <div class="hellsite-character-icon">👑</div>
+                            <div class="hellsite-character-filename">vassago_executive</div>
+                            <div class="hellsite-character-extension">.fallen</div>
+                        </div>
+                        <div class="hellsite-character-content">
+                            <div class="hellsite-character-image" style="background-image: url('../../../downloads/characters/hell-inc/vassago.png');">
+                            </div>
+                            <div class="hellsite-character-info">
+                                <h3 class="hellsite-character-name">vassago</h3>
+                                <div class="hellsite-character-role">fallen angel / advisor</div>
+                                <p class="hellsite-character-desc">
+                                    Senior executive in Hell's corporate structure, specializing in soul acquisition and corruption consulting. Aristocratic bearing masks calculating intelligence and centuries of experience in manipulation. Maintains several Earth-based subsidiary companies. Commands substantial imp workforce and one loyal hellhound.
+                                </p>
+                                <div class="hellsite-character-links">
+                                    <a href="../../../downloads/characters/hell-inc/vassago.png" download class="hellsite-character-link download">
+                                        <i class="fas fa-download"></i> download card
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hellsite-character-file">
+                        <div class="hellsite-character-header">
+                            <div class="hellsite-character-icon">🐕</div>
+                            <div class="hellsite-character-filename">jinx_01</div>
+                            <div class="hellsite-character-extension">.hellhound</div>
+                        </div>
+                        <div class="hellsite-character-content">
+                            <div class="hellsite-character-image" style="background-image: url('../../../downloads/characters/hell-inc/jinx.png');">
+                            </div>
+                            <div class="hellsite-character-info">
+                                <h3 class="hellsite-character-name">jinx</h3>
+                                <div class="hellsite-character-role">hellhound / shapeshifter</div>
+                                <p class="hellsite-character-desc">
+                                    Juvenile hellhound (approx. 50 years) with dual-form capability: massive canine beast and human-adjacent appearance. Abandoned by biological parents, raised and trained by Vassago. Demonstrates absolute loyalty to handler alongside typical hellhound mischief tendencies. Warning: do not feed chocolate.
+                                </p>
+                                <div class="hellsite-character-links">
+                                    <a href="../../../downloads/characters/hell-inc/jinx.png" download class="hellsite-character-link download">
+                                        <i class="fas fa-download"></i> download card
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Database Page -->
+        <div id="database" class="hellsite-page">
+            <div class="hellsite-section">
+                <div class="hellsite-section-header">
+                    <h2 class="hellsite-section-title">system database</h2>
+                    <p class="hellsite-section-subtitle">operational parameters & protocols</p>
+                </div>
+                
+                <div class="hellsite-terminal">
+                    <div class="hellsite-terminal-header">
+                        HELL_INC:// database_query --verbose --all --access_level=admin
+                    </div>
+                    <div class="hellsite-terminal-content">
+                        <div class="hellsite-terminal-prompt">$ access --file="comprehensive_lorebook.db" --export</div>
+                        <div class="hellsite-terminal-output">
+                            > Accessing comprehensive world documentation...
+                        </div>
+                        <div class="hellsite-terminal-output">
+                            > File size: 847.3 KB | Last modified: [ONGOING]
+                        </div>
+                        <div class="hellsite-terminal-output">
+                            > Contains: Detailed character profiles, historical records, 
+                              organizational charts, geographical surveys, supernatural 
+                              classifications, bureaucratic procedures, incident reports
+                        </div>
+                        
+                        <div class="hellsite-lorebook-access">
+                            <a href="../../../downloads/characters/hell-inc/setting-hell-inc.json" download class="hellsite-lorebook-link">
+                                <div class="hellsite-lorebook-icon">
+                                    <i class="fas fa-download"></i>
+                                </div>
+                                <div class="hellsite-lorebook-text">
+                                    <div class="hellsite-lorebook-title">EXPORT COMPLETE LOREBOOK</div>
+                                    <div class="hellsite-lorebook-subtitle">comprehensive_documentation.db</div>
+                                </div>
+                                <div class="hellsite-lorebook-status">
+                                    <div class="hellsite-lorebook-size">847.3 KB</div>
+                                    <div class="hellsite-lorebook-access-level">[AUTHORIZED]</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="hellsite-terminal-separator">
+                            ═══════════════════════════════════════════════════════════
+                        </div>
+
+                        <div class="hellsite-terminal-prompt">$ search --category="contracts" --type="legal"</div>
+                        <div class="hellsite-terminal-output">
+                            > Binding supernatural agreements requiring blood signature. Terms must be fulfilled exactly, though interpretation may vary significantly. Demon legal department specializes in creative loophole exploitation. Standard contract duration: soul's natural lifespan + eternity clause.
+                        </div>
+
+                        <div class="hellsite-terminal-prompt">$ search --category="guidelines" --authority="celestial"</div>
+                        <div class="hellsite-terminal-output">
+                            > Mandatory regulations for all guardian angel personnel. Key restrictions: no interference with mortal free will, no romantic entanglements with assignments, mandatory progress reports every 72 hours, strict adherence to miracle quotas. Violation penalties range from probation to expulsion.
+                        </div>
+
+                        <div class="hellsite-terminal-prompt">$ search --category="species" --classification="hybrid"</div>
+                        <div class="hellsite-terminal-output classified">
+                            > [CLASSIFIED - LEVEL 7] Nephilim: Angel-human hybrid offspring. Colloquially "starsparks." Existence violates Article 7 of Celestial-Mortal Non-Interference Act. Abilities manifest under extreme stress. Discovery protocols: immediate containment. Authorized personnel only.
+                        </div>
+
+                        <div class="hellsite-terminal-prompt">$ search --category="species" --type="demonic"</div>
+                        <div class="hellsite-terminal-output">
+                            > Multiple classifications: Corrupted mortal souls (post-damnation), native Hell spawn (various subspecies), fallen angel command structure. Hellhounds: demonic canines, shapeshifting capability, extreme loyalty to handlers. Imps: minor demons, clerical work, gossip distribution network.
+                        </div>
+
+                        <div class="hellsite-terminal-prompt">$ search --category="species" --type="celestial"</div>
+                        <div class="hellsite-terminal-output">
+                            > Two primary classifications: Upper-level angels (formed from divine light, archangel tier), Guardian angels (recruited post-mortem humans, middle management tier). All angels bound by Guidelines system. Fallen angels retain powers but operate under infernal jurisdiction.
+                        </div>
+
+                        <div class="hellsite-terminal-prompt">$ search --category="organizations" --realm="heaven"</div>
+                        <div class="hellsite-terminal-output">
+                            > Heaven Inc. operates as celestial bureaucracy. Key departments: Guardian Academy (training), Miracle Department (divine intervention processing), Divine Assembly (legislative body), Celestial Spire (executive headquarters). Known for: excessive paperwork, committee meetings, office politics spanning millennia.
+                        </div>
+
+                        <div class="hellsite-terminal-prompt">$ search --category="organizations" --realm="hell"</div>
+                        <div class="hellsite-terminal-output">
+                            > Hell Inc. corporate structure with fallen angel executives, demon employees, subsidiary Earth operations. Headquarters: Pandemonium metroplex. Specializes in: soul acquisition, corruption consulting, legal loophole exploitation, competitive corporate espionage against Heaven.
+                        </div>
+
+                        <div class="hellsite-terminal-prompt">$ search --category="personnel" --rank="archangel"</div>
+                        <div class="hellsite-terminal-output">
+                            > MICHAEL: Supreme commander, warrior background, authority issues with subordinates. GABRIEL: Communications director, reality TV enthusiast, micromanagement tendencies. URIEL: IT administrator/"Sphere Guardian", system security specialist. RAPHAEL: Miracle consultant, fee-for-service operations (technically legal).
+                        </div>
+
+                        <div class="hellsite-terminal-prompt">$ search --category="personnel" --classification="fallen_angel"</div>
+                        <div class="hellsite-terminal-output">
+                            > LUCIFER: Original fallen angel, CEO status, distinctive red hair, rock star aesthetic. VASSAGO: Senior advisor, soul corruption specialist, commands imp workforce. DAGON: Corporate operations, boardroom specialist. AZAZEL: Human relations (hostile), specializes in relationship destruction.
+                        </div>
+
+                        <div class="hellsite-terminal-prompt">$ search --category="protocols" --type="romance"</div>
+                        <div class="hellsite-terminal-output classified">
+                            > [RESTRICTED] Angels strictly forbidden from romantic/sexual relationships with mortals. Discovery results in severe punishment up to and including expulsion. This restriction exists to prevent: mission compromise, power imbalances, potential nephilim creation. Enforcement: immediate and unforgiving.
+                        </div>
+
+                        <div class="hellsite-terminal-prompt">$ logout</div>
+                        <div class="hellsite-terminal-output">
+                            > Session terminated. Have a blessed day.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Locations/Territories Page -->
+        <div id="locations" class="hellsite-page">
+            <div class="hellsite-section">
+                <div class="hellsite-section-header">
+                    <h2 class="hellsite-section-title">territorial survey</h2>
+                    <p class="hellsite-section-subtitle">realm documentation & travel advisories</p>
+                </div>
+                
+                <div class="hellsite-character-grid">
+                    <div class="hellsite-character-file">
+                        <div class="hellsite-character-header">
+                            <div class="hellsite-character-icon">🏢</div>
+                            <div class="hellsite-character-filename">pandemonium_metroplex</div>
+                            <div class="hellsite-character-extension">.realm</div>
+                        </div>
+                        <div class="hellsite-character-content">
+                            <div class="hellsite-character-image" style="background-image: url('images/pandemonium.png');">
+                            </div>
+                            <div class="hellsite-character-info">
+                                <h3 class="hellsite-character-name">pandemonium</h3>
+                                <div class="hellsite-character-role">hell's capital / corporate hub</div>
+                                <p class="hellsite-character-desc">
+                                    Hell's sprawling metropolitan center and primary corporate headquarters. Features towering high-rise buildings that reflect the perpetual scarlet sky, extensive underground transit systems, and enough office space to house millennia of bureaucratic operations. Home to Hell's major government facilities and the infamous legal district.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hellsite-character-file">
+                        <div class="hellsite-character-header">
+                            <div class="hellsite-character-icon">⛪</div>
+                            <div class="hellsite-character-filename">celestial_spire</div>
+                            <div class="hellsite-character-extension">.realm</div>
+                        </div>
+                        <div class="hellsite-character-content">
+                            <div class="hellsite-character-image" style="background-image: url('images/spire.png');">
+                            </div>
+                            <div class="hellsite-character-info">
+                                <h3 class="hellsite-character-name">celestial spire</h3>
+                                <div class="hellsite-character-role">heaven hq / divine tower</div>
+                                <p class="hellsite-character-desc">
+                                    Heaven's primary administrative complex - a magnificent crystalline tower stretching infinitely upward through clouds of golden light. Houses archangel executive suites, the Divine Assembly chamber, and endless floors of cubicles where angelic bureaucrats process prayers, miracle requests, and soul evaluations with heavenly efficiency.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hellsite-character-file">
+                        <div class="hellsite-character-header">
+                            <div class="hellsite-character-icon">🌊</div>
+                            <div class="hellsite-character-filename">limbo_city</div>
+                            <div class="hellsite-character-extension">.realm</div>
+                        </div>
+                        <div class="hellsite-character-content">
+                            <div class="hellsite-character-image" style="background-image: url('images/limbo.png');">
+                            </div>
+                            <div class="hellsite-character-info">
+                                <h3 class="hellsite-character-name">limbo city</h3>
+                                <div class="hellsite-character-role">border settlement / neutral zone</div>
+                                <p class="hellsite-character-desc">
+                                    Lawless frontier town located just beyond the River Styx, serving as Hell's unofficial border crossing. Features a thriving black market, criminal underworld, and surprisingly good coffee shops. Smugglers frequently transport Earth goods through here, making it a vital hub for both legitimate business and shadier enterprises.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hellsite-character-file">
+                        <div class="hellsite-character-header">
+                            <div class="hellsite-character-icon">🌍</div>
+                            <div class="hellsite-character-filename">earth_material_plane</div>
+                            <div class="hellsite-character-extension">.realm</div>
+                        </div>
+                        <div class="hellsite-character-content">
+                            <div class="hellsite-character-image" style="background-image: url('images/earth.png');">
+                            </div>
+                            <div class="hellsite-character-info">
+                                <h3 class="hellsite-character-name">earth</h3>
+                                <div class="hellsite-character-role">contested territory / battleground</div>
+                                <p class="hellsite-character-desc">
+                                    The primary battleground where Heaven and Hell wage their eternal influence war over mortal souls. Humans remain largely unaware of the supernatural conflict surrounding them. Both sides maintain corporate presences - fallen angels running legitimate businesses while angels work through charitable organizations.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer with Homepage Link -->
+        <footer class="hellsite-footer">
+            <a href="../../characters.html" class="hellsite-homepage-link">
+                return home
+            </a>
+        </footer>
+    </div>
+
+    <script>
+        // Navigation system
+        const navButtons = document.querySelectorAll('.hellsite-nav-btn');
+        const pages = document.querySelectorAll('.hellsite-page');
+
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetPage = button.getAttribute('data-page');
+                
+                // Update active nav button
+                navButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                // Show target page
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+                document.getElementById(targetPage).classList.add('active');
+            });
+        });
+
+        // Character file hover effects - REMOVED to reduce visual clutter
+        // The character card links still have their hover animations
+
+        // Terminal typing effect for database entries
+        function typewriterEffect() {
+            const outputs = document.querySelectorAll('#database .hellsite-terminal-output');
+            outputs.forEach((output, index) => {
+                if (document.getElementById('database').classList.contains('active')) {
+                    output.style.opacity = '0';
+                    setTimeout(() => {
+                        output.style.transition = 'opacity 0.5s ease';
+                        output.style.opacity = '1';
+                    }, (index + 1) * 150);
+                }
+            });
+        }
+
+        // Trigger typewriter effect when database is opened
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (button.getAttribute('data-page') === 'database') {
+                    setTimeout(typewriterEffect, 100);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

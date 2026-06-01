@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roleplay Tips | Moki</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .subpage {
+            flex: 1;
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 120px 2rem 5rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.5;
+            margin-bottom: 2.5rem;
+            transition: opacity 0.2s ease, color 0.2s ease;
+        }
+
+        .back-link:hover {
+            opacity: 1;
+            color: var(--accent);
+        }
+
+        .subpage h1 {
+            font-size: 3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .subpage-intro {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-style: italic;
+            opacity: 0.6;
+        }
+
+        .subpage-section {
+            margin-bottom: 3rem;
+        }
+
+        .subpage-section h2 {
+            margin-bottom: 1.2rem;
+        }
+
+        .subpage-section h3 {
+            font-family: var(--font-h2);
+            font-size: 0.8rem;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .subpage-section p {
+            margin-bottom: 1rem;
+        }
+
+        .code-block {
+            font-family: var(--font-h2);
+            font-size: 0.8rem;
+            color: var(--accent);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.8rem 1.2rem;
+            margin: 0.8rem 0;
+            white-space: pre-wrap;
+        }
+
+        .tip-box {
+            border-left: 2px solid var(--accent);
+            padding: 0.8rem 1.2rem;
+            margin: 1rem 0;
+            opacity: 0.7;
+        }
+
+        .tip-box .tip-label {
+            font-family: var(--font-h2);
+            font-size: 0.65rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.4rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="loader"><div class="loader-line"></div></div>
+
+    <nav id="navbar">
+        <a href="../../index.html" class="nav-brand">MOKI.</a>
+        <div class="nav-links">
+            <a href="../about.html">About Me</a>
+            <a href="../presets.html">Presets</a>
+            <a href="../characters.html">Characters</a>
+            <a href="../utilities.html">Utilities</a>
+            <a href="../aesthetics.html">Aesthetics</a>
+        </div>
+    </nav>
+
+    <main class="subpage">
+        <a href="../about.html" class="back-link">← Back to About</a>
+        <h1>Roleplay Tips</h1>
+        <p class="subpage-intro">Primarily revolving around SillyTavern. I'm by no means an expert, just a humble roleplay enjoyer slowly learning how to use the awesome tools out there. This is just some useful info I've picked up through a lot of trial and error, and I hope it might help someone else, too!</p>
+
+        <section class="subpage-section">
+            <h2>Long Roleplay Tips</h2>
+
+            <h3>Memory</h3>
+            <p>Once events have progressed in a roleplay past the model context, of course that older stuff is no longer accessible. So I like to put a brief summary of the most important events in the Author's Note. That way, it's really only necessary that the model see the AN plus the past few messages or so to keep things generally on course.</p>
+            <p>If you forget to summarize for a long time, long enough for stuff to fall out of context, you can always use one of the corpo models like ChatGPT or Claude to summarize everything (if you don't have any NSFW stuff in there).</p>
+            <p>If you want to watch your token usage, make sure to read through any summaries and condense them even further if you can, or add any important stuff that may have been missed. AI isn't great at knowing exactly what's important to human sensibilities, especially when it comes to relationship subtleties!</p>
+
+            <h3>Staying in Character</h3>
+            <p>But it seems to me that, no matter how good a character card is (and admittedly there are some pretty...meh ones out there), after around 50 messages or so every model I've used starts to slowly revert to stereotypes or character tropes rather than what's written in the card...and if the character has a non-Standard English dialogue style, that starts slipping, too. (I like longish messages, around 250-500 tokens for me and the AI each, so that's quite a lot of context by then.)</p>
+            <p>The way I get around this is by keeping a running summary of events, and when I start noticing the model getting sloppy, I ask it to write a new starting scenario from the current point in the story. Then I made a new Alternate Starter with that message (and my own edits/rewrites), plop the summary from Author's Note in the new chat, and go from there. I've managed to have some very long, very involved stories using this method.</p>
+            <p>Another thing: group chats are SO fun, but if the overall story focuses on one main character you're RPing with, you don't really need all that extra stuff taking up context. I like to branch off chats for group RP, then summarize what happened and return to a single character chat.</p>
+
+            <h3>Writing</h3>
+            <p>RPing with an LLM is a fun, relaxing hobby, but I think it's still important to keep up your end of the writing, too. I've read about people experiencing the AI's writing degrading over time into text speak, emojis, improper grammar, and misspellings. I don't know if it's true for all models, but I know Character.AI's chat would imitate the user's writing style over time. Your writing doesn't have to be perfect (mine definitely isn't) but I can only assume low effort responses from human = low effort responses from AI. Good example messages and a good starter in the style you want can help mitigate this problem.</p>
+            <p>Also, if your bot does something that annoys you, edit it out because it'll probably repeat it at some point. Any message you respond to is assumed by the AI to be acceptable! If you start seeing repetition, go back and edit some of it out or the problem will get exponentially worse over the course of the chat.</p>
+        </section>
+
+        <section class="subpage-section">
+            <h2>Author's Notes</h2>
+            <p>Aside from a recap of events, I like to include relationship notes if it's not in the character card already, and brief instructions for the LLM on writing style and genre. The latter helps achieve the feel I'm going for fairly effectively. I keep my AN at Depth 4, so it has a pretty significant impact on things.</p>
+
+            <h3>Example Author's Note</h3>
+            <p>This is just how I like to format it because I feel models keep the events in order better this way, but that could just be my own bias and not based in fact — YMMV.</p>
+            <div class="code-block"># Relationship Notes
+{{char}} and {{user}} have an xyz relationship. Etc etc.
+
+# Events so far
+*Brief title for event*
+Event text.
+*Another title*
+More event text.
+
+[Writing style: x
+Genre: x, x]</div>
+
+            <div class="tip-box">
+                <div class="tip-label">Genre Examples</div>
+                <p>Mix and match: sci-fi, fantasy (or fantasy/sci-fi), political intrigue, explicit erotica (during NSFW scenes), drama, tragedy, slice-of-life, friends to lovers, enemies to lovers, married life, adventure, action, college life, royalty, family drama, found family</p>
+            </div>
+            <div class="tip-box">
+                <div class="tip-label">Writing Style Examples</div>
+                <p>Mix and match: beige prose, casual, evocative imagery, conversational, stilted and formal, scientific, friendly, humorous, tongue-in-cheek, satirical, gritty and realistic, dark, light novel, AO3 fanfic style, danmei, 18+ rated</p>
+            </div>
+        </section>
+
+        <section class="subpage-section">
+            <h2>SillyTavern Lorebook Settings</h2>
+            <p>I'll be honest, I'm not especially stupid, but it took me an embarrassingly long time to understand how lorebooks work, and every time I get that "ooooh, so <em>that's</em> it" moment with them, I find a newer, better way to make them. But I digress; this isn't about making them, it's about using them!</p>
+            <p>Lorebooks in SillyTavern can be global (attached to all chats) or character specific (attached to a single character). So you can have a global lorebook with World Info in it, which all of your characters will have access to, and a character lorebook with character lore in it, that only THAT specific character can see. Ideally, entries are as short as possible so that all relevant entries can fit in the context you assign, without taking up too much space in your total prompt.</p>
+            <p>My global settings are:</p>
+            <div class="code-block">Scan Depth = 2
+Context = 100%
+Budget Cap = 1024
+Recursive Scan = Off
+Match Whole Words = On
+Include Names = On</div>
+            <p>I only use recursive scan if the creator of a card says to, and I'm still learning exactly how to leverage that best for my own characters. Recursive Scan just means that ST will read the contents of a lorebook entry and, if any of the words match another lorebook entry, it will pull that one up too. 1024 is the budget cap I use for lore-heavy stories/worlds (and for my private worlds, which are very in depth, I use 3000+), for more simple cards 512 is sufficient. Context at 100% lets the Budget Cap work, to the best of my knowledge. Scan Depth is how far back ST will look for keywords in your chat. 2 means it will look back 4 messages (it looks in pairs!).</p>
+            <p>If you're adequately familiar with the trigger words for the entries in your lorebook, you can intentionally trigger them when you need them, which is super useful.</p>
+        </section>
+
+        <section class="subpage-section">
+            <h2>SillyTavern Quick Replies</h2>
+
+            <h3>Auto Background</h3>
+            <p>If you name your backgrounds something descriptive (example: home kitchen interior), then there's a command in SillyTavern that will automatically choose from among your backgrounds based on the current chat context. I slapped this in a quick reply so I can use it whenever a scene changes.</p>
+            <div class="code-block">/autobg</div>
+
+            <h3>Model Switch</h3>
+            <p>Recent versions of SillyTavern make this really easy! Just set up everything how you want it (Instruct, Context, System Prompt, Tokenizer, Model), save it as a profile, and then make quick replies like:</p>
+            <div class="code-block">/profile yourprofilename</div>
+            <p>BAM, done. Make sure you've got it set so you can see your Quick Reply buttons above your user input box in the chat. Now when you press one of those buttons, the process of switching between models and all their associated settings is automated, yay!</p>
+
+            <h3>Quick Reply Organization</h3>
+            <p>You can make use of the QR context menu feature for things like Model changing; click on the vertical ... next to a QR labeled "Models" or whatever, and then, under Context Menu, link it to a separate QR set with all your model switch QRs. Now your Models QR button will have a little ... on it, and when you click that, it will bring up a context menu showing your model options.</p>
+            <p>I have a MENU set that has a set of quick replies that act as links. For example, I have a Tools QR button with this in it:</p>
+            <div class="code-block">/qr-set-on Tools |
+/qr-set-off MENU |</div>
+            <p>When I click it, it switches to my Tools QR set. Then in that set, I have a Back QR button, like so:</p>
+            <div class="code-block">/qr-set-on MENU |
+/qr-set-off Tools |</div>
+            <p>Which takes me back to my main "menu". Very convenient :P</p>
+        </section>
+
+        <section class="subpage-section">
+            <h2>SillyTavern Character Expressions</h2>
+            <p>It took me a while to get into this, but now...wow, I love this feature. There are premade sprite packs out there, but if you're like me and you play with your OCs, here's a fairly simple method to get this set up. (Keeping in mind it's not perfect, and your sprites may be "cut off" at the top or sides depending on what images you choose for this, if you follow this simple guide...as long as that doesn't bother you, onward!)</p>
+
+            <h3>Setup</h3>
+            <p>You need to go into your SillyTavern folder. From the root, go to data &gt; yourusername &gt; characters. Make a folder in there named for the character you're working with (example: Marie).</p>
+            <p>Make sure you have the Character Expressions extension activated/installed in SillyTavern. Set it up how you want it (I have it using the neutral expression by default, allow multiple sprites, using my Main API).</p>
+
+            <h3>Gen Images</h3>
+            <p>Use your image generator of choice to generate some expression images for your character. My trick is to describe the character, with specific details like "wearing a red hoodie" so that most of the gens have at least a red top, and the hair/eye/skin color, general <em>look</em> I'm going for, lol. Make sure to include "white background" in the prompt. For this, I use PixAI, the 3x5 size.</p>
+            <p>After you've got the images you want, use a background remover to remove the white backgrounds. Save the files with the expression names (eg, anger, sadness, joy, etc).</p>
+            <p>Move your images to the folder you created in the Setup step.</p>
+            <p>And that's it! A very basic character expressions setup. Now you get that visual novel experience, ugh, it's so good.</p>
+        </section>
+    </main>
+
+    <footer class="subtle-footer"><p>&copy; 2026 Moki.</p></footer>
+    <script src="../../js/main.js"></script>
+</body>
+</html>

@@ -380,6 +380,26 @@
             overflow: hidden;
         }
 
+        .hellsite-character-imagecol {
+            flex: 0 0 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .hellsite-character-imagecol .hellsite-character-image {
+            flex: 0 0 250px;
+            width: 100%;
+        }
+
+        .hellsite-character-imagecol .hellsite-character-link {
+            justify-content: center;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
         .hellsite-character-image.placeholder {
             background: linear-gradient(135deg, 
                 rgba(255, 100, 100, 0.15) 0%, 
@@ -438,7 +458,7 @@
             font-size: 0.9rem;
             line-height: 1.6;
             color: #c8b8d8;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
 
         /* Character Card Links */
@@ -497,6 +517,84 @@
         .hellsite-character-link.download:hover {
             border-color: rgba(100, 255, 100, 0.6);
             background: rgba(100, 255, 100, 0.1);
+        }
+
+        .hellsite-character-link.theme {
+            border-color: rgba(255, 180, 80, 0.35);
+        }
+
+        .hellsite-character-link.theme::before {
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(255, 180, 80, 0.12),
+                transparent);
+        }
+
+        .hellsite-character-link.theme:hover {
+            border-color: rgba(255, 180, 80, 0.6);
+            background: rgba(255, 180, 80, 0.1);
+            color: #ffd9a0;
+        }
+
+        /* Sprite info tooltip */
+        .hellsite-sprite-info {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            margin-left: -0.25rem;
+            color: #a090b0;
+            cursor: help;
+            font-size: 0.75rem;
+        }
+
+        .hellsite-sprite-info:hover {
+            color: #80ff80;
+        }
+
+        .hellsite-sprite-info .hellsite-tooltip {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 240px;
+            background: rgba(10, 5, 20, 0.97);
+            border: 1px solid rgba(100, 255, 100, 0.4);
+            border-radius: 6px;
+            padding: 0.75rem 0.85rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.68rem;
+            line-height: 1.5;
+            color: #c0c0c0;
+            text-transform: none;
+            letter-spacing: 0;
+            z-index: 10;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+        }
+
+        .hellsite-sprite-info .hellsite-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: rgba(100, 255, 100, 0.4);
+        }
+
+        .hellsite-sprite-info .hellsite-tooltip code {
+            color: #80ff80;
+            background: rgba(100, 255, 100, 0.08);
+            padding: 0.05rem 0.25rem;
+            border-radius: 3px;
+        }
+
+        .hellsite-sprite-info:hover .hellsite-tooltip {
+            visibility: visible;
+            opacity: 1;
         }
 
         .hellsite-character-link.coming-soon {
@@ -734,6 +832,59 @@
             50% { background-position: 100% 50%; }
         }
 
+        /* Backgrounds Grid */
+        .hellsite-bg-grid {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .hellsite-bg-card {
+            display: block;
+            text-decoration: none;
+            background: rgba(30, 25, 45, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .hellsite-bg-card:hover {
+            border-color: rgba(255, 100, 100, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        .hellsite-bg-thumb {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .hellsite-bg-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .hellsite-bg-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffb380;
+            letter-spacing: 0.03rem;
+        }
+
+        .hellsite-bg-dl {
+            font-size: 0.8rem;
+            color: #80ff80;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .hellsite-wrapper {
@@ -828,7 +979,12 @@
                             <div class="hellsite-character-extension">.guardian</div>
                         </div>
                         <div class="hellsite-character-content">
-                            <div class="hellsite-character-image" style="background-image: url('../../../downloads/characters/hell-inc/kazimir.png');">
+                            <div class="hellsite-character-imagecol">
+                                <div class="hellsite-character-image" style="background-image: url('../../../downloads/characters/hell-inc/kazimir.png');">
+                                </div>
+                                <a href="../../../downloads/characters/hell-inc/kazimir.png" download class="hellsite-character-link download">
+                                    <i class="fas fa-download"></i> download card
+                                </a>
                             </div>
                             <div class="hellsite-character-info">
                                 <h3 class="hellsite-character-name">kazimir</h3>
@@ -837,8 +993,15 @@
                                     Former Russian revolutionary (deceased 1890s) who served nearly a century in Hell's infantry before his unprecedented defection to Heaven. Currently assigned to guardian duties despite his... unconventional background. Known issues: anger management, nicotine addiction, general disregard for celestial protocol. Status: probationary but effective.
                                 </p>
                                 <div class="hellsite-character-links">
-                                    <a href="../../../downloads/characters/hell-inc/kazimir.png" download class="hellsite-character-link download">
-                                        <i class="fas fa-download"></i> download card
+                                    <a href="https://mega.nz/file/bXYDURJA#J-uAsBNt37tL7d_27Em3hm5Jp_itmPd8gc037r9CpPg" target="_blank" rel="noopener" class="hellsite-character-link download">
+                                        <i class="fas fa-images"></i> download sprites
+                                    </a>
+                                    <span class="hellsite-sprite-info">
+                                        <i class="fas fa-circle-info"></i>
+                                        <span class="hellsite-tooltip">Place sprites in <code>characters/{{char}}/sprites/</code>. A regex script styles them into the expression frame in chat.</span>
+                                    </span>
+                                    <a href="https://on.soundcloud.com/EAzv5WNxeTpmgLuWbW" target="_blank" rel="noopener" class="hellsite-character-link theme">
+                                        <i class="fas fa-music"></i> theme: no saint, no devil
                                     </a>
                                 </div>
                             </div>
@@ -852,7 +1015,12 @@
                             <div class="hellsite-character-extension">.guardian</div>
                         </div>
                         <div class="hellsite-character-content">
-                            <div class="hellsite-character-image placeholder">
+                            <div class="hellsite-character-imagecol">
+                                <div class="hellsite-character-image placeholder">
+                                </div>
+                                <span class="hellsite-character-link coming-soon">
+                                    <i class="fas fa-clock"></i> card coming soon
+                                </span>
                             </div>
                             <div class="hellsite-character-info">
                                 <h3 class="hellsite-character-name">pyralis</h3>
@@ -862,7 +1030,10 @@
                                 </p>
                                 <div class="hellsite-character-links">
                                     <span class="hellsite-character-link coming-soon">
-                                        <i class="fas fa-clock"></i> card coming soon
+                                        <i class="fas fa-images"></i> sprites coming soon
+                                    </span>
+                                    <span class="hellsite-character-link coming-soon">
+                                        <i class="fas fa-music"></i> theme coming soon
                                     </span>
                                 </div>
                             </div>
@@ -876,7 +1047,12 @@
                             <div class="hellsite-character-extension">.fallen</div>
                         </div>
                         <div class="hellsite-character-content">
-                            <div class="hellsite-character-image" style="background-image: url('../../../downloads/characters/hell-inc/vassago.png');">
+                            <div class="hellsite-character-imagecol">
+                                <div class="hellsite-character-image" style="background-image: url('../../../downloads/characters/hell-inc/vassago.png');">
+                                </div>
+                                <a href="../../../downloads/characters/hell-inc/vassago.png" download class="hellsite-character-link download">
+                                    <i class="fas fa-download"></i> download card
+                                </a>
                             </div>
                             <div class="hellsite-character-info">
                                 <h3 class="hellsite-character-name">vassago</h3>
@@ -885,8 +1061,15 @@
                                     Senior executive in Hell's corporate structure, specializing in soul acquisition and corruption consulting. Aristocratic bearing masks calculating intelligence and centuries of experience in manipulation. Maintains several Earth-based subsidiary companies. Commands substantial imp workforce and one loyal hellhound.
                                 </p>
                                 <div class="hellsite-character-links">
-                                    <a href="../../../downloads/characters/hell-inc/vassago.png" download class="hellsite-character-link download">
-                                        <i class="fas fa-download"></i> download card
+                                    <a href="https://mega.nz/file/mHZxVZQa#g7O9uUoQ1KrJbNvg0mRqwpETgEABh3IEN8Hlgmjjr1A" target="_blank" rel="noopener" class="hellsite-character-link download">
+                                        <i class="fas fa-images"></i> download sprites
+                                    </a>
+                                    <span class="hellsite-sprite-info">
+                                        <i class="fas fa-circle-info"></i>
+                                        <span class="hellsite-tooltip">Place sprites in <code>characters/{{char}}/sprites/</code>. A regex script styles them into the expression frame in chat.</span>
+                                    </span>
+                                    <a href="https://on.soundcloud.com/H62sr1pyQkAyuBDOGs" target="_blank" rel="noopener" class="hellsite-character-link theme">
+                                        <i class="fas fa-music"></i> theme: read the fine print
                                     </a>
                                 </div>
                             </div>
@@ -900,7 +1083,12 @@
                             <div class="hellsite-character-extension">.hellhound</div>
                         </div>
                         <div class="hellsite-character-content">
-                            <div class="hellsite-character-image" style="background-image: url('../../../downloads/characters/hell-inc/jinx.png');">
+                            <div class="hellsite-character-imagecol">
+                                <div class="hellsite-character-image" style="background-image: url('../../../downloads/characters/hell-inc/jinx.png');">
+                                </div>
+                                <a href="../../../downloads/characters/hell-inc/jinx.png" download class="hellsite-character-link download">
+                                    <i class="fas fa-download"></i> download card
+                                </a>
                             </div>
                             <div class="hellsite-character-info">
                                 <h3 class="hellsite-character-name">jinx</h3>
@@ -909,8 +1097,15 @@
                                     Juvenile hellhound (approx. 50 years) with dual-form capability: massive canine beast and human-adjacent appearance. Abandoned by biological parents, raised and trained by Vassago. Demonstrates absolute loyalty to handler alongside typical hellhound mischief tendencies. Warning: do not feed chocolate.
                                 </p>
                                 <div class="hellsite-character-links">
-                                    <a href="../../../downloads/characters/hell-inc/jinx.png" download class="hellsite-character-link download">
-                                        <i class="fas fa-download"></i> download card
+                                    <a href="https://mega.nz/file/af4igA6a#dpXBBU8KtW4OzhZ6w9te5lqTXufS5O17MEghCNMD37I" target="_blank" rel="noopener" class="hellsite-character-link download">
+                                        <i class="fas fa-images"></i> download sprites
+                                    </a>
+                                    <span class="hellsite-sprite-info">
+                                        <i class="fas fa-circle-info"></i>
+                                        <span class="hellsite-tooltip">Place sprites in <code>characters/{{char}}/sprites/</code>. A regex script styles them into the expression frame in chat.</span>
+                                    </span>
+                                    <a href="https://on.soundcloud.com/WAmUpEKkQQZ3dfJTRZ" target="_blank" rel="noopener" class="hellsite-character-link theme">
+                                        <i class="fas fa-music"></i> theme: bad dog, good boy
                                     </a>
                                 </div>
                             </div>
@@ -1032,7 +1227,32 @@
                     <h2 class="hellsite-section-title">territorial survey</h2>
                     <p class="hellsite-section-subtitle">realm documentation & travel advisories</p>
                 </div>
-                
+
+                <!-- Backgrounds -->
+                <div class="hellsite-bg-grid">
+                    <a href="../../../downloads/characters/hell-inc/backgrounds/hell-inc-alley.png" download class="hellsite-bg-card">
+                        <div class="hellsite-bg-thumb" style="background-image: url('../../../downloads/characters/hell-inc/backgrounds/hell-inc-alley.png');"></div>
+                        <div class="hellsite-bg-info">
+                            <span class="hellsite-bg-name">Alley</span>
+                            <span class="hellsite-bg-dl"><i class="fas fa-download"></i></span>
+                        </div>
+                    </a>
+                    <a href="../../../downloads/characters/hell-inc/backgrounds/hell-inc-apartment-exterior.png" download class="hellsite-bg-card">
+                        <div class="hellsite-bg-thumb" style="background-image: url('../../../downloads/characters/hell-inc/backgrounds/hell-inc-apartment-exterior.png');"></div>
+                        <div class="hellsite-bg-info">
+                            <span class="hellsite-bg-name">Apartment Exterior</span>
+                            <span class="hellsite-bg-dl"><i class="fas fa-download"></i></span>
+                        </div>
+                    </a>
+                    <a href="../../../downloads/characters/hell-inc/backgrounds/hell-inc-vass-home.png" download class="hellsite-bg-card">
+                        <div class="hellsite-bg-thumb" style="background-image: url('../../../downloads/characters/hell-inc/backgrounds/hell-inc-vass-home.png');"></div>
+                        <div class="hellsite-bg-info">
+                            <span class="hellsite-bg-name">Vassago's Home</span>
+                            <span class="hellsite-bg-dl"><i class="fas fa-download"></i></span>
+                        </div>
+                    </a>
+                </div>
+
                 <div class="hellsite-character-grid">
                     <div class="hellsite-character-file">
                         <div class="hellsite-character-header">

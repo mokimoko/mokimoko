@@ -939,7 +939,7 @@
             "content": "(OOC: hey, can you skip the excessively long and time-consuming reasoning please? when you constantly question and second guess yourself, it annoys me AND it's burning my tokens! I'm usually happy with your first draft, any more than that is overdoing it. I'd rather you be concise in your reasoning, draft ONCE, then just give the output.)",
             "injection_position": 1,
             "injection_depth": 0,
-            "injection_order": 98,
+            "injection_order": 97,
             "injection_trigger": [],
             "forbid_overrides": false
         },
@@ -953,7 +953,7 @@
             "content": "(OOC: Understood. I will keep Reasoning to a minimum. I will also severely limit how often I draft. Wait, the user said...ah, I'm doing it. Overthinking. I need to keep in mind that being consistent, but still disciplined and concise is more important than being perfect.)",
             "injection_position": 1,
             "injection_depth": 0,
-            "injection_order": 97,
+            "injection_order": 98,
             "injection_trigger": [],
             "forbid_overrides": false
         },
@@ -1359,11 +1359,11 @@
                 },
                 {
                     "identifier": "3a2050f5-b4b7-4e51-9b0f-eef5606ee843",
-                    "enabled": false
+                    "enabled": true
                 },
                 {
                     "identifier": "7ee02f7d-af53-4abf-afd5-18bd12917f36",
-                    "enabled": true
+                    "enabled": false
                 },
                 {
                     "identifier": "157db729-1654-47f3-8ef3-de77f54e4b0f",

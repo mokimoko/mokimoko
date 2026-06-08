@@ -1,0 +1,466 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+
+/* ── ASI Theme Variables ────────────────────────── */
+:root {
+    --asi-bg: #0a0b0d;
+    --asi-surface: #121418;
+    --asi-olive: #7b8c6a;
+    --asi-olive-dim: rgba(123, 140, 106, 0.35);
+    --asi-olive-glow: rgba(123, 140, 106, 0.10);
+    --asi-warn: #c49856;
+    --asi-cold-white: #d8dce2;
+    --asi-muted: #6e737d;
+    --asi-dark-border: rgba(123, 140, 106, 0.10);
+    --asi-glass: rgba(123, 140, 106, 0.04);
+    --asi-font-display: 'Rajdhani', sans-serif;
+    --asi-font-body: 'IBM Plex Sans', sans-serif;
+}
+
+/* ── Page Base ──────────────────────────────────── */
+.asi-page {
+    flex: 1;
+    background: var(--asi-bg);
+    color: var(--asi-cold-white);
+    font-family: var(--asi-font-body);
+}
+
+/* ── Hero Banner ────────────────────────────────── */
+.asi-hero {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.asi-hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.asi-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 20%,
+        rgba(10, 11, 13, 0.65) 60%,
+        var(--asi-bg) 100%
+    );
+}
+
+.asi-hero-content {
+    text-align: center;
+    margin-top: -4rem;
+    position: relative;
+    z-index: 2;
+    padding: 0 2rem 1rem;
+}
+
+.asi-hero-title {
+    font-family: var(--asi-font-display);
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--asi-cold-white);
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.asi-hero-tagline {
+    font-family: var(--asi-font-body);
+    font-size: 1rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--asi-muted);
+    letter-spacing: 1.5px;
+}
+
+/* ── Content Container ──────────────────────────── */
+.asi-content {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+}
+
+/* ── Divider ────────────────────────────────────── */
+.asi-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3.5rem 0 2.5rem;
+}
+
+.asi-divider::before,
+.asi-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        var(--asi-olive-dim),
+        transparent
+    );
+}
+
+.asi-divider-icon {
+    font-size: 0.85rem;
+    color: var(--asi-olive);
+    opacity: 0.45;
+}
+
+/* ── Section Headers ────────────────────────────── */
+.asi-section-title {
+    font-family: var(--asi-font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--asi-olive);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    scroll-margin-top: 5rem;
+}
+
+/* ── Overview Section ───────────────────────────── */
+.asi-overview {
+    font-family: var(--asi-font-body);
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--asi-muted);
+    max-width: 760px;
+}
+
+.asi-overview strong {
+    color: var(--asi-cold-white);
+    font-weight: 500;
+}
+
+/* ── Jump Nav ───────────────────────────────────── */
+.asi-jump-nav {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.asi-jump-nav a {
+    font-family: var(--asi-font-display);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--asi-muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    transition: color 0.3s ease;
+}
+
+.asi-jump-nav a:hover {
+    color: var(--asi-olive);
+}
+
+/* ── Subsection ─────────────────────────────────── */
+.asi-subsection {
+    margin-bottom: 2.5rem;
+}
+
+/* ── Lorebook Card ──────────────────────────────── */
+.asi-lore-card {
+    display: block;
+    width: 140px;
+    border: 1px solid var(--asi-dark-border);
+    background: var(--asi-glass);
+    text-decoration: none;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+    cursor: pointer;
+}
+
+.asi-lore-card:hover {
+    border-color: var(--asi-olive-dim);
+}
+
+.asi-lore-portrait {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.asi-lore-portrait img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.5s ease;
+}
+
+.asi-lore-card:hover .asi-lore-portrait img {
+    transform: scale(1.05);
+}
+
+.asi-lore-label {
+    padding: 0.7rem 0.9rem;
+    font-family: var(--asi-font-display);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--asi-cold-white);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* ── Character Grid ─────────────────────────────── */
+.asi-char-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 200px));
+    gap: 1.5rem;
+}
+
+.asi-char-card {
+    position: relative;
+    border: 1px solid var(--asi-dark-border);
+    background: var(--asi-glass);
+    overflow: visible;
+    transition: border-color 0.3s ease;
+    cursor: pointer;
+}
+
+.asi-char-card:hover {
+    border-color: var(--asi-olive-dim);
+}
+
+.asi-char-portrait {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+}
+
+.asi-char-portrait img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.5s ease;
+}
+
+.asi-char-card:hover .asi-char-portrait img {
+    transform: scale(1.05);
+}
+
+.asi-char-name {
+    padding: 0.7rem 0.9rem;
+    font-family: var(--asi-font-display);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--asi-cold-white);
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+}
+
+.asi-char-role {
+    padding: 0 0.9rem 0.7rem;
+    font-family: var(--asi-font-body);
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: var(--asi-muted);
+    font-style: italic;
+}
+
+/* ── Coming Soon State ──────────────────────────── */
+.asi-char-card.coming-soon {
+    cursor: default;
+}
+
+.asi-char-card.coming-soon .asi-char-portrait {
+    filter: grayscale(0.7) brightness(0.45);
+}
+
+.asi-char-soon-badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--asi-font-display);
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--asi-muted);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    background: rgba(10, 11, 13, 0.88);
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--asi-dark-border);
+    pointer-events: none;
+}
+
+/* ── Character Context Menu ─────────────────────── */
+.asi-char-menu {
+    position: fixed;
+    background: var(--asi-surface);
+    border: 1px solid var(--asi-olive-dim);
+    min-width: 180px;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+}
+
+.asi-char-menu.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.asi-char-menu a {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1rem;
+    text-decoration: none;
+    color: var(--asi-cold-white);
+    font-family: var(--asi-font-body);
+    font-size: 0.85rem;
+    transition: background 0.15s ease;
+}
+
+.asi-char-menu a:hover {
+    background: var(--asi-olive-glow);
+}
+
+.asi-char-menu a .menu-icon {
+    font-size: 0.75rem;
+    color: var(--asi-olive);
+    opacity: 0.6;
+    width: 1rem;
+    text-align: center;
+}
+
+.asi-char-menu a + a {
+    border-top: 1px solid var(--asi-dark-border);
+}
+
+/* ── Background Preview Cards ───────────────────── */
+.asi-bg-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 280px));
+    gap: 1.5rem;
+}
+
+.asi-bg-card {
+    display: block;
+    border: 1px solid var(--asi-dark-border);
+    background: var(--asi-glass);
+    overflow: hidden;
+    text-decoration: none;
+    transition: border-color 0.3s ease;
+}
+
+.asi-bg-card:hover {
+    border-color: var(--asi-olive-dim);
+}
+
+.asi-bg-thumb {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+
+.asi-bg-thumb img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.asi-bg-card:hover .asi-bg-thumb img {
+    transform: scale(1.05);
+}
+
+.asi-bg-info {
+    padding: 0.6rem 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.asi-bg-name {
+    font-family: var(--asi-font-display);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--asi-cold-white);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.asi-bg-dl {
+    font-family: var(--asi-font-body);
+    font-size: 0.75rem;
+    color: var(--asi-olive);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.asi-bg-card:hover .asi-bg-dl {
+    opacity: 0.7;
+}
+
+/* ── Placeholder State ──────────────────────────── */
+.asi-placeholder {
+    padding: 2.5rem 2rem;
+    border: 1px dashed rgba(123, 140, 106, 0.15);
+    background: var(--asi-glass);
+    text-align: center;
+}
+
+.asi-placeholder p {
+    font-family: var(--asi-font-body);
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--asi-muted);
+    font-style: italic;
+    letter-spacing: 0.5px;
+}
+
+/* ── Info Block Image ───────────────────────────── */
+.asi-info-block {
+    margin: 2rem 0;
+    border: 1px solid var(--asi-dark-border);
+    overflow: hidden;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.asi-info-block img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ── Responsive ─────────────────────────────────── */
+@media (max-width: 768px) {
+    .asi-hero-title {
+        font-size: 2.2rem;
+        letter-spacing: 4px;
+    }
+
+    .asi-char-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .asi-jump-nav {
+        gap: 1.2rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .asi-hero-title {
+        font-size: 1.6rem;
+    }
+
+    .asi-char-grid {
+        grid-template-columns: 1fr;
+        max-width: 220px;
+    }
+}

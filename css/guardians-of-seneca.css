@@ -116,6 +116,7 @@
     letter-spacing: 3px;
     text-transform: uppercase;
     margin-bottom: 1.5rem;
+    scroll-margin-top: 5rem;
 }
 
 /* ── Overview Section ───────────────────────────── */
@@ -192,6 +193,50 @@
 .sen-download-item:hover .sen-download-arrow {
     opacity: 0.7;
 }
+/* ── Lorebook Card ──────────────────────────────── */
+.sen-lore-card {
+    display: block;
+    width: 140px;
+    border: 1px solid var(--sen-dark-border);
+    background: var(--sen-glass);
+    text-decoration: none;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+    cursor: pointer;
+}
+
+.sen-lore-card:hover {
+    border-color: var(--sen-brass-dim);
+}
+
+.sen-lore-portrait {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.sen-lore-portrait img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.5s ease;
+}
+
+.sen-lore-card:hover .sen-lore-portrait img {
+    transform: scale(1.05);
+}
+
+.sen-lore-label {
+    padding: 0.7rem 0.9rem;
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    color: var(--sen-warm-white);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
 /* ── Character Cards (Portrait with context menu) ── */
 .sen-char-grid {
     display: grid;
@@ -451,6 +496,29 @@
 .sen-back:hover {
     color: var(--sen-brass);
 }
+
+/* ── Jump Nav ───────────────────────────────────── */
+.sen-jump-nav {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.sen-jump-nav a {
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    color: var(--sen-muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    transition: color 0.3s ease;
+}
+
+.sen-jump-nav a:hover {
+    color: var(--sen-brass);
+}
+
 /* ── Sub-section Label ──────────────────────────── */
 .sen-subsection {
     margin-bottom: 2.5rem;

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anomalous Studies Institute | Moki</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/anomalous-studies-institute.css">
+</head>
+<body class="nav-autohide">
+    <!-- Loading Effect -->
+    <div id="loader">
+        <div class="loader-line"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="../../index.html" class="nav-brand">MOKI.</a>
+        <div class="nav-links">
+            <a href="../about.html">About Me</a>
+            <a href="../presets.html">Presets</a>
+            <a href="../characters.html" class="active">Characters</a>
+            <a href="../utilities.html">Utilities</a>
+            <a href="../aesthetics.html">Aesthetics</a>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <div class="asi-hero">
+        <img src="../../images/misc/asi/header.png" alt="Anomalous Studies Institute">
+    </div>
+
+    <main class="asi-page">
+        <div class="asi-content">
+
+            <div class="asi-hero-content">
+                <h1 class="asi-hero-title">Anomalous Studies Institute</h1>
+                <p class="asi-hero-tagline">Alternate history 1989 — in the ruins of America, monsters are real and someone is collecting them</p>
+            </div>
+
+            <nav class="asi-jump-nav">
+                <a href="#lorebook">Lorebook</a>
+                <a href="#characters">Characters</a>
+                <a href="#backgrounds">Backgrounds</a>
+            </nav>
+
+            <!-- Overview -->
+            <div class="asi-overview">
+                <p>
+                    A nuclear bomb destroyed <strong>Chicago</strong> in 1957, and the world never recovered. The 
+                    <strong>New Republic</strong> rose from the ashes — a militaristic regime controlling what was once the 
+                    United States and Canada through walled <strong>safe cities</strong> and strict surveillance. Beyond the 
+                    walls lie the irradiated <strong>Wilds</strong>, lawless and crawling with mutant wildlife, raiders, and 
+                    worse. The fallout didn't just poison the land — it woke something up. Supernatural creatures and 
+                    genetic mutations, classified as <strong>anomalies</strong>, began appearing across the continent. 
+                    The <strong>Anomalous Studies Institute</strong>, a secret research facility buried in the Colorado 
+                    wilderness, captures and studies them. Not all of its methods are humane.
+                </p>
+            </div>
+
+            <!-- ═══ Lorebook ═══ -->
+            <div class="asi-divider">
+                <span class="asi-divider-icon">☢</span>
+            </div>
+
+            <h2 class="asi-section-title" id="lorebook">Lorebook</h2>
+            <div class="asi-subsection">
+                <a href="../../downloads/characters/asi/ASI - Setting - New Republic.json" download class="asi-lore-card">
+                    <div class="asi-lore-portrait">
+                        <img src="../../downloads/characters/asi/ASI_lore.png" alt="ASI Lorebook" loading="lazy">
+                    </div>
+                    <div class="asi-lore-label">Core Setting</div>
+                </a>
+            </div>
+
+            <!-- ═══ Characters ═══ -->
+            <div class="asi-divider">
+                <span class="asi-divider-icon">☢</span>
+            </div>
+
+            <h2 class="asi-section-title" id="characters">Characters</h2>
+            <p class="asi-overview" style="margin-bottom: 1.5rem; font-size: 0.95rem;">Click a character to see download options.</p>
+
+            <div class="asi-char-grid">
+
+                <!-- Kira -->
+                <div class="asi-char-card" onclick="toggleCharMenu(this, event)">
+                    <div class="asi-char-portrait">
+                        <img src="../../downloads/characters/asi/Kira.png" alt="Kira" loading="lazy">
+                    </div>
+                    <div class="asi-char-name">Kira</div>
+                    <div class="asi-char-role">Kitsune</div>
+                    <div class="asi-char-menu">
+                        <a href="../../downloads/characters/asi/Kira.png" download onclick="event.stopPropagation()">
+                            <span class="menu-icon">↓</span> Download Card
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Theo -->
+                <div class="asi-char-card" onclick="toggleCharMenu(this, event)">
+                    <div class="asi-char-portrait">
+                        <img src="../../downloads/characters/asi/Theo.png" alt="Theo Chapman" loading="lazy">
+                    </div>
+                    <div class="asi-char-name">Theo</div>
+                    <div class="asi-char-role">Werewolf</div>
+                    <div class="asi-char-menu">
+                        <a href="../../downloads/characters/asi/Theo.png" download onclick="event.stopPropagation()">
+                            <span class="menu-icon">↓</span> Download Card
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Etienne -->
+                <div class="asi-char-card" onclick="toggleCharMenu(this, event)">
+                    <div class="asi-char-portrait">
+                        <img src="../../downloads/characters/asi/Etienne.png" alt="Etienne" loading="lazy">
+                    </div>
+                    <div class="asi-char-name">Etienne</div>
+                    <div class="asi-char-role">Merman</div>
+                    <div class="asi-char-menu">
+                        <a href="../../downloads/characters/asi/Etienne.png" download onclick="event.stopPropagation()">
+                            <span class="menu-icon">↓</span> Download Card
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hector — Coming Soon -->
+                <div class="asi-char-card coming-soon">
+                    <div class="asi-char-portrait">
+                        <img src="../../downloads/characters/asi/altavatars/main_the-captive-centaur-fa11cf05_spec_v2.png" alt="Hector" loading="lazy">
+                    </div>
+                    <div class="asi-char-soon-badge">Coming Soon</div>
+                    <div class="asi-char-name">Hector</div>
+                    <div class="asi-char-role">Centaur</div>
+                </div>
+
+                <!-- Amir — Coming Soon -->
+                <div class="asi-char-card coming-soon">
+                    <div class="asi-char-portrait">
+                        <img src="../../downloads/characters/asi/altavatars/main_the-captive-naga-4cc32131_spec_v2.png" alt="Amir" loading="lazy">
+                    </div>
+                    <div class="asi-char-soon-badge">Coming Soon</div>
+                    <div class="asi-char-name">Amir</div>
+                    <div class="asi-char-role">Naga</div>
+                </div>
+
+                <!-- Nilrix — Coming Soon -->
+                <div class="asi-char-card coming-soon">
+                    <div class="asi-char-portrait">
+                        <img src="../../downloads/characters/asi/altavatars/main_the-captive-drider-352cbe5d_spec_v2.png" alt="Nilrix" loading="lazy">
+                    </div>
+                    <div class="asi-char-soon-badge">Coming Soon</div>
+                    <div class="asi-char-name">Nilrix</div>
+                    <div class="asi-char-role">Drider</div>
+                </div>
+
+            </div>
+
+            <!-- ═══ Backgrounds ═══ -->
+            <div class="asi-divider">
+                <span class="asi-divider-icon">☢</span>
+            </div>
+
+            <h2 class="asi-section-title" id="backgrounds">Backgrounds</h2>
+            <div class="asi-subsection">
+                <div class="asi-bg-grid">
+                    <a href="../../downloads/characters/asi/backgrounds/cave.png" download class="asi-bg-card">
+                        <div class="asi-bg-thumb">
+                            <img src="../../downloads/characters/asi/backgrounds/cave.png" alt="Cave" loading="lazy">
+                        </div>
+                        <div class="asi-bg-info">
+                            <span class="asi-bg-name">Cave</span>
+                            <span class="asi-bg-dl">↓</span>
+                        </div>
+                    </a>
+                    <a href="../../downloads/characters/asi/backgrounds/kiras-house-day.png" download class="asi-bg-card">
+                        <div class="asi-bg-thumb">
+                            <img src="../../downloads/characters/asi/backgrounds/kiras-house-day.png" alt="Kira's House (Day)" loading="lazy">
+                        </div>
+                        <div class="asi-bg-info">
+                            <span class="asi-bg-name">Kira's House (Day)</span>
+                            <span class="asi-bg-dl">↓</span>
+                        </div>
+                    </a>
+                    <a href="../../downloads/characters/asi/backgrounds/kiras-house-night.png" download class="asi-bg-card">
+                        <div class="asi-bg-thumb">
+                            <img src="../../downloads/characters/asi/backgrounds/kiras-house-night.png" alt="Kira's House (Night)" loading="lazy">
+                        </div>
+                        <div class="asi-bg-info">
+                            <span class="asi-bg-name">Kira's House (Night)</span>
+                            <span class="asi-bg-dl">↓</span>
+                        </div>
+                    </a>
+                    <a href="../../downloads/characters/asi/backgrounds/wasteland.png" download class="asi-bg-card">
+                        <div class="asi-bg-thumb">
+                            <img src="../../downloads/characters/asi/backgrounds/wasteland.png" alt="Wasteland" loading="lazy">
+                        </div>
+                        <div class="asi-bg-info">
+                            <span class="asi-bg-name">Wasteland</span>
+                            <span class="asi-bg-dl">↓</span>
+                        </div>
+                    </a>
+                    <a href="../../downloads/characters/asi/backgrounds/pool.png" download class="asi-bg-card">
+                        <div class="asi-bg-thumb">
+                            <img src="../../downloads/characters/asi/backgrounds/pool.png" alt="Pool" loading="lazy">
+                        </div>
+                        <div class="asi-bg-info">
+                            <span class="asi-bg-name">Pool</span>
+                            <span class="asi-bg-dl">↓</span>
+                        </div>
+                    </a>
+                    <a href="../../downloads/characters/asi/backgrounds/woods-night.png" download class="asi-bg-card">
+                        <div class="asi-bg-thumb">
+                            <img src="../../downloads/characters/asi/backgrounds/woods-night.png" alt="Woods (Night)" loading="lazy">
+                        </div>
+                        <div class="asi-bg-info">
+                            <span class="asi-bg-name">Woods (Night)</span>
+                            <span class="asi-bg-dl">↓</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="subtle-footer">
+        <p>&copy; 2026 Moki.</p>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function toggleCharMenu(card, event) {
+            const menu = card.querySelector('.asi-char-menu');
+            if (!menu) return;
+            const wasActive = menu.classList.contains('active');
+            document.querySelectorAll('.asi-char-menu.active').forEach(m => m.classList.remove('active'));
+            if (!wasActive) {
+                let x = event.clientX;
+                let y = event.clientY;
+                const menuRect = { width: 200, height: 90 };
+                if (x + menuRect.width > window.innerWidth) x = window.innerWidth - menuRect.width - 8;
+                if (y + menuRect.height > window.innerHeight) y = y - menuRect.height;
+                menu.style.left = x + 'px';
+                menu.style.top = y + 'px';
+                menu.classList.add('active');
+            }
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.asi-char-card')) {
+                document.querySelectorAll('.asi-char-menu.active').forEach(m => m.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Lotus (Marinara Engine) | Moki</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        /* ── Page Layout ────────────────────────────── */
+        .preset-page {
+            flex: 1;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 120px 2rem 5rem;
+        }
+
+        /* ── Back Crumb ─────────────────────────────── */
+        .breadcrumb {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 3rem;
+            transition: color 0.2s ease;
+        }
+        .breadcrumb::before { content: '← '; }
+        .breadcrumb:hover { color: var(--accent); }
+
+        /* ── Hero Row ───────────────────────────────── */
+        .preset-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-bottom: 5rem;
+        }
+
+        .preset-hero-image {
+            width: 100%;
+            aspect-ratio: 11 / 7;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+
+        .preset-hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        .preset-hero-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            padding-top: 0.5rem;
+        }
+
+        .preset-eyebrow {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.7;
+        }
+
+        .preset-hero-meta h1 {
+            font-size: 3.5rem;
+        }
+
+        .preset-hero-meta .tagline {
+            font-family: var(--font-h2);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            max-width: 380px;
+        }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
+            opacity: 0.3;
+            margin: 0.5rem 0;
+        }
+
+        /* ── Section Label (shared) ─────────────────── */
+        .section-label {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.6;
+            margin-bottom: 1rem;
+        }
+
+        /* ── Download Area ──────────────────────────── */
+        .download-area {
+            margin-bottom: 5rem;
+        }
+
+        .download-bar {
+            border: 1px solid var(--glass-border);
+            padding: 1.2rem 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            background: var(--glass-bg);
+        }
+
+        .download-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .download-info .file-name {
+            font-family: var(--font-h2);
+            font-size: 0.85rem;
+            color: var(--text-main);
+        }
+
+        .download-info .file-meta {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ── About Section ──────────────────────────── */
+        .about-block {
+            margin-bottom: 5rem;
+        }
+
+        .about-block p {
+            max-width: 680px;
+            margin-bottom: 1rem;
+        }
+
+        /* ── Notice / Callout ───────────────────────── */
+        .tests-callout {
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            padding: 1.2rem 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            margin-bottom: 5rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .tests-callout:hover {
+            border-color: rgba(199, 181, 131, 0.2);
+        }
+
+        .tests-callout-text {
+            font-family: var(--font-h2);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .tests-callout .btn,
+        .download-bar .btn {
+            white-space: nowrap;
+            flex-shrink: 0;
+            padding: 0.7rem 1.8rem;
+        }
+
+        /* ── What's Inside ──────────────────────────── */
+        .features-block {
+            margin-bottom: 5rem;
+        }
+
+        .feature-group {
+            margin-bottom: 2.5rem;
+        }
+
+        .feature-group-title {
+            font-family: var(--font-h1);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .feature-group p {
+            max-width: 680px;
+            margin-bottom: 0.8rem;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+            max-width: 680px;
+        }
+
+        .feature-item {
+            font-family: var(--font-h2);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.6rem 0;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .feature-item span {
+            color: var(--accent);
+            opacity: 0.5;
+            margin-right: 0.5rem;
+        }
+
+        /* ── How To Use ─────────────────────────────── */
+        .howto-block {
+            margin-bottom: 4rem;
+        }
+
+        .howto-list {
+            list-style: none;
+            max-width: 680px;
+        }
+
+        .howto-list li {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+            padding: 0.6rem 0;
+            border-top: 1px solid var(--glass-border);
+            display: grid;
+            grid-template-columns: 24px 1fr;
+            gap: 1rem;
+        }
+
+        .howto-list li:last-child {
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .howto-list .step-num {
+            font-family: var(--font-h2);
+            font-size: 0.65rem;
+            color: var(--accent);
+            opacity: 0.5;
+            padding-top: 0.25rem;
+        }
+
+        /* ── Inline Links ────────────────────────────── */
+        .preset-page a:not(.btn):not(.breadcrumb):not(.nav-brand):not(.nav-links a) {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(199, 181, 131, 0.3);
+            transition: border-color 0.2s ease;
+        }
+
+        .preset-page a:not(.btn):not(.breadcrumb):not(.nav-brand):not(.nav-links a):hover {
+            border-color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .preset-hero {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .preset-hero-meta h1 {
+                font-size: 2.8rem;
+            }
+
+            .download-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .tests-callout {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Effect -->
+    <div id="loader">
+        <div class="loader-line"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="../../index.html" class="nav-brand">MOKI.</a>
+        <div class="nav-links">
+            <a href="../about.html">About Me</a>
+            <a href="../presets.html" class="active">Presets</a>
+            <a href="../characters.html">Characters</a>
+            <a href="../utilities.html">Utilities</a>
+            <a href="../aesthetics.html">Aesthetics</a>
+        </div>
+    </nav>
+
+    <main class="preset-page">
+
+        <a href="../presets.html" class="breadcrumb">Presets</a>
+
+        <!-- Hero -->
+        <div class="preset-hero">
+            <div class="preset-hero-image">
+                <img src="../../images/white-lotus-marinara.png" alt="White Lotus for Marinara Engine">
+            </div>
+            <div class="preset-hero-meta">
+                <div class="preset-eyebrow">Marinara Engine Preset</div>
+                <h1>White Lotus</h1>
+                <div class="tagline">Small by default · pretty if desired · modular when needed · prose-first always.</div>
+                <div class="divider"></div>
+                <p>The White Lotus preset rebuilt for Marinara Engine — same prose-first philosophy, restructured around ME's variable system.</p>
+            </div>
+        </div>
+
+        <!-- Download -->
+        <div class="download-area">
+            <div class="download-bar">
+                <div class="download-info">
+                    <div class="file-name">White_Lotus_4.0.0_marinara.json</div>
+                    <div class="file-meta">Latest &nbsp;·&nbsp; Marinara Engine Preset &nbsp;·&nbsp; JSON</div>
+                </div>
+                <a href="../../downloads/presets/White_Lotus_4.0.0_marinara.json" download class="btn" style="margin-top:0;">Download</a>
+            </div>
+        </div>
+
+        <!-- About -->
+        <div class="about-block">
+            <div class="section-label">About</div>
+            <p>
+                This is White Lotus ported to Marinara Engine. Same goal as the SillyTavern build: push LLMs toward the two things they're worst at — creativity and plot progression — without burying the output under a wall of instructions. The priorities are adaptability, a reasonable token count, and writing quality over doohickies.
+            </p>
+            <p>
+                The big structural change is that most of the prompt blocks have been moved into the special variables Marinara Engine uses, so you set your preferences through ME's variable menu instead of toggling individual prompt sections. The original's built-in trackers have also been removed — Marinara Engine has its own native tracker system, so there's no need to duplicate it here.
+            </p>
+            <p>
+                If you want the full philosophy write-up, deeper module notes, and per-model parameter recommendations, the <a href="white-lotus.html">SillyTavern page</a> goes into more detail — most of the model and parameter advice carries over.
+            </p>
+        </div>
+
+        <!-- Notice -->
+        <div class="tests-callout">
+            <div class="tests-callout-text">Heads up: the Marinara Engine version hasn't been put through the same testing as the SillyTavern build yet. If you run into anything weird or broken, please reach out and let me know.</div>
+            <a href="mailto:mokimoko83@gmail.com" class="btn" style="margin-top: 0;">Get In Touch</a>
+        </div>
+
+        <!-- What's Inside -->
+        <div class="features-block">
+            <div class="section-label">What's Inside</div>
+
+            <div class="feature-group">
+                <div class="feature-group-title">Setup Variables</div>
+                <p>
+                    The dials you set once through Marinara Engine's variable menu: narrator type, POV, tense, length, diction, and genre. Narrator can be Omniscient (knows every NPC's inner world except yours), Character (becomes {{char}}, with their biases and blind spots), or Storyteller (writes everyone, including you). Diction options for China, Japan, or Historical settings layer in culturally appropriate idioms, honorifics, and cadence. Length runs from Super Short up through Girthy, plus a Flexible mode.
+                </p>
+                <div class="feature-list">
+                    <div class="feature-item"><span>→</span> Contemporary</div>
+                    <div class="feature-item"><span>→</span> Slice of Life</div>
+                    <div class="feature-item"><span>→</span> Science Fiction</div>
+                    <div class="feature-item"><span>→</span> Space Opera</div>
+                    <div class="feature-item"><span>→</span> Dark Fantasy</div>
+                    <div class="feature-item"><span>→</span> Southern Gothic</div>
+                    <div class="feature-item"><span>→</span> Regency Historical</div>
+                    <div class="feature-item"><span>→</span> LitRPG</div>
+                    <div class="feature-item"><span>→</span> Grimdark Comedy</div>
+                    <div class="feature-item"><span>→</span> Historical Chinese</div>
+                    <div class="feature-item"><span>→</span> Modern Chinese</div>
+                </div>
+            </div>
+
+            <div class="feature-group">
+                <div class="feature-group-title">Tweaks</div>
+                <p>
+                    Optional modules you can stack as needed — no dependencies, no conflicts. Only turn on what's actually relevant to the current scene. Anti-Slop and User Autonomy guardrails are built in rather than optional.
+                </p>
+                <div class="feature-list">
+                    <div class="feature-item"><span>→</span> Better NPCs</div>
+                    <div class="feature-item"><span>→</span> Disabilities</div>
+                    <div class="feature-item"><span>→</span> Negativity Bias</div>
+                    <div class="feature-item"><span>→</span> Intense Violence</div>
+                    <div class="feature-item"><span>→</span> Abuse / Toxic</div>
+                    <div class="feature-item"><span>→</span> Consent Override</div>
+                    <div class="feature-item"><span>→</span> NSFW Toggle</div>
+                </div>
+            </div>
+
+            <div class="feature-group">
+                <div class="feature-group-title">Direction</div>
+                <p>
+                    Variety Toggle injects an extra story element each turn — a memory, an intrusive thought, a misunderstanding being planted for later, a sudden commotion — to break repetitive loops. Brainstorm (CoT) walks thinking models through character motivation, lore, and scene pressure before they write, and Hyper-Mode adds a thematic reasoning layer on top. NPC Crafter generates a randomized character with specific physical traits, fashion sense, speaking style, personality, and a quirk, so you get something more interesting than the model's default "tall, handsome, mysterious."
+                </p>
+            </div>
+
+            <div class="feature-group">
+                <div class="feature-group-title">On Trackers</div>
+                <p>
+                    The trackers that shipped with the SillyTavern version (Relationship, Temporal, Status Board) aren't included here. Marinara Engine has its own native tracker system, so you can lean on that instead.
+                </p>
+            </div>
+        </div>
+
+        <!-- How to Use -->
+        <div class="howto-block">
+            <div class="section-label">How To Use</div>
+            <ul class="howto-list">
+                <li>
+                    <span class="step-num">01</span>
+                    <span>Set your <strong>variables</strong> through Marinara Engine's variable menu — narrator type, POV, tense, length, diction, and genre. Genre presets come with pre-configured tone and author style, so just pick the one that fits.</span>
+                </li>
+                <li>
+                    <span class="step-num">02</span>
+                    <span>Drop your character card, persona, scenario, and lore into the usual marker slots. The preset's lore section is a baseline the characters grow from as the chat progresses.</span>
+                </li>
+                <li>
+                    <span class="step-num">03</span>
+                    <span>Stack the <strong>Tweaks</strong> you want. Leave off anything you aren't using soon — if nobody's getting frisky, skip the NSFW Toggle.</span>
+                </li>
+                <li>
+                    <span class="step-num">04</span>
+                    <span>Reach for <strong>Direction</strong> when you want more: Variety Toggle for unpredictability, Brainstorm (CoT) + Hyper-Mode for thinking models, and NPC Crafter as a one-shot when you need a fresh face (turn it back off after, or you'll spawn a new NPC every turn).</span>
+                </li>
+                <li>
+                    <span class="step-num">05</span>
+                    <span>For trackers, use <strong>Marinara Engine's native tracker system</strong> — this preset deliberately leaves that to the engine.</span>
+                </li>
+            </ul>
+        </div>
+
+    </main>
+
+    <footer class="subtle-footer">
+        <p>&copy; 2026 Moki.</p>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>

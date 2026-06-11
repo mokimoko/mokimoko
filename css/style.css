@@ -219,6 +219,13 @@ p {
     border: 1px solid var(--glass-border);
     padding: 2rem;
     transition: border-color 0.3s ease, background 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.card .btn {
+    margin-top: auto;
+    align-self: flex-start;
 }
 
 .card:hover {

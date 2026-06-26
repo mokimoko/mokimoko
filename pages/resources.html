@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources | Moki</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .res-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.2rem;
+            margin-top: 3rem;
+        }
+
+        .res-card {
+            display: block;
+            text-decoration: none;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            padding: 2rem 1.8rem;
+            transition: border-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .res-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .res-card .res-num {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--accent);
+            letter-spacing: 2px;
+            opacity: 0.5;
+            display: block;
+            margin-bottom: 1.2rem;
+        }
+
+        .res-card h2 {
+            font-size: 1.4rem;
+            margin: 0 0 0.6rem;
+            transition: color 0.2s ease;
+        }
+
+        .res-card:hover h2 {
+            color: var(--accent);
+        }
+
+        .res-card .res-desc {
+            font-family: var(--font-body);
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            opacity: 0.65;
+            line-height: 1.6;
+        }
+
+        .res-card .res-arrow {
+            font-family: var(--font-h2);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.4;
+            margin-top: 1.5rem;
+            display: inline-block;
+            transition: opacity 0.2s ease, color 0.2s ease;
+        }
+
+        .res-card:hover .res-arrow {
+            opacity: 1;
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Effect -->
+    <div id="loader">
+        <div class="loader-line"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar"></nav>
+
+    <!-- Page Content -->
+    <main class="container">
+        <h1>Resources</h1>
+        <p>Tips, guides, and templates I've gathered for roleplay and botmaking.</p>
+
+        <div class="res-grid">
+            <a href="guides/roleplay-tips.html" class="res-card">
+                <span class="res-num">01</span>
+                <h2>Roleplay Tips</h2>
+                <div class="res-desc">Things I've picked up for getting more out of SillyTavern and roleplay in general.</div>
+                <span class="res-arrow">Read →</span>
+            </a>
+
+            <a href="guides/guides.html" class="res-card">
+                <span class="res-num">02</span>
+                <h2>Guides</h2>
+                <div class="res-desc">External guides and references that actually made things click for me.</div>
+                <span class="res-arrow">Read →</span>
+            </a>
+
+            <a href="guides/character-templates.html" class="res-card">
+                <span class="res-num">03</span>
+                <h2>Character Templates</h2>
+                <div class="res-desc">Starting points and formats for building your own character cards.</div>
+                <span class="res-arrow">Read →</span>
+            </a>
+        </div>
+    </main>
+
+    <footer class="subtle-footer">
+        <p>&copy; 2026 Moki.</p>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

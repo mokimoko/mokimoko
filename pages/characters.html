@@ -147,7 +147,7 @@
         /* ── World Grid ──────────────────────────────── */
         .world-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 480px));
+            grid-template-columns: repeat(auto-fill, minmax(200px, 220px));
             gap: 1.5rem;
         }
 
@@ -168,7 +168,7 @@
 
         .world-thumbnail {
             width: 100%;
-            aspect-ratio: 16 / 11;
+            aspect-ratio: 2 / 3;
             overflow: hidden;
         }
 
@@ -240,7 +240,7 @@
             }
 
             .world-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -259,16 +259,7 @@
     </div>
 
     <!-- Navigation -->
-    <nav id="navbar">
-        <a href="../index.html" class="nav-brand">MOKI.</a>
-        <div class="nav-links">
-            <a href="about.html">About Me</a>
-            <a href="presets.html">Presets</a>
-            <a href="characters.html" class="active">Characters</a>
-            <a href="utilities.html">Utilities</a>
-            <a href="aesthetics.html">Aesthetics</a>
-        </div>
-    </nav>
+    <nav id="navbar"></nav>
 
     <main class="characters-page">
 
@@ -282,9 +273,19 @@
             <div class="category-label">Worlds</div>
             <div class="world-grid">
 
+                <a href="worlds/tiberian-empire.html" class="world-card">
+                    <div class="world-thumbnail">
+                        <img src="../images/misc/tiberian-empire/main.png" alt="The Tiberian Empire" loading="lazy">
+                    </div>
+                    <div class="world-overlay">
+                        <div class="overlay-desc">A pre-industrial empire of scarce women, sworn oaths, and court intrigue. The dynasty is a decade old, the emperor is failing, and the north swears the long winter is returning early.</div>
+                        <div class="overlay-action">→ Explore Setting</div>
+                    </div>
+                </a>
+
                 <a href="worlds/guardians-of-seneca.html" class="world-card">
                     <div class="world-thumbnail">
-                        <img src="../images/misc/guardians-of-seneca/gos-main.png" alt="Guardians of Seneca" loading="lazy">
+                        <img src="../images/misc/guardians-of-seneca/main.png" alt="Guardians of Seneca" loading="lazy">
                     </div>
                     <div class="world-overlay">
                         <div class="overlay-desc">A Victorian steampunk kingdom under siege. Four Guardians, four sacred relics, and a prophecy that could close the rifts forever.</div>
@@ -294,7 +295,7 @@
 
                 <a href="worlds/hell-inc/index.html" class="world-card">
                     <div class="world-thumbnail">
-                        <img src="../images/misc/hell-inc/hellinc-main.png" alt="Hell, Inc." loading="lazy">
+                        <img src="../images/misc/hell-inc/main.png" alt="Hell, Inc." loading="lazy">
                     </div>
                     <div class="world-overlay">
                         <div class="overlay-desc">The afterlife runs like a corporation. Demons clock in, angels file paperwork, and one reformed defector is stuck in celestial middle management.</div>
@@ -304,7 +305,7 @@
 
                 <a href="worlds/anomalous-studies-institute.html" class="world-card">
                     <div class="world-thumbnail">
-                        <img src="../images/misc/asi/asi-main.png" alt="Anomalous Studies Institute" loading="lazy">
+                        <img src="../images/misc/asi/main.png" alt="Anomalous Studies Institute" loading="lazy">
                     </div>
                     <div class="world-overlay">
                         <div class="overlay-desc">Post-nuclear America, 1989. A secret facility in the Colorado wilderness captures and studies the anomalies the fallout left behind.</div>

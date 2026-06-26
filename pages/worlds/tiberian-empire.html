@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tiberian Empire | Moki</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/tiberian-empire.css">
+</head>
+<body class="nav-autohide">
+    <!-- Loading Effect -->
+    <div id="loader">
+        <div class="loader-line"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar"></nav>
+
+    <!-- Hero Banner -->
+    <div class="tib-hero">
+        <img src="../../images/misc/tiberian-empire/header.png" alt="The Tiberian Empire">
+    </div>
+
+    <main class="tiber-page">
+        <div class="tib-content">
+
+            <div class="tib-hero-content">
+                <h1 class="tib-hero-title">The <span class="tib-gilt">Tiberian</span> Empire</h1>
+                <p class="tib-hero-tagline">Pre-industrial imperial fantasy — scarce women, sworn oaths, and a winter that should not be coming</p>
+            </div>
+
+            <nav class="tib-jump-nav">
+                <a href="#overview">Overview</a>
+                <a href="#territories">Territories</a>
+                <a href="#lorebook">Lorebook</a>
+                <a href="#characters">Characters</a>
+                <a href="#backgrounds">Backgrounds</a>
+            </nav>
+
+            <!-- Overview -->
+            <div class="tib-intro" id="overview">
+                <div class="tib-intro-side">
+                    <img src="../../images/misc/tiberian-empire/side.png" alt="The Tiberian Empire" loading="lazy">
+                </div>
+                <div class="tib-overview">
+                    <p>
+                        A centralized empire roughly two centuries old, forged by <strong>Emperor Tiber</strong> out of the chaos
+                        of the last <strong>High Winter</strong> &mdash; and never handed back. It is a Greco-Roman imperial
+                        society filtered through medieval feudalism: no gunpowder, very little magic, and a court that runs on
+                        bloodline, oath, and leverage. Roughly three boys are born for every girl, so women are scarce and
+                        fiercely valued, every match a negotiation. All men serve their <strong>conscription</strong>, a duke's
+                        son beside a farmer's, and the army is where most have their first taste of love and loss alike.
+                        The current dynasty seized the throne a decade ago, when the <strong>Silver Knight</strong> cut down
+                        the old tyrant. Now an aging emperor, a Gallemere queen, and a crown prince nearing service age circle
+                        one another &mdash; while in the frozen north, Dunhallow's shamans swear the cycle is turning centuries
+                        too early, and no one south of the snow will listen.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Setting Notes (shared collapsible) -->
+            <details class="setting-notes">
+                <summary><span class="sn-caret">▶</span> Setting Notes</summary>
+                <div class="sn-body">
+                    <p>You can probably already see this was heavily influenced by a certain popular grimdark fantasy series which may or may not ever be completed. ;P But I put my own spin on it.</p>
+                    <p>I'm really interested in gender roles and how people perform gender&mdash;it's such an interesting topic. This setting explores that a little bit in that there's a massive sex imbalance, with way more men than women. In a world like that, presumably society would adapt, for better or worse.</p>
+                </div>
+            </details>
+
+            <!-- ═══ Territories ═══ -->
+            <div class="tib-divider">
+                <span class="tib-divider-icon">✦</span>
+            </div>
+
+            <h2 class="tib-section-title" id="territories">The Six Territories</h2>
+            <div class="tib-territory-grid">
+
+                <div class="tib-territory-card">
+                    <div class="tib-territory-name">Dunhallow</div>
+                    <div class="tib-territory-tag">The frozen north</div>
+                    <div class="tib-territory-desc">Harsh, remote, and fiercely honor-bound. The last to bend the knee, ruled still by its old line. Its shamans keep the oldest memory &mdash; and raise the alarm no one heeds.</div>
+                </div>
+
+                <div class="tib-territory-card">
+                    <div class="tib-territory-name">Kingsward</div>
+                    <div class="tib-territory-tag">The capital, seat of Aventine</div>
+                    <div class="tib-territory-desc">The imperial heart and the most treacherous ground in the empire. The emperor rules here directly, and at court everyone watches everyone.</div>
+                </div>
+
+                <div class="tib-territory-card">
+                    <div class="tib-territory-name">Gallemere</div>
+                    <div class="tib-territory-tag">Dealmakers and diplomats</div>
+                    <div class="tib-territory-desc">Not the richest or strongest, but the most politically nimble. Home of the Queen and the Silver Knight, and the philosophy of cleverness over brute force.</div>
+                </div>
+
+                <div class="tib-territory-card">
+                    <div class="tib-territory-name">Lissane</div>
+                    <div class="tib-territory-tag">Trade and wealth</div>
+                    <div class="tib-territory-desc">Ports, rivers, and agricultural riches that feed and fund the empire. Marriages here are financial mergers, and Lissane funds whoever sits the throne.</div>
+                </div>
+
+                <div class="tib-territory-card">
+                    <div class="tib-territory-name">Guardia</div>
+                    <div class="tib-territory-tag">The martial border</div>
+                    <div class="tib-territory-desc">Loyal, practical, and built on military service. It produces career soldiers, bears the brunt of foreign wars, and quietly resents bleeding so Lissane grows fat.</div>
+                </div>
+
+                <div class="tib-territory-card">
+                    <div class="tib-territory-name">Ballyrath</div>
+                    <div class="tib-territory-tag">The forgotten coast</div>
+                    <div class="tib-territory-desc">Poor, warm, and easygoing &mdash; the empire leaves it alone because there is nothing worth taking. The most socially relaxed corner of the realm, and tougher in a scrap than anyone expects.</div>
+                </div>
+
+            </div>
+
+            <!-- ═══ Lorebook ═══ -->
+            <div class="tib-divider">
+                <span class="tib-divider-icon">✦</span>
+            </div>
+
+            <h2 class="tib-section-title" id="lorebook">Lorebook</h2>
+            <div class="tib-subsection">
+                <a href="../../downloads/characters/tiberian-empire/Tiber - Setting - Tiberian Empire.json" download class="tib-lore-card">
+                    <div class="tib-lore-portrait">
+                        <img src="../../downloads/characters/tiberian-empire/Tiber_lore.png" alt="Tiberian Empire Lorebook" loading="lazy">
+                    </div>
+                    <div class="tib-lore-label">Core Setting</div>
+                </a>
+            </div>
+
+            <!-- ═══ Characters ═══ -->
+            <div class="tib-divider">
+                <span class="tib-divider-icon">✦</span>
+            </div>
+
+            <h2 class="tib-section-title" id="characters">Characters</h2>
+            <p class="tib-overview" style="margin-bottom: 1.5rem; font-size: 0.95rem;">Click a character to see download options.</p>
+
+            <div class="tib-char-grid">
+
+                <!-- Border Unit -->
+                <div class="tib-char-card" onclick="toggleCharMenu(this, event)">
+                    <div class="tib-char-portrait">
+                        <img src="../../downloads/characters/tiberian-empire/Border Unit.png" alt="Border Unit" loading="lazy">
+                        <div class="tib-char-overlay"></div>
+                        <div class="tib-char-menu">
+                            <a href="../../downloads/characters/tiberian-empire/Border Unit.png" download onclick="event.stopPropagation()">Download Card</a>
+                            <a href="https://chub.ai/characters/Mokiikitty/border-unit-273852a584e4" target="_blank" rel="noopener" onclick="event.stopPropagation()">Venus Chub Link</a>
+                        </div>
+                    </div>
+                    <div class="tib-char-name">Border Unit</div>
+                    <div class="tib-char-role">Guardia conscripts</div>
+                    <div class="tib-char-desc">You've been conscripted into Tiber's army. The empire is at peace for the most part, but there are still small skirmishes along Guardia's border with Urh&mdash;and that's where your unit gets posted. It's a boring assignment in an isolated location. The soldiers are young men from all over the empire, and they spend most of their free time gambling and horsing around when they aren't running patrols or doing chores. Unfortunately for you, there's a lot of pent-up energy in service and very few outlets. Your unit has decided that you're a shared resource, and they'll take every opportunity to get you into compromising situations.</div>
+                </div>
+
+            </div>
+
+            <!-- ═══ Backgrounds ═══ -->
+            <div class="tib-divider">
+                <span class="tib-divider-icon">✦</span>
+            </div>
+
+            <h2 class="tib-section-title" id="backgrounds">Backgrounds</h2>
+            <div class="tib-subsection">
+                <div class="tib-bg-grid">
+                    <a href="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Border.png" download class="tib-bg-card">
+                        <div class="tib-bg-thumb">
+                            <img src="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Border.png" alt="Border" loading="lazy">
+                        </div>
+                        <div class="tib-bg-info">
+                            <span class="tib-bg-name">Border</span>
+                            <span class="tib-bg-dl">↓</span>
+                        </div>
+                    </a>
+                    <a href="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Countryside%20Day.png" download class="tib-bg-card">
+                        <div class="tib-bg-thumb">
+                            <img src="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Countryside%20Day.png" alt="Countryside Day" loading="lazy">
+                        </div>
+                        <div class="tib-bg-info">
+                            <span class="tib-bg-name">Countryside Day</span>
+                            <span class="tib-bg-dl">↓</span>
+                        </div>
+                    </a>
+                    <a href="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Countryside%20Night.png" download class="tib-bg-card">
+                        <div class="tib-bg-thumb">
+                            <img src="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Countryside%20Night.png" alt="Countryside Night" loading="lazy">
+                        </div>
+                        <div class="tib-bg-info">
+                            <span class="tib-bg-name">Countryside Night</span>
+                            <span class="tib-bg-dl">↓</span>
+                        </div>
+                    </a>
+                    <a href="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Courtyard.png" download class="tib-bg-card">
+                        <div class="tib-bg-thumb">
+                            <img src="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Courtyard.png" alt="Courtyard" loading="lazy">
+                        </div>
+                        <div class="tib-bg-info">
+                            <span class="tib-bg-name">Courtyard</span>
+                            <span class="tib-bg-dl">↓</span>
+                        </div>
+                    </a>
+                    <a href="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Hunting%20Lodge%20Interior.png" download class="tib-bg-card">
+                        <div class="tib-bg-thumb">
+                            <img src="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Hunting%20Lodge%20Interior.png" alt="Hunting Lodge Interior" loading="lazy">
+                        </div>
+                        <div class="tib-bg-info">
+                            <span class="tib-bg-name">Hunting Lodge Interior</span>
+                            <span class="tib-bg-dl">↓</span>
+                        </div>
+                    </a>
+                    <a href="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Lissane%20Streets.png" download class="tib-bg-card">
+                        <div class="tib-bg-thumb">
+                            <img src="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Lissane%20Streets.png" alt="Lissane Streets" loading="lazy">
+                        </div>
+                        <div class="tib-bg-info">
+                            <span class="tib-bg-name">Lissane Streets</span>
+                            <span class="tib-bg-dl">↓</span>
+                        </div>
+                    </a>
+                    <a href="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Perrin%27s%20Estate.png" download class="tib-bg-card">
+                        <div class="tib-bg-thumb">
+                            <img src="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Perrin%27s%20Estate.png" alt="Perrin's Estate" loading="lazy">
+                        </div>
+                        <div class="tib-bg-info">
+                            <span class="tib-bg-name">Perrin's Estate</span>
+                            <span class="tib-bg-dl">↓</span>
+                        </div>
+                    </a>
+                    <a href="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Temple%20of%20Cairos%20Exterior%20Day.png" download class="tib-bg-card">
+                        <div class="tib-bg-thumb">
+                            <img src="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Temple%20of%20Cairos%20Exterior%20Day.png" alt="Temple of Cairos Exterior Day" loading="lazy">
+                        </div>
+                        <div class="tib-bg-info">
+                            <span class="tib-bg-name">Temple of Cairos Exterior Day</span>
+                            <span class="tib-bg-dl">↓</span>
+                        </div>
+                    </a>
+                    <a href="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Temple%20of%20Cairos%20Exterior%20Night.png" download class="tib-bg-card">
+                        <div class="tib-bg-thumb">
+                            <img src="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Temple%20of%20Cairos%20Exterior%20Night.png" alt="Temple of Cairos Exterior Night" loading="lazy">
+                        </div>
+                        <div class="tib-bg-info">
+                            <span class="tib-bg-name">Temple of Cairos Exterior Night</span>
+                            <span class="tib-bg-dl">↓</span>
+                        </div>
+                    </a>
+                    <a href="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Temple%20of%20Cairos%20Interior%20Day.png" download class="tib-bg-card">
+                        <div class="tib-bg-thumb">
+                            <img src="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Temple%20of%20Cairos%20Interior%20Day.png" alt="Temple of Cairos Interior Day" loading="lazy">
+                        </div>
+                        <div class="tib-bg-info">
+                            <span class="tib-bg-name">Temple of Cairos Interior Day</span>
+                            <span class="tib-bg-dl">↓</span>
+                        </div>
+                    </a>
+                    <a href="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Temple%20of%20Cairos%20Interior%20Night.png" download class="tib-bg-card">
+                        <div class="tib-bg-thumb">
+                            <img src="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Temple%20of%20Cairos%20Interior%20Night.png" alt="Temple of Cairos Interior Night" loading="lazy">
+                        </div>
+                        <div class="tib-bg-info">
+                            <span class="tib-bg-name">Temple of Cairos Interior Night</span>
+                            <span class="tib-bg-dl">↓</span>
+                        </div>
+                    </a>
+                    <a href="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Woods%20Day.png" download class="tib-bg-card">
+                        <div class="tib-bg-thumb">
+                            <img src="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Woods%20Day.png" alt="Woods Day" loading="lazy">
+                        </div>
+                        <div class="tib-bg-info">
+                            <span class="tib-bg-name">Woods Day</span>
+                            <span class="tib-bg-dl">↓</span>
+                        </div>
+                    </a>
+                    <a href="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Woods%20Night.png" download class="tib-bg-card">
+                        <div class="tib-bg-thumb">
+                            <img src="../../downloads/characters/tiberian-empire/backgrounds/Tiber%20Woods%20Night.png" alt="Woods Night" loading="lazy">
+                        </div>
+                        <div class="tib-bg-info">
+                            <span class="tib-bg-name">Woods Night</span>
+                            <span class="tib-bg-dl">↓</span>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="subtle-footer">
+        <p>&copy; 2026 Moki.</p>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top tib-themed" aria-label="Back to top">↑</button>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function toggleCharMenu(card, event) {
+            const menu = card.querySelector('.tib-char-menu');
+            if (!menu) return;
+            const wasOpen = card.classList.contains('menu-open');
+            document.querySelectorAll('.tib-char-card.menu-open').forEach(c => c.classList.remove('menu-open'));
+            if (!wasOpen) card.classList.add('menu-open');
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.tib-char-card')) {
+                document.querySelectorAll('.tib-char-card.menu-open').forEach(c => c.classList.remove('menu-open'));
+            }
+        });
+
+        // Tooltip edge detection — flip to the left when there's no room on the right
+        document.querySelectorAll('.tib-char-card').forEach(card => {
+            const desc = card.querySelector('.tib-char-desc');
+            if (!desc) return;
+            const decideSide = () => {
+                const rect = card.getBoundingClientRect();
+                const needed = 240 + 12 + 16;
+                card.classList.toggle('flip-tip', rect.right + needed > window.innerWidth);
+            };
+            card.addEventListener('mouseenter', decideSide);
+            card.addEventListener('focusin', decideSide);
+        });
+
+        // Back to top
+        const backToTop = document.querySelector('.back-to-top');
+        if (backToTop) {
+            const toggleBackToTop = () => {
+                backToTop.classList.toggle('visible', window.scrollY > 400);
+            };
+            window.addEventListener('scroll', toggleBackToTop, { passive: true });
+            toggleBackToTop();
+            backToTop.addEventListener('click', () => {
+                const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+            });
+        }
+    </script>
+</body>
+</html>

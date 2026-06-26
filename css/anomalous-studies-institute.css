@@ -123,6 +123,40 @@
     scroll-margin-top: 5rem;
 }
 
+/* ── Intro Row (side image + overview) ──────────── */
+.asi-intro {
+    display: flex;
+    align-items: stretch;
+    gap: 2rem;
+}
+
+.asi-intro-side {
+    position: relative;
+    flex-shrink: 0;
+    width: 280px;
+    min-height: 300px;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, #000 70%, transparent 100%), linear-gradient(to bottom, #000 70%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to right, #000 70%, transparent 100%), linear-gradient(to bottom, #000 70%, transparent 100%);
+    mask-composite: intersect;
+}
+
+.asi-intro-side img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    object-position: top center;
+}
+
+.asi-intro .asi-overview {
+    max-width: none;
+    flex: 1;
+}
+
 /* ── Overview Section ───────────────────────────── */
 .asi-overview {
     font-family: var(--asi-font-body);
@@ -251,7 +285,7 @@
 }
 
 .asi-char-name {
-    padding: 0.7rem 0.9rem;
+    padding: 0.7rem 0.9rem 0.15rem;
     font-family: var(--asi-font-display);
     font-size: 0.78rem;
     font-weight: 600;
@@ -261,7 +295,7 @@
 }
 
 .asi-char-role {
-    padding: 0 0.9rem 0.7rem;
+    padding: 0 0.9rem 0.5rem;
     font-family: var(--asi-font-body);
     font-size: 0.78rem;
     font-weight: 300;
@@ -295,49 +329,132 @@
     pointer-events: none;
 }
 
-/* ── Character Context Menu ─────────────────────── */
-.asi-char-menu {
-    position: fixed;
-    background: var(--asi-surface);
-    border: 1px solid var(--asi-olive-dim);
-    min-width: 180px;
-    z-index: 100;
+/* ── Character Context Menu (in-place unfold) ───── */
+.asi-char-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 9, 11, 0.72);
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.15s ease;
+    transition: opacity 0.25s ease;
+    z-index: 2;
 }
 
-.asi-char-menu.active {
+.asi-char-card.menu-open .asi-char-overlay {
     opacity: 1;
+}
+
+.asi-char-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.6rem 0.55rem;
+    pointer-events: none;
+}
+
+.asi-char-card.menu-open .asi-char-menu {
     pointer-events: auto;
 }
 
 .asi-char-menu a {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.7rem 1rem;
+    display: block;
+    padding: 0.4rem 0.55rem;
     text-decoration: none;
     color: var(--asi-cold-white);
     font-family: var(--asi-font-body);
-    font-size: 0.85rem;
-    transition: background 0.15s ease;
+    font-size: 0.78rem;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    border-radius: 3px;
+    opacity: 0;
+    transform: translateY(-3px);
+    transition: opacity 0.2s ease, transform 0.2s ease, background 0.15s ease, color 0.15s ease;
 }
 
 .asi-char-menu a:hover {
     background: var(--asi-olive-glow);
+    color: #fff;
 }
 
-.asi-char-menu a .menu-icon {
+.asi-char-card.menu-open .asi-char-menu a {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.asi-char-card.menu-open .asi-char-menu a:nth-child(2) { transition-delay: 0.05s; }
+.asi-char-card.menu-open .asi-char-menu a:nth-child(3) { transition-delay: 0.10s; }
+.asi-char-card.menu-open .asi-char-menu a:nth-child(4) { transition-delay: 0.15s; }
+.asi-char-card.menu-open .asi-char-menu a:nth-child(5) { transition-delay: 0.20s; }
+
+/* ── Character Hover Tooltip ────────────────────── */
+.asi-char-desc {
+    position: absolute;
+    top: 0;
+    left: calc(100% + 12px);
+    width: 240px;
+    max-width: 70vw;
+    padding: 0.75rem 0.85rem;
+    background: rgba(18, 20, 24, 0.97);
+    border: 1px solid var(--asi-olive-dim);
+    border-radius: 8px;
+    color: var(--asi-cold-white);
+    font-family: var(--asi-font-body);
     font-size: 0.75rem;
-    color: var(--asi-olive);
-    opacity: 0.6;
-    width: 1rem;
-    text-align: center;
+    font-weight: 300;
+    line-height: 1.55;
+    letter-spacing: 0.2px;
+    text-align: left;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(-4px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    z-index: 60;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
 }
 
-.asi-char-menu a + a {
-    border-top: 1px solid var(--asi-dark-border);
+.asi-char-desc::after {
+    content: '';
+    position: absolute;
+    top: 24px;
+    right: 100%;
+    border: 6px solid transparent;
+    border-right-color: var(--asi-olive-dim);
+}
+
+.asi-char-card.flip-tip .asi-char-desc {
+    left: auto;
+    right: calc(100% + 12px);
+    transform: translateX(4px);
+}
+
+.asi-char-card.flip-tip .asi-char-desc::after {
+    right: auto;
+    left: 100%;
+    border-right-color: transparent;
+    border-left-color: var(--asi-olive-dim);
+}
+
+.asi-char-card:hover .asi-char-desc,
+.asi-char-card:focus-within .asi-char-desc {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.asi-char-card.menu-open .asi-char-desc {
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+@media (max-width: 640px) {
+    .asi-char-desc {
+        display: none;
+    }
 }
 
 /* ── Background Preview Cards ───────────────────── */
@@ -452,6 +569,20 @@
     .asi-jump-nav {
         gap: 1.2rem;
     }
+
+    .asi-intro {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .asi-intro-side {
+        width: 100%;
+        max-width: 320px;
+        align-self: center;
+        -webkit-mask-image: linear-gradient(to bottom, #000 75%, transparent 100%);
+        mask-image: linear-gradient(to bottom, #000 75%, transparent 100%);
+    }
 }
 
 @media (max-width: 420px) {
@@ -463,4 +594,37 @@
         grid-template-columns: 1fr;
         max-width: 220px;
     }
+}
+
+
+/* ── Setting Notes theming (shared component) ───── */
+.asi-page .setting-notes {
+    --sn-accent: var(--asi-olive);
+    --sn-font-head: var(--asi-font-display);
+    --sn-font-body: var(--asi-font-body);
+    --sn-border: var(--asi-dark-border);
+}
+
+.asi-page .setting-notes .sn-body {
+    color: var(--asi-muted);
+}
+
+
+/* ── Back to Top theming (shared component) ─────── */
+.back-to-top.asi-themed {
+    --btt-accent: var(--asi-olive);
+    --btt-bg: rgba(18, 20, 24, 0.85);
+    --btt-border: var(--asi-olive-dim);
+}
+
+
+/* ── Song Player theming (shared component) ─────── */
+.asi-page {
+    --player-accent: var(--asi-olive);
+    --player-muted: var(--asi-muted);
+    --player-glow: var(--asi-olive-glow);
+    --player-accent-dim: var(--asi-olive-dim);
+    --player-menu-bg: rgba(18, 20, 24, 0.98);
+    --player-menu-text: var(--asi-cold-white);
+    --player-font: var(--asi-font-body);
 }

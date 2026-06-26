@@ -40,6 +40,29 @@
             height: auto;
         }
 
+        .util-toc {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin-top: 2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .util-toc a {
+            font-family: var(--font-h2);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color 0.2s ease;
+        }
+
+        .util-toc a:hover {
+            color: var(--accent);
+        }
+
         .misc-link {
             display: inline-block;
             font-family: var(--font-h2);
@@ -80,24 +103,21 @@
     </div>
 
     <!-- Navigation -->
-    <nav id="navbar">
-        <a href="../index.html" class="nav-brand">MOKI.</a>
-        <div class="nav-links">
-            <a href="about.html">About Me</a>
-            <a href="presets.html">Presets</a>
-            <a href="characters.html">Characters</a>
-            <a href="utilities.html" class="active">Utilities</a>
-            <a href="aesthetics.html">Aesthetics</a>
-        </div>
-    </nav>
+    <nav id="navbar"></nav>
 
     <!-- Page Content -->
     <main class="container">
         <h1>Utilities</h1>
         <p>Tools and extensions I've built for SillyTavern.</p>
 
+        <!-- Table of Contents -->
+        <nav class="util-toc">
+            <a href="#extensions">Extensions</a>
+            <a href="#tools">Tools</a>
+        </nav>
+
         <!-- Extensions Section -->
-        <section class="util-section" style="margin-top: 3rem;">
+        <section id="extensions" class="util-section" style="margin-top: 3rem;">
             <h2>Extensions</h2>
             <div class="ext-grid">
                 <a href="https://github.com/mokimoko/SillyTavern-WhiteLotus" target="_blank" rel="noopener" class="ext-link">
@@ -127,12 +147,16 @@
             </div>
         </section>
 
-        <!-- Misc Section -->
-        <section class="util-section">
-            <h2>Misc</h2>
+        <!-- Tools Section -->
+        <section id="tools" class="util-section">
+            <h2>Tools</h2>
             <div>
-                <a href="extractor.html" class="misc-link">Character Card Extractor</a>
+                <a href="extractor.html" class="misc-link">Card Extractor</a>
                 <div class="misc-link-desc">Extract text from character cards and lorebooks · download as TXT, JSON, or PDF</div>
+            </div>
+            <div style="margin-top: 1.5rem;">
+                <a href="card-builder.html" class="misc-link">Card Builder</a>
+                <div class="misc-link-desc">Fill out fields in my prose card style and copy the finished character definition</div>
             </div>
         </section>
     </main>

@@ -1,0 +1,647 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Cinzel:wght@400;500;600;700;800&display=swap');
+
+/* ── Tiberian Empire Theme Variables ────────────── */
+:root {
+    --tib-bg: #0c0a07;
+    --tib-surface: #161209;
+    --tib-gold: #b89a5e;
+    --tib-gold-bright: #cdb27e;
+    --tib-gold-dim: rgba(184, 154, 94, 0.28);
+    --tib-gold-glow: rgba(184, 154, 94, 0.08);
+    --tib-wine: #7a2e35;
+    --tib-wine-bright: #a3434c;
+    --tib-parchment: #e3d8c2;
+    --tib-muted: #9a8c70;
+    --tib-dark-border: rgba(184, 154, 94, 0.08);
+    --tib-glass: rgba(184, 154, 94, 0.025);
+    --tib-font-display: 'Cinzel', serif;
+    --tib-font-serif: 'Crimson Text', serif;
+}
+
+/* ── Page Base ──────────────────────────────────── */
+.tiber-page {
+    flex: 1;
+    background: var(--tib-bg);
+    color: var(--tib-parchment);
+    font-family: var(--tib-font-serif);
+}
+
+/* ── Hero Banner ────────────────────────────────── */
+.tib-hero {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.tib-hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.tib-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 25%,
+        rgba(12, 10, 7, 0.65) 62%,
+        var(--tib-bg) 100%
+    );
+}
+
+.tib-hero-content {
+    text-align: center;
+    margin-top: -4.5rem;
+    position: relative;
+    z-index: 2;
+    padding: 0 2rem 1rem;
+}
+
+.tib-hero-title {
+    font-family: var(--tib-font-display);
+    font-size: 3.4rem;
+    font-weight: 500;
+    color: var(--tib-parchment);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55);
+}
+
+.tib-hero-title .tib-gilt {
+    color: var(--tib-gold);
+}
+
+.tib-hero-tagline {
+    font-family: var(--tib-font-serif);
+    font-size: 1.12rem;
+    font-style: italic;
+    color: var(--tib-muted);
+    letter-spacing: 1px;
+}
+
+/* ── Content Container ──────────────────────────── */
+.tib-content {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+}
+
+/* ── Jump Nav ───────────────────────────────────── */
+.tib-jump-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.tib-jump-nav a {
+    font-family: var(--tib-font-display);
+    font-size: 0.68rem;
+    color: var(--tib-muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: color 0.3s ease;
+}
+
+.tib-jump-nav a:hover {
+    color: var(--tib-gold);
+}
+
+/* ── Intro Row (side image + overview) ──────────── */
+.tib-intro {
+    display: flex;
+    align-items: stretch;
+    gap: 2rem;
+}
+
+.tib-intro-side {
+    position: relative;
+    flex-shrink: 0;
+    width: 280px;
+    min-height: 300px;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, #000 70%, transparent 100%), linear-gradient(to bottom, #000 70%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to right, #000 70%, transparent 100%), linear-gradient(to bottom, #000 70%, transparent 100%);
+    mask-composite: intersect;
+}
+
+.tib-intro-side img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    object-position: top center;
+}
+
+.tib-intro .tib-overview {
+    max-width: none;
+    flex: 1;
+}
+
+/* ── Overview Section ───────────────────────────── */
+.tib-overview {
+    font-family: var(--tib-font-serif);
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--tib-muted);
+    max-width: 780px;
+}
+
+.tib-overview strong {
+    color: var(--tib-parchment);
+    font-weight: 600;
+}
+
+/* ── Ornamental Divider ─────────────────────────── */
+.tib-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3.5rem 0 2.5rem;
+}
+
+.tib-divider::before,
+.tib-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        var(--tib-gold-dim),
+        transparent
+    );
+}
+
+.tib-divider-icon {
+    font-family: var(--tib-font-display);
+    font-size: 0.7rem;
+    color: var(--tib-gold);
+    opacity: 0.4;
+    letter-spacing: 2px;
+}
+
+/* ── Section Headers ────────────────────────────── */
+.tib-section-title {
+    font-family: var(--tib-font-display);
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: var(--tib-gold);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    scroll-margin-top: 5rem;
+}
+
+/* ── Sub-section ────────────────────────────────── */
+.tib-subsection {
+    margin-bottom: 2.5rem;
+}
+
+/* ── Territories Grid (Tiber-specific) ──────────── */
+.tib-territory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.75rem 2rem;
+}
+
+.tib-territory-card {
+    border: none;
+    background: none;
+    padding: 0.2rem 0 0.2rem 1.1rem;
+    border-left: 1px solid var(--tib-dark-border);
+    transition: border-color 0.4s ease;
+}
+
+.tib-territory-card:hover {
+    border-left-color: var(--tib-gold-dim);
+    background: none;
+}
+
+.tib-territory-name {
+    font-family: var(--tib-font-display);
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--tib-gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.2rem;
+}
+
+.tib-territory-tag {
+    font-family: var(--tib-font-serif);
+    font-size: 0.82rem;
+    font-style: italic;
+    color: var(--tib-muted);
+    margin-bottom: 0.6rem;
+}
+
+.tib-territory-desc {
+    font-family: var(--tib-font-serif);
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: var(--tib-parchment);
+    opacity: 0.72;
+}
+
+/* ── Lorebook Card ──────────────────────────────── */
+.tib-lore-card {
+    display: block;
+    width: 140px;
+    border: 1px solid var(--tib-dark-border);
+    background: var(--tib-glass);
+    text-decoration: none;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+    cursor: pointer;
+}
+
+.tib-lore-card:hover {
+    border-color: var(--tib-gold-dim);
+}
+
+.tib-lore-portrait {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.tib-lore-portrait img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.5s ease;
+}
+
+.tib-lore-card:hover .tib-lore-portrait img {
+    transform: scale(1.05);
+}
+
+.tib-lore-label {
+    padding: 0.7rem 0.9rem;
+    font-family: var(--tib-font-display);
+    font-size: 0.72rem;
+    color: var(--tib-parchment);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ── Character Cards (portrait + context menu) ──── */
+.tib-char-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 200px));
+    gap: 1.5rem;
+}
+
+.tib-char-card {
+    position: relative;
+    border: 1px solid var(--tib-dark-border);
+    background: var(--tib-glass);
+    overflow: visible;
+    transition: border-color 0.3s ease;
+    cursor: pointer;
+}
+
+.tib-char-card:hover {
+    border-color: var(--tib-gold-dim);
+}
+
+.tib-char-portrait {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+}
+
+.tib-char-portrait img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.5s ease;
+}
+
+.tib-char-card:hover .tib-char-portrait img {
+    transform: scale(1.05);
+}
+
+.tib-char-name {
+    padding: 0.7rem 0.9rem 0;
+    font-family: var(--tib-font-display);
+    font-size: 0.72rem;
+    color: var(--tib-parchment);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tib-char-role {
+    padding: 0.15rem 0.9rem 0.7rem;
+    font-family: var(--tib-font-serif);
+    font-size: 0.78rem;
+    color: var(--tib-muted);
+    font-style: italic;
+}
+
+/* Coming Soon state */
+.tib-char-card.coming-soon {
+    cursor: default;
+}
+
+.tib-char-card.coming-soon .tib-char-portrait {
+    filter: grayscale(0.6) brightness(0.5);
+}
+
+.tib-char-soon-badge {
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--tib-font-display);
+    font-size: 0.6rem;
+    color: var(--tib-muted);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    background: rgba(12, 10, 7, 0.85);
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--tib-dark-border);
+    pointer-events: none;
+}
+
+/* ── Character Context Menu (in-place unfold) ───── */
+.tib-char-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 8, 5, 0.72);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 2;
+}
+
+.tib-char-card.menu-open .tib-char-overlay {
+    opacity: 1;
+}
+
+.tib-char-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.6rem 0.55rem;
+    pointer-events: none;
+}
+
+.tib-char-card.menu-open .tib-char-menu {
+    pointer-events: auto;
+}
+
+.tib-char-menu a {
+    display: block;
+    padding: 0.4rem 0.55rem;
+    text-decoration: none;
+    color: var(--tib-parchment);
+    font-family: var(--tib-font-serif);
+    font-size: 0.85rem;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    border-radius: 3px;
+    opacity: 0;
+    transform: translateY(-3px);
+    transition: opacity 0.2s ease, transform 0.2s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.tib-char-menu a:hover {
+    background: var(--tib-gold-glow);
+    color: #fff;
+}
+
+.tib-char-card.menu-open .tib-char-menu a {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tib-char-card.menu-open .tib-char-menu a:nth-child(2) { transition-delay: 0.05s; }
+.tib-char-card.menu-open .tib-char-menu a:nth-child(3) { transition-delay: 0.10s; }
+.tib-char-card.menu-open .tib-char-menu a:nth-child(4) { transition-delay: 0.15s; }
+.tib-char-card.menu-open .tib-char-menu a:nth-child(5) { transition-delay: 0.20s; }
+
+/* ── Character Hover Tooltip ────────────────────── */
+.tib-char-desc {
+    position: absolute;
+    top: 0;
+    left: calc(100% + 12px);
+    width: 240px;
+    max-width: 70vw;
+    padding: 0.75rem 0.85rem;
+    background: rgba(22, 18, 9, 0.97);
+    border: 1px solid var(--tib-gold-dim);
+    border-radius: 8px;
+    color: var(--tib-parchment);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.55;
+    letter-spacing: 0.2px;
+    text-align: left;
+    font-style: normal;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(-4px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    z-index: 60;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+}
+
+.tib-char-desc::after {
+    content: '';
+    position: absolute;
+    top: 24px;
+    right: 100%;
+    border: 6px solid transparent;
+    border-right-color: var(--tib-gold-dim);
+}
+
+.tib-char-card.flip-tip .tib-char-desc {
+    left: auto;
+    right: calc(100% + 12px);
+    transform: translateX(4px);
+}
+
+.tib-char-card.flip-tip .tib-char-desc::after {
+    right: auto;
+    left: 100%;
+    border-right-color: transparent;
+    border-left-color: var(--tib-gold-dim);
+}
+
+.tib-char-card:hover .tib-char-desc,
+.tib-char-card:focus-within .tib-char-desc {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.tib-char-card.menu-open .tib-char-desc {
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+@media (max-width: 640px) {
+    .tib-char-desc {
+        display: none;
+    }
+}
+
+/* ── Background Preview Cards ───────────────────── */
+.tib-bg-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 280px));
+    gap: 1.5rem;
+}
+
+.tib-bg-card {
+    display: block;
+    border: 1px solid var(--tib-dark-border);
+    background: var(--tib-glass);
+    overflow: hidden;
+    text-decoration: none;
+    transition: border-color 0.3s ease;
+}
+
+.tib-bg-card:hover {
+    border-color: var(--tib-gold-dim);
+}
+
+.tib-bg-thumb {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+
+.tib-bg-thumb img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.tib-bg-card:hover .tib-bg-thumb img {
+    transform: scale(1.05);
+}
+
+.tib-bg-info {
+    padding: 0.6rem 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tib-bg-name {
+    font-family: var(--tib-font-display);
+    font-size: 0.65rem;
+    color: var(--tib-parchment);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tib-bg-dl {
+    font-family: var(--tib-font-serif);
+    font-size: 0.75rem;
+    color: var(--tib-gold);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.tib-bg-card:hover .tib-bg-dl {
+    opacity: 0.8;
+}
+
+/* ── Responsive ─────────────────────────────────── */
+@media (max-width: 768px) {
+    .tib-hero-title {
+        font-size: 2.2rem;
+        letter-spacing: 3px;
+    }
+
+    .tib-char-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tib-territory-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tib-intro {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .tib-intro-side {
+        width: 100%;
+        max-width: 320px;
+        align-self: center;
+        -webkit-mask-image: linear-gradient(to bottom, #000 75%, transparent 100%);
+        mask-image: linear-gradient(to bottom, #000 75%, transparent 100%);
+    }
+}
+
+@media (max-width: 420px) {
+    .tib-hero-title {
+        font-size: 1.6rem;
+    }
+
+    .tib-char-grid {
+        grid-template-columns: 1fr;
+        max-width: 220px;
+    }
+}
+
+
+/* ── Setting Notes theming (shared component) ───── */
+.tiber-page .setting-notes {
+    --sn-accent: var(--tib-gold);
+    --sn-font-head: var(--tib-font-display);
+    --sn-font-body: var(--tib-font-serif);
+    --sn-border: var(--tib-dark-border);
+}
+
+.tiber-page .setting-notes .sn-body {
+    color: var(--tib-muted);
+}
+
+
+/* ── Back to Top theming (shared component) ─────── */
+.back-to-top.tib-themed {
+    --btt-accent: var(--tib-gold);
+    --btt-bg: rgba(22, 18, 9, 0.85);
+    --btt-border: var(--tib-gold-dim);
+}
+
+
+/* ── Song Player theming (shared component) ─────── */
+.tiber-page {
+    --player-accent: var(--tib-gold);
+    --player-muted: var(--tib-muted);
+    --player-glow: var(--tib-gold-glow);
+    --player-accent-dim: var(--tib-gold-dim);
+    --player-menu-bg: rgba(22, 18, 9, 0.98);
+    --player-menu-text: var(--tib-parchment);
+    --player-font: var(--tib-font-serif);
+}

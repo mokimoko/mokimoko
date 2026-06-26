@@ -3,1390 +3,1075 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hell, inc. ◊ corporate afterlife</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <title>hell, inc. — corporate afterlife division</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* ── Reset ─────────────────────────────────────── */
+        * { margin: 0; padding: 0; box-sizing: border-box; border-radius: 0; }
+
+        /* ── Theme: one signature oxblood accent, amber reserved
+              for warning/classified states only ───────────── */
+        :root {
+            --hi-bg:        #0a0708;
+            --hi-surface:   #141013;
+            --hi-surface-2: #1b151a;
+            --hi-line:      rgba(196, 122, 122, 0.14);
+            --hi-line-soft: rgba(255, 255, 255, 0.06);
+            --hi-blood:     #b23a3a;
+            --hi-blood-dim: rgba(178, 58, 58, 0.40);
+            --hi-blood-glow:rgba(178, 58, 58, 0.08);
+            --hi-amber:     #c4923f;
+            --hi-amber-dim: rgba(196, 146, 63, 0.40);
+            --hi-ink:       #e7dfe2;
+            --hi-muted:     #8a7f85;
+            --hi-paper:     #cdc3b2;
+            --hi-paper-ink: #322b26;
+
+            --hi-font-display: 'Oswald', sans-serif;
+            --hi-font-body:    'Inter', sans-serif;
+            --hi-font-mono:    'Space Mono', monospace;
         }
 
+        /* ── Page Base ─────────────────────────────────── */
         body {
-            font-family: 'Inter', sans-serif;
-            background: 
-                linear-gradient(165deg, 
-                    rgba(20, 5, 35, 0.85) 0%, 
-                    rgba(45, 15, 25, 0.75) 30%, 
-                    rgba(15, 25, 45, 0.85) 70%, 
-                    rgba(5, 15, 35, 0.9) 100%),
-                repeating-linear-gradient(90deg, 
-                    transparent 0px, 
-                    rgba(255, 255, 255, 0.008) 1px, 
-                    transparent 2px),
-                repeating-linear-gradient(0deg, 
-                    transparent 0px, 
-                    rgba(255, 255, 255, 0.003) 1px, 
-                    transparent 2px),
+            font-family: var(--hi-font-body);
+            background:
+                linear-gradient(180deg, rgba(10,7,8,0.86) 0%, rgba(10,7,8,0.94) 100%),
                 url('images/background.png');
-            background-attachment: scroll, fixed, fixed, fixed;
-            background-size: cover, auto, auto, cover;
-            background-position: center, 0% 0%, 0% 0%, center;
-            background-repeat: no-repeat, repeat, repeat, no-repeat;
-            color: #e8e3f0;
-            line-height: 1.6;
+            background-attachment: scroll, fixed;
+            background-size: cover, cover;
+            background-position: center, center;
+            background-repeat: no-repeat, no-repeat;
+            color: var(--hi-ink);
+            line-height: 1.65;
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Floating particles effect */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 25% 25%, rgba(255, 100, 100, 0.03) 0%, transparent 25%),
-                radial-gradient(circle at 75% 75%, rgba(255, 200, 50, 0.02) 0%, transparent 25%),
-                radial-gradient(circle at 50% 10%, rgba(100, 150, 255, 0.02) 0%, transparent 25%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Main Layout */
-        .hellsite-wrapper {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
+        .hi-wrap {
+            max-width: 880px;
             margin: 0 auto;
-            padding: 2rem 1.5rem;
+            padding: 2.5rem 1.5rem 4rem;
         }
 
-        /* Header Banner */
-        .hellsite-banner {
+        /* ── Masthead ──────────────────────────────────── */
+        .hi-banner {
             width: 100%;
-            height: 100px;
+            height: 92px;
             background-image: url('images/banner.png');
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            position: relative;
-            overflow: hidden;
+            border: 1px solid var(--hi-line);
+            margin-bottom: 1.25rem;
         }
 
-        /* Navigation Header */
-        .hellsite-nav-header {
-            background: 
-                linear-gradient(180deg, 
-                    rgba(25, 20, 40, 0.3) 0%, 
-                    rgba(25, 20, 40, 0.5) 30%, 
-                    rgba(25, 20, 40, 0.7) 100%),
+        .hi-mast {
+            border: 1px solid var(--hi-line);
+            border-top: 2px solid var(--hi-blood);
+            background:
+                linear-gradient(180deg, rgba(20,16,19,0.92), rgba(14,11,13,0.92)),
                 url('images/menubg.png');
-            background-size: cover, cover;
-            background-position: center, center;
-            background-repeat: no-repeat, no-repeat;
-            backdrop-filter: blur(12px);
-            border: 2px solid transparent;
-            background-clip: padding-box;
-            border-radius: 16px;
-            padding: 1.5rem 2rem;
-            text-align: center;
-            margin-bottom: 1rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hellsite-nav-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 16px;
-            padding: 2px;
-            background: linear-gradient(135deg, 
-                rgba(255, 100, 100, 0.3) 0%, 
-                rgba(255, 200, 50, 0.2) 50%, 
-                rgba(100, 150, 255, 0.3) 100%);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask-composite: exclude;
-            z-index: -1;
-        }
-
-        .hellsite-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3rem;
-            font-weight: 600;
-            letter-spacing: 0.2rem;
-            margin-bottom: 0.25rem;
-            background: linear-gradient(45deg, 
-                #ff6464 0%, 
-                #ffb347 30%, 
-                #4a9eff 70%, 
-                #ff6464 100%);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: hellsite-gradient-shift 8s ease-in-out infinite;
-            text-shadow: 0 0 30px rgba(255, 100, 100, 0.3);
-        }
-
-        .hellsite-subtitle {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.9rem;
-            font-weight: 400;
-            letter-spacing: 0.15rem;
-            color: #b8a8c8;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-        }
-
-        .hellsite-nav {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .hellsite-nav-btn {
-            background: rgba(40, 30, 60, 0.6);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #d8c8e8;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 500;
-            letter-spacing: 0.05rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .hellsite-nav-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 100, 100, 0.1), 
-                transparent);
-            transition: left 0.5s ease;
-        }
-
-        .hellsite-nav-btn:hover::before {
-            left: 100%;
-        }
-
-        .hellsite-nav-btn:hover {
-            background: rgba(60, 40, 80, 0.8);
-            border-color: rgba(255, 100, 100, 0.4);
-            color: #f0e8f8;
-            transform: translateY(-2px);
-        }
-
-        .hellsite-nav-btn.active {
-            background: rgba(255, 100, 100, 0.15);
-            border-color: rgba(255, 100, 100, 0.5);
-            color: #ff8080;
-        }
-
-        /* Page Sections */
-        .hellsite-page {
-            display: none;
-        }
-
-        .hellsite-page.active {
-            display: block;
-        }
-
-        /* Home/Memo Page */
-        .hellsite-memo {
-            background: rgba(255, 245, 225, 0.95);
-            color: #2a2a2a;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hellsite-memo::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 60px;
-            width: 2px;
-            height: 100%;
-            background: rgba(255, 100, 100, 0.3);
-        }
-
-        .hellsite-memo-header {
-            background: rgba(255, 100, 100, 0.1);
-            padding: 1.5rem 2rem 1.5rem 80px;
-            border-bottom: 2px solid rgba(255, 100, 100, 0.2);
-        }
-
-        .hellsite-memo-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 1rem;
-            font-weight: 700;
-            color: #d62d20;
-            text-transform: uppercase;
-            letter-spacing: 0.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .hellsite-memo-from {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
-            color: #666;
-        }
-
-        .hellsite-memo-content {
-            padding: 2rem 2rem 2rem 80px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            line-height: 1.7;
-            color: #3a3a3a;
-        }
-
-        .hellsite-memo-content p {
-            margin-bottom: 1.2rem;
-        }
-
-        .hellsite-memo-content .highlight {
-            background: rgba(255, 200, 50, 0.2);
-            padding: 0.1rem 0.3rem;
-            border-radius: 3px;
-        }
-
-        /* Personnel Files Section */
-        .hellsite-section {
-            background: rgba(20, 15, 35, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .hellsite-section-header {
-            background: linear-gradient(135deg, 
-                rgba(255, 100, 100, 0.1) 0%, 
-                rgba(40, 30, 60, 0.3) 100%);
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .hellsite-section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 500;
-            color: #ff8080;
-            letter-spacing: 0.1rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .hellsite-section-subtitle {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.7rem;
-            color: #a090b0;
-            letter-spacing: 0.1rem;
-            text-transform: uppercase;
-        }
-
-        /* Character Files */
-        .hellsite-character-grid {
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
-        }
-
-        .hellsite-character-file {
-            background: rgba(30, 25, 45, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .hellsite-character-header {
-            background: rgba(40, 35, 55, 0.6);
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .hellsite-character-icon {
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-        }
-
-        .hellsite-character-filename {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.9rem;
-            color: #e8d8f8;
-            font-weight: 500;
-        }
-
-        .hellsite-character-extension {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.8rem;
-            color: #a090b0;
-            margin-left: auto;
-        }
-
-        .hellsite-character-content {
-            display: flex;
-            gap: 2rem;
-            padding: 2rem 1.5rem;
-            align-items: flex-start;
-        }
-
-        .hellsite-character-image {
-            flex: 0 0 200px;
-            height: 250px;
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
+            padding: 1.75rem 2rem 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .hi-mast-top {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: #ff8080;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hellsite-character-imagecol {
-            flex: 0 0 200px;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .hellsite-character-imagecol .hellsite-character-image {
-            flex: 0 0 250px;
-            width: 100%;
-        }
-
-        .hellsite-character-imagecol .hellsite-character-link {
-            justify-content: center;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .hellsite-character-image.placeholder {
-            background: linear-gradient(135deg, 
-                rgba(255, 100, 100, 0.15) 0%, 
-                rgba(40, 30, 60, 0.4) 100%);
-        }
-
-        .hellsite-character-image.placeholder::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: repeating-linear-gradient(
-                45deg,
-                transparent 0px,
-                rgba(255, 255, 255, 0.02) 1px,
-                transparent 2px,
-                transparent 10px
-            );
-        }
-
-        .hellsite-character-image:not(.placeholder) {
-            font-size: 0;
-        }
-
-        .hellsite-character-info {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+            align-items: baseline;
+            justify-content: space-between;
             gap: 1rem;
-        }
-
-        .hellsite-character-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 600;
-            color: #ffb380;
-            letter-spacing: 0.05rem;
-        }
-
-        .hellsite-character-role {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.75rem;
-            color: #8090c0;
-            text-transform: uppercase;
-            letter-spacing: 0.1rem;
-            background: rgba(80, 90, 120, 0.15);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            align-self: flex-start;
-        }
-
-        .hellsite-character-desc {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            color: #c8b8d8;
-            margin-bottom: 0.75rem;
-        }
-
-        /* Character Card Links */
-        .hellsite-character-links {
-            display: flex;
-            gap: 0.75rem;
             flex-wrap: wrap;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--hi-line-soft);
         }
 
-        .hellsite-character-link {
-            background: rgba(50, 40, 70, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #d8c8e8;
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-family: 'Space Mono', monospace;
-            font-size: 0.65rem;
-            font-weight: 500;
-            letter-spacing: 0.05rem;
+        .hi-title {
+            font-family: var(--hi-font-display);
+            font-size: 2.7rem;
+            font-weight: 700;
             text-transform: uppercase;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            letter-spacing: 0.12em;
+            color: var(--hi-ink);
+            line-height: 1;
+        }
+        .hi-title .hi-comma { color: var(--hi-blood); }
+
+        .hi-stamp {
+            font-family: var(--hi-font-mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--hi-muted);
+            text-align: right;
+            line-height: 1.7;
+        }
+        .hi-stamp b { color: var(--hi-blood); font-weight: 700; }
+
+        /* ── Nav (tabs as a filing index) ──────────────── */
+        .hi-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
         }
 
-        .hellsite-character-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
+        .hi-nav-btn {
+            appearance: none;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: var(--hi-muted);
+            padding: 0.95rem 1.35rem;
+            font-family: var(--hi-font-mono);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+        .hi-nav-btn i { margin-right: 0.5rem; opacity: 0.7; font-size: 0.72rem; }
+        .hi-nav-btn:hover { color: var(--hi-ink); }
+        .hi-nav-btn.active {
+            color: var(--hi-ink);
+            border-bottom-color: var(--hi-blood);
+        }
+        .hi-nav-btn.active i { color: var(--hi-blood); opacity: 1; }
+
+        /* ── Pages ─────────────────────────────────────── */
+        .hi-page { display: none; animation: hi-fade 0.35s ease; }
+        .hi-page.active { display: block; }
+        @keyframes hi-fade { from { opacity: 0; } to { opacity: 1; } }
+
+        /* ── Memo (home) — actual interoffice memo ─────── */
+        .hi-memo {
+            background: var(--hi-paper);
+            color: var(--hi-paper-ink);
+            border: 1px solid var(--hi-line);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.30);
+        }
+
+        .hi-memo-head {
+            padding: 1.5rem 2rem 1.1rem;
+            border-bottom: 1px solid rgba(50,43,38,0.30);
+        }
+        .hi-memo-kicker {
+            font-family: var(--hi-font-mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: #8a4030;
+            margin-bottom: 0.65rem;
+        }
+        .hi-memo-word {
+            font-family: var(--hi-font-display);
+            font-size: 1.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            line-height: 1;
+            margin-bottom: 0.9rem;
+        }
+        .hi-memo-meta {
+            display: grid;
+            grid-template-columns: max-content 1fr;
+            gap: 0.2rem 1rem;
+            font-family: var(--hi-font-mono);
+            font-size: 0.72rem;
+            color: #6a5f54;
+        }
+        .hi-memo-meta dt { color: #8a4030; text-transform: uppercase; letter-spacing: 0.08em; }
+
+        .hi-memo-body {
+            padding: 1.75rem 2rem 2rem;
+            font-size: 0.92rem;
+            line-height: 1.8;
+            color: #4a4039;
+        }
+        .hi-memo-body p { margin-bottom: 1.1rem; }
+        .hi-memo-body p:last-child { margin-bottom: 0; }
+        .hi-memo-body strong { color: var(--hi-paper-ink); }
+        .hi-memo-mark {
+            background: linear-gradient(transparent 55%, rgba(196,146,63,0.45) 55%);
+            padding: 0 0.1rem;
+        }
+        .hi-memo-sig {
+            margin-top: 1.6rem;
+            padding-top: 1.1rem;
+            border-top: 1px dashed #b3a890;
+            font-family: var(--hi-font-mono);
+            font-size: 0.72rem;
+            color: #6a605a;
+        }
+
+        /* ── Section shell (files / db / territories) ──── */
+        .hi-section { border: 1px solid var(--hi-line); background: rgba(14,11,13,0.72); }
+
+        .hi-section-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            padding: 1.4rem 1.75rem;
+            border-bottom: 1px solid var(--hi-line);
+            background: linear-gradient(90deg, var(--hi-blood-glow), transparent 60%);
+        }
+        .hi-section-title {
+            font-family: var(--hi-font-display);
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--hi-ink);
+        }
+        .hi-section-sub {
+            font-family: var(--hi-font-mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--hi-muted);
+        }
+
+        /* ── Personnel files ───────────────────────────── */
+        .hi-files { padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+
+        .hi-file { border: 1px solid var(--hi-line-soft); background: var(--hi-surface); }
+
+        .hi-file-tab {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.7rem 1rem;
+            border-bottom: 1px solid var(--hi-line-soft);
+            background: var(--hi-surface-2);
+            font-family: var(--hi-font-mono);
+            font-size: 0.74rem;
+        }
+        .hi-file-tab .hi-file-icon { color: var(--hi-blood); font-size: 0.8rem; width: 1.1rem; text-align: center; }
+        .hi-file-name { color: var(--hi-ink); font-weight: 700; }
+        .hi-file-ext  { color: var(--hi-muted); }
+        .hi-file-id   { margin-left: auto; color: var(--hi-muted); font-size: 0.66rem; letter-spacing: 0.1em; }
+
+        .hi-file-body { display: flex; gap: 1.5rem; padding: 1.5rem; align-items: flex-start; }
+
+        .hi-file-portrait-col { flex: 0 0 180px; display: flex; flex-direction: column; gap: 0.6rem; }
+        .hi-file-portrait {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 200, 50, 0.1), 
-                transparent);
-            transition: left 0.4s ease;
+            aspect-ratio: 3 / 4;
+            background-size: cover;
+            background-position: top center;
+            border: 1px solid var(--hi-line);
+            filter: grayscale(0.25) contrast(1.02);
+            transition: filter 0.4s ease;
+        }
+        .hi-file:hover .hi-file-portrait { filter: grayscale(0) contrast(1); }
+        .hi-file-portrait.placeholder {
+            background:
+                repeating-linear-gradient(45deg, rgba(178,58,58,0.05) 0 10px, transparent 10px 20px),
+                var(--hi-surface-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hi-file-portrait.placeholder::after {
+            content: 'NO IMAGE\AON FILE';
+            white-space: pre;
+            text-align: center;
+            font-family: var(--hi-font-mono);
+            font-size: 0.6rem;
+            letter-spacing: 0.12em;
+            color: var(--hi-muted);
         }
 
-        .hellsite-character-link:hover::before {
-            left: 100%;
+        .hi-file-info { flex: 1; min-width: 0; }
+        .hi-file-name-lg {
+            font-family: var(--hi-font-display);
+            font-size: 1.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--hi-ink);
+            line-height: 1.05;
         }
-
-        .hellsite-character-link:hover {
-            background: rgba(70, 50, 90, 0.8);
-            border-color: rgba(255, 200, 50, 0.4);
-            color: #f0e8f8;
-            transform: translateY(-1px);
+        .hi-file-role {
+            display: inline-block;
+            margin: 0.5rem 0 0.9rem;
+            font-family: var(--hi-font-mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--hi-blood);
+            border: 1px solid var(--hi-blood-dim);
+            padding: 0.3rem 0.65rem;
         }
+        .hi-file-desc { font-size: 0.86rem; line-height: 1.7; color: var(--hi-muted); margin-bottom: 1rem; }
+        .hi-file-desc strong { color: var(--hi-ink); font-weight: 500; }
 
-        .hellsite-character-link.download {
-            border-color: rgba(100, 255, 100, 0.3);
+        /* ── Action links ──────────────────────────────── */
+        .hi-links { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+
+        .hi-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            background: transparent;
+            border: 1px solid var(--hi-line);
+            color: var(--hi-muted);
+            padding: 0.45rem 0.8rem;
+            text-decoration: none;
+            font-family: var(--hi-font-mono);
+            font-size: 0.64rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
         }
-
-        .hellsite-character-link.download:hover {
-            border-color: rgba(100, 255, 100, 0.6);
-            background: rgba(100, 255, 100, 0.1);
+        .hi-link i { font-size: 0.72rem; }
+        .hi-link:hover {
+            color: var(--hi-ink);
+            border-color: var(--hi-blood-dim);
+            background: var(--hi-blood-glow);
         }
+        .hi-link.soon { opacity: 0.45; cursor: default; }
+        .hi-link.soon:hover { color: var(--hi-muted); border-color: var(--hi-line); background: transparent; }
 
-        .hellsite-character-link.theme {
-            border-color: rgba(255, 180, 80, 0.35);
+        /* sprite tooltip */
+        .hi-info { position: relative; display: inline-flex; color: var(--hi-muted); cursor: help; }
+        .hi-info > i { font-size: 0.72rem; }
+        .hi-info:hover { color: var(--hi-blood); }
+        .hi-tip {
+            visibility: hidden; opacity: 0;
+            position: absolute; bottom: calc(100% + 8px); left: 50%;
+            transform: translateX(-50%);
+            width: 220px;
+            background: var(--hi-bg);
+            border: 1px solid var(--hi-blood-dim);
+            padding: 0.7rem 0.8rem;
+            font-family: var(--hi-font-mono);
+            font-size: 0.64rem; line-height: 1.5;
+            color: var(--hi-muted);
+            text-transform: none; letter-spacing: 0;
+            z-index: 10;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
         }
+        .hi-tip code { color: var(--hi-blood); }
+        .hi-info:hover .hi-tip { visibility: visible; opacity: 1; }
 
-        .hellsite-character-link.theme::before {
-            background: linear-gradient(90deg,
-                transparent,
-                rgba(255, 180, 80, 0.12),
-                transparent);
-        }
-
-        .hellsite-character-link.theme:hover {
-            border-color: rgba(255, 180, 80, 0.6);
-            background: rgba(255, 180, 80, 0.1);
-            color: #ffd9a0;
-        }
-
-        /* Sprite info tooltip */
-        .hellsite-sprite-info {
+        /* subtle icon-links (sprites, chub) — distinct from Download Card button */
+        .hi-icon-link {
             position: relative;
             display: inline-flex;
             align-items: center;
-            margin-left: -0.25rem;
-            color: #a090b0;
-            cursor: help;
-            font-size: 0.75rem;
-        }
-
-        .hellsite-sprite-info:hover {
-            color: #80ff80;
-        }
-
-        .hellsite-sprite-info .hellsite-tooltip {
-            visibility: hidden;
-            opacity: 0;
-            position: absolute;
-            bottom: calc(100% + 8px);
-            left: 50%;
-            transform: translateX(-50%);
-            width: 240px;
-            background: rgba(10, 5, 20, 0.97);
-            border: 1px solid rgba(100, 255, 100, 0.4);
-            border-radius: 6px;
-            padding: 0.75rem 0.85rem;
-            font-family: 'Space Mono', monospace;
-            font-size: 0.68rem;
-            line-height: 1.5;
-            color: #c0c0c0;
-            text-transform: none;
-            letter-spacing: 0;
-            z-index: 10;
-            transition: opacity 0.25s ease, visibility 0.25s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            pointer-events: none;
-        }
-
-        .hellsite-sprite-info .hellsite-tooltip::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 6px solid transparent;
-            border-top-color: rgba(100, 255, 100, 0.4);
-        }
-
-        .hellsite-sprite-info .hellsite-tooltip code {
-            color: #80ff80;
-            background: rgba(100, 255, 100, 0.08);
-            padding: 0.05rem 0.25rem;
-            border-radius: 3px;
-        }
-
-        .hellsite-sprite-info:hover .hellsite-tooltip {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        .hellsite-character-link.coming-soon {
-            border-color: rgba(255, 255, 255, 0.08);
-            color: #807090;
-            cursor: default;
-            opacity: 0.6;
-        }
-
-        /* Database Terminal */
-        .hellsite-terminal {
-            background: rgba(10, 5, 20, 0.8);
-            border: 1px solid rgba(100, 255, 100, 0.3);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .hellsite-terminal-header {
-            background: rgba(100, 255, 100, 0.1);
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid rgba(100, 255, 100, 0.2);
-            font-family: 'Space Mono', monospace;
-            font-size: 0.7rem;
-            color: #80ff80;
-        }
-
-        .hellsite-terminal-content {
-            padding: 1.5rem;
-            font-family: 'Space Mono', monospace;
-            font-size: 0.8rem;
-            line-height: 1.5;
-            color: #a0ffa0;
-            max-height: 85vh;
-            overflow-y: auto;
-        }
-
-        .hellsite-terminal-prompt {
-            color: #60d060;
-        }
-
-        .hellsite-terminal-output {
-            color: #c0c0c0;
-            margin-left: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .hellsite-terminal-output.classified {
-            color: #ff8080;
-        }
-
-        /* Terminal Separator */
-        .hellsite-terminal-separator {
-            color: #4a6a4a;
-            font-family: 'Space Mono', monospace;
-            font-size: 0.7rem;
-            margin: 1.5rem 0;
-            text-align: center;
-        }
-
-        /* Lorebook Access */
-        .hellsite-lorebook-access {
-            margin: 1.5rem 0;
-            padding: 1rem;
-            border: 2px dashed rgba(100, 255, 100, 0.3);
-            border-radius: 8px;
-            background: rgba(100, 255, 100, 0.05);
-        }
-
-        .hellsite-lorebook-link {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: rgba(100, 255, 100, 0.1);
-            border: 1px solid rgba(100, 255, 100, 0.4);
-            border-radius: 6px;
+            justify-content: center;
+            width: 1.7rem; height: 1.7rem;
+            color: var(--hi-muted);
             text-decoration: none;
-            color: inherit;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            opacity: 0.7;
+            transition: color 0.2s ease, opacity 0.2s ease;
         }
+        .hi-icon-link i { font-size: 0.82rem; }
+        .hi-icon-link:hover { color: var(--hi-blood); opacity: 1; }
 
-        .hellsite-lorebook-link::before {
-            content: '';
+        /* tiny label tooltip for icon-links */
+        .hi-icon-link::after {
+            content: attr(data-label);
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(100, 255, 100, 0.15), 
-                transparent);
-            transition: left 0.5s ease;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%) translateY(3px);
+            white-space: nowrap;
+            background: var(--hi-bg);
+            border: 1px solid var(--hi-blood-dim);
+            color: var(--hi-muted);
+            font-family: var(--hi-font-mono);
+            font-size: 0.58rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.25rem 0.5rem;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+            z-index: 20;
+        }
+        .hi-icon-link:hover::after {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
         }
 
-        .hellsite-lorebook-link:hover::before {
-            left: 100%;
+        /* ── Song Player (inline port of shared component) ── */
+        .hi-player {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.1rem;
+            flex-shrink: 0;
         }
-
-        .hellsite-lorebook-link:hover {
-            background: rgba(100, 255, 100, 0.15);
-            border-color: rgba(100, 255, 100, 0.6);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(100, 255, 100, 0.2);
-        }
-
-        .hellsite-lorebook-icon {
-            flex: 0 0 auto;
-            width: 40px;
-            height: 40px;
-            background: rgba(100, 255, 100, 0.2);
-            border: 1px solid rgba(100, 255, 100, 0.5);
-            border-radius: 6px;
+        .hi-player-btn {
+            appearance: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.3rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            color: #80ff80;
+            color: var(--hi-muted);
+            opacity: 0.65;
+            transition: color 0.25s ease, opacity 0.25s ease, background 0.2s ease;
+            line-height: 0;
         }
-
-        .hellsite-lorebook-text {
-            flex: 1;
+        .hi-file:hover .hi-player-btn { opacity: 0.9; }
+        .hi-player-btn:hover {
+            color: var(--hi-blood);
+            opacity: 1;
+            background: var(--hi-blood-glow);
         }
+        .hi-player-btn svg { width: 14px; height: 14px; display: block; }
+        .hi-player-btn .icon-pause { display: none; }
+        .hi-player.is-playing .icon-play { display: none; }
+        .hi-player.is-playing .icon-pause { display: block; }
+        .hi-player.is-playing .hi-player-play { color: var(--hi-blood); opacity: 1; }
 
-        .hellsite-lorebook-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.9rem;
+        .hi-player-label {
+            font-family: var(--hi-font-mono);
+            font-size: 0.62rem;
             font-weight: 700;
-            color: #a0ffa0;
-            letter-spacing: 0.05rem;
-            margin-bottom: 0.25rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--hi-muted);
+            margin: 0 0.15rem 0 0.35rem;
+            white-space: nowrap;
         }
+        .hi-player.is-playing .hi-player-label { color: var(--hi-ink); }
 
-        .hellsite-lorebook-subtitle {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.7rem;
-            color: #70d070;
-            opacity: 0.8;
+        .hi-player-more { position: relative; }
+        .hi-player-menu {
+            position: absolute;
+            bottom: calc(100% + 4px);
+            left: 0;
+            min-width: 140px;
+            background: var(--hi-bg);
+            border: 1px solid var(--hi-blood-dim);
+            padding: 0.3rem;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.55);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(4px);
+            transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+            z-index: 40;
         }
-
-        .hellsite-lorebook-status {
-            flex: 0 0 auto;
-            text-align: right;
+        .hi-player-more.open .hi-player-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
-
-        .hellsite-lorebook-size {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.75rem;
-            color: #a0ffa0;
-            margin-bottom: 0.25rem;
-        }
-
-        .hellsite-lorebook-access-level {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.65rem;
-            color: #60d060;
-            background: rgba(100, 255, 100, 0.2);
-            padding: 0.2rem 0.5rem;
-            border-radius: 3px;
-            border: 1px solid rgba(100, 255, 100, 0.4);
-        }
-
-        /* Homepage Link - Contract Signature Style */
-        .hellsite-footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding: 2rem;
-        }
-
-        .hellsite-homepage-link {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
-            font-weight: 400;
-            font-style: italic;
-            letter-spacing: 0.1rem;
-            color: #d8c8e8;
+        .hi-player-menu a {
+            display: block;
+            padding: 0.4rem 0.55rem;
             text-decoration: none;
-            position: relative;
-            display: inline-block;
-            padding: 0.5rem 2rem;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 8px;
-            border: 1px dashed rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
+            color: var(--hi-ink);
+            font-family: var(--hi-font-mono);
+            font-size: 0.66rem;
+            letter-spacing: 0.06em;
+            white-space: nowrap;
+            transition: background 0.15s ease, color 0.15s ease;
         }
+        .hi-player-menu a:hover { background: var(--hi-blood-glow); color: var(--hi-blood); }
 
-        .hellsite-homepage-link:hover {
-            color: #f0e8f8;
-            border-color: rgba(255, 100, 100, 0.4);
-            background: rgba(255, 255, 255, 0.04);
+        /* ── Terminal (database) ───────────────────────── */
+        .hi-terminal { background: #070506; }
+        .hi-term-bar {
+            display: flex; align-items: center; gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            border-bottom: 1px solid var(--hi-line);
+            font-family: var(--hi-font-mono);
+            font-size: 0.66rem;
+            color: var(--hi-muted);
         }
+        .hi-term-dot { width: 8px; height: 8px; border: 1px solid var(--hi-blood-dim); }
+        .hi-term-dot.live { background: var(--hi-blood); border-color: var(--hi-blood); }
+        .hi-term-path { margin-left: auto; letter-spacing: 0.08em; }
 
-        .hellsite-homepage-link::before {
-            content: '';
-            position: absolute;
-            bottom: 0.2rem;
-            left: 1.5rem;
-            right: 1.5rem;
-            height: 1px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(255, 100, 100, 0.4) 20%, 
-                rgba(255, 100, 100, 0.6) 50%, 
-                rgba(255, 100, 100, 0.4) 80%, 
-                transparent 100%);
-            border-radius: 1px;
+        .hi-term-body {
+            padding: 1.5rem;
+            font-family: var(--hi-font-mono);
+            font-size: 0.76rem;
+            line-height: 1.6;
+            color: #b9b2ab;
+            max-height: 80vh;
+            overflow-y: auto;
         }
+        .hi-term-cmd { color: var(--hi-ink); }
+        .hi-term-cmd::before { content: '$ '; color: var(--hi-blood); }
+        .hi-term-out { color: var(--hi-muted); margin: 0.3rem 0 1.3rem 1.3rem; }
+        .hi-term-out::before { content: '> '; color: var(--hi-blood-dim); }
+        .hi-term-out.flag { color: var(--hi-amber); }
+        .hi-term-out.flag::before { color: var(--hi-amber-dim); }
+        .hi-term-rule { border: 0; border-top: 1px solid var(--hi-line); margin: 1.4rem 0; }
 
-        .hellsite-homepage-link::after {
-            content: '✦';
-            position: absolute;
-            right: 0.5rem;
-            bottom: -0.2rem;
-            font-size: 0.8rem;
-            color: rgba(255, 100, 100, 0.6);
-            animation: hellsite-signature-glow 3s ease-in-out infinite alternate;
+        /* lorebook export row inside terminal */
+        .hi-export {
+            display: flex; align-items: center; gap: 1rem;
+            margin: 1.4rem 0;
+            padding: 1rem 1.1rem;
+            border: 1px solid var(--hi-blood-dim);
+            background: var(--hi-blood-glow);
+            text-decoration: none;
+            color: inherit;
+            transition: background 0.2s ease, border-color 0.2s ease;
         }
-
-        @keyframes hellsite-signature-glow {
-            0% { 
-                color: rgba(255, 100, 100, 0.4);
-                text-shadow: 0 0 2px rgba(255, 100, 100, 0.3);
-            }
-            100% { 
-                color: rgba(255, 100, 100, 0.8);
-                text-shadow: 0 0 8px rgba(255, 100, 100, 0.4);
-            }
+        .hi-export:hover { background: rgba(178,58,58,0.14); border-color: var(--hi-blood); }
+        .hi-export-icon {
+            flex: 0 0 auto; width: 38px; height: 38px;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--hi-blood-dim);
+            color: var(--hi-blood); font-size: 1rem;
         }
+        .hi-export-text { flex: 1; }
+        .hi-export-title { font-weight: 700; color: var(--hi-ink); letter-spacing: 0.06em; }
+        .hi-export-sub { font-size: 0.66rem; color: var(--hi-muted); }
+        .hi-export-meta { text-align: right; font-size: 0.66rem; }
+        .hi-export-size { color: var(--hi-ink); }
+        .hi-export-auth { color: var(--hi-blood); letter-spacing: 0.08em; }
 
-        /* Animations */
-        @keyframes hellsite-gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        /* Backgrounds Grid */
-        .hellsite-bg-grid {
-            padding: 2rem;
+        /* ── Territories ───────────────────────────────── */
+        .hi-bg-grid {
+            padding: 1.5rem;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 1.25rem;
+            gap: 1rem;
+            border-bottom: 1px solid var(--hi-line);
         }
-
-        .hellsite-bg-card {
-            display: block;
-            text-decoration: none;
-            background: rgba(30, 25, 45, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.3s ease;
+        .hi-bg-card {
+            display: block; text-decoration: none;
+            border: 1px solid var(--hi-line-soft);
+            background: var(--hi-surface);
+            transition: border-color 0.2s ease;
         }
-
-        .hellsite-bg-card:hover {
-            border-color: rgba(255, 100, 100, 0.4);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+        .hi-bg-card:hover { border-color: var(--hi-blood-dim); }
+        .hi-bg-thumb {
+            width: 100%; aspect-ratio: 16 / 9;
+            background-size: cover; background-position: center;
+            filter: grayscale(0.3);
+            transition: filter 0.4s ease;
         }
-
-        .hellsite-bg-thumb {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+        .hi-bg-card:hover .hi-bg-thumb { filter: grayscale(0); }
+        .hi-bg-info {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.6rem 0.85rem;
+            border-top: 1px solid var(--hi-line-soft);
+            font-family: var(--hi-font-mono);
         }
+        .hi-bg-name { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--hi-ink); }
+        .hi-bg-dl { color: var(--hi-blood); opacity: 0; font-size: 0.72rem; transition: opacity 0.2s ease; }
+        .hi-bg-card:hover .hi-bg-dl { opacity: 1; }
 
-        .hellsite-bg-info {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.75rem 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        .hi-realm-grid { padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
+        .hi-realm {
+            display: flex; gap: 1.5rem; align-items: stretch;
+            border: 1px solid var(--hi-line-soft);
+            background: var(--hi-surface);
         }
-
-        .hellsite-bg-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #ffb380;
-            letter-spacing: 0.03rem;
+        .hi-realm-img {
+            flex: 0 0 220px;
+            background-size: cover; background-position: center;
+            border-right: 1px solid var(--hi-line-soft);
+            filter: grayscale(0.3);
+            transition: filter 0.4s ease;
         }
-
-        .hellsite-bg-dl {
-            font-size: 0.8rem;
-            color: #80ff80;
+        .hi-realm:hover .hi-realm-img { filter: grayscale(0); }
+        .hi-realm-body { padding: 1.4rem 1.5rem; }
+        .hi-realm-name {
+            font-family: var(--hi-font-display);
+            font-size: 1.5rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.06em;
+            color: var(--hi-ink); line-height: 1;
         }
+        .hi-realm-tag {
+            display: inline-block; margin: 0.5rem 0 0.85rem;
+            font-family: var(--hi-font-mono); font-size: 0.6rem;
+            letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--hi-blood);
+            border: 1px solid var(--hi-blood-dim); padding: 0.28rem 0.6rem;
+        }
+        .hi-realm-desc { font-size: 0.86rem; line-height: 1.7; color: var(--hi-muted); }
+        .hi-realm-desc strong { color: var(--hi-ink); font-weight: 500; }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hellsite-wrapper {
-                padding: 1rem;
-            }
-            
-            .hellsite-title {
-                font-size: 2.5rem;
-            }
-            
-            .hellsite-character-content {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-            
-            .hellsite-character-image {
-                flex: 0 0 150px;
-                height: 180px;
-            }
+        /* ── Footer ────────────────────────────────────── */
+        .hi-footer { text-align: center; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--hi-line); }
+        .hi-home-link {
+            font-family: var(--hi-font-mono);
+            font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--hi-muted); text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .hi-home-link i { color: var(--hi-blood); margin-right: 0.5rem; }
+        .hi-home-link:hover { color: var(--hi-ink); }
+
+        /* ── Responsive ────────────────────────────────── */
+        @media (max-width: 720px) {
+            .hi-title { font-size: 2rem; }
+            .hi-nav { justify-content: center; }
+            .hi-file-body { flex-direction: column; }
+            .hi-file-portrait-col { flex: 0 0 auto; width: 100%; max-width: 240px; align-self: center; }
+            .hi-realm { flex-direction: column; }
+            .hi-realm-img { flex: 0 0 200px; border-right: none; border-bottom: 1px solid var(--hi-line-soft); }
+            .hi-memo-body, .hi-memo-head { padding-left: 1.25rem; padding-right: 1.25rem; }
         }
     </style>
 </head>
 <body>
-    <div class="hellsite-wrapper">
-        <!-- Banner Image -->
-        <div class="hellsite-banner"></div>
+    <div class="hi-wrap">
 
-        <!-- Navigation Header -->
-        <header class="hellsite-nav-header">
-            <h1 class="hellsite-title">hell, inc.</h1>
-            <p class="hellsite-subtitle">◊ corporate afterlife division ◊</p>
-            <nav class="hellsite-nav">
-                <button class="hellsite-nav-btn active" data-page="home">
-                    <i class="fas fa-home"></i> headquarters
-                </button>
-                <button class="hellsite-nav-btn" data-page="personnel">
-                    <i class="fas fa-folder"></i> personnel files
-                </button>
-                <button class="hellsite-nav-btn" data-page="database">
-                    <i class="fas fa-database"></i> system database
-                </button>
-                <button class="hellsite-nav-btn" data-page="locations">
-                    <i class="fas fa-map"></i> territories
-                </button>
+        <div class="hi-banner"></div>
+
+        <!-- Masthead -->
+        <header class="hi-mast">
+            <div class="hi-mast-top">
+                <h1 class="hi-title">hell<span class="hi-comma">,</span> inc.</h1>
+                <div class="hi-stamp">
+                    Corporate Afterlife Division<br>
+                    File Access — <b>Authorized</b>
+                </div>
+            </div>
+            <nav class="hi-nav">
+                <button class="hi-nav-btn active" data-page="home"><i class="fa-solid fa-building"></i>Headquarters</button>
+                <button class="hi-nav-btn" data-page="personnel"><i class="fa-regular fa-folder-open"></i>Personnel</button>
+                <button class="hi-nav-btn" data-page="database"><i class="fa-solid fa-terminal"></i>Database</button>
+                <button class="hi-nav-btn" data-page="locations"><i class="fa-regular fa-compass"></i>Territories</button>
             </nav>
         </header>
 
-        <!-- Home/Memo Page -->
-        <div id="home" class="hellsite-page active">
-            <div class="hellsite-memo">
-                <div class="hellsite-memo-header">
-                    <div class="hellsite-memo-title">internal memo: project documentation</div>
-                    <div class="hellsite-memo-from">FROM: universe.documentation@hell-inc.void</div>
+        <!-- ── Home / Memo ───────────────────────────── -->
+        <div id="home" class="hi-page active">
+            <div class="hi-memo">
+                <div class="hi-memo-head">
+                    <div class="hi-memo-kicker">Interoffice Memorandum — Acquisitions — Eyes Only</div>
+                    <div class="hi-memo-word">Asset Notice</div>
+                    <dl class="hi-memo-meta">
+                        <dt>From</dt><dd>v.vassago@hell-inc.void — Acquisitions &amp; Corruption</dd>
+                        <dt>Re</dt><dd>Confirmed Starspark — Priority Recovery Target</dd>
+                        <dt>Class</dt><dd>Nephilim (Angel × Demon) — Restricted</dd>
+                        <dt>Status</dt><dd><span class="hi-memo-mark">Contested</span></dd>
+                    </dl>
                 </div>
-                <div class="hellsite-memo-content">
-                    <p>
-                        <strong>SUBJECT:</strong> Hell, Inc. Universe Documentation & Personnel Database
-                    </p>
-                    <p>
-                        This central repository serves as documentation for the Hell, Inc. universe - a personal worldbuilding project exploring what happens when the afterlife operates like a modern corporation, complete with <span class="highlight">bureaucratic inefficiency</span>, office politics, and departmental rivalries that span millennia.
-                    </p>
-                    <p>
-                        The setting combines urban fantasy elements with corporate satire, following characters who navigate the absurdity of celestial bureaucracy while dealing with very real supernatural consequences. Current operational focus includes exploring the tension between individual agency and institutional expectations, the possibility of redemption in systems designed to categorize people as "good" or "evil," and what happens when a reformed demon has to work customer service for eternity.
-                    </p>
-                    <p>
-                        <strong>WARNING:</strong> Expect morally complex characters, redemption arcs, found family dynamics, enemies-to-lovers tension, and probably too many jokes about filing paperwork in triplicate. Side effects may include existential questions about the nature of good and evil, an inexplicable urge to organize your own afterlife bureaucracy, and sudden sympathy for supernatural middle management.
-                    </p>
-                    <p>
-                        <strong>CURRENT STATUS:</strong> Active development. New personnel files and territorial documentation added regularly.
-                    </p>
-                    <p>
-                        Use the navigation above to access specific departments and documentation.
-                    </p>
+                <div class="hi-memo-body">
+                    <p>Be advised: a <strong>starspark</strong> has surfaced on the material plane. For the uninitiated — that is a nephilim, the offspring of an angel and a demon, an existence both Heaven and Hell officially insist is impossible and unofficially would pay a great deal to possess. They are rare. They are valuable. And as of this filing, one is alive, unregistered, and very much aware of nothing.</p>
+                    <p>Acquisitions has opened recovery operations. The asset is to be brought in <strong>intact</strong> — Hell has no interest in a corpse when a living starspark is a once-in-a-millennium lever against the competition upstairs. Field handling has been delegated to my associate, the hellhound <strong>Jinx</strong>, who is enthusiastic to a fault. Heaven, predictably, has filed a competing claim.</p>
+                    <p><strong>Complication:</strong> the asset's assigned guardian, one <strong>Kazimir</strong> — a defector, a former Hell infantryman, and a thorn in everyone's quarterly review — has refused to surrender the target to either party. He appears to have decided this one is his to protect. We will see how long that lasts.</p>
+                    <div class="hi-memo-sig">A modern reimagining of Heaven and Hell as rival corporations. Expect morally grey characters, found family, slow-burn tension, and a bureaucracy that files damnation in triplicate. Use the index above to access personnel files, the system database, and territories. You are the starspark. Good luck.</div>
                 </div>
             </div>
         </div>
 
-        <!-- Personnel Files Page -->
-        <div id="personnel" class="hellsite-page">
-            <div class="hellsite-section">
-                <div class="hellsite-section-header">
-                    <h2 class="hellsite-section-title">personnel files</h2>
-                    <p class="hellsite-section-subtitle">active agents & entities - main cast</p>
+        <!-- ── Personnel ─────────────────────────────── -->
+        <div id="personnel" class="hi-page">
+            <div class="hi-section">
+                <div class="hi-section-head">
+                    <div class="hi-section-title">Personnel Files</div>
+                    <div class="hi-section-sub">Active Agents &amp; Entities — Main Cast</div>
                 </div>
-                
-                <div class="hellsite-character-grid">
-                    <div class="hellsite-character-file">
-                        <div class="hellsite-character-header">
-                            <div class="hellsite-character-icon">👼</div>
-                            <div class="hellsite-character-filename">kazimir_dmitri</div>
-                            <div class="hellsite-character-extension">.guardian</div>
+                <div class="hi-files">
+
+                    <!-- Kazimir -->
+                    <div class="hi-file">
+                        <div class="hi-file-tab">
+                            <i class="hi-file-icon fa-solid fa-dove"></i>
+                            <span class="hi-file-name">kazimir_dmitri</span><span class="hi-file-ext">.guardian</span>
+                            <span class="hi-file-id">REF — HI/0001</span>
                         </div>
-                        <div class="hellsite-character-content">
-                            <div class="hellsite-character-imagecol">
-                                <div class="hellsite-character-image" style="background-image: url('../../../downloads/characters/hell-inc/kazimir.png');">
-                                </div>
-                                <a href="../../../downloads/characters/hell-inc/kazimir.png" download class="hellsite-character-link download">
-                                    <i class="fas fa-download"></i> download card
-                                </a>
+                        <div class="hi-file-body">
+                            <div class="hi-file-portrait-col">
+                                <div class="hi-file-portrait" style="background-image: url('../../../downloads/characters/hell-inc/kazimir.png');"></div>
+                                <a href="../../../downloads/characters/hell-inc/kazimir.png" download class="hi-link"><i class="fa-solid fa-download"></i> Download Card</a>
                             </div>
-                            <div class="hellsite-character-info">
-                                <h3 class="hellsite-character-name">kazimir</h3>
-                                <div class="hellsite-character-role">guardian angel / reformed</div>
-                                <p class="hellsite-character-desc">
-                                    Former Russian revolutionary (deceased 1890s) who served nearly a century in Hell's infantry before his unprecedented defection to Heaven. Currently assigned to guardian duties despite his... unconventional background. Known issues: anger management, nicotine addiction, general disregard for celestial protocol. Status: probationary but effective.
-                                </p>
-                                <div class="hellsite-character-links">
-                                    <a href="https://mega.nz/file/bXYDURJA#J-uAsBNt37tL7d_27Em3hm5Jp_itmPd8gc037r9CpPg" target="_blank" rel="noopener" class="hellsite-character-link download">
-                                        <i class="fas fa-images"></i> download sprites
-                                    </a>
-                                    <span class="hellsite-sprite-info">
-                                        <i class="fas fa-circle-info"></i>
-                                        <span class="hellsite-tooltip">Place sprites in <code>characters/{{char}}/sprites/</code>. A regex script styles them into the expression frame in chat.</span>
-                                    </span>
-                                    <a href="https://on.soundcloud.com/EAzv5WNxeTpmgLuWbW" target="_blank" rel="noopener" class="hellsite-character-link theme">
-                                        <i class="fas fa-music"></i> theme: no saint, no devil
-                                    </a>
+                            <div class="hi-file-info">
+                                <div class="hi-file-name-lg">Kazimir</div>
+                                <span class="hi-file-role">Guardian Angel — Reformed</span>
+                                <p class="hi-file-desc">Former Russian revolutionary (deceased 1890s) who served nearly a century in Hell's infantry before his unprecedented defection to Heaven. Now assigned to guardian duties despite his unconventional background. <strong>Known issues:</strong> anger management, nicotine addiction, general disregard for celestial protocol. <strong>Status:</strong> probationary but effective.</p>
+                                <div class="hi-links">
+                                    <div class="hi-player" data-src="https://files.catbox.moe/6hmpz4.mp3">
+                                        <button type="button" class="hi-player-btn hi-player-play" aria-label="Play Kazimir's theme">
+                                            <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                            <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+                                        </button>
+                                        <span class="hi-player-label">No Saint, No Devil</span>
+                                        <div class="hi-player-more">
+                                            <button type="button" class="hi-player-btn hi-player-kebab" aria-label="More options">
+                                                <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg>
+                                            </button>
+                                            <div class="hi-player-menu">
+                                                <a href="https://files.catbox.moe/6hmpz4.mp3" class="hi-song-download" data-filename="No Saint, No Devil.mp3">Download Song</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="https://chub.ai/characters/Mokiikitty/kaz-guardian-angel-2efe343e" target="_blank" rel="noopener" class="hi-icon-link" data-label="Venus Chub" aria-label="Venus Chub link"><i class="fa-solid fa-link"></i></a>
+                                    <a href="https://janitorai.com/characters/27710524-ca47-4130-a2d8-8cf04c26eb19_character-kazimir-your-guardian-angel" target="_blank" rel="noopener" class="hi-icon-link" data-label="Janitor" aria-label="Janitor link"><i class="fa-solid fa-robot"></i></a>
+                                    <a href="https://mega.nz/file/bXYDURJA#J-uAsBNt37tL7d_27Em3hm5Jp_itmPd8gc037r9CpPg" target="_blank" rel="noopener" class="hi-icon-link" data-label="Sprites" aria-label="Download sprites"><i class="fa-solid fa-images"></i></a>
+                                    <span class="hi-info"><i class="fa-solid fa-circle-info"></i><span class="hi-tip">Sprites: place in <code>characters/{{char}}/sprites/</code>. A regex script frames them as expressions in chat.</span></span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="hellsite-character-file">
-                        <div class="hellsite-character-header">
-                            <div class="hellsite-character-icon">🔥</div>
-                            <div class="hellsite-character-filename">pyralis_nova</div>
-                            <div class="hellsite-character-extension">.guardian</div>
+                    <!-- Pyralis -->
+                    <div class="hi-file">
+                        <div class="hi-file-tab">
+                            <i class="hi-file-icon fa-solid fa-fire"></i>
+                            <span class="hi-file-name">pyralis_nova</span><span class="hi-file-ext">.guardian</span>
+                            <span class="hi-file-id">REF — HI/0002</span>
                         </div>
-                        <div class="hellsite-character-content">
-                            <div class="hellsite-character-imagecol">
-                                <div class="hellsite-character-image placeholder">
-                                </div>
-                                <span class="hellsite-character-link coming-soon">
-                                    <i class="fas fa-clock"></i> card coming soon
-                                </span>
+                        <div class="hi-file-body">
+                            <div class="hi-file-portrait-col">
+                                <div class="hi-file-portrait placeholder"></div>
+                                <span class="hi-link soon"><i class="fa-regular fa-clock"></i> Card Pending</span>
                             </div>
-                            <div class="hellsite-character-info">
-                                <h3 class="hellsite-character-name">pyralis</h3>
-                                <div class="hellsite-character-role">guardian angel / junior</div>
-                                <p class="hellsite-character-desc">
-                                    Rookie guardian angel representing the new generation of celestial personnel. Petite redhead with an optimistic outlook that has yet to be crushed by bureaucratic reality. Demonstrates unwavering faith in The Guidelines despite constant demonic harassment. Frequently clashes with senior staff over "proper procedure."
-                                </p>
-                                <div class="hellsite-character-links">
-                                    <span class="hellsite-character-link coming-soon">
-                                        <i class="fas fa-images"></i> sprites coming soon
-                                    </span>
-                                    <span class="hellsite-character-link coming-soon">
-                                        <i class="fas fa-music"></i> theme coming soon
-                                    </span>
+                            <div class="hi-file-info">
+                                <div class="hi-file-name-lg">Pyralis</div>
+                                <span class="hi-file-role">Guardian Angel — Junior</span>
+                                <p class="hi-file-desc">Rookie guardian angel representing the new generation of celestial personnel. Petite redhead with an optimism that has yet to be crushed by bureaucratic reality. Demonstrates unwavering faith in The Guidelines despite constant demonic harassment. Frequently clashes with senior staff over "proper procedure."</p>
+                                <div class="hi-links">
+                                    <span class="hi-link soon"><i class="fa-solid fa-images"></i> Sprites Pending</span>
+                                    <span class="hi-link soon"><i class="fa-solid fa-music"></i> Theme Pending</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="hellsite-character-file">
-                        <div class="hellsite-character-header">
-                            <div class="hellsite-character-icon">👑</div>
-                            <div class="hellsite-character-filename">vassago_executive</div>
-                            <div class="hellsite-character-extension">.fallen</div>
+                    <!-- Vassago -->
+                    <div class="hi-file">
+                        <div class="hi-file-tab">
+                            <i class="hi-file-icon fa-solid fa-crown"></i>
+                            <span class="hi-file-name">vassago_executive</span><span class="hi-file-ext">.fallen</span>
+                            <span class="hi-file-id">REF — HI/0003</span>
                         </div>
-                        <div class="hellsite-character-content">
-                            <div class="hellsite-character-imagecol">
-                                <div class="hellsite-character-image" style="background-image: url('../../../downloads/characters/hell-inc/vassago.png');">
-                                </div>
-                                <a href="../../../downloads/characters/hell-inc/vassago.png" download class="hellsite-character-link download">
-                                    <i class="fas fa-download"></i> download card
-                                </a>
+                        <div class="hi-file-body">
+                            <div class="hi-file-portrait-col">
+                                <div class="hi-file-portrait" style="background-image: url('../../../downloads/characters/hell-inc/vassago.png');"></div>
+                                <a href="../../../downloads/characters/hell-inc/vassago.png" download class="hi-link"><i class="fa-solid fa-download"></i> Download Card</a>
                             </div>
-                            <div class="hellsite-character-info">
-                                <h3 class="hellsite-character-name">vassago</h3>
-                                <div class="hellsite-character-role">fallen angel / advisor</div>
-                                <p class="hellsite-character-desc">
-                                    Senior executive in Hell's corporate structure, specializing in soul acquisition and corruption consulting. Aristocratic bearing masks calculating intelligence and centuries of experience in manipulation. Maintains several Earth-based subsidiary companies. Commands substantial imp workforce and one loyal hellhound.
-                                </p>
-                                <div class="hellsite-character-links">
-                                    <a href="https://mega.nz/file/mHZxVZQa#g7O9uUoQ1KrJbNvg0mRqwpETgEABh3IEN8Hlgmjjr1A" target="_blank" rel="noopener" class="hellsite-character-link download">
-                                        <i class="fas fa-images"></i> download sprites
-                                    </a>
-                                    <span class="hellsite-sprite-info">
-                                        <i class="fas fa-circle-info"></i>
-                                        <span class="hellsite-tooltip">Place sprites in <code>characters/{{char}}/sprites/</code>. A regex script styles them into the expression frame in chat.</span>
-                                    </span>
-                                    <a href="https://on.soundcloud.com/H62sr1pyQkAyuBDOGs" target="_blank" rel="noopener" class="hellsite-character-link theme">
-                                        <i class="fas fa-music"></i> theme: read the fine print
-                                    </a>
+                            <div class="hi-file-info">
+                                <div class="hi-file-name-lg">Vassago</div>
+                                <span class="hi-file-role">Fallen Angel — Advisor</span>
+                                <p class="hi-file-desc">Senior executive in Hell's corporate structure, specializing in soul acquisition and corruption consulting. Aristocratic bearing masks calculating intelligence and centuries of experience in manipulation. Maintains several Earth-based subsidiary companies. Commands a substantial imp workforce and one loyal hellhound.</p>
+                                <div class="hi-links">
+                                    <div class="hi-player" data-src="https://files.catbox.moe/jlgjqb.mp3">
+                                        <button type="button" class="hi-player-btn hi-player-play" aria-label="Play Vassago's theme">
+                                            <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                            <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+                                        </button>
+                                        <span class="hi-player-label">Read the Fine Print</span>
+                                        <div class="hi-player-more">
+                                            <button type="button" class="hi-player-btn hi-player-kebab" aria-label="More options">
+                                                <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg>
+                                            </button>
+                                            <div class="hi-player-menu">
+                                                <a href="https://files.catbox.moe/jlgjqb.mp3" class="hi-song-download" data-filename="Read the Fine Print.mp3">Download Song</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="https://chub.ai/characters/Mokiikitty/vassago-fallen-angel-0d57609e" target="_blank" rel="noopener" class="hi-icon-link" data-label="Venus Chub" aria-label="Venus Chub link"><i class="fa-solid fa-link"></i></a>
+                                    <a href="https://janitorai.com/characters/6d05318c-0cfb-4ed5-8353-4a4462d68713_character-vassago-fallen-angel" target="_blank" rel="noopener" class="hi-icon-link" data-label="Janitor" aria-label="Janitor link"><i class="fa-solid fa-robot"></i></a>
+                                    <a href="https://mega.nz/file/mHZxVZQa#g7O9uUoQ1KrJbNvg0mRqwpETgEABh3IEN8Hlgmjjr1A" target="_blank" rel="noopener" class="hi-icon-link" data-label="Sprites" aria-label="Download sprites"><i class="fa-solid fa-images"></i></a>
+                                    <span class="hi-info"><i class="fa-solid fa-circle-info"></i><span class="hi-tip">Sprites: place in <code>characters/{{char}}/sprites/</code>. A regex script frames them as expressions in chat.</span></span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="hellsite-character-file">
-                        <div class="hellsite-character-header">
-                            <div class="hellsite-character-icon">🐕</div>
-                            <div class="hellsite-character-filename">jinx_01</div>
-                            <div class="hellsite-character-extension">.hellhound</div>
+                    <!-- Jinx -->
+                    <div class="hi-file">
+                        <div class="hi-file-tab">
+                            <i class="hi-file-icon fa-solid fa-dog"></i>
+                            <span class="hi-file-name">jinx_01</span><span class="hi-file-ext">.hellhound</span>
+                            <span class="hi-file-id">REF — HI/0004</span>
                         </div>
-                        <div class="hellsite-character-content">
-                            <div class="hellsite-character-imagecol">
-                                <div class="hellsite-character-image" style="background-image: url('../../../downloads/characters/hell-inc/jinx.png');">
-                                </div>
-                                <a href="../../../downloads/characters/hell-inc/jinx.png" download class="hellsite-character-link download">
-                                    <i class="fas fa-download"></i> download card
-                                </a>
+                        <div class="hi-file-body">
+                            <div class="hi-file-portrait-col">
+                                <div class="hi-file-portrait" style="background-image: url('../../../downloads/characters/hell-inc/jinx.png');"></div>
+                                <a href="../../../downloads/characters/hell-inc/jinx.png" download class="hi-link"><i class="fa-solid fa-download"></i> Download Card</a>
                             </div>
-                            <div class="hellsite-character-info">
-                                <h3 class="hellsite-character-name">jinx</h3>
-                                <div class="hellsite-character-role">hellhound / shapeshifter</div>
-                                <p class="hellsite-character-desc">
-                                    Juvenile hellhound (approx. 50 years) with dual-form capability: massive canine beast and human-adjacent appearance. Abandoned by biological parents, raised and trained by Vassago. Demonstrates absolute loyalty to handler alongside typical hellhound mischief tendencies. Warning: do not feed chocolate.
-                                </p>
-                                <div class="hellsite-character-links">
-                                    <a href="https://mega.nz/file/af4igA6a#dpXBBU8KtW4OzhZ6w9te5lqTXufS5O17MEghCNMD37I" target="_blank" rel="noopener" class="hellsite-character-link download">
-                                        <i class="fas fa-images"></i> download sprites
-                                    </a>
-                                    <span class="hellsite-sprite-info">
-                                        <i class="fas fa-circle-info"></i>
-                                        <span class="hellsite-tooltip">Place sprites in <code>characters/{{char}}/sprites/</code>. A regex script styles them into the expression frame in chat.</span>
-                                    </span>
-                                    <a href="https://on.soundcloud.com/WAmUpEKkQQZ3dfJTRZ" target="_blank" rel="noopener" class="hellsite-character-link theme">
-                                        <i class="fas fa-music"></i> theme: bad dog, good boy
-                                    </a>
+                            <div class="hi-file-info">
+                                <div class="hi-file-name-lg">Jinx</div>
+                                <span class="hi-file-role">Hellhound — Shapeshifter</span>
+                                <p class="hi-file-desc">Juvenile hellhound (approx. 50 years) with dual-form capability: massive canine beast and human-adjacent appearance. Abandoned by biological parents, raised and trained by Vassago. Demonstrates absolute loyalty to handler alongside typical hellhound mischief. <strong>Warning:</strong> do not feed chocolate.</p>
+                                <div class="hi-links">
+                                    <div class="hi-player" data-src="https://files.catbox.moe/ga55ej.mp3">
+                                        <button type="button" class="hi-player-btn hi-player-play" aria-label="Play Jinx's theme">
+                                            <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                            <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+                                        </button>
+                                        <span class="hi-player-label">Bad Dog, Good Boy</span>
+                                        <div class="hi-player-more">
+                                            <button type="button" class="hi-player-btn hi-player-kebab" aria-label="More options">
+                                                <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg>
+                                            </button>
+                                            <div class="hi-player-menu">
+                                                <a href="https://files.catbox.moe/ga55ej.mp3" class="hi-song-download" data-filename="Bad Dog, Good Boy.mp3">Download Song</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="https://chub.ai/characters/Mokiikitty/jinx-hellhound-c727efbe" target="_blank" rel="noopener" class="hi-icon-link" data-label="Venus Chub" aria-label="Venus Chub link"><i class="fa-solid fa-link"></i></a>
+                                    <a href="https://janitorai.com/characters/98eecb29-96e0-45cc-8950-43902196692c_character-jinx-hellhound" target="_blank" rel="noopener" class="hi-icon-link" data-label="Janitor" aria-label="Janitor link"><i class="fa-solid fa-robot"></i></a>
+                                    <a href="https://mega.nz/file/af4igA6a#dpXBBU8KtW4OzhZ6w9te5lqTXufS5O17MEghCNMD37I" target="_blank" rel="noopener" class="hi-icon-link" data-label="Sprites" aria-label="Download sprites"><i class="fa-solid fa-images"></i></a>
+                                    <span class="hi-info"><i class="fa-solid fa-circle-info"></i><span class="hi-tip">Sprites: place in <code>characters/{{char}}/sprites/</code>. A regex script frames them as expressions in chat.</span></span>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
 
-        <!-- Database Page -->
-        <div id="database" class="hellsite-page">
-            <div class="hellsite-section">
-                <div class="hellsite-section-header">
-                    <h2 class="hellsite-section-title">system database</h2>
-                    <p class="hellsite-section-subtitle">operational parameters & protocols</p>
+        <!-- ── Database ──────────────────────────────── -->
+        <div id="database" class="hi-page">
+            <div class="hi-section">
+                <div class="hi-section-head">
+                    <div class="hi-section-title">System Database</div>
+                    <div class="hi-section-sub">Operational Parameters &amp; Protocols</div>
                 </div>
-                
-                <div class="hellsite-terminal">
-                    <div class="hellsite-terminal-header">
-                        HELL_INC:// database_query --verbose --all --access_level=admin
+                <div class="hi-terminal">
+                    <div class="hi-term-bar">
+                        <span class="hi-term-dot live"></span><span class="hi-term-dot"></span><span class="hi-term-dot"></span>
+                        <span class="hi-term-path">HELL_INC :// query --all --access=admin</span>
                     </div>
-                    <div class="hellsite-terminal-content">
-                        <div class="hellsite-terminal-prompt">$ access --file="comprehensive_lorebook.db" --export</div>
-                        <div class="hellsite-terminal-output">
-                            > Accessing comprehensive world documentation...
-                        </div>
-                        <div class="hellsite-terminal-output">
-                            > File size: 847.3 KB | Last modified: [ONGOING]
-                        </div>
-                        <div class="hellsite-terminal-output">
-                            > Contains: Detailed character profiles, historical records, 
-                              organizational charts, geographical surveys, supernatural 
-                              classifications, bureaucratic procedures, incident reports
-                        </div>
-                        
-                        <div class="hellsite-lorebook-access">
-                            <a href="../../../downloads/characters/hell-inc/setting-hell-inc.json" download class="hellsite-lorebook-link">
-                                <div class="hellsite-lorebook-icon">
-                                    <i class="fas fa-download"></i>
-                                </div>
-                                <div class="hellsite-lorebook-text">
-                                    <div class="hellsite-lorebook-title">EXPORT COMPLETE LOREBOOK</div>
-                                    <div class="hellsite-lorebook-subtitle">comprehensive_documentation.db</div>
-                                </div>
-                                <div class="hellsite-lorebook-status">
-                                    <div class="hellsite-lorebook-size">847.3 KB</div>
-                                    <div class="hellsite-lorebook-access-level">[AUTHORIZED]</div>
-                                </div>
-                            </a>
-                        </div>
+                    <div class="hi-term-body">
+                        <div class="hi-term-cmd">access --file="comprehensive_lorebook.db" --export</div>
+                        <div class="hi-term-out">Accessing comprehensive world documentation…</div>
+                        <div class="hi-term-out">File size 847.3 KB — last modified [ONGOING]</div>
+                        <div class="hi-term-out">Contains: character profiles, historical records, org charts, geographical surveys, supernatural classifications, bureaucratic procedures, incident reports.</div>
 
-                        <div class="hellsite-terminal-separator">
-                            ═══════════════════════════════════════════════════════════
-                        </div>
+                        <a href="../../../downloads/characters/hell-inc/setting-hell-inc.json" download class="hi-export">
+                            <div class="hi-export-icon"><i class="fa-solid fa-file-arrow-down"></i></div>
+                            <div class="hi-export-text">
+                                <div class="hi-export-title">Export Complete Lorebook</div>
+                                <div class="hi-export-sub">comprehensive_documentation.db</div>
+                            </div>
+                            <div class="hi-export-meta">
+                                <div class="hi-export-size">847.3 KB</div>
+                                <div class="hi-export-auth">[AUTHORIZED]</div>
+                            </div>
+                        </a>
 
-                        <div class="hellsite-terminal-prompt">$ search --category="contracts" --type="legal"</div>
-                        <div class="hellsite-terminal-output">
-                            > Binding supernatural agreements requiring blood signature. Terms must be fulfilled exactly, though interpretation may vary significantly. Demon legal department specializes in creative loophole exploitation. Standard contract duration: soul's natural lifespan + eternity clause.
-                        </div>
+                        <hr class="hi-term-rule">
 
-                        <div class="hellsite-terminal-prompt">$ search --category="guidelines" --authority="celestial"</div>
-                        <div class="hellsite-terminal-output">
-                            > Mandatory regulations for all guardian angel personnel. Key restrictions: no interference with mortal free will, no romantic entanglements with assignments, mandatory progress reports every 72 hours, strict adherence to miracle quotas. Violation penalties range from probation to expulsion.
-                        </div>
+                        <div class="hi-term-cmd">search --category="contracts" --type="legal"</div>
+                        <div class="hi-term-out">Binding supernatural agreements requiring blood signature. Terms must be fulfilled exactly, though interpretation may vary. Demon legal specializes in creative loophole exploitation. Standard duration: soul's natural lifespan + eternity clause.</div>
 
-                        <div class="hellsite-terminal-prompt">$ search --category="species" --classification="hybrid"</div>
-                        <div class="hellsite-terminal-output classified">
-                            > [CLASSIFIED - LEVEL 7] Nephilim: Angel-human hybrid offspring. Colloquially "starsparks." Existence violates Article 7 of Celestial-Mortal Non-Interference Act. Abilities manifest under extreme stress. Discovery protocols: immediate containment. Authorized personnel only.
-                        </div>
+                        <div class="hi-term-cmd">search --category="guidelines" --authority="celestial"</div>
+                        <div class="hi-term-out">Mandatory regulations for guardian personnel. Key restrictions: no interference with mortal free will, no romantic entanglement with assignments, progress reports every 72 hours, strict miracle quotas. Penalties range from probation to expulsion.</div>
 
-                        <div class="hellsite-terminal-prompt">$ search --category="species" --type="demonic"</div>
-                        <div class="hellsite-terminal-output">
-                            > Multiple classifications: Corrupted mortal souls (post-damnation), native Hell spawn (various subspecies), fallen angel command structure. Hellhounds: demonic canines, shapeshifting capability, extreme loyalty to handlers. Imps: minor demons, clerical work, gossip distribution network.
-                        </div>
+                        <div class="hi-term-cmd">search --category="species" --classification="hybrid"</div>
+                        <div class="hi-term-out flag">[CLASSIFIED — LEVEL 7] Nephilim: angel-human hybrid offspring, colloquially "starsparks." Existence violates Article 7 of the Celestial-Mortal Non-Interference Act. Abilities manifest under extreme stress. Discovery protocol: immediate containment. Authorized personnel only.</div>
 
-                        <div class="hellsite-terminal-prompt">$ search --category="species" --type="celestial"</div>
-                        <div class="hellsite-terminal-output">
-                            > Two primary classifications: Upper-level angels (formed from divine light, archangel tier), Guardian angels (recruited post-mortem humans, middle management tier). All angels bound by Guidelines system. Fallen angels retain powers but operate under infernal jurisdiction.
-                        </div>
+                        <div class="hi-term-cmd">search --category="species" --type="demonic"</div>
+                        <div class="hi-term-out">Multiple classifications: corrupted mortal souls (post-damnation), native Hell spawn (various subspecies), fallen angel command structure. Hellhounds: demonic canines, shapeshifting, extreme handler loyalty. Imps: minor demons, clerical work, gossip distribution.</div>
 
-                        <div class="hellsite-terminal-prompt">$ search --category="organizations" --realm="heaven"</div>
-                        <div class="hellsite-terminal-output">
-                            > Heaven Inc. operates as celestial bureaucracy. Key departments: Guardian Academy (training), Miracle Department (divine intervention processing), Divine Assembly (legislative body), Celestial Spire (executive headquarters). Known for: excessive paperwork, committee meetings, office politics spanning millennia.
-                        </div>
+                        <div class="hi-term-cmd">search --category="species" --type="celestial"</div>
+                        <div class="hi-term-out">Two primary classes: upper-level angels (formed from divine light, archangel tier) and guardian angels (recruited post-mortem humans, middle-management tier). All bound by the Guidelines. Fallen angels retain powers under infernal jurisdiction.</div>
 
-                        <div class="hellsite-terminal-prompt">$ search --category="organizations" --realm="hell"</div>
-                        <div class="hellsite-terminal-output">
-                            > Hell Inc. corporate structure with fallen angel executives, demon employees, subsidiary Earth operations. Headquarters: Pandemonium metroplex. Specializes in: soul acquisition, corruption consulting, legal loophole exploitation, competitive corporate espionage against Heaven.
-                        </div>
+                        <div class="hi-term-cmd">search --category="organizations" --realm="heaven"</div>
+                        <div class="hi-term-out">Heaven Inc. operates as a celestial bureaucracy. Departments: Guardian Academy (training), Miracle Dept. (intervention processing), Divine Assembly (legislative), Celestial Spire (executive). Known for excessive paperwork and millennia-spanning office politics.</div>
 
-                        <div class="hellsite-terminal-prompt">$ search --category="personnel" --rank="archangel"</div>
-                        <div class="hellsite-terminal-output">
-                            > MICHAEL: Supreme commander, warrior background, authority issues with subordinates. GABRIEL: Communications director, reality TV enthusiast, micromanagement tendencies. URIEL: IT administrator/"Sphere Guardian", system security specialist. RAPHAEL: Miracle consultant, fee-for-service operations (technically legal).
-                        </div>
+                        <div class="hi-term-cmd">search --category="organizations" --realm="hell"</div>
+                        <div class="hi-term-out">Hell Inc. corporate structure: fallen angel executives, demon employees, subsidiary Earth operations. HQ: Pandemonium metroplex. Specialties: soul acquisition, corruption consulting, loophole exploitation, corporate espionage against Heaven.</div>
 
-                        <div class="hellsite-terminal-prompt">$ search --category="personnel" --classification="fallen_angel"</div>
-                        <div class="hellsite-terminal-output">
-                            > LUCIFER: Original fallen angel, CEO status, distinctive red hair, rock star aesthetic. VASSAGO: Senior advisor, soul corruption specialist, commands imp workforce. DAGON: Corporate operations, boardroom specialist. AZAZEL: Human relations (hostile), specializes in relationship destruction.
-                        </div>
+                        <div class="hi-term-cmd">search --category="personnel" --rank="archangel"</div>
+                        <div class="hi-term-out">MICHAEL — supreme commander, warrior background, authority issues. GABRIEL — communications director, reality-TV enthusiast, micromanager. URIEL — IT admin / "Sphere Guardian," security specialist. RAPHAEL — miracle consultant, fee-for-service (technically legal).</div>
 
-                        <div class="hellsite-terminal-prompt">$ search --category="protocols" --type="romance"</div>
-                        <div class="hellsite-terminal-output classified">
-                            > [RESTRICTED] Angels strictly forbidden from romantic/sexual relationships with mortals. Discovery results in severe punishment up to and including expulsion. This restriction exists to prevent: mission compromise, power imbalances, potential nephilim creation. Enforcement: immediate and unforgiving.
-                        </div>
+                        <div class="hi-term-cmd">search --category="personnel" --class="fallen_angel"</div>
+                        <div class="hi-term-out">LUCIFER — original fallen angel, CEO, distinctive red hair, rock-star aesthetic. VASSAGO — senior advisor, soul corruption, commands imps. DAGON — corporate operations, boardroom specialist. AZAZEL — human relations (hostile), relationship destruction.</div>
 
-                        <div class="hellsite-terminal-prompt">$ logout</div>
-                        <div class="hellsite-terminal-output">
-                            > Session terminated. Have a blessed day.
-                        </div>
+                        <div class="hi-term-cmd">search --category="protocols" --type="romance"</div>
+                        <div class="hi-term-out flag">[RESTRICTED] Angels forbidden from romantic/sexual relationships with mortals. Discovery results in severe punishment up to expulsion. Rationale: prevent mission compromise, power imbalance, and potential nephilim creation. Enforcement: immediate and unforgiving.</div>
+
+                        <div class="hi-term-cmd">logout</div>
+                        <div class="hi-term-out">Session terminated. Have a blessed day.</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Locations/Territories Page -->
-        <div id="locations" class="hellsite-page">
-            <div class="hellsite-section">
-                <div class="hellsite-section-header">
-                    <h2 class="hellsite-section-title">territorial survey</h2>
-                    <p class="hellsite-section-subtitle">realm documentation & travel advisories</p>
+        <!-- ── Territories ───────────────────────────── -->
+        <div id="locations" class="hi-page">
+            <div class="hi-section">
+                <div class="hi-section-head">
+                    <div class="hi-section-title">Territorial Survey</div>
+                    <div class="hi-section-sub">Realm Documentation &amp; Travel Advisories</div>
                 </div>
 
-                <!-- Backgrounds -->
-                <div class="hellsite-bg-grid">
-                    <a href="../../../downloads/characters/hell-inc/backgrounds/hell-inc-alley.png" download class="hellsite-bg-card">
-                        <div class="hellsite-bg-thumb" style="background-image: url('../../../downloads/characters/hell-inc/backgrounds/hell-inc-alley.png');"></div>
-                        <div class="hellsite-bg-info">
-                            <span class="hellsite-bg-name">Alley</span>
-                            <span class="hellsite-bg-dl"><i class="fas fa-download"></i></span>
-                        </div>
+                <div class="hi-bg-grid">
+                    <a href="../../../downloads/characters/hell-inc/backgrounds/hell-inc-alley.png" download class="hi-bg-card">
+                        <div class="hi-bg-thumb" style="background-image: url('../../../downloads/characters/hell-inc/backgrounds/hell-inc-alley.png');"></div>
+                        <div class="hi-bg-info"><span class="hi-bg-name">Alley</span><span class="hi-bg-dl"><i class="fa-solid fa-download"></i></span></div>
                     </a>
-                    <a href="../../../downloads/characters/hell-inc/backgrounds/hell-inc-apartment-exterior.png" download class="hellsite-bg-card">
-                        <div class="hellsite-bg-thumb" style="background-image: url('../../../downloads/characters/hell-inc/backgrounds/hell-inc-apartment-exterior.png');"></div>
-                        <div class="hellsite-bg-info">
-                            <span class="hellsite-bg-name">Apartment Exterior</span>
-                            <span class="hellsite-bg-dl"><i class="fas fa-download"></i></span>
-                        </div>
+                    <a href="../../../downloads/characters/hell-inc/backgrounds/hell-inc-apartment-exterior.png" download class="hi-bg-card">
+                        <div class="hi-bg-thumb" style="background-image: url('../../../downloads/characters/hell-inc/backgrounds/hell-inc-apartment-exterior.png');"></div>
+                        <div class="hi-bg-info"><span class="hi-bg-name">Apartment Exterior</span><span class="hi-bg-dl"><i class="fa-solid fa-download"></i></span></div>
                     </a>
-                    <a href="../../../downloads/characters/hell-inc/backgrounds/hell-inc-vass-home.png" download class="hellsite-bg-card">
-                        <div class="hellsite-bg-thumb" style="background-image: url('../../../downloads/characters/hell-inc/backgrounds/hell-inc-vass-home.png');"></div>
-                        <div class="hellsite-bg-info">
-                            <span class="hellsite-bg-name">Vassago's Home</span>
-                            <span class="hellsite-bg-dl"><i class="fas fa-download"></i></span>
-                        </div>
+                    <a href="../../../downloads/characters/hell-inc/backgrounds/hell-inc-vass-home.png" download class="hi-bg-card">
+                        <div class="hi-bg-thumb" style="background-image: url('../../../downloads/characters/hell-inc/backgrounds/hell-inc-vass-home.png');"></div>
+                        <div class="hi-bg-info"><span class="hi-bg-name">Vassago's Home</span><span class="hi-bg-dl"><i class="fa-solid fa-download"></i></span></div>
                     </a>
                 </div>
 
-                <div class="hellsite-character-grid">
-                    <div class="hellsite-character-file">
-                        <div class="hellsite-character-header">
-                            <div class="hellsite-character-icon">🏢</div>
-                            <div class="hellsite-character-filename">pandemonium_metroplex</div>
-                            <div class="hellsite-character-extension">.realm</div>
-                        </div>
-                        <div class="hellsite-character-content">
-                            <div class="hellsite-character-image" style="background-image: url('images/pandemonium.png');">
-                            </div>
-                            <div class="hellsite-character-info">
-                                <h3 class="hellsite-character-name">pandemonium</h3>
-                                <div class="hellsite-character-role">hell's capital / corporate hub</div>
-                                <p class="hellsite-character-desc">
-                                    Hell's sprawling metropolitan center and primary corporate headquarters. Features towering high-rise buildings that reflect the perpetual scarlet sky, extensive underground transit systems, and enough office space to house millennia of bureaucratic operations. Home to Hell's major government facilities and the infamous legal district.
-                                </p>
-                            </div>
+                <div class="hi-realm-grid">
+                    <div class="hi-realm">
+                        <div class="hi-realm-img" style="background-image: url('images/pandemonium.png');"></div>
+                        <div class="hi-realm-body">
+                            <div class="hi-realm-name">Pandemonium</div>
+                            <span class="hi-realm-tag">Hell's Capital — Corporate Hub</span>
+                            <p class="hi-realm-desc">Hell's sprawling metropolitan center and primary corporate headquarters. Towering high-rises reflect the perpetual scarlet sky above an extensive underground transit network, with enough office space to house millennia of bureaucratic operations. Home to Hell's major government facilities and the infamous legal district.</p>
                         </div>
                     </div>
-
-                    <div class="hellsite-character-file">
-                        <div class="hellsite-character-header">
-                            <div class="hellsite-character-icon">⛪</div>
-                            <div class="hellsite-character-filename">celestial_spire</div>
-                            <div class="hellsite-character-extension">.realm</div>
-                        </div>
-                        <div class="hellsite-character-content">
-                            <div class="hellsite-character-image" style="background-image: url('images/spire.png');">
-                            </div>
-                            <div class="hellsite-character-info">
-                                <h3 class="hellsite-character-name">celestial spire</h3>
-                                <div class="hellsite-character-role">heaven hq / divine tower</div>
-                                <p class="hellsite-character-desc">
-                                    Heaven's primary administrative complex - a magnificent crystalline tower stretching infinitely upward through clouds of golden light. Houses archangel executive suites, the Divine Assembly chamber, and endless floors of cubicles where angelic bureaucrats process prayers, miracle requests, and soul evaluations with heavenly efficiency.
-                                </p>
-                            </div>
+                    <div class="hi-realm">
+                        <div class="hi-realm-img" style="background-image: url('images/spire.png');"></div>
+                        <div class="hi-realm-body">
+                            <div class="hi-realm-name">Celestial Spire</div>
+                            <span class="hi-realm-tag">Heaven HQ — Divine Tower</span>
+                            <p class="hi-realm-desc">Heaven's primary administrative complex — a crystalline tower stretching infinitely upward through clouds of golden light. Houses archangel executive suites, the Divine Assembly chamber, and endless floors of cubicles where angelic bureaucrats process prayers, miracle requests, and soul evaluations with heavenly efficiency.</p>
                         </div>
                     </div>
-
-                    <div class="hellsite-character-file">
-                        <div class="hellsite-character-header">
-                            <div class="hellsite-character-icon">🌊</div>
-                            <div class="hellsite-character-filename">limbo_city</div>
-                            <div class="hellsite-character-extension">.realm</div>
-                        </div>
-                        <div class="hellsite-character-content">
-                            <div class="hellsite-character-image" style="background-image: url('images/limbo.png');">
-                            </div>
-                            <div class="hellsite-character-info">
-                                <h3 class="hellsite-character-name">limbo city</h3>
-                                <div class="hellsite-character-role">border settlement / neutral zone</div>
-                                <p class="hellsite-character-desc">
-                                    Lawless frontier town located just beyond the River Styx, serving as Hell's unofficial border crossing. Features a thriving black market, criminal underworld, and surprisingly good coffee shops. Smugglers frequently transport Earth goods through here, making it a vital hub for both legitimate business and shadier enterprises.
-                                </p>
-                            </div>
+                    <div class="hi-realm">
+                        <div class="hi-realm-img" style="background-image: url('images/limbo.png');"></div>
+                        <div class="hi-realm-body">
+                            <div class="hi-realm-name">Limbo City</div>
+                            <span class="hi-realm-tag">Border Settlement — Neutral Zone</span>
+                            <p class="hi-realm-desc">Lawless frontier town just beyond the River Styx, serving as Hell's unofficial border crossing. A thriving black market, a busy criminal underworld, and surprisingly good coffee shops. Smugglers move Earth goods through here, making it a vital hub for both legitimate business and shadier enterprises.</p>
                         </div>
                     </div>
-
-                    <div class="hellsite-character-file">
-                        <div class="hellsite-character-header">
-                            <div class="hellsite-character-icon">🌍</div>
-                            <div class="hellsite-character-filename">earth_material_plane</div>
-                            <div class="hellsite-character-extension">.realm</div>
-                        </div>
-                        <div class="hellsite-character-content">
-                            <div class="hellsite-character-image" style="background-image: url('images/earth.png');">
-                            </div>
-                            <div class="hellsite-character-info">
-                                <h3 class="hellsite-character-name">earth</h3>
-                                <div class="hellsite-character-role">contested territory / battleground</div>
-                                <p class="hellsite-character-desc">
-                                    The primary battleground where Heaven and Hell wage their eternal influence war over mortal souls. Humans remain largely unaware of the supernatural conflict surrounding them. Both sides maintain corporate presences - fallen angels running legitimate businesses while angels work through charitable organizations.
-                                </p>
-                            </div>
+                    <div class="hi-realm">
+                        <div class="hi-realm-img" style="background-image: url('images/earth.png');"></div>
+                        <div class="hi-realm-body">
+                            <div class="hi-realm-name">Earth</div>
+                            <span class="hi-realm-tag">Contested Territory — Battleground</span>
+                            <p class="hi-realm-desc">The primary battleground where Heaven and Hell wage their eternal influence war over mortal souls. Humans remain largely unaware of the conflict around them. Both sides keep corporate fronts — fallen angels running legitimate businesses while angels work through charitable organizations.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Footer with Homepage Link -->
-        <footer class="hellsite-footer">
-            <a href="../../characters.html" class="hellsite-homepage-link">
-                return home
-            </a>
+        <footer class="hi-footer">
+            <a href="../../characters.html" class="hi-home-link"><i class="fa-solid fa-arrow-left-long"></i>Return to Index</a>
         </footer>
     </div>
 
     <script>
-        // Navigation system
-        const navButtons = document.querySelectorAll('.hellsite-nav-btn');
-        const pages = document.querySelectorAll('.hellsite-page');
-
+        const navButtons = document.querySelectorAll('.hi-nav-btn');
+        const pages = document.querySelectorAll('.hi-page');
         navButtons.forEach(button => {
             button.addEventListener('click', () => {
-                const targetPage = button.getAttribute('data-page');
-                
-                // Update active nav button
-                navButtons.forEach(btn => btn.classList.remove('active'));
+                const target = button.getAttribute('data-page');
+                navButtons.forEach(b => b.classList.remove('active'));
                 button.classList.add('active');
-                
-                // Show target page
-                pages.forEach(page => {
-                    page.classList.remove('active');
+                pages.forEach(p => p.classList.remove('active'));
+                document.getElementById(target).classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // ── Song Player (self-contained; one shared <audio>) ──
+        (function () {
+            let audio = null;
+            let currentPlayer = null;
+
+            function ensureAudio() {
+                if (audio) return audio;
+                audio = new Audio();
+                audio.addEventListener('ended', () => {
+                    if (currentPlayer) currentPlayer.classList.remove('is-playing');
                 });
-                document.getElementById(targetPage).classList.add('active');
-            });
-        });
+                audio.addEventListener('pause', () => {
+                    if (currentPlayer && audio.paused) currentPlayer.classList.remove('is-playing');
+                });
+                return audio;
+            }
 
-        // Character file hover effects - REMOVED to reduce visual clutter
-        // The character card links still have their hover animations
+            function togglePlay(player) {
+                const src = player.dataset.src;
+                if (!src) return;
+                ensureAudio();
+                const isSame = currentPlayer === player;
+                if (isSame && !audio.paused) {
+                    audio.pause();
+                    player.classList.remove('is-playing');
+                    return;
+                }
+                if (currentPlayer && currentPlayer !== player) {
+                    currentPlayer.classList.remove('is-playing');
+                }
+                if (!isSame) audio.src = src;
+                currentPlayer = player;
+                audio.play()
+                    .then(() => player.classList.add('is-playing'))
+                    .catch(() => player.classList.remove('is-playing'));
+            }
 
-        // Terminal typing effect for database entries
-        function typewriterEffect() {
-            const outputs = document.querySelectorAll('#database .hellsite-terminal-output');
-            outputs.forEach((output, index) => {
-                if (document.getElementById('database').classList.contains('active')) {
-                    output.style.opacity = '0';
-                    setTimeout(() => {
-                        output.style.transition = 'opacity 0.5s ease';
-                        output.style.opacity = '1';
-                    }, (index + 1) * 150);
+            function toggleMenu(more) {
+                const wasOpen = more.classList.contains('open');
+                document.querySelectorAll('.hi-player-more.open').forEach(m => m.classList.remove('open'));
+                if (!wasOpen) more.classList.add('open');
+            }
+
+            // catbox is cross-origin, so <a download> is ignored; fetch as a
+            // blob to save with the intended filename, fall back to opening.
+            async function downloadSong(link) {
+                const url = link.href;
+                const filename = link.dataset.filename || 'song.mp3';
+                const original = link.textContent;
+                link.textContent = 'Downloading…';
+                try {
+                    const res = await fetch(url);
+                    if (!res.ok) throw new Error('fetch failed');
+                    const blob = await res.blob();
+                    const blobUrl = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = blobUrl;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    URL.revokeObjectURL(blobUrl);
+                } catch (err) {
+                    window.open(url, '_blank', 'noopener');
+                } finally {
+                    link.textContent = original;
+                    const more = link.closest('.hi-player-more');
+                    if (more) more.classList.remove('open');
+                }
+            }
+
+            document.addEventListener('click', (e) => {
+                const playBtn = e.target.closest('.hi-player-play');
+                if (playBtn) {
+                    e.stopPropagation();
+                    togglePlay(playBtn.closest('.hi-player'));
+                    return;
+                }
+                const kebab = e.target.closest('.hi-player-kebab');
+                if (kebab) {
+                    e.stopPropagation();
+                    toggleMenu(kebab.closest('.hi-player-more'));
+                    return;
+                }
+                const dl = e.target.closest('.hi-song-download');
+                if (dl) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    downloadSong(dl);
+                    return;
+                }
+                if (!e.target.closest('.hi-player-more')) {
+                    document.querySelectorAll('.hi-player-more.open').forEach(m => m.classList.remove('open'));
                 }
             });
-        }
-
-        // Trigger typewriter effect when database is opened
-        navButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                if (button.getAttribute('data-page') === 'database') {
-                    setTimeout(typewriterEffect, 100);
-                }
-            });
-        });
+        })();
     </script>
 </body>
 </html>

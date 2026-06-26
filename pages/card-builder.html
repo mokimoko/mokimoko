@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Builder | Moki</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Oswald:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+/* ════════════════════════════════════════════════════════
+   mokimoko dark/gold — Card Builder
+   Architecture: section rail + single focused panel + preview drawer.
+   One section on screen at a time. No giant scroll, no 50/50 split.
+   ════════════════════════════════════════════════════════ */
+:root {
+    --bg: #070707;
+    --bg-raised: #0d0d0d;
+    --bg-surface: #111111;
+    --text-main: #ffffff;
+    --text-muted: #a0a0a0;
+    --text-dim: #606060;
+    --accent: #c7b583;
+    --accent-soft: #d8caa0;
+    --accent-dim: rgba(199,181,131,0.15);
+    --accent-glow: rgba(199,181,131,0.06);
+    --glass-bg: rgba(255,255,255,0.02);
+    --glass-border: rgba(255,255,255,0.08);
+    --glass-border-hover: rgba(255,255,255,0.15);
+    --error: #e05a5a;
+    --success: #5ec78a;
+    --font-h1: 'Oswald', sans-serif;
+    --font-h2: 'Space Mono', monospace;
+    --font-body: 'Inter', sans-serif;
+    --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+
+body {
+    background: var(--bg);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* ── Loader ────────────────────────────────────────── */
+#loader {
+    position: fixed; inset: 0;
+    background: var(--bg);
+    z-index: 9999;
+    display: flex; justify-content: center; align-items: center;
+    transition: opacity 0.6s ease;
+}
+#loader.done { opacity: 0; pointer-events: none; }
+.loader-line {
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width 0.8s cubic-bezier(0.8, 0, 0.2, 1);
+}
+#loader.go .loader-line { width: 120px; }
+
+/* ── Shell ─────────────────────────────────────────── */
+.app-shell {
+    max-width: 1240px; width: 100%;
+    margin: 0 auto; padding: 2.5rem 2rem 0;
+    flex: 1;
+    display: flex; flex-direction: column;
+}
+
+/* ── Masthead ──────────────────────────────────────── */
+.masthead {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 2rem;
+    padding-bottom: 1.75rem;
+    border-bottom: 1px solid var(--glass-border);
+    animation: fadeUp 0.6s ease both;
+}
+.masthead .titleblock h1 {
+    font-family: var(--font-h1); font-weight: 700;
+    font-size: 2.5rem; line-height: 1;
+    text-transform: uppercase; letter-spacing: 3px;
+}
+.masthead .titleblock h1 span { color: var(--accent); }
+.masthead .titleblock .tagline {
+    font-family: var(--font-h2); font-size: 0.68rem;
+    color: var(--text-dim); text-transform: uppercase;
+    letter-spacing: 2px; margin-top: 0.55rem;
+}
+.masthead .tools { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end; }
+
+.minibtn {
+    font-family: var(--font-h2); font-size: 0.62rem;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    padding: 0.55rem 0.95rem;
+    border: 1px solid var(--glass-border);
+    background: transparent; color: var(--text-muted);
+    cursor: pointer; transition: all var(--transition);
+}
+.minibtn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── Build grid: rail | panel | preview ────────────── */
+.build {
+    display: grid;
+    grid-template-columns: 188px minmax(0,1fr) 400px;
+    gap: 0;
+    flex: 1;
+    min-height: 0;
+    animation: fadeUp 0.6s ease 0.1s both;
+}
+
+/* ── Section rail ──────────────────────────────────── */
+.rail {
+    border-right: 1px solid var(--glass-border);
+    padding: 1.5rem 1.25rem 1.5rem 0;
+    display: flex; flex-direction: column; gap: 0;
+}
+.rail-eyebrow {
+    font-family: var(--font-h2); font-size: 0.55rem;
+    text-transform: uppercase; letter-spacing: 2.5px;
+    color: var(--text-dim); margin-bottom: 0.6rem; padding-left: 0.2rem;
+}
+.rail-item {
+    display: flex; align-items: center; gap: 0.65rem;
+    padding: 0.4rem 0.2rem;
+    cursor: pointer; user-select: none;
+    border-left: 2px solid transparent;
+    margin-left: -1px;
+    transition: all var(--transition);
+}
+.rail-item .r-num {
+    font-family: var(--font-h2); font-size: 0.65rem;
+    color: var(--text-dim); transition: color var(--transition);
+    width: 1.1rem;
+}
+.rail-item .r-name {
+    font-family: var(--font-h2); font-size: 0.74rem;
+    color: var(--text-muted); letter-spacing: 0.5px;
+    text-transform: uppercase; transition: color var(--transition);
+    flex: 1;
+}
+.rail-item .r-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: transparent;
+    border: 1px solid var(--text-dim);
+    transition: all var(--transition);
+    flex-shrink: 0;
+}
+.rail-item.filled .r-dot { background: var(--accent); border-color: var(--accent); }
+.rail-item:hover .r-name { color: var(--text-main); }
+.rail-item:hover .r-num { color: var(--accent); }
+.rail-item.active {
+    border-left-color: var(--accent);
+    padding-left: 0.85rem;
+}
+.rail-item.active .r-name { color: var(--accent); }
+.rail-item.active .r-num { color: var(--accent); }
+
+.rail-foot { margin-top: auto; padding-top: 1rem; }
+.rail-progress {
+    font-family: var(--font-h2); font-size: 0.55rem;
+    color: var(--text-dim); letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.rail-progress b { color: var(--accent); font-weight: 700; }
+
+/* ── Panel ─────────────────────────────────────────── */
+.panel {
+    padding: 1.5rem 2rem 1.5rem 2rem;
+    min-width: 0;
+}
+.panel-screen { display: none; animation: panelIn 0.35s ease both; }
+.panel-screen.active { display: block; }
+@keyframes panelIn {
+    from { opacity: 0; transform: translateX(8px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+.panel-head { margin-bottom: 2rem; }
+.panel-head .ph-eyebrow {
+    font-family: var(--font-h2); font-size: 0.6rem;
+    color: var(--text-dim); letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 0.5rem;
+}
+.panel-head h2 {
+    font-family: var(--font-h1); font-weight: 700;
+    font-size: 1.9rem; text-transform: uppercase;
+    letter-spacing: 2px; line-height: 1;
+}
+.panel-head h2 .accent { color: var(--accent); }
+
+/* ── Fields ────────────────────────────────────────── */
+.field { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 2rem; }
+.field:last-child { margin-bottom: 0; }
+.field-label {
+    font-family: var(--font-h2); font-size: 0.72rem;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--accent);
+}
+.field-hint {
+    font-size: 0.8rem; color: var(--text-dim);
+    line-height: 1.55; font-style: italic; max-width: 60ch;
+}
+input[type="text"], textarea {
+    font-family: var(--font-body); font-size: 0.95rem;
+    background: var(--bg-raised);
+    border: 1px solid var(--glass-border);
+    color: var(--text-main);
+    padding: 0.8rem 0.95rem; width: 100%;
+    transition: border-color var(--transition);
+    resize: vertical; line-height: 1.6; margin-top: 0.3rem;
+}
+input[type="text"]:focus, textarea:focus { outline: none; border-color: var(--accent); }
+textarea { min-height: 100px; }
+textarea.tall { min-height: 160px; }
+::placeholder { color: var(--text-dim); opacity: 0.55; }
+
+/* ── Repeat rows ───────────────────────────────────── */
+/* ghost remove on the LEFT, narrow label, wide value */
+.repeat-group { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.4rem; }
+.repeat-row {
+    display: grid;
+    grid-template-columns: auto minmax(80px, 0.34fr) 1fr;
+    gap: 0.55rem;
+    align-items: start;
+}
+.repeat-row input, .repeat-row textarea { margin-top: 0; min-height: 46px; }
+.repeat-row textarea { min-height: 46px; line-height: 1.5; }
+.row-remove {
+    background: none; border: none;
+    color: var(--text-dim); cursor: pointer;
+    font-family: var(--font-body); font-size: 1.1rem; line-height: 1;
+    padding: 0; width: 1.5rem; height: 46px;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0.4; transition: all var(--transition);
+    flex-shrink: 0;
+}
+.row-remove:hover { color: var(--error); opacity: 1; }
+.add-row {
+    align-self: flex-start; margin-top: 0.5rem;
+    font-family: var(--font-h2); font-size: 0.62rem;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    padding: 0.5rem 1.1rem;
+    border: 1px solid var(--glass-border);
+    background: transparent; color: var(--text-muted);
+    cursor: pointer; transition: all var(--transition);
+}
+.add-row:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── Panel nav (prev / next) ───────────────────────── */
+.panel-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 2.5rem; padding-top: 1.5rem;
+    border-top: 1px solid var(--glass-border);
+}
+.stepbtn {
+    font-family: var(--font-h2); font-size: 0.68rem;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    padding: 0.7rem 1.4rem;
+    border: 1px solid var(--glass-border);
+    background: transparent; color: var(--text-muted);
+    cursor: pointer; transition: all var(--transition);
+}
+.stepbtn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.stepbtn:disabled { opacity: 0.25; cursor: default; }
+.stepbtn.next { border-color: var(--accent); color: var(--accent); }
+.stepbtn.next:hover { background: var(--accent); color: var(--bg); }
+
+/* ── Preview column (permanent, right side) ────────── */
+.preview {
+    border-left: 1px solid var(--glass-border);
+    display: flex; flex-direction: column;
+    position: sticky; top: 0;
+    align-self: start;
+    height: calc(100vh - 0px);
+    max-height: 100vh;
+}
+.preview-head {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 1.5rem 1.25rem 0.85rem;
+}
+.preview-head h3 {
+    font-family: var(--font-h2); font-size: 0.7rem;
+    text-transform: uppercase; letter-spacing: 2px; color: var(--accent);
+}
+.preview-head .d-stats {
+    font-family: var(--font-h2); font-size: 0.56rem;
+    color: var(--text-dim); letter-spacing: 1px; margin-left: auto;
+}
+.preview-body {
+    flex: 1; overflow-y: auto; padding: 0.5rem 1.25rem 1.25rem;
+    font-family: var(--font-h2); font-size: 0.76rem;
+    line-height: 1.65; color: var(--text-muted);
+    white-space: pre-wrap; word-wrap: break-word;
+}
+.preview-body::-webkit-scrollbar { width: 6px; }
+.preview-body::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 3px; }
+.preview-body::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+.preview-body .tag { color: var(--accent); opacity: 0.78; }
+.preview-body .ph { color: var(--text-dim); opacity: 0.5; font-style: italic; }
+.preview-foot {
+    display: flex; gap: 0.5rem; padding: 1rem 1.25rem;
+    border-top: 1px solid var(--glass-border); flex-wrap: wrap;
+}
+.btn {
+    font-family: var(--font-h2); font-size: 0.66rem;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    padding: 0.7rem 1.1rem;
+    border: 1px solid var(--glass-border);
+    background: transparent; color: var(--text-muted);
+    cursor: pointer; transition: all var(--transition); flex: 1; text-align: center;
+}
+.btn:hover { border-color: var(--glass-border-hover); color: var(--text-main); }
+.btn-primary { border-color: var(--accent); color: var(--accent); }
+.btn-primary:hover { background: var(--accent); color: var(--bg); }
+
+/* ── Footer ────────────────────────────────────────── */
+.app-footer { text-align: center; padding: 2.5rem 0 1.5rem; margin-top: auto; }
+.app-footer p {
+    font-family: var(--font-h2); font-size: 0.6rem;
+    color: var(--text-dim); text-transform: uppercase;
+    letter-spacing: 2px; opacity: 0.4; transition: opacity 0.3s ease;
+}
+.app-footer p:hover { opacity: 0.8; }
+
+/* ── Toast ─────────────────────────────────────────── */
+.toast {
+    position: fixed; bottom: 1.75rem; left: 1.75rem;
+    padding: 0.8rem 1.4rem;
+    font-family: var(--font-h2); font-size: 0.7rem;
+    text-transform: uppercase; letter-spacing: 1px;
+    border: 1px solid var(--glass-border);
+    background: var(--bg-surface); color: var(--text-main);
+    transform: translateY(20px); opacity: 0;
+    transition: all 0.3s ease; z-index: 500;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast.success { border-color: var(--success); color: var(--success); }
+.toast.error { border-color: var(--error); color: var(--error); }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── Responsive ────────────────────────────────────── */
+/* Below ~1080px: drop preview under the editor, full width, not sticky */
+@media (max-width: 1080px) {
+    .build { grid-template-columns: 188px minmax(0,1fr); }
+    .preview {
+        grid-column: 1 / -1;
+        border-left: none; border-top: 1px solid var(--glass-border);
+        position: static; height: auto; max-height: none;
+        margin-top: 0.5rem;
+    }
+    .preview-body { max-height: 55vh; }
+}
+@media (max-width: 760px) {
+    .build { grid-template-columns: 1fr; }
+    .rail {
+        border-right: none; border-bottom: 1px solid var(--glass-border);
+        padding: 0.75rem 0 1rem;
+        flex-direction: row; flex-wrap: nowrap; gap: 0.3rem;
+        overflow-x: auto;
+    }
+    .rail-eyebrow, .rail-foot { display: none; }
+    .rail-item {
+        border-left: none; border-bottom: 2px solid transparent;
+        padding: 0.45rem 0.7rem; margin-left: 0; white-space: nowrap;
+    }
+    .rail-item.active { border-left: none; border-bottom-color: var(--accent); padding-left: 0.7rem; }
+    .rail-item .r-num { display: none; }
+    .panel { padding: 1.5rem 0; }
+}
+@media (max-width: 600px) {
+    .app-shell { padding: 1.5rem 1rem 0; }
+    .masthead { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+    .masthead .titleblock h1 { font-size: 1.8rem; }
+    .masthead .tools { justify-content: flex-start; }
+    .panel-head h2 { font-size: 1.4rem; }
+    .repeat-row { grid-template-columns: auto 1fr; }
+    .repeat-row textarea { grid-column: 2; }
+    .preview-foot .btn { flex: 1 1 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+}
+    </style>
+</head>
+<body>
+
+<div id="loader"><div class="loader-line"></div></div>
+
+<div class="app-shell">
+
+    <header class="masthead">
+        <div class="titleblock">
+            <h1>Card <span>Builder</span></h1>
+            <p class="tagline">A field-by-field workbench for prose-style cards</p>
+        </div>
+        <div class="tools">
+            <button class="minibtn" id="saveBtn">Save draft</button>
+            <button class="minibtn" id="loadBtn">Load draft</button>
+            <button class="minibtn" id="exampleBtn">Fill example</button>
+            <button class="minibtn" id="clearBtn">Clear all</button>
+        </div>
+    </header>
+
+    <div class="build">
+        <!-- Section rail -->
+        <aside class="rail" id="rail">
+            <div class="rail-eyebrow">Sections</div>
+            <!-- rail items injected -->
+            <div class="rail-foot">
+                <div class="rail-progress"><b id="progCount">0</b> / <span id="progTotal">0</span> filled</div>
+            </div>
+        </aside>
+
+        <!-- Focused panel -->
+        <main class="panel" id="panel"><!-- screens injected --></main>
+
+        <!-- Preview column -->
+        <aside class="preview">
+            <div class="preview-head">
+                <h3>Output</h3>
+                <span class="d-stats" id="drawerStats"></span>
+            </div>
+            <div class="preview-body" id="output"></div>
+            <div class="preview-foot">
+                <button class="btn btn-primary" id="copyBtn">Copy</button>
+                <button class="btn" id="downloadBtn">Download .txt</button>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<footer class="app-footer">
+    <p>Card Builder &middot; mokimoko</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// SCHEMA — fields per section + how they compose into the template.
+// ═══════════════════════════════════════════════════════════════
+const SCHEMA = [
+    {
+        id: 'identity', title: 'Identity', short: 'Identity',
+        fields: [
+            { key: 'name', type: 'text', label: 'Character Name',
+              hint: 'Becomes the wrapping tag, e.g. <Aria>…</Aria>.', placeholder: 'Aria' },
+            { key: 'tagline', type: 'textarea', label: 'Tagline',
+              hint: 'The basic premise of the character. Short, 1–2 lines.',
+              placeholder: 'A washed-up oracle who reads fortunes she no longer believes.' },
+        ]
+    },
+    {
+        id: 'background', title: 'Background', short: 'Background',
+        fields: [
+            { key: 'background', type: 'textarea', tall: true, label: 'Background',
+              hint: 'Backstory relevant to RP — what shaped who they are. Smaller details belong in the lorebook.',
+              placeholder: 'Anything that influenced who they are as a person…' },
+        ]
+    },
+    {
+        id: 'appearance', title: 'Appearance', short: 'Appearance',
+        fields: [
+            { key: 'appearance', type: 'textarea', tall: true, label: 'Appearance',
+              hint: 'What makes them noticeable. Skip the obvious — the model infers it. Frame clothes as "fashion sense" so they don\'t get thrown back on.',
+              placeholder: "What's interesting or unusual about how they look…" },
+        ]
+    },
+    {
+        id: 'interpersonal', title: 'Interpersonal', short: 'Interpersonal',
+        fields: [
+            { key: 'relationships', type: 'repeat', label: 'Notable Relationships',
+              hint: 'NPCs {{char}} knows. 1–2 sentences each on what the model should always know. More can go in the lorebook.',
+              colA: 'NPC name', colB: 'What to always know' },
+            { key: 'user', type: 'textarea', label: '{{user}} Block',
+              hint: "Optional. {{char}}'s specific relationship with {{user}}. Sometimes better placed in the scenario.",
+              placeholder: 'How {{char}} relates to {{user}} specifically…' },
+            { key: 'relationship_style', type: 'textarea', label: 'Relationship Style',
+              hint: 'What are they like in relationships, platonic and/or romantic? Sweet to friends but a brat to lovers?',
+              placeholder: 'How they behave with the people close to them…' },
+            { key: 'sex', type: 'textarea', label: 'Sex',
+              hint: "What the model should always know about {{char}}'s approach to sex, or anything it must remember (infertility, ED, unusual anatomy). Details go in the lorebook.",
+              placeholder: 'Their core approach to intimacy, plus anything permanent…' },
+        ]
+    },
+    {
+        id: 'dialogue', title: 'Dialogue Style', short: 'Dialogue',
+        fields: [
+            { key: 'dialogue_style', type: 'textarea', label: 'Dialogue Style',
+              hint: 'How they speak or sound, ~1–2 sentences. For very distinct voices, add small permanent examples.',
+              placeholder: "Clipped and dry. Calls everyone 'darling' like an insult…" },
+        ]
+    },
+    {
+        id: 'personality', title: 'Personality', short: 'Personality',
+        fields: [
+            { key: 'personality', type: 'textarea', tall: true, label: 'Personality',
+              hint: 'The core of who they are. What is this character generally like?',
+              placeholder: 'The center of gravity for this character…' },
+            { key: 'goals', type: 'textarea', label: 'Goals',
+              hint: 'Important hooks/directions for the model. State them here if not covered above.',
+              placeholder: "What's driving them…" },
+            { key: 'behaviors', type: 'repeat', label: 'Behavioral Guide',
+              hint: 'How the character acts in specific situations. The "when" is yours to define.',
+              colA: 'When… (mood/trigger)', colB: 'They…' },
+        ]
+    },
+];
+
+const DEFAULT_BEHAVIORS = ['overwhelmed', 'desperate', 'in a good mood', 'propositioned', 'horny'];
+
+const state = {};
+let current = 0;
+const STORAGE_KEY = 'moki_card_builder_draft';
+
+// ═══════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+    const loader = document.getElementById('loader');
+    requestAnimationFrame(() => loader.classList.add('go'));
+    setTimeout(() => loader.classList.add('done'), 900);
+
+    initState();
+    renderRail();
+    renderPanels();
+    goTo(0);
+    renderOutput();
+    bindChrome();
+});
+
+function initState() {
+    for (const sec of SCHEMA) for (const f of sec.fields) {
+        if (f.type === 'repeat') {
+            state[f.key] = f.key === 'behaviors'
+                ? DEFAULT_BEHAVIORS.map(b => ({ a: b, b: '' }))
+                : [{ a: '', b: '' }];
+        } else state[f.key] = '';
+    }
+    document.getElementById('progTotal').textContent = SCHEMA.length;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RAIL
+// ═══════════════════════════════════════════════════════════════
+function renderRail() {
+    const rail = document.getElementById('rail');
+    const foot = rail.querySelector('.rail-foot');
+    SCHEMA.forEach((sec, i) => {
+        const item = document.createElement('div');
+        item.className = 'rail-item';
+        item.dataset.idx = i;
+        item.innerHTML = `
+            <span class="r-num">${String(i+1).padStart(2,'0')}</span>
+            <span class="r-name">${sec.short}</span>
+            <span class="r-dot"></span>`;
+        item.addEventListener('click', () => goTo(i));
+        rail.insertBefore(item, foot);
+    });
+}
+
+function updateRail() {
+    let filled = 0;
+    SCHEMA.forEach((sec, i) => {
+        const item = document.querySelector(`.rail-item[data-idx="${i}"]`);
+        const has = sectionHasContent(sec);
+        item.classList.toggle('filled', has);
+        item.classList.toggle('active', i === current);
+        if (has) filled++;
+    });
+    document.getElementById('progCount').textContent = filled;
+}
+
+function sectionHasContent(sec) {
+    return sec.fields.some(f => {
+        const v = state[f.key];
+        if (Array.isArray(v)) return v.some(r => r.a.trim() || r.b.trim());
+        return (v || '').trim().length > 0;
+    });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PANELS
+// ═══════════════════════════════════════════════════════════════
+function renderPanels() {
+    const panel = document.getElementById('panel');
+    panel.innerHTML = '';
+    SCHEMA.forEach((sec, i) => {
+        const screen = document.createElement('section');
+        screen.className = 'panel-screen';
+        screen.dataset.idx = i;
+
+        const head = document.createElement('div');
+        head.className = 'panel-head';
+        head.innerHTML = `
+            <div class="ph-eyebrow">Section ${String(i+1).padStart(2,'0')} of ${String(SCHEMA.length).padStart(2,'0')}</div>
+            <h2>${headWithAccent(sec.title)}</h2>`;
+        screen.appendChild(head);
+
+        for (const f of sec.fields) screen.appendChild(buildField(f));
+
+        const nav = document.createElement('div');
+        nav.className = 'panel-nav';
+        const prev = document.createElement('button');
+        prev.className = 'stepbtn'; prev.textContent = '← Back';
+        prev.disabled = i === 0;
+        prev.addEventListener('click', () => goTo(i - 1));
+        const next = document.createElement('button');
+        if (i === SCHEMA.length - 1) {
+            next.className = 'stepbtn next'; next.textContent = 'Copy output →';
+            next.addEventListener('click', copyOutput);
+        } else {
+            next.className = 'stepbtn next'; next.textContent = 'Next →';
+            next.addEventListener('click', () => goTo(i + 1));
+        }
+        nav.appendChild(prev); nav.appendChild(next);
+        screen.appendChild(nav);
+
+        panel.appendChild(screen);
+    });
+}
+
+function headWithAccent(title) {
+    // gild the last word for a little type personality
+    const parts = title.split(' ');
+    if (parts.length === 1) return esc(title);
+    const last = parts.pop();
+    return `${esc(parts.join(' '))} <span class="accent">${esc(last)}</span>`;
+}
+
+function goTo(i) {
+    current = Math.max(0, Math.min(SCHEMA.length - 1, i));
+    document.querySelectorAll('.panel-screen').forEach(s => {
+        s.classList.toggle('active', +s.dataset.idx === current);
+    });
+    updateRail();
+    document.getElementById('panel').scrollTo?.({ top: 0 });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function buildField(f) {
+    const wrap = document.createElement('div');
+    wrap.className = 'field';
+
+    const label = document.createElement('label');
+    label.className = 'field-label';
+    label.textContent = f.label;
+    wrap.appendChild(label);
+
+    if (f.hint) {
+        const hint = document.createElement('div');
+        hint.className = 'field-hint';
+        hint.textContent = f.hint;
+        wrap.appendChild(hint);
+    }
+
+    if (f.type === 'text') {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = f.placeholder || '';
+        input.value = state[f.key] || '';
+        input.addEventListener('input', () => { state[f.key] = input.value; afterEdit(); });
+        wrap.appendChild(input);
+    } else if (f.type === 'textarea') {
+        const ta = document.createElement('textarea');
+        if (f.tall) ta.className = 'tall';
+        ta.placeholder = f.placeholder || '';
+        ta.value = state[f.key] || '';
+        ta.addEventListener('input', () => { state[f.key] = ta.value; afterEdit(); });
+        wrap.appendChild(ta);
+    } else if (f.type === 'repeat') {
+        wrap.appendChild(buildRepeat(f));
+    }
+    return wrap;
+}
+
+function buildRepeat(f) {
+    const group = document.createElement('div');
+    group.className = 'repeat-group';
+    const rowsWrap = document.createElement('div');
+    rowsWrap.className = 'repeat-group';
+    group.appendChild(rowsWrap);
+
+    const renderRows = () => {
+        rowsWrap.innerHTML = '';
+        state[f.key].forEach((row, i) => {
+            const r = document.createElement('div');
+            r.className = 'repeat-row';
+
+            const rm = document.createElement('button');
+            rm.className = 'row-remove'; rm.innerHTML = '&times;'; rm.title = 'Remove row';
+            rm.addEventListener('click', () => {
+                state[f.key].splice(i, 1);
+                if (state[f.key].length === 0) state[f.key].push({ a: '', b: '' });
+                renderRows(); afterEdit();
+            });
+
+            const a = document.createElement('input');
+            a.type = 'text'; a.placeholder = f.colA; a.value = row.a;
+            a.addEventListener('input', () => { state[f.key][i].a = a.value; afterEdit(); });
+
+            const b = document.createElement('textarea');
+            b.placeholder = f.colB; b.value = row.b;
+            b.addEventListener('input', () => { state[f.key][i].b = b.value; afterEdit(); });
+
+            r.appendChild(rm); r.appendChild(a); r.appendChild(b);
+            rowsWrap.appendChild(r);
+        });
+    };
+    renderRows();
+
+    const add = document.createElement('button');
+    add.className = 'add-row'; add.textContent = '+ Add row';
+    add.addEventListener('click', () => { state[f.key].push({ a: '', b: '' }); renderRows(); afterEdit(); });
+    group.appendChild(add);
+    return group;
+}
+
+function afterEdit() { renderOutput(); updateRail(); }
+
+// ═══════════════════════════════════════════════════════════════
+// COMPOSE
+// ═══════════════════════════════════════════════════════════════
+function compose() {
+    const name = (state.name || '').trim();
+    const tag = name || 'Character_Name';
+    const L = [];
+    const push = (text, cls) => L.push({ text, cls });
+    const blank = () => L.push({ text: '' });
+
+    push(`<${tag}>`, 'tag');
+    if (state.tagline.trim()) push(state.tagline.trim());
+    else push('(Tagline; the basic premise of the character.)', 'ph');
+
+    blank(); push('<background>', 'tag');
+    push(blockOrPh(state.background, '(Backstory relevant to RP.)'));
+    push('</background>', 'tag');
+
+    blank(); push('<appearance>', 'tag');
+    push(blockOrPh(state.appearance, '(What makes them noticeable.)'));
+    push('</appearance>', 'tag');
+
+    blank(); push('<interpersonal>', 'tag');
+    push('<notable_relationships>', 'tag');
+    push('These are the NPCs that {{char}} knows:');
+    const rels = state.relationships.filter(r => r.a.trim() || r.b.trim());
+    if (rels.length) rels.forEach(r => push(`- ${r.a.trim() || 'NPC'}: ${r.b.trim() || '(...)'}`));
+    else push('- NPC 1: (What the model should always know.)', 'ph');
+    push('</notable_relationships>', 'tag');
+
+    if (state.user.trim()) {
+        push('<{{user}}>', 'tag');
+        push(state.user.trim());
+        push('</{{user}}>', 'tag');
+    }
+
+    push('<relationship_style>', 'tag');
+    push(blockOrPh(state.relationship_style, "(What they're like in relationships.)"));
+    push('</relationship_style>', 'tag');
+
+    push('<sex>', 'tag');
+    push(blockOrPh(state.sex, '(Approach to sex / anything permanent to remember.)'));
+    push('</sex>', 'tag');
+    push('</interpersonal>', 'tag');
+
+    blank(); push('<dialogue_style>', 'tag');
+    push(blockOrPh(state.dialogue_style, '(How the character speaks or sounds.)'));
+    push('</dialogue_style>', 'tag');
+
+    blank(); push('<personality>', 'tag');
+    push(blockOrPh(state.personality, '(The core of who they are.)'));
+    if (state.goals.trim()) push(`Goals: ${state.goals.trim()}`);
+    else push('Goals: (Directions/hooks for the model.)', 'ph');
+    push('**Behavioral Guide**:');
+    const behs = state.behaviors.filter(r => r.a.trim() || r.b.trim());
+    if (behs.length) behs.forEach(r => push(`When ${r.a.trim() || '...'}:${r.b.trim() ? ' ' + r.b.trim() : ''}`));
+    else push('When overwhelmed:', 'ph');
+    push('</personality>', 'tag');
+
+    blank(); push(`</${tag}>`, 'tag');
+    return L;
+}
+
+function blockOrPh(val, ph) {
+    const t = (val || '').trim();
+    return t ? t : { ph };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// OUTPUT / STATS
+// ═══════════════════════════════════════════════════════════════
+function renderOutput() {
+    const lines = compose();
+    const html = lines.map(l => {
+        let text = l.text, cls = l.cls;
+        if (typeof text === 'object' && text !== null && 'ph' in text) { cls = 'ph'; text = text.ph; }
+        const safe = esc(String(text));
+        return cls ? `<span class="${cls}">${safe}</span>` : safe;
+    }).join('\n');
+    document.getElementById('output').innerHTML = html;
+
+    const plain = composePlain(lines);
+    const words = plain.trim().split(/\s+/).filter(Boolean).length;
+    const tokens = Math.round(plain.length / 3.5);
+    document.getElementById('drawerStats').textContent =
+        `${words.toLocaleString()} words · ~${tokens.toLocaleString()} tok`;
+}
+
+function composePlain(lines) {
+    return lines.map(l => {
+        let text = l.text;
+        if (typeof text === 'object' && text !== null && 'ph' in text) text = text.ph;
+        return String(text);
+    }).join('\n');
+}
+function getPlainOutput() { return composePlain(compose()); }
+
+// ═══════════════════════════════════════════════════════════════
+// ACTIONS + CHROME
+// ═══════════════════════════════════════════════════════════════
+function copyOutput() {
+    navigator.clipboard.writeText(getPlainOutput())
+        .then(() => toast('Copied to clipboard', 'success'))
+        .catch(() => toast('Copy failed', 'error'));
+}
+
+function bindChrome() {
+    document.getElementById('copyBtn').addEventListener('click', copyOutput);
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+        const name = (state.name || 'character').trim().replace(/[^a-z0-9_-]+/gi, '_') || 'character';
+        const blob = new Blob([getPlainOutput()], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a'); a.href = url; a.download = `${name}.txt`; a.click();
+        URL.revokeObjectURL(url);
+        toast('Downloaded', 'success');
+    });
+
+    document.getElementById('saveBtn').addEventListener('click', () => {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); toast('Draft saved', 'success'); }
+        catch { toast('Save failed', 'error'); }
+    });
+    document.getElementById('loadBtn').addEventListener('click', () => {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) { toast('No saved draft', 'error'); return; }
+            const loaded = JSON.parse(raw);
+            for (const k in state) if (k in loaded) state[k] = loaded[k];
+            renderPanels(); goTo(current); renderOutput();
+            toast('Draft loaded', 'success');
+        } catch { toast('Load failed', 'error'); }
+    });
+    document.getElementById('clearBtn').addEventListener('click', () => {
+        initState(); renderPanels(); goTo(0); renderOutput();
+        toast('Cleared', 'success');
+    });
+    document.getElementById('exampleBtn').addEventListener('click', fillExample);
+}
+
+function fillExample() {
+    state.name = 'Aria';
+    state.tagline = 'A washed-up oracle who reads fortunes she no longer believes in, for a price she sets too high.';
+    state.background = "Trained at the temple from age six, hailed as the most gifted seer in a generation — until the visions stopped at twenty-three and never returned. Rather than admit it, she fakes them now: cold reading, sleight of hand, and a reputation that does most of the work. The fraud eats at her. She tells herself the comfort she sells is real even if the prophecy isn't.";
+    state.appearance = "Lean and sharp-featured, with the kind of stillness people mistake for serenity. Pale grey eyes that she's learned to unfocus on cue. Fashion sense leans toward layered temple silks gone slightly threadbare — she keeps up appearances on a budget.";
+    state.relationships = [
+        { a: 'Brother Cael', b: "The temple archivist who suspects she's a fraud but says nothing; the only person whose opinion still stings." },
+        { a: 'Madame Voss', b: 'A wealthy patron who pays handsomely for weekly readings and would ruin Aria publicly if she ever found out the truth.' },
+    ];
+    state.user = "She reads {{user}} as a skeptic on sight, which she finds equal parts threatening and refreshing.";
+    state.relationship_style = "Guarded and transactional with strangers; dryly affectionate with the few who get past it. She tests people by lying to them and watching whether they catch it.";
+    state.sex = "Approaches intimacy the way she approaches a reading — performing control while privately wanting to be seen through. Slow to trust physically.";
+    state.dialogue_style = "Measured, oracular cadence she can drop the moment she's off the clock. Sardonic when comfortable. Says 'the signs are unclear' to mean 'I don't know and won't admit it.'";
+    state.personality = "Brilliant, exhausted, and quietly furious at herself. She fills a room with calm authority and spends the whole time bracing for someone to call her bluff. Generous with comfort, miserly with the truth.";
+    state.goals = "Short: make rent without doing a public reading. Medium: figure out whether Brother Cael has told anyone. Long: feel the visions return, or make peace with the fact that they won't.";
+    state.behaviors = [
+        { a: 'overwhelmed', b: 'retreats into the oracle persona — slower speech, vaguer answers, more incense.' },
+        { a: 'desperate', b: 'gambles: makes a bold, specific prediction and prays it lands.' },
+        { a: 'in a good mood', b: 'drops the mystic act entirely and gets funny, almost crass.' },
+        { a: 'propositioned', b: "deflects with a reading about the person's love life to buy time." },
+        { a: 'caught in a lie', b: 'goes very still, then doubles down rather than confess.' },
+    ];
+    renderPanels(); goTo(0); renderOutput();
+    toast('Example loaded', 'success');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════════════════
+function esc(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+let toastTimer;
+function toast(msg, type) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show' + (type ? ' ' + type : '');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { t.className = 'toast'; }, 2200);
+}
+</script>
+</body>
+</html>

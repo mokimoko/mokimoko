@@ -14,16 +14,7 @@
     </div>
 
     <!-- Navigation -->
-    <nav id="navbar">
-        <a href="../../index.html" class="nav-brand">MOKI.</a>
-        <div class="nav-links">
-            <a href="../about.html">About Me</a>
-            <a href="../presets.html">Presets</a>
-            <a href="../characters.html" class="active">Characters</a>
-            <a href="../utilities.html">Utilities</a>
-            <a href="../aesthetics.html">Aesthetics</a>
-        </div>
-    </nav>
+    <nav id="navbar"></nav>
     <!-- Hero Banner -->
     <div class="sen-hero">
         <img src="../../images/misc/guardians-of-seneca/header.png" alt="Guardians of Seneca">
@@ -44,15 +35,35 @@
             </nav>
 
             <!-- Overview -->
-            <div class="sen-overview">
-                <p>
-                    <strong>Seneca</strong> is a kingdom where steampower and magic collide. Twin moons hang over clockwork towers and enchanted airships, 
-                    while tears in reality called <strong>rifts</strong> spawn wraiths that plague the land. Four sacred relics — 
-                    a key, a lyre, a compass, and an hourglass — can temporarily close these rifts, each wielded by a 
-                    <strong>Guardian</strong> sworn to protect their territory. A prophecy speaks of the Auspice, 
-                    who will unite the relics and close the rifts for good.
-                </p>
+            <div class="sen-intro">
+                <div class="sen-intro-side">
+                    <img src="../../images/misc/guardians-of-seneca/side.png" alt="Guardians of Seneca" loading="lazy">
+                </div>
+                <div class="sen-overview">
+                    <p>
+                        You are the new <strong>monarch of Seneca</strong> — but the crown is probably the least of your problems. 
+                        The four <strong>Guardians</strong>, each tasked with ruling one of the major territories and wielding a 
+                        magical relic capable of sealing the terrible <strong>rifts</strong> that let monsters spill into the land, 
+                        believe you are the <strong>Auspice</strong>: prophesied to unite the relics and close the rifts for good. 
+                        You've got the crescent moon birthmark, after all.
+                    </p>
+                    <p>
+                        Never mind that your mother, the late queen, died of the <strong>Crimson Plague</strong> when you were very 
+                        small, or that your father, the recently deceased King Marcus, lied about where you were for the last seven 
+                        years "for your own protection" (sure). At least you've got the Guardians. They've known you since you were 
+                        a child, and they've always had your best interests at heart… right?
+                    </p>
+                </div>
             </div>
+
+            <!-- Setting Notes (shared collapsible) -->
+            <details class="setting-notes">
+                <summary><span class="sn-caret">▶</span> Setting Notes</summary>
+                <div class="sn-body">
+                    <p>I originally made these a while ago, but only released Fenris. The others were still in their draft form for ages. These were the first cards I tried making expression sprites for; the resulting sprites are okaaaay but I may redo them one day to match the avatar style better <em>*tired groan*</em> it's so much work....so probably not any time soon.</p>
+                </div>
+            </details>
+
             <div class="sen-info-block">
                 <img src="../../images/misc/guardians-of-seneca/info-block.png" alt="The Kingdom of Seneca" loading="lazy">
             </div>
@@ -85,67 +96,63 @@
                 <div class="sen-char-card" onclick="toggleCharMenu(this, event)">
                     <div class="sen-char-portrait">
                         <img src="../../downloads/characters/seneca/Fenris.png" alt="Sir Fenris Kearney" loading="lazy">
+                        <div class="sen-char-overlay"></div>
+                        <div class="sen-char-menu">
+                            <a href="../../downloads/characters/seneca/Fenris.png" download onclick="event.stopPropagation()">Download Card</a>
+                            <a href="https://mega.nz/file/LG5xSCCL#mrjQqoLVQC3DENm4FpFRB2CbvnKj7RDSVSjeZ5JVm4c" target="_blank" rel="noopener" onclick="event.stopPropagation()">Download Sprites</a>
+                            <a href="https://chub.ai/characters/Mokiikitty/fenris-guardian-of-the-west-83786316b4c4" target="_blank" rel="noopener" onclick="event.stopPropagation()">Venus Chub Link</a>
+                        </div>
                     </div>
                     <div class="sen-char-name">Fenris</div>
                     <div class="sen-char-role">Guardian of the West</div>
-                    <div class="sen-char-menu">
-                        <a href="../../downloads/characters/seneca/Fenris.png" download onclick="event.stopPropagation()">
-                            <span class="menu-icon">↓</span> Download Card
-                        </a>
-                        <a href="https://mega.nz/file/LG5xSCCL#mrjQqoLVQC3DENm4FpFRB2CbvnKj7RDSVSjeZ5JVm4c" target="_blank" rel="noopener" onclick="event.stopPropagation()">
-                            <span class="menu-icon">📁</span> Download Sprites
-                        </a>
-                    </div>
+                    <div class="sen-char-desc">Your rugged childhood protector and former captain of the guard. A brawler who hates formal titles and court politics. He's fiercely loyal and probably the most genuinely warm of the four.</div>
                 </div>
                 <!-- Azrael -->
                 <div class="sen-char-card" onclick="toggleCharMenu(this, event)">
                     <div class="sen-char-portrait">
                         <img src="../../downloads/characters/seneca/Azrael.png" alt="Azrael Locksend" loading="lazy">
+                        <div class="sen-char-overlay"></div>
+                        <div class="sen-char-menu">
+                            <a href="../../downloads/characters/seneca/Azrael.png" download onclick="event.stopPropagation()">Download Card</a>
+                            <a href="https://mega.nz/file/rKgWVBzI#-CMQ-Ljg5qloiU8uEb3TPnT9kg6KlgKveNEDG2-k7vI" target="_blank" rel="noopener" onclick="event.stopPropagation()">Download Sprites</a>
+                            <a href="https://chub.ai/characters/Mokiikitty/azrael-929a8c240656" target="_blank" rel="noopener" onclick="event.stopPropagation()">Venus Chub Link</a>
+                        </div>
                     </div>
                     <div class="sen-char-name">Azrael</div>
                     <div class="sen-char-role">Guardian of the East</div>
-<div class="sen-char-menu">
-                        <a href="../../downloads/characters/seneca/Azrael.png" download onclick="event.stopPropagation()">
-                            <span class="menu-icon">↓</span> Download Card
-                        </a>
-                        <a href="https://mega.nz/file/rKgWVBzI#-CMQ-Ljg5qloiU8uEb3TPnT9kg6KlgKveNEDG2-k7vI" target="_blank" rel="noopener" onclick="event.stopPropagation()">
-                            <span class="menu-icon">📁</span> Download Sprites
-                        </a>
-                    </div>
+                    <div class="sen-char-desc">Your godfather, a brilliant inventor, and an absolute control freak. Born a commoner to an abusive drunk, Azrael clawed his way to the top through pure genius and now sports a ticking brass arm of his own design. (He also might be hiding some intensely kinky desires behind his impeccable aristocratic facade.)</div>
                 </div>
 
                 <!-- Elias -->
                 <div class="sen-char-card" onclick="toggleCharMenu(this, event)">
                     <div class="sen-char-portrait">
                         <img src="../../downloads/characters/seneca/Elias.png" alt="Elias" loading="lazy">
+                        <div class="sen-char-overlay"></div>
+                        <div class="sen-char-menu">
+                            <a href="../../downloads/characters/seneca/Elias.png" download onclick="event.stopPropagation()">Download Card</a>
+                            <a href="https://mega.nz/file/fPxjTLbQ#05oLW8gs74b5WjFi4XIkoB3qwK-3yxHFZAJ4td4oqR4" target="_blank" rel="noopener" onclick="event.stopPropagation()">Download Sprites</a>
+                            <a href="https://chub.ai/characters/Mokiikitty/elias-guardian-of-the-west-7aff94811832" target="_blank" rel="noopener" onclick="event.stopPropagation()">Venus Chub Link</a>
+                        </div>
                     </div>
                     <div class="sen-char-name">Elias</div>
                     <div class="sen-char-role">Guardian of the North</div>
-                    <div class="sen-char-menu">
-                        <a href="../../downloads/characters/seneca/Elias.png" download onclick="event.stopPropagation()">
-                            <span class="menu-icon">↓</span> Download Card
-                        </a>
-                        <a href="https://mega.nz/file/fPxjTLbQ#05oLW8gs74b5WjFi4XIkoB3qwK-3yxHFZAJ4td4oqR4" target="_blank" rel="noopener" onclick="event.stopPropagation()">
-                            <span class="menu-icon">📁</span> Download Sprites
-                        </a>
-                    </div>
+                    <div class="sen-char-desc">The "Angel of Serenth." To the public, Elias is a serene, beautiful cleric of Polaris and a miraculous healer. In reality&hellip;he is a mentally unstable fanatic addicted to the painful ecstasy of his own healing magic. He fully believes you are the prophesied Auspice, but he's hiding the darkest secret of all: he knows the Auspice is destined to die when the last rift closes.</div>
                 </div>
 
                 <!-- Malachi -->
                 <div class="sen-char-card" onclick="toggleCharMenu(this, event)">
                     <div class="sen-char-portrait">
                         <img src="../../downloads/characters/seneca/Malachi.png" alt="Malachi" loading="lazy">
+                        <div class="sen-char-overlay"></div>
+                        <div class="sen-char-menu">
+                            <a href="../../downloads/characters/seneca/Malachi.png" download onclick="event.stopPropagation()">Download Card</a>
+                            <a href="https://mega.nz/file/7GoTBD4C#RWPEFh_xjUsbffgJKAgbZSeb9Lj2AWpLCMc1FMyhnVA" target="_blank" rel="noopener" onclick="event.stopPropagation()">Download Sprites</a>
+                            <a href="https://chub.ai/characters/Mokiikitty/malachi-guardian-of-the-south-1aa60bc05948" target="_blank" rel="noopener" onclick="event.stopPropagation()">Venus Chub Link</a>
+                        </div>
                     </div>
                     <div class="sen-char-name">Malachi</div>
                     <div class="sen-char-role">Guardian of the South</div>
-                    <div class="sen-char-menu">
-                        <a href="../../downloads/characters/seneca/Malachi.png" download onclick="event.stopPropagation()">
-                            <span class="menu-icon">↓</span> Download Card
-                        </a>
-                        <a href="https://mega.nz/file/7GoTBD4C#RWPEFh_xjUsbffgJKAgbZSeb9Lj2AWpLCMc1FMyhnVA" target="_blank" rel="noopener" onclick="event.stopPropagation()">
-                            <span class="menu-icon">📁</span> Download Sprites
-                        </a>
-                    </div>
+                    <div class="sen-char-desc">An ancient, millennia-old fallen angel (or demon, depending on who you ask) who governs the desert South. Malachi is dramatic, seductive, chaotic, and completely detached from mortal politics. He is the only one who knew about your seven-year imprisonment&hellip;and he did nothing.</div>
                 </div>
 
             </div>
@@ -220,35 +227,53 @@
         <p>&copy; 2026 Moki.</p>
     </footer>
 
+    <!-- Back to Top -->
+    <button class="back-to-top sen-themed" aria-label="Back to top">↑</button>
+
     <script src="../../js/main.js"></script>
     <script>
-        // Character card context menu at cursor position
+        // Character card context menu — unfold in place
         function toggleCharMenu(card, event) {
             const menu = card.querySelector('.sen-char-menu');
             if (!menu) return;
-            const wasActive = menu.classList.contains('active');
-            // Close all menus first
-            document.querySelectorAll('.sen-char-menu.active').forEach(m => m.classList.remove('active'));
-            if (!wasActive) {
-                // Position at cursor
-                let x = event.clientX;
-                let y = event.clientY;
-                // Prevent overflow off right/bottom edge
-                const menuRect = { width: 200, height: 90 };
-                if (x + menuRect.width > window.innerWidth) x = window.innerWidth - menuRect.width - 8;
-                if (y + menuRect.height > window.innerHeight) y = y - menuRect.height;
-                menu.style.left = x + 'px';
-                menu.style.top = y + 'px';
-                menu.classList.add('active');
-            }
+            const wasOpen = card.classList.contains('menu-open');
+            document.querySelectorAll('.sen-char-card.menu-open').forEach(c => c.classList.remove('menu-open'));
+            if (!wasOpen) card.classList.add('menu-open');
         }
 
         // Close menus on outside click
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.sen-char-card')) {
-                document.querySelectorAll('.sen-char-menu.active').forEach(m => m.classList.remove('active'));
+                document.querySelectorAll('.sen-char-card.menu-open').forEach(c => c.classList.remove('menu-open'));
             }
         });
+
+        // Tooltip edge detection — flip to the left when there's no room on the right
+        document.querySelectorAll('.sen-char-card').forEach(card => {
+            const desc = card.querySelector('.sen-char-desc');
+            if (!desc) return;
+            const decideSide = () => {
+                const rect = card.getBoundingClientRect();
+                const needed = 240 + 12 + 16;
+                card.classList.toggle('flip-tip', rect.right + needed > window.innerWidth);
+            };
+            card.addEventListener('mouseenter', decideSide);
+            card.addEventListener('focusin', decideSide);
+        });
+
+        // Back to top
+        const backToTop = document.querySelector('.back-to-top');
+        if (backToTop) {
+            const toggleBackToTop = () => {
+                backToTop.classList.toggle('visible', window.scrollY > 400);
+            };
+            window.addEventListener('scroll', toggleBackToTop, { passive: true });
+            toggleBackToTop();
+            backToTop.addEventListener('click', () => {
+                const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+            });
+        }
     </script>
 </body>
 </html>

@@ -49,8 +49,9 @@
         <div class="loader-line"></div>
     </div>
 
-    <!-- Navigation -->
-    <nav id="navbar">
+    <!-- Navigation (hardcoded + root-relative: the 404 page can be served
+         from any URL depth, so the depth-computed nav doesn't apply here) -->
+    <nav id="navbar" data-nav-static>
         <a href="/index.html" class="nav-brand">MOKI.</a>
         <div class="nav-links">
             <a href="/pages/about.html">About Me</a>
@@ -58,6 +59,7 @@
             <a href="/pages/characters.html">Characters</a>
             <a href="/pages/utilities.html">Utilities</a>
             <a href="/pages/aesthetics.html">Aesthetics</a>
+            <a href="/pages/resources.html">Resources</a>
         </div>
     </nav>
 

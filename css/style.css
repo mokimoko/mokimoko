@@ -301,3 +301,266 @@ p {
 .subtle-footer p:hover {
     opacity: 0.8;
 }
+
+/* ─────────────────────────────────────────────────
+ * SHARED: Setting Notes (collapsible)
+ * Drops into any world page beneath the overview.
+ * Each page themes it by setting these three vars on
+ * its own .setting-notes (accent / fonts). Falls back
+ * to the global accent + body font if unset.
+ * ───────────────────────────────────────────────── */
+.setting-notes {
+    --sn-accent: var(--accent);
+    --sn-font-head: var(--font-h2);
+    --sn-font-body: var(--font-body);
+    --sn-border: rgba(255, 255, 255, 0.07);
+    margin: 1.75rem 0 0.5rem;
+    border-top: 1px solid var(--sn-border);
+    border-bottom: 1px solid var(--sn-border);
+}
+
+.setting-notes > summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.95rem 0.2rem;
+    font-family: var(--sn-font-head);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--sn-accent);
+    opacity: 0.72;
+    transition: opacity 0.25s ease;
+    user-select: none;
+}
+
+.setting-notes > summary::-webkit-details-marker {
+    display: none;
+}
+
+.setting-notes > summary:hover {
+    opacity: 1;
+}
+
+/* Caret — rotates open */
+.setting-notes > summary .sn-caret {
+    font-size: 0.6rem;
+    transition: transform 0.3s ease;
+    opacity: 0.8;
+}
+
+.setting-notes[open] > summary .sn-caret {
+    transform: rotate(90deg);
+}
+
+/* Body of the notes */
+.setting-notes .sn-body {
+    padding: 0.25rem 0.2rem 1.4rem;
+    font-family: var(--sn-font-body);
+    font-size: 0.98rem;
+    line-height: 1.75;
+    color: var(--text-muted);
+    max-width: 760px;
+    animation: sn-reveal 0.35s ease;
+}
+
+.setting-notes .sn-body p + p {
+    margin-top: 0.9rem;
+}
+
+@keyframes sn-reveal {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ─────────────────────────────────────────────────
+ * SHARED: Back to Top (floating button)
+ * Fades in once the page is scrolled down. Each world
+ * page themes it via the vars below; falls back to the
+ * global accent + body font if unset.
+ * ───────────────────────────────────────────────── */
+.back-to-top {
+    --btt-accent: var(--accent);
+    --btt-bg: rgba(20, 20, 20, 0.85);
+    --btt-border: rgba(255, 255, 255, 0.12);
+    position: fixed;
+    bottom: 1.75rem;
+    right: 1.75rem;
+    width: 2.9rem;
+    height: 2.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--btt-bg);
+    color: var(--btt-accent);
+    border: 1px solid var(--btt-border);
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 90;
+    opacity: 0;
+    transform: translateY(0.6rem);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.back-to-top.visible {
+    opacity: 0.85;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.back-to-top:hover {
+    opacity: 1;
+    border-color: var(--btt-accent);
+}
+
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 1.1rem;
+        right: 1.1rem;
+        width: 2.6rem;
+        height: 2.6rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .back-to-top {
+        transition: opacity 0.2s ease;
+        transform: none;
+    }
+}
+
+
+/* ══════════════════════════════════════════════════
+   Shared Song Player (used on world character cards)
+   Theme each page by mapping the --player-* vars to
+   that page's accent palette. Sensible fallbacks let
+   it work even with no theming.
+   ══════════════════════════════════════════════════ */
+:root {
+    --player-accent: #c9a84c;
+    --player-muted: #8a8478;
+    --player-glow: rgba(201, 168, 76, 0.12);
+    --player-accent-dim: rgba(201, 168, 76, 0.4);
+    --player-menu-bg: rgba(18, 16, 14, 0.98);
+    --player-menu-text: #e8e0d0;
+    --player-font: inherit;
+}
+
+/* footer row: name/role on the left, player on the right */
+.song-footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 0.4rem;
+}
+
+.song-footer .song-meta {
+    min-width: 0;
+    flex: 1;
+}
+
+/* player cluster */
+.song-player {
+    display: flex;
+    align-items: center;
+    gap: 0.1rem;
+    padding: 0 0.3rem 0.2rem 0;
+    flex-shrink: 0;
+}
+
+.song-player-btn {
+    appearance: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--player-muted);
+    opacity: 0.5;
+    transition: color 0.25s ease, opacity 0.25s ease, background 0.2s ease;
+    border-radius: 4px;
+    line-height: 0;
+}
+
+/* brighten the controls a touch when the card is hovered;
+   cards opt in by adding .song-host to the hover target */
+.song-host:hover .song-player-btn {
+    opacity: 0.85;
+}
+
+.song-player-btn:hover {
+    color: var(--player-accent);
+    opacity: 1;
+    background: var(--player-glow);
+}
+
+.song-player-btn svg {
+    width: 14px;
+    height: 14px;
+    display: block;
+}
+
+/* play / pause glyph swap */
+.song-player-btn .icon-pause { display: none; }
+.song-player.is-playing .icon-play { display: none; }
+.song-player.is-playing .icon-pause { display: block; }
+
+.song-player.is-playing .song-player-play {
+    color: var(--player-accent);
+    opacity: 1;
+}
+
+/* overflow (kebab) menu */
+.song-player-more {
+    position: relative;
+}
+
+.song-player-menu {
+    position: absolute;
+    bottom: calc(100% + 4px);
+    right: 0;
+    min-width: 140px;
+    background: var(--player-menu-bg);
+    border: 1px solid var(--player-accent-dim);
+    border-radius: 7px;
+    padding: 0.3rem;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(4px);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+    z-index: 40;
+}
+
+.song-player-more.open .song-player-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.song-player-menu a {
+    display: block;
+    padding: 0.4rem 0.55rem;
+    text-decoration: none;
+    color: var(--player-menu-text);
+    font-family: var(--player-font);
+    font-size: 0.74rem;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+    border-radius: 4px;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.song-player-menu a:hover {
+    background: var(--player-glow);
+    color: #fff;
+}

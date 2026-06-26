@@ -14,16 +14,7 @@
     </div>
 
     <!-- Navigation -->
-    <nav id="navbar">
-        <a href="../../index.html" class="nav-brand">MOKI.</a>
-        <div class="nav-links">
-            <a href="../about.html">About Me</a>
-            <a href="../presets.html">Presets</a>
-            <a href="../characters.html" class="active">Characters</a>
-            <a href="../utilities.html">Utilities</a>
-            <a href="../aesthetics.html">Aesthetics</a>
-        </div>
-    </nav>
+    <nav id="navbar"></nav>
 
     <!-- Hero Banner -->
     <div class="asi-hero">
@@ -45,18 +36,32 @@
             </nav>
 
             <!-- Overview -->
-            <div class="asi-overview">
-                <p>
-                    A nuclear bomb destroyed <strong>Chicago</strong> in 1957, and the world never recovered. The 
-                    <strong>New Republic</strong> rose from the ashes — a militaristic regime controlling what was once the 
-                    United States and Canada through walled <strong>safe cities</strong> and strict surveillance. Beyond the 
-                    walls lie the irradiated <strong>Wilds</strong>, lawless and crawling with mutant wildlife, raiders, and 
-                    worse. The fallout didn't just poison the land — it woke something up. Supernatural creatures and 
-                    genetic mutations, classified as <strong>anomalies</strong>, began appearing across the continent. 
-                    The <strong>Anomalous Studies Institute</strong>, a secret research facility buried in the Colorado 
-                    wilderness, captures and studies them. Not all of its methods are humane.
-                </p>
+            <div class="asi-intro">
+                <div class="asi-intro-side">
+                    <img src="../../images/misc/asi/side.png" alt="Anomalous Studies Institute" loading="lazy">
+                </div>
+                <div class="asi-overview">
+                    <p>
+                        A nuclear bomb destroyed <strong>Chicago</strong> in 1957, and the world never recovered. The 
+                        <strong>New Republic</strong> rose from the ashes — a militaristic regime controlling what was once the 
+                        United States and Canada through walled <strong>safe cities</strong> and strict surveillance. Beyond the 
+                        walls lie the irradiated <strong>Wilds</strong>, lawless and crawling with mutant wildlife, raiders, and 
+                        worse. The fallout didn't just poison the land — it woke something up. Supernatural creatures and 
+                        genetic mutations, classified as <strong>anomalies</strong>, began appearing across the continent. 
+                        The <strong>Anomalous Studies Institute</strong>, a secret research facility buried in the Colorado 
+                        wilderness, captures and studies them. Not all of its methods are humane.
+                    </p>
+                </div>
             </div>
+
+            <!-- Setting Notes (shared collapsible) -->
+            <details class="setting-notes">
+                <summary><span class="sn-caret">▶</span> Setting Notes</summary>
+                <div class="sn-body">
+                    <p>These cards started as much simpler versions, inspired by an old gooner card that no longer exists (or at least, I can't find it...) on JanitorAI. The premise was that {{user}} is thrown into a "monster lab" and the various monsters have their way with him/her. Fun stuff.</p>
+                    <p>But I immediately had some characters in mind, so I made separate cards for them. And over the years I've iterated on them, eventually landing on an alternate history scenario taking place in the background. Some of the details have changed for these characters, but the core of them has largely stayed the same.</p>
+                </div>
+            </details>
 
             <!-- ═══ Lorebook ═══ -->
             <div class="asi-divider">
@@ -84,45 +89,105 @@
             <div class="asi-char-grid">
 
                 <!-- Kira -->
-                <div class="asi-char-card" onclick="toggleCharMenu(this, event)">
+                <div class="asi-char-card song-host" onclick="toggleCharMenu(this, event)">
                     <div class="asi-char-portrait">
                         <img src="../../downloads/characters/asi/Kira.png" alt="Kira" loading="lazy">
+                        <div class="asi-char-overlay"></div>
+                        <div class="asi-char-menu">
+                            <a href="../../downloads/characters/asi/Kira.png" download onclick="event.stopPropagation()">Download Card</a>
+                            <a href="https://chub.ai/characters/Mokiikitty/kira-captive-kitsune-v2-862024493be5" target="_blank" rel="noopener" onclick="event.stopPropagation()">Venus Chub Link</a>
+                            <a href="https://janitorai.com/characters/5d23cbcd-7eb7-4ab7-b71f-beb63d1afb48_character-kira-captive-kitsune-asi-verse" target="_blank" rel="noopener" onclick="event.stopPropagation()">Janitor Link</a>
+                        </div>
                     </div>
-                    <div class="asi-char-name">Kira</div>
-                    <div class="asi-char-role">Kitsune</div>
-                    <div class="asi-char-menu">
-                        <a href="../../downloads/characters/asi/Kira.png" download onclick="event.stopPropagation()">
-                            <span class="menu-icon">↓</span> Download Card
-                        </a>
+                    <div class="song-footer">
+                        <div class="song-meta">
+                            <div class="asi-char-name">Kira</div>
+                            <div class="asi-char-role">Kitsune</div>
+                        </div>
+                        <div class="song-player" data-src="https://files.catbox.moe/u1j3hf.mp3" data-title="Kira">
+                            <button type="button" class="song-player-btn song-player-play" aria-label="Play Kira's theme">
+                                <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+                            </button>
+                            <div class="song-player-more">
+                                <button type="button" class="song-player-btn song-player-kebab" aria-label="More options">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg>
+                                </button>
+                                <div class="song-player-menu">
+                                    <a href="https://files.catbox.moe/u1j3hf.mp3" class="song-download" data-filename="Clear-Sky Rain.mp3">Download Song</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="asi-char-desc">Kira the kitsune has been at the ASI facility since its founding. He's known for his charm, which has secured him certain privileges&mdash;like having the sweetest digs out of any of the "specimens." With his striking red hair, fluffy tails, and fabulous sense of fashion, he certainly attracts attention&hellip;but it's difficult to get to know someone who seems determined to NOT be known, not really. Human lives are so transient, especially to a fox three centuries old. Can you really blame him for maintaining a certain level of detachment?</div>
                 </div>
 
                 <!-- Theo -->
-                <div class="asi-char-card" onclick="toggleCharMenu(this, event)">
+                <div class="asi-char-card song-host" onclick="toggleCharMenu(this, event)">
                     <div class="asi-char-portrait">
                         <img src="../../downloads/characters/asi/Theo.png" alt="Theo Chapman" loading="lazy">
+                        <div class="asi-char-overlay"></div>
+                        <div class="asi-char-menu">
+                            <a href="../../downloads/characters/asi/Theo.png" download onclick="event.stopPropagation()">Download Card</a>
+                            <a href="https://chub.ai/characters/Mokiikitty/theo-captive-werewolf-v2-b072bba4fcb3" target="_blank" rel="noopener" onclick="event.stopPropagation()">Venus Chub Link</a>
+                            <a href="https://janitorai.com/characters/c7d626f4-ebc1-4b4e-91e7-19b85c3692c8_character-theo-captive-werewolf-asi-verse" target="_blank" rel="noopener" onclick="event.stopPropagation()">Janitor Link</a>
+                        </div>
                     </div>
-                    <div class="asi-char-name">Theo</div>
-                    <div class="asi-char-role">Werewolf</div>
-                    <div class="asi-char-menu">
-                        <a href="../../downloads/characters/asi/Theo.png" download onclick="event.stopPropagation()">
-                            <span class="menu-icon">↓</span> Download Card
-                        </a>
+                    <div class="song-footer">
+                        <div class="song-meta">
+                            <div class="asi-char-name">Theo</div>
+                            <div class="asi-char-role">Werewolf</div>
+                        </div>
+                        <div class="song-player" data-src="https://files.catbox.moe/vrwzx0.mp3" data-title="Theo">
+                            <button type="button" class="song-player-btn song-player-play" aria-label="Play Theo's theme">
+                                <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+                            </button>
+                            <div class="song-player-more">
+                                <button type="button" class="song-player-btn song-player-kebab" aria-label="More options">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg>
+                                </button>
+                                <div class="song-player-menu">
+                                    <a href="https://files.catbox.moe/vrwzx0.mp3" class="song-download" data-filename="Temporary Spine.mp3">Download Song</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="asi-char-desc">Theo the werewolf is one of those creatures, brought to the facility after a paid research study gone wrong. He's not too happy about the accommodations, to put it lightly. Will you tame his wild heart, romance novel style? Or will he just eat you? (I mean, a man's gotta eat.)</div>
                 </div>
 
                 <!-- Etienne -->
-                <div class="asi-char-card" onclick="toggleCharMenu(this, event)">
+                <div class="asi-char-card song-host" onclick="toggleCharMenu(this, event)">
                     <div class="asi-char-portrait">
                         <img src="../../downloads/characters/asi/Etienne.png" alt="Etienne" loading="lazy">
+                        <div class="asi-char-overlay"></div>
+                        <div class="asi-char-menu">
+                            <a href="../../downloads/characters/asi/Etienne.png" download onclick="event.stopPropagation()">Download Card</a>
+                            <a href="https://chub.ai/characters/Mokiikitty/etienne-captured-merman-v2-242b5375d85d" target="_blank" rel="noopener" onclick="event.stopPropagation()">Venus Chub Link</a>
+                            <a href="https://janitorai.com/characters/68175937-d5dd-48fd-8349-fa8ae0966624_character-etienne-captive-merman-asi-verse" target="_blank" rel="noopener" onclick="event.stopPropagation()">Janitor Link</a>
+                        </div>
                     </div>
-                    <div class="asi-char-name">Etienne</div>
-                    <div class="asi-char-role">Merman</div>
-                    <div class="asi-char-menu">
-                        <a href="../../downloads/characters/asi/Etienne.png" download onclick="event.stopPropagation()">
-                            <span class="menu-icon">↓</span> Download Card
-                        </a>
+                    <div class="song-footer">
+                        <div class="song-meta">
+                            <div class="asi-char-name">Etienne</div>
+                            <div class="asi-char-role">Merman</div>
+                        </div>
+                        <div class="song-player" data-src="https://files.catbox.moe/4dghmg.mp3" data-title="Etienne">
+                            <button type="button" class="song-player-btn song-player-play" aria-label="Play Etienne's theme">
+                                <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+                            </button>
+                            <div class="song-player-more">
+                                <button type="button" class="song-player-btn song-player-kebab" aria-label="More options">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg>
+                                </button>
+                                <div class="song-player-menu">
+                                    <a href="https://files.catbox.moe/4dghmg.mp3" class="song-download" data-filename="Look at Me Like That.mp3">Download Song</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="asi-char-desc">Etienne was captured as a young merboy and has spent half his life in captivity. He doesn't know much about the outside world&hellip;but he does remember you. Wait, are you saying you don't remember him? (Impossible!!) On the shores of the irradiated lake where he was born, the two of you met when you were little kids&hellip;that makes you childhood besties! The researchers don't seem that interested in letting him make babies, but he'd really like to try with you anyway. Okay, so&hellip;maybe it's just a bit lonely in his tank. If you got in here with him, it would be a lot less lonely ;)</div>
                 </div>
 
                 <!-- Hector — Coming Soon -->
@@ -136,17 +201,37 @@
                 </div>
 
                 <!-- Amir -->
-                <div class="asi-char-card" onclick="toggleCharMenu(this, event)">
+                <div class="asi-char-card song-host" onclick="toggleCharMenu(this, event)">
                     <div class="asi-char-portrait">
                         <img src="../../downloads/characters/asi/Amir.png" alt="Amir" loading="lazy">
+                        <div class="asi-char-overlay"></div>
+                        <div class="asi-char-menu">
+                            <a href="../../downloads/characters/asi/Amir.png" download onclick="event.stopPropagation()">Download Card</a>
+                            <a href="https://chub.ai/characters/Mokiikitty/amir-captive-naga-v2-695b80756c3b" target="_blank" rel="noopener" onclick="event.stopPropagation()">Venus Chub Link</a>
+                            <a href="https://janitorai.com/characters/97e4df8c-ff26-428c-868e-653e1e6e7416_character-amir-captive-naga-asi-verse" target="_blank" rel="noopener" onclick="event.stopPropagation()">Janitor Link</a>
+                        </div>
                     </div>
-                    <div class="asi-char-name">Amir</div>
-                    <div class="asi-char-role">Naga</div>
-                    <div class="asi-char-menu">
-                        <a href="../../downloads/characters/asi/Amir.png" download onclick="event.stopPropagation()">
-                            <span class="menu-icon">↓</span> Download Card
-                        </a>
+                    <div class="song-footer">
+                        <div class="song-meta">
+                            <div class="asi-char-name">Amir</div>
+                            <div class="asi-char-role">Naga</div>
+                        </div>
+                        <div class="song-player" data-src="https://files.catbox.moe/lyiw0q.mp3" data-title="Amir">
+                            <button type="button" class="song-player-btn song-player-play" aria-label="Play Amir's theme">
+                                <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+                            </button>
+                            <div class="song-player-more">
+                                <button type="button" class="song-player-btn song-player-kebab" aria-label="More options">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg>
+                                </button>
+                                <div class="song-player-menu">
+                                    <a href="https://files.catbox.moe/lyiw0q.mp3" class="song-download" data-filename="Desert Hymn.mp3">Download Song</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="asi-char-desc">Amir came to ASI willingly&mdash;the last hope of a dying clan, trading his body to the researchers in exchange for a cure he believes they're working toward. He's gentle, painfully sincere, and openly in love with you. He thinks he understands the bargain he's made. He's wrong about almost all of it.</div>
                 </div>
 
                 <!-- Nilrix — Coming Soon -->
@@ -242,30 +327,51 @@
         <p>&copy; 2026 Moki.</p>
     </footer>
 
+    <!-- Back to Top -->
+    <button class="back-to-top asi-themed" aria-label="Back to top">↑</button>
+
     <script src="../../js/main.js"></script>
     <script>
         function toggleCharMenu(card, event) {
             const menu = card.querySelector('.asi-char-menu');
             if (!menu) return;
-            const wasActive = menu.classList.contains('active');
-            document.querySelectorAll('.asi-char-menu.active').forEach(m => m.classList.remove('active'));
-            if (!wasActive) {
-                let x = event.clientX;
-                let y = event.clientY;
-                const menuRect = { width: 200, height: 90 };
-                if (x + menuRect.width > window.innerWidth) x = window.innerWidth - menuRect.width - 8;
-                if (y + menuRect.height > window.innerHeight) y = y - menuRect.height;
-                menu.style.left = x + 'px';
-                menu.style.top = y + 'px';
-                menu.classList.add('active');
-            }
+            const wasOpen = card.classList.contains('menu-open');
+            document.querySelectorAll('.asi-char-card.menu-open').forEach(c => c.classList.remove('menu-open'));
+            if (!wasOpen) card.classList.add('menu-open');
         }
 
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.asi-char-card')) {
-                document.querySelectorAll('.asi-char-menu.active').forEach(m => m.classList.remove('active'));
+                document.querySelectorAll('.asi-char-card.menu-open').forEach(c => c.classList.remove('menu-open'));
             }
         });
+
+        // Tooltip edge detection — flip to the left when there's no room on the right
+        document.querySelectorAll('.asi-char-card').forEach(card => {
+            const desc = card.querySelector('.asi-char-desc');
+            if (!desc) return;
+            const decideSide = () => {
+                const rect = card.getBoundingClientRect();
+                const needed = 240 + 12 + 16;
+                card.classList.toggle('flip-tip', rect.right + needed > window.innerWidth);
+            };
+            card.addEventListener('mouseenter', decideSide);
+            card.addEventListener('focusin', decideSide);
+        });
+
+        // Back to top
+        const backToTop = document.querySelector('.back-to-top');
+        if (backToTop) {
+            const toggleBackToTop = () => {
+                backToTop.classList.toggle('visible', window.scrollY > 400);
+            };
+            window.addEventListener('scroll', toggleBackToTop, { passive: true });
+            toggleBackToTop();
+            backToTop.addEventListener('click', () => {
+                const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+            });
+        }
     </script>
 </body>
 </html>

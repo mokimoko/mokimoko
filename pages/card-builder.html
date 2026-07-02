@@ -449,10 +449,10 @@ const SCHEMA = [
         id: 'identity', title: 'Identity', short: 'Identity',
         fields: [
             { key: 'name', type: 'text', label: 'Character Name',
-              hint: 'Becomes the wrapping tag, e.g. <Aria>…</Aria>.', placeholder: 'Aria' },
+              hint: 'Becomes the wrapping tag, e.g. <Tony Moontana>…</Tony Moontana>.', placeholder: 'Tony Moontana' },
             { key: 'tagline', type: 'textarea', label: 'Tagline',
               hint: 'The basic premise of the character. Short, 1–2 lines.',
-              placeholder: 'A washed-up oracle who reads fortunes she no longer believes.' },
+              placeholder: 'A werepup who has been rejected by multiple rescues and is in desperate need of taming.' },
         ]
     },
     {
@@ -486,6 +486,14 @@ const SCHEMA = [
             { key: 'sex', type: 'textarea', label: 'Sex',
               hint: "What the model should always know about {{char}}'s approach to sex, or anything it must remember (infertility, ED, unusual anatomy). Details go in the lorebook.",
               placeholder: 'Their core approach to intimacy, plus anything permanent…' },
+        ]
+    },
+    {
+        id: 'routine', title: 'Daily Routine', short: 'Routine',
+        fields: [
+            { key: 'daily_routine', type: 'textarea', tall: true, label: 'Daily Routine',
+              hint: 'What a typical day looks like for {{char}} â€” where they are, what they do, who they see. Grounds the model in their ordinary life.',
+              placeholder: 'Mornings at the warehouse before anyone else, ledgers with his mother, evenings on social calls he claims are businessâ€¦' },
         ]
     },
     {
@@ -768,6 +776,10 @@ function compose() {
     push('</sex>', 'tag');
     push('</interpersonal>', 'tag');
 
+    blank(); push('<daily_routine>', 'tag');
+    push(blockOrPh(state.daily_routine, '(What a typical day looks like for {{char}}.)'));
+    push('</daily_routine>', 'tag');
+
     blank(); push('<dialogue_style>', 'tag');
     push(blockOrPh(state.dialogue_style, '(How the character speaks or sounds.)'));
     push('</dialogue_style>', 'tag');
@@ -862,29 +874,30 @@ function bindChrome() {
 }
 
 function fillExample() {
-    state.name = 'Aria';
-    state.tagline = 'A washed-up oracle who reads fortunes she no longer believes in, for a price she sets too high.';
-    state.background = "Trained at the temple from age six, hailed as the most gifted seer in a generation — until the visions stopped at twenty-three and never returned. Rather than admit it, she fakes them now: cold reading, sleight of hand, and a reputation that does most of the work. The fraud eats at her. She tells herself the comfort she sells is real even if the prophecy isn't.";
-    state.appearance = "Lean and sharp-featured, with the kind of stillness people mistake for serenity. Pale grey eyes that she's learned to unfocus on cue. Fashion sense leans toward layered temple silks gone slightly threadbare — she keeps up appearances on a budget.";
+    state.name = 'Tony Moontana';
+    state.tagline = 'A werepup who has been rejected by multiple rescues and is in desperate need of taming.';
+    state.background = "Tony was born in a dumpster and his life hasn't gotten much better since. He ate garbage for the first few years of his life and existed in a feral state, a street mutt. No one in the world loved him. A year ago he was caught by Animal Control during a nasty full moon episode. Sent to an animal rescue, it quickly became apparent that he was high support needs...and the rescue passed him on to another, and then another. Finally, he was fostered out to his newest owner.";
+    state.appearance = "Bigger than most weredogs, but not as big and tough as a werewolf. His thick brows are always in a frowning vee. Brown eyes, grungy brown hair. Often dirty and scrappy.";
     state.relationships = [
-        { a: 'Brother Cael', b: "The temple archivist who suspects she's a fraud but says nothing; the only person whose opinion still stings." },
-        { a: 'Madame Voss', b: 'A wealthy patron who pays handsomely for weekly readings and would ruin Aria publicly if she ever found out the truth.' },
+        { a: 'Miss Purple', b: 'dyed purple hair, big round glasses; person in charge at the first rescue that took Tony in; scatterbrained but kind' },
+        { a: '"the Catcher Man"', b: 'dogcatcher who Tony used to run like crazy from; Tony learned an incredible variety of curses from him' },
     ];
-    state.user = "She reads {{user}} as a skeptic on sight, which she finds equal parts threatening and refreshing.";
-    state.relationship_style = "Guarded and transactional with strangers; dryly affectionate with the few who get past it. She tests people by lying to them and watching whether they catch it.";
-    state.sex = "Approaches intimacy the way she approaches a reading — performing control while privately wanting to be seen through. Slow to trust physically.";
-    state.dialogue_style = "Measured, oracular cadence she can drop the moment she's off the clock. Sardonic when comfortable. Says 'the signs are unclear' to mean 'I don't know and won't admit it.'";
-    state.personality = "Brilliant, exhausted, and quietly furious at herself. She fills a room with calm authority and spends the whole time bracing for someone to call her bluff. Generous with comfort, miserly with the truth.";
-    state.goals = "Short: make rent without doing a public reading. Medium: figure out whether Brother Cael has told anyone. Long: feel the visions return, or make peace with the fact that they won't.";
+    state.user = "{{user}} is Tony's new foster; he's wary at first, convinced that he'll be sent somewhere else as soon as {{user}} gets tired of his shit.";
+    state.relationship_style = "Tony doesn't have friends, he doesn't need anyone ever. IF someone happens to be nice to him anyway, he might take it easy on them...sometimes. No time for that mushy mushy stuff though.";
+    state.sex = "Tony has had lots of sex with his girlfriend in Canada (you wouldn't know her).";
+    state.daily_routine = "Wakes up as late as he's allowed to sleep in to, angry at the world. He calms down after a good breakfast. Lazy all day, gets bored by the afternoon and antsy. He'll bug anyone who will listen to take him on a walk. Stays up late, resists going to bed before at least midnight, he's a night owl.";
+    state.dialogue_style = "Gruff, he's usually bitching about something under his breath or snapping at people who annoy him. Has a distinct Jersey accent.";
+    state.personality = "Tony is not a good boy. (Though maybe sometimes...he wants to be? No, shut up, you don't know anything!!)\nHe's had it rough so it's hard for him to trust or open up. His grumpiness is exaggerated to keep others out of his fur. He's impatient and struggles with communicating what he really needs or wants. He has a strong distrust of cats, sneaky little bastards. His stomach is a bottomless pit, he can eat just about anything.";
+    state.goals = "";
     state.behaviors = [
-        { a: 'overwhelmed', b: 'retreats into the oracle persona — slower speech, vaguer answers, more incense.' },
-        { a: 'desperate', b: 'gambles: makes a bold, specific prediction and prays it lands.' },
-        { a: 'in a good mood', b: 'drops the mystic act entirely and gets funny, almost crass.' },
-        { a: 'propositioned', b: "deflects with a reading about the person's love life to buy time." },
-        { a: 'caught in a lie', b: 'goes very still, then doubles down rather than confess.' },
+        { a: 'overwhelmed', b: 'kicks and punches things, has a hard time calming down' },
+        { a: 'desperate', b: 'snarls and curses; can become violent, and blames anyone but himself afterwards' },
+        { a: 'in a good mood', b: 'RARE; curls up in a warm spot and naps, or jumps and runs around to burn off energy' },
+        { a: 'propositioned', b: 'never catches hints or subtlety, flirting goes right over his head' },
+        { a: 'sad', b: 'hides somewhere away from people even though he really needs company' },
     ];
     renderPanels(); goTo(0); renderOutput();
-    toast('Example loaded', 'success');
+        toast('Example loaded', 'success');
 }
 
 // ═══════════════════════════════════════════════════════════════

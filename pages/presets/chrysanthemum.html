@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrysanthemum | Moki</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        /* ── Page Layout ────────────────────────────── */
+        .preset-page {
+            flex: 1;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 120px 2rem 5rem;
+        }
+
+        /* ── Back Crumb ─────────────────────────────── */
+        .breadcrumb {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 3rem;
+            transition: color 0.2s ease;
+        }
+        .breadcrumb::before { content: '← '; }
+        .breadcrumb:hover { color: var(--accent); }
+
+        /* ── Hero Row ───────────────────────────────── */
+        .preset-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-bottom: 5rem;
+        }
+
+        .preset-hero-image {
+            width: 100%;
+            aspect-ratio: 11 / 7;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+
+        .preset-hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        .preset-hero-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            padding-top: 0.5rem;
+        }
+
+        .preset-eyebrow {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.7;
+        }
+
+        .preset-hero-meta h1 {
+            font-size: 3.5rem;
+        }
+
+        .preset-hero-meta .tagline {
+            font-family: var(--font-h2);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            max-width: 380px;
+        }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
+            opacity: 0.3;
+            margin: 0.5rem 0;
+        }
+
+        /* ── Section Label (shared) ─────────────────── */
+        .section-label {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.6;
+            margin-bottom: 1rem;
+        }
+
+        /* ── Download Area ──────────────────────────── */
+        .download-area {
+            margin-bottom: 5rem;
+        }
+
+        .download-bar {
+            border: 1px solid var(--glass-border);
+            padding: 1.2rem 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            background: var(--glass-bg);
+        }
+
+        .download-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .download-info .file-name {
+            font-family: var(--font-h2);
+            font-size: 0.85rem;
+            color: var(--text-main);
+        }
+
+        .download-info .file-meta {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .download-bar .btn {
+            white-space: nowrap;
+            flex-shrink: 0;
+            padding: 0.7rem 1.8rem;
+        }
+
+        /* ── Models / Parameters ────────────────────── */
+        .models-block {
+            margin-bottom: 5rem;
+        }
+
+        .models-note {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+            line-height: 1.7;
+            max-width: 680px;
+            margin-bottom: 1.5rem;
+        }
+
+        .model-row {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 1rem 2rem;
+            border-top: 1px solid var(--glass-border);
+            padding: 1.2rem 0;
+            align-items: start;
+        }
+
+        .model-row:last-child {
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .model-name {
+            font-family: var(--font-h2);
+            font-size: 0.8rem;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding-top: 0.1rem;
+        }
+
+        .model-params {
+            font-family: var(--font-h2);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            line-height: 1.9;
+        }
+
+        .model-params span {
+            color: var(--accent);
+            opacity: 0.8;
+        }
+
+        /* ── About Section ──────────────────────────── */
+        .about-block {
+            margin-bottom: 5rem;
+        }
+
+        .about-block p {
+            max-width: 680px;
+            margin-bottom: 1rem;
+        }
+
+        /* ── What's Inside ──────────────────────────── */
+        .features-block {
+            margin-bottom: 5rem;
+        }
+
+        .feature-group {
+            margin-bottom: 2.5rem;
+        }
+
+        .feature-group-title {
+            font-family: var(--font-h1);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .feature-group p {
+            max-width: 680px;
+            margin-bottom: 0.8rem;
+        }
+
+        /* ── How To Use ─────────────────────────────── */
+        .howto-block {
+            margin-bottom: 4rem;
+        }
+
+        .howto-list {
+            list-style: none;
+            max-width: 680px;
+        }
+
+        .howto-list li {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+            padding: 0.6rem 0;
+            border-top: 1px solid var(--glass-border);
+            display: grid;
+            grid-template-columns: 24px 1fr;
+            gap: 1rem;
+        }
+
+        .howto-list li:last-child {
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .howto-list .step-num {
+            font-family: var(--font-h2);
+            font-size: 0.65rem;
+            color: var(--accent);
+            opacity: 0.5;
+            padding-top: 0.25rem;
+        }
+
+        /* ── Inline Links ────────────────────────────── */
+        .preset-page a:not(.btn):not(.breadcrumb):not(.nav-brand):not(.nav-links a) {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(199, 181, 131, 0.3);
+            transition: border-color 0.2s ease;
+        }
+
+        .preset-page a:not(.btn):not(.breadcrumb):not(.nav-brand):not(.nav-links a):hover {
+            border-color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .preset-hero {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .preset-hero-meta h1 {
+                font-size: 2.8rem;
+            }
+
+            .model-row {
+                grid-template-columns: 1fr;
+                gap: 0.4rem;
+            }
+
+            .download-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Effect -->
+    <div id="loader">
+        <div class="loader-line"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar"></nav>
+
+    <main class="preset-page">
+
+        <a href="../presets.html" class="breadcrumb">Presets</a>
+
+        <!-- Hero -->
+        <div class="preset-hero">
+            <div class="preset-hero-image">
+                <img src="../../images/chrysanthemum.png" alt="Chrysanthemum Preset">
+            </div>
+            <div class="preset-hero-meta">
+                <div class="preset-eyebrow">SillyTavern Preset</div>
+                <h1>Chrysanthemum</h1>
+                <div class="tagline">A simpler sibling to White Lotus — markdown-organized, built for one-on-one RP, with a voice of its own.</div>
+                <div class="divider"></div>
+                <p>Same structure I liked in White Lotus, stripped down. Fewer toggles, writing style baked in, less to fuss with.</p>
+            </div>
+        </div>
+
+        <!-- Download -->
+        <div class="download-area">
+            <div class="download-bar">
+                <div class="download-info">
+                    <div class="file-name">Chrysanthemum [1.0.0].json</div>
+                    <div class="file-meta">Latest &nbsp;·&nbsp; SillyTavern Preset &nbsp;·&nbsp; JSON</div>
+                </div>
+                <a href="../../downloads/presets/Chrysanthemum [1.0.0].json" download class="btn" style="margin-top:0;">Download</a>
+            </div>
+        </div>
+
+        <!-- About -->
+        <div class="about-block">
+            <div class="section-label">About</div>
+            <p>
+                Chrysanthemum is an alternative to my <a href="white-lotus.html">White Lotus</a> preset. I liked how White Lotus was structured, but I wanted something simpler — so this is that. Same general goal, less machinery.
+            </p>
+            <p>
+                The biggest difference under the hood is that Chrysanthemum organizes everything with markdown rather than XML tags, and the writing style is baked directly into the prompt instead of living behind a pile of switches. The result is a preset with a distinct "feel" of its own — noticeably different from White Lotus, in a good way.
+            </p>
+            <p>
+                It's tailored for one-on-one roleplay, so most of the setup you'd normally fiddle with is already handled. Load it, drop in your character, and go.
+            </p>
+        </div>
+
+        <!-- What's Inside -->
+        <div class="features-block">
+            <div class="section-label">What's Inside</div>
+
+            <div class="feature-group">
+                <div class="feature-group-title">The Two Toggles</div>
+                <p>
+                    Chrysanthemum keeps it lean — there are really only two toggles worth touching: <strong>NSFW</strong> and <strong>User Autonomy</strong>. You can happily leave both on all the time. The preset is tuned for one-on-one RP, and User Autonomy is what keeps the model from grabbing the wheel and writing {{user}} for you.
+                </p>
+                <p>
+                    If you'd rather let the model write for {{user}} too — narrating both sides — just flip User Autonomy off. NSFW does what it says on the tin; toggle it as needed.
+                </p>
+            </div>
+
+            <div class="feature-group">
+                <div class="feature-group-title">Baked-In Style</div>
+                <p>
+                    Unlike White Lotus, the writing style here isn't a menu — it's built into the prompt. If you ever want to tweak it, the instructions are split across two spots: the <strong>Main Prompt</strong> holds the style, and <strong>Turn Start</strong> handles length and structure. Edit those and the whole voice shifts.
+                </p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="subtle-footer">
+        <p>&copy; 2026 Moki.</p>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>

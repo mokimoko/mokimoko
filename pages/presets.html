@@ -5,6 +5,154 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Presets | Moki</title>
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Presets page only — tighter grid so cards sit 3 to a row */
+        .container { padding: 80px 1.5rem 4rem; }
+
+        .grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .grid .card { padding: 1.5rem; }
+        .grid .img-container { margin-bottom: 1rem; }
+
+        /* Fall back gracefully on smaller screens */
+        @media (max-width: 900px) {
+            .grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+
+        /* ── Parameters trigger link ────────────────── */
+        .param-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            font-family: var(--font-h2);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            padding: 0.65rem 1.4rem;
+            cursor: pointer;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+        .param-link:hover {
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        /* ── Parameters modal ───────────────────────── */
+        .param-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: flex-start;
+            justify-content: center;
+            z-index: 1000;
+            padding: 5rem 1.5rem;
+            overflow-y: auto;
+        }
+        .param-modal-overlay.open { display: flex; }
+
+        .param-modal {
+            background: var(--bg-color);
+            border: 1px solid var(--glass-border);
+            max-width: 760px;
+            width: 100%;
+            padding: 2.5rem;
+            position: relative;
+        }
+
+        .param-modal-close {
+            position: absolute;
+            top: 1.1rem;
+            right: 1.3rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.6rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .param-modal-close:hover { color: var(--accent); }
+
+        .param-modal .modal-label {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.6;
+            margin-bottom: 0.6rem;
+        }
+        .param-modal h2 { font-size: 1.7rem; margin-bottom: 0.8rem; }
+
+        .param-modal .models-note {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            opacity: 0.6;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .param-modal .model-row {
+            display: grid;
+            grid-template-columns: 170px 1fr;
+            gap: 0.8rem 1.5rem;
+            border-top: 1px solid var(--glass-border);
+            padding: 1rem 0;
+            align-items: start;
+        }
+        .param-modal .model-row:last-child { border-bottom: 1px solid var(--glass-border); }
+
+        .param-modal .model-name {
+            font-family: var(--font-h2);
+            font-size: 0.78rem;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .param-modal .model-name .model-note {
+            display: block;
+            font-size: 0.62rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+            margin-top: 0.3rem;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .param-modal .model-params {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            line-height: 1.9;
+        }
+        .param-modal .model-params span { color: var(--accent); opacity: 0.8; }
+        .param-modal .model-params .alt-label {
+            display: inline-block;
+            font-size: 0.58rem;
+            color: var(--accent);
+            opacity: 0.4;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .param-modal { padding: 2rem 1.2rem; }
+            .param-modal .model-row { grid-template-columns: 1fr; gap: 0.3rem; }
+        }
+    </style>
 </head>
 <body>
     <!-- Loading Effect -->
@@ -19,6 +167,10 @@
     <main class="container">
         <h1>My Presets</h1>
         <p>Settings I use for SillyTavern and Marinara Engine. Mostly text-generation tweaks.</p>
+
+        <div>
+            <button type="button" class="param-link" id="paramTrigger">Recommended Parameters</button>
+        </div>
 
         <div class="grid">
             <!-- Preset Item 1 -->
@@ -39,8 +191,102 @@
                 <a href="presets/white-lotus-marinara.html" class="btn">More Info</a>
             </div>
 
+            <!-- Preset Item 3 -->
+            <div class="card">
+                <div class="img-container"><img src="../images/chrysanthemum.png">
+</div>
+                <h2>Chrysanthemum for SillyTavern</h2>
+                <p>A simpler sibling to White Lotus, built for one-on-one roleplay.</p>
+                <a href="presets/chrysanthemum.html" class="btn">More Info</a>
+            </div>
+
             <!-- Add as many cards as you want here -->
         </div>
+
+        <!-- Parameters Popup -->
+        <div class="param-modal-overlay" id="paramModal" role="dialog" aria-modal="true" aria-labelledby="paramModalTitle">
+            <div class="param-modal">
+                <button type="button" class="param-modal-close" aria-label="Close">&times;</button>
+
+                <div class="modal-label">Reference</div>
+                <h2 id="paramModalTitle">Recommended Parameters</h2>
+                <div class="models-note">All hosted via NanoGPT unless noted. Post-processing: Merge consecutive roles (Semi-strict for GLM 5/5.1). Context: 35k set, ~20k practical with summary extension.</div>
+
+                <div class="model-row">
+                    <div class="model-name">Kimi 2.5 Thinking
+                        <span class="model-note">My love.</span>
+                    </div>
+                    <div class="model-params">
+                        <span>Temp</span> 1.0 · <span>Freq</span> 0 · <span>Pres</span> 0 · <span>Top P</span> 0.90 · <span>Top K</span> 0 · <span>Rep P</span> 1 · <span>Min P</span> 0.01 · <span>Top A</span> 0<br>
+                        <span class="alt-label">Alt</span> <span>Temp</span> 1.0 · <span>Freq</span> 0 · <span>Pres</span> 0 · <span>Top P</span> 0.95 · <span>Top K</span> 25 · <span>Rep P</span> 1 · <span>Min P</span> 0 · <span>Top A</span> 1
+                    </div>
+                </div>
+
+                <div class="model-row">
+                    <div class="model-name">Kimi 2.5 (Non-Think)</div>
+                    <div class="model-params">
+                        <span>Temp</span> 0.6 · <span>Freq</span> 0 · <span>Pres</span> 0 · <span>Top P</span> 0.95 · <span>Top K</span> 0 · <span>Rep P</span> 1 · <span>Min P</span> 0.01 · <span>Top A</span> 0
+                    </div>
+                </div>
+
+                <div class="model-row">
+                    <div class="model-name">Kimi 2.6</div>
+                    <div class="model-params">
+                        <span>Temp</span> 1.0 · <span>Freq</span> 0 · <span>Pres</span> 0 · <span>Top P</span> 1.0 · <span>Top K</span> 0 · <span>Rep P</span> 1 · <span>Min P</span> 0 · <span>Top A</span> 0
+                    </div>
+                </div>
+
+                <div class="model-row">
+                    <div class="model-name">GLM 5 / 5.1
+                        <span class="model-note">Semi-strict post-processing</span>
+                    </div>
+                    <div class="model-params">
+                        <span>Temp</span> 1.0 · <span>Freq</span> 0–0.2 · <span>Pres</span> 0–0.2 · <span>Top P</span> 0.95 · <span>Top K</span> 40 · <span>Rep P</span> 1 · <span>Min P</span> 0 · <span>Top A</span> 0<br>
+                        <span class="alt-label">Alt</span> <span>Temp</span> 1.0 · <span>Freq</span> 0.02 · <span>Pres</span> 0.03 · <span>Top P</span> 1 · <span>Top K</span> 0 · <span>Rep P</span> 1 · <span>Min P</span> 0.05 · <span>Top A</span> 0.4
+                    </div>
+                </div>
+
+                <div class="model-row">
+                    <div class="model-name">GLM 4.7</div>
+                    <div class="model-params">
+                        <span>Temp</span> 1.0 · <span>Freq</span> 0–0.2 · <span>Pres</span> 0–0.2 · <span>Top P</span> 0.95 · <span>Top K</span> 40 · <span>Rep P</span> 1 · <span>Min P</span> 0 · <span>Top A</span> 0
+                    </div>
+                </div>
+
+                <div class="model-row">
+                    <div class="model-name">Deepseek 3.2 Exp
+                        <span class="model-note">Thinking — DS docs say most params are ignored</span>
+                    </div>
+                    <div class="model-params">
+                        <span>Temp</span> 1.0 · <span>Freq</span> 0 · <span>Pres</span> 0 · <span>Top P</span> 0.95 · <span>Top K</span> 0 · <span>Rep P</span> 1 · <span>Min P</span> 0 · <span>Top A</span> 0
+                    </div>
+                </div>
+
+                <div class="model-row">
+                    <div class="model-name">Deepseek 4 Flash
+                        <span class="model-note">Super sensitive to temp!</span>
+                    </div>
+                    <div class="model-params">
+                        <span>Temp</span> 0.7 · <span>Freq</span> 0 · <span>Pres</span> 0 · <span>Top P</span> 0 · <span>Top K</span> 0 · <span>Rep P</span> 1 · <span>Min P</span> 0 · <span>Top A</span> 0
+                    </div>
+                </div>
+
+                <div class="model-row">
+                    <div class="model-name">DS 4 Flash (Think)<br>DS 4 Pro</div>
+                    <div class="model-params">
+                        <span>Temp</span> 1.0 · <span>Freq</span> 0 · <span>Pres</span> 0 · <span>Top P</span> 1.0 · <span>Top K</span> 0 · <span>Rep P</span> 1 · <span>Min P</span> 0 · <span>Top A</span> 0
+                    </div>
+                </div>
+
+                <div class="model-row">
+                    <div class="model-name">Gemma 4 31B</div>
+                    <div class="model-params">
+                        <span>Temp</span> 1.0 · <span>Freq</span> 0–0.2 · <span>Pres</span> 0–0.2 · <span>Top P</span> 0.95 · <span>Top K</span> 64 · <span>Rep P</span> 1 · <span>Min P</span> 0 · <span>Top A</span> 0
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <footer class="subtle-footer">
@@ -48,5 +294,30 @@
     </footer>
 
     <script src="../js/main.js"></script>
+    <script>
+        (function () {
+            const overlay = document.getElementById('paramModal');
+            const trigger = document.getElementById('paramTrigger');
+            const closeBtn = overlay.querySelector('.param-modal-close');
+
+            const open = () => {
+                overlay.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            };
+            const close = () => {
+                overlay.classList.remove('open');
+                document.body.style.overflow = '';
+            };
+
+            trigger.addEventListener('click', open);
+            closeBtn.addEventListener('click', close);
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) close();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && overlay.classList.contains('open')) close();
+            });
+        })();
+    </script>
 </body>
 </html>

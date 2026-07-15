@@ -137,6 +137,29 @@
             letter-spacing: 1px;
         }
 
+        .older-versions {
+            margin-top: 1rem;
+            font-family: var(--font-h2);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            opacity: 0.4;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .older-versions a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease, opacity 0.2s ease;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 1px;
+        }
+
+        .older-versions a:hover {
+            color: var(--accent);
+            opacity: 1;
+        }
+
         /* ── About Section ──────────────────────────── */
         .about-block {
             margin-bottom: 5rem;
@@ -327,10 +350,13 @@
         <div class="download-area">
             <div class="download-bar">
                 <div class="download-info">
-                    <div class="file-name">White_Lotus_4.0.0_marinara.json</div>
+                    <div class="file-name">WHITE LOTUS [4.1.0].marinara.json</div>
                     <div class="file-meta">Latest &nbsp;·&nbsp; Marinara Engine Preset &nbsp;·&nbsp; JSON</div>
                 </div>
-                <a href="../../downloads/presets/White_Lotus_4.0.0_marinara.json" download class="btn" style="margin-top:0;">Download</a>
+                <a href="../../downloads/presets/White Lotus [4.1.0].marinara.json" download class="btn" style="margin-top:0;">Download</a>
+            </div>
+            <div class="older-versions">
+                Previous: <a href="../../downloads/presets/White Lotus [4.0.0].marinara.json" download>v4.0.0</a>
             </div>
         </div>
 

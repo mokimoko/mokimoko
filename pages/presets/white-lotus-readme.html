@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Lotus README | Moki</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .subpage {
+            flex: 1;
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 120px 2rem 5rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.5;
+            margin-bottom: 2.5rem;
+            transition: opacity 0.2s ease, color 0.2s ease;
+        }
+
+        .back-link:hover {
+            opacity: 1;
+            color: var(--accent);
+        }
+
+        .readme h1 {
+            font-size: 2.6rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .readme h2 {
+            font-family: var(--font-h1);
+            font-size: 1.15rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin: 2.6rem 0 0.8rem;
+        }
+
+        .readme p {
+            color: var(--text-muted);
+            line-height: 1.75;
+            margin-bottom: 1rem;
+            max-width: 700px;
+        }
+
+        .readme strong { color: var(--text-main); }
+
+        .readme code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            color: var(--accent);
+            background: rgba(199, 181, 131, 0.08);
+            padding: 0.1em 0.35em;
+            border-radius: 2px;
+        }
+
+        .readme ul {
+            max-width: 700px;
+            margin: 0 0 1rem 1.2rem;
+            color: var(--text-muted);
+            line-height: 1.75;
+        }
+        .readme ul li { margin-bottom: 0.5rem; }
+
+        /* Q&A */
+        .qa {
+            margin: 1.4rem 0;
+            max-width: 700px;
+        }
+        .qa-q {
+            font-style: italic;
+            color: var(--accent);
+            opacity: 0.85;
+            margin-bottom: 0.4rem;
+        }
+        .qa-a {
+            color: var(--text-muted);
+            line-height: 1.75;
+            margin-bottom: 0.6rem;
+        }
+        .qa-a::before {
+            content: '» ';
+            color: var(--accent);
+            opacity: 0.6;
+        }
+        .qa-a.cont::before { content: ''; }
+
+        .readme .closing {
+            font-family: var(--font-h2);
+            color: var(--text-muted);
+        }
+
+        .readme a:not(.back-link) {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(199, 181, 131, 0.3);
+            transition: border-color 0.2s ease;
+        }
+        .readme a:not(.back-link):hover { border-color: var(--accent); }
+    </style>
+</head>
+<body>
+    <div id="loader"><div class="loader-line"></div></div>
+
+    <nav id="navbar"></nav>
+
+    <main class="subpage readme">
+        <a href="white-lotus.html" class="back-link">← Back to White Lotus</a>
+
+        <h1>White Lotus, a preset for SillyTavern</h1>
+
+        <h2>⚙️ Setup</h2>
+        <p>These are the various options you can choose from, like Length, POV, NSFW Style, etc. Choose only one of each!</p>
+
+        <h2>🪷 Lotus Engine</h2>
+        <p>This is the main prompt. It's right before the regular SillyTavern context (World Info, Character Description, and so on).</p>
+
+        <h2>🎛️ Modules</h2>
+        <p>I place the "tweaks" here so they have a decent amount of influence over the output, but not disproportionately so. You can toggle on however many of these you want. A note on the <code>NSFW Toggle</code>: this "activates" the NSFW prompts. The NSFW Style you chose in the Setup won't actually be inserted if this is toggled off.</p>
+
+        <h2>🪢 Kimi Wrangling</h2>
+        <p>My attempt at reining in Kimi's overthinking. It's primarily intended for Kimi 2.6 Thinking.</p>
+
+        <h2>🛠️ Tools</h2>
+        <p>These are all completely optional frills. <code>NPC Crafter</code> should NOT be left on or you'll get new NPCs back to back, but it's useful if you <em>know</em> an NPC will be appearing in the next message; it uses randomizers to create some interesting, non-stereotypical results. All the stuff after that are trackers; they REQUIRE the Tracker Rules to be toggled on. The Custom Tracker block can be used if you want to create your own tracker, but have it use my tracker rules.</p>
+
+        <h2>🧭 Direction</h2>
+        <p>The final instructions for the AI. <code>Variety Toggle</code> will randomize an instruction for the next turn, it's great for introducing....variety. You'd think leaving it on would be chaotic, and it CAN be, but I will say in my testing, it worked really well with GLM models and was very reasonable.</p>
+        <p>The CoTs are for Reasoning models, they're fairly straightforward. <code>Brainstorm</code> isn't too complex; <code>Hyper-Mode</code> asks the AI to consider some things that are more literature adjacent.</p>
+
+        <h2>Q&amp;A</h2>
+
+        <div class="qa">
+            <p class="qa-q">Is this only for SillyTavern?</p>
+            <p class="qa-a">No, I also made a port for Marinara Engine, you can look at the <a href="../presets.html">Presets page</a> if you missed it. I didn't test on other frontends but it's not really that complex; any frontend that supports this kind of json and the {{random}} and {{setvar}}/{{getvar}} macros might be fine.</p>
+        </div>
+
+        <div class="qa">
+            <p class="qa-q">What models does this work with?</p>
+            <p class="qa-a">I primarily tested with GLM 5/5.1, Kimi 2.5/2.6, and a little bit of Deepseek 3.1/3.2/4 (VERY little of that last one) and Gemma 4 31b. I prefer the Thinking variants but most of the time this worked fine with non-Thinking. The trackers in particular benefit from Reasoning capabilities.</p>
+        </div>
+
+        <div class="qa">
+            <p class="qa-q">How big is it?</p>
+            <p class="qa-a">I tried to keep it reasonable. It's a little bigger than Marinara's preset, much smaller than Freaky Frankenstein. However, this very much depends on what you have toggled on! The default configuration is slim, but if you have every option toggled on, it's beefier.</p>
+        </div>
+
+        <div class="qa">
+            <p class="qa-q">Does this work for group chats?</p>
+            <p class="qa-a">Well...I'm not sure how well it works for Group Chats actually, since I don't use those. But it won't break anything so feel free to test it out!</p>
+        </div>
+
+        <div class="qa">
+            <p class="qa-q">Sometimes the trackers don't work!</p>
+            <p class="qa-a">If you use less intelligent models, they're less likely to work correctly. A completely missing tracker just means the model excluded it entirely. Usually not a big deal. A broken one, where you can see the raw text, means the model either forgot the closing XML tag, or messed up the format, so the regex isn't capturing it.</p>
+        </div>
+
+        <div class="qa">
+            <p class="qa-q">What's this about an extension?</p>
+            <p class="qa-a">It annoys me scrolling through a ton of prompt blocks in ST's native preset drawer, so I made an extension specifically to address my annoyances! It displays the toggles you actually would realistically be controlling in an easy-to-view way, a custom side panel that opens when you click the extension's button in the ST UI (top right). It also makes it possible to run the trackers as a separate gen, for better consistency. (So your main model can focus on writing, and a sidecar can handle the stats!)</p>
+        </div>
+
+        <h2>Recommendations for General Roleplay</h2>
+        <ul>
+            <li>Use a summary extension or whatever summary method you prefer to periodically summarize the chat; keep the context size ~30k-50k for the best coherence. (Some people are fine with a bit higher, but in my experience, this is a good setting for that.)</li>
+        </ul>
+
+    </main>
+
+    <footer class="subtle-footer">
+        <p>&copy; 2026 Moki.</p>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>

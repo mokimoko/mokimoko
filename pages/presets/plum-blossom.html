@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plum Blossom | Moki</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        /* ── Page Layout ────────────────────────────── */
+        .preset-page {
+            flex: 1;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 120px 2rem 5rem;
+        }
+
+        /* ── Back Crumb ─────────────────────────────── */
+        .breadcrumb {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 3rem;
+            transition: color 0.2s ease;
+        }
+        .breadcrumb::before { content: '← '; }
+        .breadcrumb:hover { color: var(--accent); }
+
+        /* ── Hero Row ───────────────────────────────── */
+        .preset-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-bottom: 3.5rem;
+        }
+
+        .preset-hero-image {
+            width: 100%;
+            aspect-ratio: 11 / 7;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+
+        .preset-hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        .preset-hero-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            padding-top: 0.5rem;
+        }
+
+        .preset-eyebrow {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.7;
+        }
+
+        .preset-hero-meta h1 {
+            font-size: 3.5rem;
+        }
+
+        .preset-hero-meta .tagline {
+            font-family: var(--font-h2);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            max-width: 380px;
+        }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
+            opacity: 0.3;
+            margin: 0.5rem 0;
+        }
+
+        /* ── Section Label (shared) ─────────────────── */
+        .section-label {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.6;
+            margin-bottom: 1rem;
+        }
+
+        /* ── Experimental Notice ────────────────────── */
+        .exp-notice {
+            border: 1px solid rgba(199, 181, 131, 0.35);
+            background: var(--glass-bg);
+            padding: 1.1rem 1.6rem;
+            margin-bottom: 3.5rem;
+            font-family: var(--font-h2);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+        .exp-notice strong {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.7rem;
+        }
+
+        /* ── Download Area ──────────────────────────── */
+        .download-area {
+            margin-bottom: 5rem;
+        }
+
+        .ext-note {
+            font-family: var(--font-h2);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            opacity: 0.75;
+        }
+
+        .readme-link {
+            margin-top: 1rem;
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .download-bar {
+            border: 1px solid var(--glass-border);
+            padding: 1.2rem 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            background: var(--glass-bg);
+        }
+
+        .download-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .download-info .file-name {
+            font-family: var(--font-h2);
+            font-size: 0.85rem;
+            color: var(--text-main);
+        }
+
+        .download-info .file-meta {
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .download-bar .btn {
+            white-space: nowrap;
+            flex-shrink: 0;
+            padding: 0.7rem 1.8rem;
+        }
+
+        /* ── About Section ──────────────────────────── */
+        .about-block {
+            margin-bottom: 5rem;
+        }
+
+        .about-block p {
+            max-width: 680px;
+            margin-bottom: 1rem;
+        }
+
+        /* ── What's Inside ──────────────────────────── */
+        .features-block {
+            margin-bottom: 5rem;
+        }
+
+        .feature-group {
+            margin-bottom: 2.5rem;
+        }
+
+        .feature-group-title {
+            font-family: var(--font-h1);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .feature-group p {
+            max-width: 680px;
+            margin-bottom: 0.8rem;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+            max-width: 680px;
+        }
+
+        .feature-item {
+            font-family: var(--font-h2);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.6rem 0;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .feature-item span {
+            color: var(--accent);
+            opacity: 0.5;
+            margin-right: 0.5rem;
+        }
+
+        /* ── How To Use ─────────────────────────────── */
+        .howto-block {
+            margin-bottom: 4rem;
+        }
+
+        .howto-list {
+            list-style: none;
+            max-width: 680px;
+        }
+
+        .howto-list li {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+            padding: 0.6rem 0;
+            border-top: 1px solid var(--glass-border);
+            display: grid;
+            grid-template-columns: 24px 1fr;
+            gap: 1rem;
+        }
+
+        .howto-list li:last-child {
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .howto-list .step-num {
+            font-family: var(--font-h2);
+            font-size: 0.65rem;
+            color: var(--accent);
+            opacity: 0.5;
+            padding-top: 0.25rem;
+        }
+
+        /* ── Inline Links ────────────────────────────── */
+        .preset-page a:not(.btn):not(.breadcrumb):not(.nav-brand):not(.nav-links a) {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(199, 181, 131, 0.3);
+            transition: border-color 0.2s ease;
+        }
+
+        .preset-page a:not(.btn):not(.breadcrumb):not(.nav-brand):not(.nav-links a):hover {
+            border-color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .preset-hero {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .preset-hero-meta h1 {
+                font-size: 2.8rem;
+            }
+
+            .download-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Effect -->
+    <div id="loader">
+        <div class="loader-line"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar"></nav>
+
+    <main class="preset-page">
+
+        <a href="../presets.html" class="breadcrumb">Presets</a>
+
+        <!-- Hero -->
+        <div class="preset-hero">
+            <div class="preset-hero-image">
+                <img src="../../images/plum-blossom.png" alt="Plum Blossom Preset">
+            </div>
+            <div class="preset-hero-meta">
+                <div class="preset-eyebrow">SillyTavern Preset</div>
+                <h1>Plum Blossom 1.0.0</h1>
+                <div class="tagline">An experimental preset with a conditional, self-adjusting prompt.</div>
+                <div class="divider"></div>
+                <p>Requires the Experimental Macro Engine. Tested on GLM (4.7, 5, 5.1, 5.2), Kimi, Deepseek 3.2, and Mimo 2.5 Pro. Built for smart, thinking-capable models.</p>
+            </div>
+        </div>
+
+        <!-- Experimental Notice -->
+        <div class="exp-notice">
+            <strong>Experimental.</strong> &nbsp;Plum Blossom leans on SillyTavern's Experimental Macro Engine, which you MUST have toggled on for it to work. It's more involved than my other presets, so give the About and How To Use a read before diving in.
+        </div>
+
+        <!-- Downloads -->
+        <div class="download-area">
+            <p class="ext-note">Using the <a href="../utilities.html">White Lotus extension</a>? No need to download manually. The extension can import Plum Blossom for you.</p>
+            <div class="download-bar">
+                <div class="download-info">
+                    <div class="file-name">plum-blossom-latest.json</div>
+                    <div class="file-meta">v1.0.0 &nbsp;·&nbsp; Latest &nbsp;·&nbsp; SillyTavern Preset &nbsp;·&nbsp; JSON</div>
+                </div>
+                <a href="../../downloads/presets/plum-blossom-latest.json" download class="btn" style="margin-top:0;">Download</a>
+            </div>
+            <div class="readme-link">
+                <a href="plum-blossom-readme.html">Full README →</a>
+            </div>
+        </div>
+
+        <!-- About -->
+        <div class="about-block">
+            <div class="section-label">About</div>
+            <p>
+                Most presets dump the same wall of instructions into every single turn, whether the scene needs them or not. Plum Blossom doesn't. It's built around a conditional main prompt that adjusts to what's actually happening. Instructions for confrontations show up when there's conflict; guidance for romantic or sexual tension shows up when the scene calls for it and stays out of the way during active combat.
+            </p>
+            <p>
+                The way it works: with Scene Analysis enabled, the model outputs a short <code>&lt;analyze&gt;</code> block at the end of each response. Plum Blossom reads that block with regex, sets a batch of variables, and uses <code>{{if}}</code> macros to decide which prompt snippets belong in the next generation. That's the engine. You can run the preset without it, but the dynamic prompt is the whole point, so at that stage you'd be better off with something simpler.
+            </p>
+            <p>
+                Fair warning on size: she's thicc. White Lotus averages around 2k tokens; this one sits closer to 4k. That's more than twice Marinara's size, though still short of the really enormous presets out there. It's made for capable models (thinking models especially), and it will not do well on older or less intelligent ones. It's SillyTavern-only since it depends on the macro engine, though it does run fine on TauriTavern, and it's integrated with the <a href="../utilities.html">White Lotus extension</a> if you want a more streamlined way to manage everything.
+            </p>
+        </div>
+
+        <!-- What's Inside -->
+        <div class="features-block">
+            <div class="section-label">What's Inside</div>
+
+            <div class="feature-group">
+                <div class="feature-group-title">Choose</div>
+                <p>
+                    Every user-facing toggle lives at the top of the preset in the <strong>Choose</strong> section: length, POV, and the allowances you want to switch on or off. This is the only part you actually need to touch. Set your preferences, import, and go. The <strong>Controls</strong> section above it is just for resetting things, so you can usually ignore it.
+                </p>
+            </div>
+
+            <div class="feature-group">
+                <div class="feature-group-title">Scene Analysis (The Engine)</div>
+                <p>
+                    Enable <strong>Scene Analysis</strong> and the preset asks the model to output an <code>&lt;analyze&gt;</code> block each turn. Regex reads that block and sets variables that determine which conditional snippets get included next time. The result is a prompt that reflects the current situation instead of firing every instruction at once. Nearly everything else in Plum Blossom depends on this being on.
+                </p>
+            </div>
+
+            <div class="feature-group">
+                <div class="feature-group-title">Focus Character</div>
+                <p>
+                    Scene Analysis picks a Focus Character each turn (rotatable), plus up to two Prominent Characters, filling the roles of lead and supporting cast. The Focus Character gets the deepest attention: special states like injured or impaired, and their relationship to <code>{{user}}</code>, both of which feed back into the prompt. An impaired character gets dialogue and riskier-behavior instructions; low familiarity adds a note that people stay reserved with those they don't know well. There are toggles for M/M, M/F, and F/F pairings that adjust wording without much changing the underlying instructions. You can also set <strong>Narrator is Focus Character</strong> to auto-assign your lead as the narrator, which sidesteps the usual close-third-person problem on multi-character and scenario cards.
+                </p>
+            </div>
+
+            <div class="feature-group">
+                <div class="feature-group-title">Auto-Author</div>
+                <p>
+                    Toggle <strong>Auto-Author</strong> at the start of a chat and Plum Blossom runs an Establishment routine to give that chat its own writing style. It works out the time period (fantasy settings included), the tone, whether the setting is mundane or fantastical, and whether it reads as literary or webnovel, then picks an author from the matching pool. NSFW scenes reroute to authors who actually write those, then switch back. It's swipe-aware and self-repairing (an <em>Establishment Stalled</em> tag just means it rejected something odd and will retry). Optional, but it needs Scene Analysis to function.
+                </p>
+            </div>
+
+            <div class="feature-group">
+                <div class="feature-group-title">Content Modules</div>
+                <p>
+                    Toggle <strong>Allow NSFW</strong> to unlock explicit handling (leave it off and a mild, prim prompt is used instead). Scene Analysis then detects when things are heading that direction and injects the right prompts based on your NSFW Pacing and Type choices. <strong>Explicit Narration</strong> pushes graphic language, while <strong>Less Explicit Dialogue</strong> keeps the spoken lines tamer, and yes, you can run both together.
+                </p>
+                <p>
+                    <strong>Allow Violence</strong> works the same way with three flavors to pick from. Model-specific tweaks smooth over the quirks of the main models this was built for (including a workaround for the NSFW filter that's been tripping on Mimo via NanoGPT lately). Leave any of these off if their concerns don't apply to you.
+                </p>
+                <div class="feature-list">
+                    <div class="feature-item"><span>→</span> Allow NSFW</div>
+                    <div class="feature-item"><span>→</span> NSFW Pacing / Type</div>
+                    <div class="feature-item"><span>→</span> Explicit Narration</div>
+                    <div class="feature-item"><span>→</span> Less Explicit Dialogue</div>
+                    <div class="feature-item"><span>→</span> Action Movie</div>
+                    <div class="feature-item"><span>→</span> Brutal World / Gore</div>
+                    <div class="feature-item"><span>→</span> Webnovel Style</div>
+                    <div class="feature-item"><span>→</span> Handle Relationships</div>
+                    <div class="feature-item"><span>→</span> Model Tweaks</div>
+                </div>
+            </div>
+
+            <div class="feature-group">
+                <div class="feature-group-title">Controls &amp; Debug</div>
+                <p>
+                    Every variable is prefixed with <code>pb_</code> so it's easy to spot in the Variable Viewer. <strong>Reset All State</strong> wipes them clean and restarts Establishment; <strong>Re-Run Auto-Author</strong> just re-runs the setting analysis without clearing everything else. Toggle whichever you need on, generate one message, then toggle it off. A <strong>Debug Readout</strong> toggle surfaces the current values at the top of your next message so you can inspect them in SillyTavern's prompt viewer. To clear leftover <code>&lt;analyze&gt;</code> blocks from a chat, there's a small <a href="https://github.com/mokimoko/SillyTavern-ChatBlockCleaner">ChatBlockCleaner extension</a> (already built into the White Lotus extension if you use that).
+                </p>
+            </div>
+        </div>
+
+        <!-- How to Use -->
+        <div class="howto-block">
+            <div class="section-label">How To Use</div>
+            <ul class="howto-list">
+                <li>
+                    <span class="step-num">01</span>
+                    <span>Turn on the <strong>Experimental Macro Engine</strong> in SillyTavern first. Plum Blossom won't work without it.</span>
+                </li>
+                <li>
+                    <span class="step-num">02</span>
+                    <span>Import the preset, then set your preferences in the <strong>CHOOSE</strong> section at the top: length, POV, and the NSFW / violence allowances you want. That's the only section you need to configure.</span>
+                </li>
+                <li>
+                    <span class="step-num">03</span>
+                    <span>Leave <strong>Scene Analysis</strong> on. It's the engine, prompting the model for an <code>&lt;analyze&gt;</code> block each turn that drives the conditional prompt. Without it, most of Plum Blossom sits idle.</span>
+                </li>
+                <li>
+                    <span class="step-num">04</span>
+                    <span>Optionally toggle <strong>Auto-Author</strong> at the start of a new chat for a chat-unique writing style, and <strong>Handle Relationships</strong> for relationship analysis on your Focus Character. Both need Scene Analysis enabled.</span>
+                </li>
+                <li>
+                    <span class="step-num">05</span>
+                    <span>Flip on <strong>Allow NSFW</strong> or <strong>Allow Violence</strong> if you want them, then fine-tune with the pacing, type, and style sub-options. Pick a model tweak that matches whatever model you're running (or skip it).</span>
+                </li>
+                <li>
+                    <span class="step-num">06</span>
+                    <span>If something gets stuck (an <em>Establishment Stalled</em> tag, stale data, leftover blocks), use the <strong>Controls</strong> section: <strong>Reset All State</strong> or <strong>Re-Run Auto-Author</strong>. And if SillyTavern's regex ever wipes a chat, your backup is in the <code>username/backups</code> folder.</span>
+                </li>
+            </ul>
+        </div>
+
+    </main>
+
+    <footer class="subtle-footer">
+        <p>&copy; 2026 Moki.</p>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plum Blossom README | Moki</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .subpage {
+            flex: 1;
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 120px 2rem 5rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.5;
+            margin-bottom: 2.5rem;
+            transition: opacity 0.2s ease, color 0.2s ease;
+        }
+
+        .back-link:hover {
+            opacity: 1;
+            color: var(--accent);
+        }
+
+        .readme h1 {
+            font-size: 2.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .readme .intro-note {
+            color: var(--text-muted);
+            font-style: italic;
+            opacity: 0.7;
+            margin-bottom: 2rem;
+        }
+
+        .readme h2 {
+            font-family: var(--font-h1);
+            font-size: 1.15rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin: 2.6rem 0 0.8rem;
+        }
+
+        .readme p {
+            color: var(--text-muted);
+            line-height: 1.75;
+            margin-bottom: 1rem;
+            max-width: 700px;
+        }
+
+        .readme strong { color: var(--text-main); }
+
+        .readme blockquote {
+            border-left: 2px solid var(--accent);
+            padding: 0.6rem 0 0.6rem 1.2rem;
+            margin: 1.5rem 0;
+            color: var(--text-main);
+            font-family: var(--font-h2);
+            font-size: 0.9rem;
+            background: var(--glass-bg);
+        }
+
+        .readme code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            color: var(--accent);
+            background: rgba(199, 181, 131, 0.08);
+            padding: 0.1em 0.35em;
+            border-radius: 2px;
+        }
+
+        .readme ul {
+            max-width: 700px;
+            margin: 0 0 1rem 1.2rem;
+            color: var(--text-muted);
+            line-height: 1.75;
+        }
+        .readme ul li { margin-bottom: 0.5rem; }
+
+        /* Q&A */
+        .qa {
+            margin: 1.4rem 0;
+            max-width: 700px;
+        }
+        .qa-q {
+            font-style: italic;
+            color: var(--accent);
+            opacity: 0.85;
+            margin-bottom: 0.4rem;
+        }
+        .qa-a {
+            color: var(--text-muted);
+            line-height: 1.75;
+            margin-bottom: 0.6rem;
+        }
+        .qa-a::before {
+            content: '» ';
+            color: var(--accent);
+            opacity: 0.6;
+        }
+        .qa-a.cont::before { content: ''; }
+
+        .readme hr {
+            border: none;
+            border-top: 1px solid var(--glass-border);
+            margin: 3rem 0 2rem;
+        }
+
+        .readme .closing {
+            font-family: var(--font-h2);
+            color: var(--text-muted);
+        }
+
+        .readme a:not(.back-link) {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(199, 181, 131, 0.3);
+            transition: border-color 0.2s ease;
+        }
+        .readme a:not(.back-link):hover { border-color: var(--accent); }
+    </style>
+</head>
+<body>
+    <div id="loader"><div class="loader-line"></div></div>
+
+    <nav id="navbar"></nav>
+
+    <main class="subpage readme">
+        <a href="plum-blossom.html" class="back-link">← Back to Plum Blossom</a>
+
+        <h1>Plum Blossom, a preset for SillyTavern</h1>
+
+        <p class="intro-note">Plum Blossom is experimental! I encourage you to read this README before using!</p>
+
+        <blockquote>⚠︎ You MUST have the Experimental Macro Engine toggled on to use Plum Blossom.</blockquote>
+
+        <h2>🕹️ Controls</h2>
+        <p>You usually won't need the stuff in <code>Controls</code>. These toggles are for resetting stuff. (I talk about that more at the bottom.)</p>
+
+        <h2>✅ Choose - User Choice</h2>
+        <p>All user-facing toggles are at the TOP of the preset where you can easily set them, in the section labeled <code>Choose</code>. These are things like length, POV, stuff you want to allow or tweak.</p>
+
+        <h2>🔀 Conditional, Dynamic Main Prompt</h2>
+        <p>After the choice section, you don't need to touch any of the other toggles. They operate with conditional {{if}} macros--that's the "engine". When you enable <code>Scene Analysis</code> the preset will insert instructions for the LLM to output an &lt;analyze&gt; block at the end of every response. Plum Blossom works by reading that block and using regex to set variables that determine what conditional prompt snippets should be included in the next gen.</p>
+        <p>In this way, the prompt can include instructions for how characters behave during confrontations or conflict but ONLY when that's actually happening in the current scene. Or it can include instructions for how to handle romantic/sexual tension when the scene calls for it, but NOT during active combat. The prompt is dynamic and adjusts to what the situation demands rather than dumping a general set of instructions every single turn.</p>
+        <p>You can still use the preset without this enabled...but honestly, in that case you might as well use another preset since this is Plum Blossom's whole schtick.</p>
+
+        <h2>📝 Chat-Unique Writing Style</h2>
+        <p>If you have <code>Auto-Author</code> toggled on at the beginning of a new chat or the first time you use Plum Blossom, Plum Blossom runs an Establishment routine the first time it's used in a chat. It determines the general time period (this works fine for fantasy settings too!), the story tone, whether this is a fantasy or mundane setting. It also decides whether the setting is primarily "literary" or "webnovel" (it will choose webnovel for Chinese settings in particular--I'm a big fan of xianxia), and webnovel gets its own author pool, separate from literary.</p>
+        <p>This is an optional feature; you can toggle it off. But if it's toggled on, you need Scene Analysis for it to work, otherwise it's inactive.</p>
+
+        <h2>💞 Relationships Influence the Prompt</h2>
+        <p>If you have <code>Handle Relationships</code> toggled, Plum Blossom will include relationship analysis in its &lt;analyze&gt; block for the Focus Character (see below). (This also requires Scene Analysis to be toggled on!)</p>
+
+        <h2>🌟 Anyone Can Be the Hero</h2>
+        <p>Scene Analysis will determine who the Focus Character is on a turn-by-turn basis. It assigns ONE Focus Character (rotatable), and up to two Prominent Characters. These essentially fill the roles of Main and Side Characters. They receive different kinds of analyses.</p>
+        <p>It keeps a running pool of Prominent Characters saved to a variable. (I'm not actually doing anything with that yet, but might in future.)</p>
+        <p>The Focus Character gets in-depth attention: special states (injured, impaired), and their relationship to {{user}}, which work in tandem with the rest of the analysis to dynamically control the prompt. For example, if impaired, there are instructions for dialogue, and for more risky, impulsive behavior. A relationship with low familiarity triggers a note that characters are more reserved with people they don't know.</p>
+        <p>I included certain facts like height and age relative to {{user}} and anatomical sex. I also included toggles for M/M, M/F, and F/F stories. It's not really gonna hurt anything if you have the "wrong" one toggled on--the instructions aren't really that different. But the wording IS adjusted to account for specifics relevant to those sexual pairings. I find it really annoying when the AI gets confused about stuff like that.</p>
+        <p>ALSO, you can choose the <code>Narrator is Focus Character</code> option to automatically assign whoever is your lead character as the narrator! This neatly sidesteps the "I want a close-third-person narrator but {{char}} isn't a single person" issue.</p>
+
+        <h2>🔥 NSFW Handling</h2>
+        <p>You need to toggle on <code>Allow NSFW</code> or else a very mild, very prim prompt will be used. Once NSFW is allowed, <code>Scene Analysis</code> will determine when the scene is heading in a NSFW direction and inject the NSFW prompts. Your choices in NSFW Pacing and NSFW Type influence this. Additionally, <code>Explicit Narration</code> encourages the narrator to use graphic language, and <code>Less Explicit Dialogue</code> should make the dialogue, specifically, LESS horny; you can use both together!</p>
+
+        <h2>💥 Violence</h2>
+        <p>I included three options! I like Action Movie violence myself, but Brutal World (and the Allow Gore toggle) can make things more gory and grim, and Webnovel Style is what it says on the tin. They only work when <code>Allow Violence</code> is toggled on.</p>
+
+        <h2>🩺 Model Specific Tweaks</h2>
+        <p>I included some smallish prompts for handling the idiosyncrasies of the primary models this was made for--just choose whichever you're currently using (but you can leave those off if the stuff mentioned in them doesn't bother you.....however, for Mimo through NanoGPT in particular, NSFW stuff seems to be triggering a filter lately, so I do have a thing in there to counteract that!)</p>
+
+        <h2>Troubleshooting</h2>
+        <p>There is a Debug Readout toggle which, if toggled on, can display current values at the top of the prompt in your next message, so you can view them using SillyTavern's native prompt viewer. This is useful if you want to see what values are actually being assigned.</p>
+
+        <h2>Q&amp;A</h2>
+
+        <div class="qa">
+            <p class="qa-q">Shut up, I ain't reading allat, how do I get started?</p>
+            <p class="qa-a">Ok, TLDR: the only toggles you need are in the <code>Choose</code> section of the preset, import as usual, pick your preferences, you're good to go.</p>
+        </div>
+
+        <div class="qa">
+            <p class="qa-q">Is this only for SillyTavern?</p>
+            <p class="qa-a">Yeah. It uses the Experimental Macro Engine, lots of {{if}} macros. I'm not that familiar with other frontends so I don't know if it could be converted or not. HOWEVER, it does work for TauriTavern (I do use that).</p>
+        </div>
+
+        <div class="qa">
+            <p class="qa-q">What models does this work with?</p>
+            <p class="qa-a">It works well with GLM family models (5.1, 5.2, probably 4.7 and 5 as well). Deepseek 3.2 is fine, Deepseek 4 sometimes ignores the tracking instructions altogether. Mimo 2.5 Pro does ok, the "crof" variant not so much. Kimi family models work fine too in my testing. (I use Thinking models for testing...and in general, I just like them.)</p>
+            <p class="qa-a cont">You're welcome to try with others! I don't test with big ones like Claude, ChatGPT, or Gemini because I can't afford them, so you're on your own there. Keep in mind, I use a NanoGPT subscription so caching isn't a concern of mine. However, assuming you don't use lorebooks (it's my understanding the typical use for those would break your cache ANYWAY...), PB's actual prompt placement is below Chat History...so theoretically it shouldn't break your cache??</p>
+        </div>
+
+        <div class="qa">
+            <p class="qa-q">How big is this bad boy?</p>
+            <p class="qa-a">She's bigger than White Lotus by a significant margin. White Lotus averages at ~2k tokens, this one at ~4k. So she's thicc. Compared to other popular presets, she's more than twice Marinara's size, but not as big as Freaky Frankenstein (to give a frame of reference).</p>
+        </div>
+
+        <div class="qa">
+            <p class="qa-q">Does this work for group chats?</p>
+            <p class="qa-a">To be honest, idk. I don't really use those! So...maybe? But it's really made for 1-card chats, whether that's a traditional character card, a multi-character card, or a scenario card. The whole purpose of the "Focus Character" concept is to account for the latter two.</p>
+        </div>
+
+        <div class="qa">
+            <p class="qa-q">How does a preset capture variables from the chat?</p>
+            <p class="qa-a">It uses regex to catch the keywords and convert those with the {{setvar}} macro.</p>
+        </div>
+
+        <div class="qa">
+            <p class="qa-q">How does Auto-Author work?</p>
+            <p class="qa-a">PB runs an "Establishment Phase" the first time it's used, or when you manually trigger it. It's a two phase process: (1) it identifies the general time period and story type; (2) it narrows down the time period and other facts about the setting. It then uses this information to choose from a list of authors. It will continue using that author except for NSFW scenes, which have their own author overrides (I did this bc many of the primary authors don't write sex scenes, so I thought it made sense to reroute to authors who DO). Then it switches back.</p>
+            <p class="qa-a cont">The Establishment Phase can be a little finicky at times! I tried my best to counteract that. It's swipe aware (so swipes shouldn't break it), and it has a self-repair mechanism....so if you ever see a little <code>Establishment Stalled</code> tag, that just means it caught something non-kosher and it's not accepting it. You can just continue as usual and it'll try again...but you can also swipe, or delete the message altogether, either way it should self-correct.</p>
+            <p class="qa-a cont">The only thing you really need to look out for are missed or malformed &lt;analyze&gt; blocks (with smart models, that's rare).</p>
+        </div>
+
+        <div class="qa">
+            <p class="qa-q">Sometimes no &lt;analyze&gt; block is output at all!</p>
+            <p class="qa-a">Eh, unless you're using really powerful models, that can happen. I tried to design PB so it's not a big deal. Missing a block now and then doesn't really affect anything. The data from the last capture is still in the variables; just try not to let it miss too many in a row or that CAN be an issue (stale data, gross). You can just swipe if you want to try for a block on a message that is missing it.</p>
+        </div>
+
+        <div class="qa">
+            <p class="qa-q">Does it work on existing chats?</p>
+            <p class="qa-a">Usually it's fine...the instructions are at the bottom so they take highest priority, meaning even in a very long chat, they SHOULD still work.</p>
+        </div>
+
+        <div class="qa">
+            <p class="qa-q">I'm a habitual swiper like yourself, can I still feed my addiction?</p>
+            <p class="qa-a">Oh yeah for sure. I specifically made it swipe aware for people of culture....or rather, I tried to! You may still have hiccups, but that's why I included ways to reset stuff.</p>
+        </div>
+
+        <div class="qa">
+            <p class="qa-q">Can this wreak havoc in any way?</p>
+            <p class="qa-a">Well, yes and no. No, because it's just a preset. Tool-calling is not enabled, it doesn't have an extension, it works via the macro engine and regex. Yes, because SillyTavern's native regex CAN occasionally wipe a chat...this isn't Plum Blossom specific. I've had this happen with other presets too. It's rare, but frustrating when it happens.</p>
+            <p class="qa-a cont">The important thing is: your chat isn't lost forever! SillyTavern keeps backups in your <code>username/backups</code> folder. You'll need to go find the backup of the chat and place it in the <code>chats/charactername</code> folder. Viola, crisis averted.</p>
+            <p class="qa-a cont">Aside from that....this DOES use a ton of variables. I've labeled ALL of them with the <code>pb_</code> prefix to make identifying them easier. It doesn't hurt anything but it can be annoying if you're testing something else with variables and Variable Viewer is full of PB stuff. If that gets on your nerves, you CAN just wipe all the pb_* variables with PB's <code>Reset All</code> toggle--then switch away from PB so it doesn't refill them lol (however, that WILL wipe your author so if you use PB again, it will need to do its Establishment routine again). There's more about the Reset toggle below.</p>
+        </div>
+
+        <div class="qa">
+            <p class="qa-q">Can Plum Blossom's "Reset All" command remove &lt;analyze&gt; blocks already in the chat?</p>
+            <p class="qa-a">Unfortunately, no, though I wish it could because I feel like that's cleaner... You'd need to manually remove those from each message, I'm sorry! (This is a drawback you'd have with any preset's trackers...) <code>Reset All</code> just wipes all the variables clean and restarts the Establishment phase from the beginning. <code>Re-Run Auto-Author</code> just resets Establishment (without wiping everything else) so the setting analysis can run again. Ideally you should toggle whichever you want on, gen a message, then toggle off.</p>
+            <p class="qa-a cont">If the lingering &lt;analyze&gt; blocks bother you....my perfectionism led me to make an <a href="https://github.com/mokimoko/SillyTavern-ChatBlockCleaner">extension</a> to address precisely that. (You don't need this if you have my White Lotus extension, it's built in with that.) Use at your own risk, it's not extensively tested (I do use it myself lol)....the extension works for ANY XML block you assign it to remove. Keep in mind it does NOT reset PB's Scene Analysis variables! It ONLY removes any XML block you assign to it from the chat file. You have to use PB's <code>Reset All State</code> (or manually flush the variables) if you want to start completely fresh.</p>
+        </div>
+
+        <div class="qa">
+            <p class="qa-q">Does this work with your preset extension?</p>
+            <p class="qa-a">Yep :) I've added Plum Blossom to my White Lotus <a href="https://github.com/mokimoko/SillyTavern-WhiteLotus">extension</a>, which is a much more streamlined way of using it. It includes the dropdown sampler options, easy to find toggles, and the option to run Scene Analysis as a separate gen (manual or automatic). It also has improved Debug in its Debug Inspector, which can just display the values directly rather than in the prompt viewer...and in a way that's easier to read and understand. Inspector has all the Reset options built in too....AND you don't need my little ChatBlockCleaner extension to clean the XML blocks, you can just do it from Inspector. So if you're open to extensions, I highly encourage using the WL extension if you use my presets.</p>
+        </div>
+
+        <h2>Recommendations for General Roleplay</h2>
+        <ul>
+            <li>Use a summary extension or whatever summary method you prefer to periodically summarize the chat; keep the context size ~30k-50k for the best coherence. (Some people are fine with a bit higher, but in my experience, this is a good setting for that.)</li>
+            <li>Seeing raw data from the &lt;analyze&gt; output? That means the LLM didn't do it correctly so the regex styling broke. (Or something else in your setup is interfering with the regex rendering.)</li>
+            <li>A complex preset like this isn't going to perform very well on older or less intelligent models. You'll need to use a smart one!</li>
+        </ul>
+
+        <hr>
+
+        <p class="closing">Anyway, that's it! ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧</p>
+
+    </main>
+
+    <footer class="subtle-footer">
+        <p>&copy; 2026 Moki.</p>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plum Blossom Changelog | Moki</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .subpage {
+            flex: 1;
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 120px 2rem 5rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            font-family: var(--font-h2);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.5;
+            margin-bottom: 2.5rem;
+            transition: opacity 0.2s ease, color 0.2s ease;
+        }
+
+        .back-link:hover {
+            opacity: 1;
+            color: var(--accent);
+        }
+
+        .subpage h1 {
+            font-size: 3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .subpage-intro {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-style: italic;
+            opacity: 0.6;
+        }
+
+        .changelog-entry {
+            margin-bottom: 3rem;
+        }
+
+        .changelog-date {
+            font-family: var(--font-h2);
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.7;
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .changelog-entry ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .changelog-entry li {
+            position: relative;
+            padding: 0.5rem 0 0.5rem 1.2rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .changelog-entry li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            opacity: 0.4;
+        }
+    </style>
+</head>
+<body>
+    <div id="loader"><div class="loader-line"></div></div>
+
+    <nav id="navbar"></nav>
+
+    <main class="subpage">
+        <a href="plum-blossom.html" class="back-link">← Back to Plum Blossom</a>
+        <h1>Changelog</h1>
+        <p class="subpage-intro">Update history for the Plum Blossom preset.</p>
+
+        <div class="changelog-entry">
+            <div class="changelog-date">August 25, 2026</div>
+            <ul>
+                <li>Added a fix a user identified in the README. Tweaked the definition of "impaired" based on user feedback.</li>
+            </ul>
+        </div>
+
+    </main>
+
+    <footer class="subtle-footer">
+        <p>&copy; 2026 Moki.</p>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>

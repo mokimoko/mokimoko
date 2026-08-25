@@ -172,6 +172,29 @@
             letter-spacing: 1px;
         }
 
+        .older-versions {
+            margin-top: 1rem;
+            font-family: var(--font-h2);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            opacity: 0.4;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .older-versions a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease, opacity 0.2s ease;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 1px;
+        }
+
+        .older-versions a:hover {
+            color: var(--accent);
+            opacity: 1;
+        }
+
         .download-bar .btn {
             white-space: nowrap;
             flex-shrink: 0;
@@ -321,7 +344,7 @@
             </div>
             <div class="preset-hero-meta">
                 <div class="preset-eyebrow">SillyTavern Preset</div>
-                <h1>Plum Blossom 1.0.0</h1>
+                <h1>Plum Blossom 1.1.0</h1>
                 <div class="tagline">An experimental preset with a conditional, self-adjusting prompt.</div>
                 <div class="divider"></div>
                 <p>Requires the Experimental Macro Engine. Tested on GLM (4.7, 5, 5.1, 5.2), Kimi, Deepseek 3.2, and Mimo 2.5 Pro. Built for smart, thinking-capable models.</p>
@@ -339,9 +362,12 @@
             <div class="download-bar">
                 <div class="download-info">
                     <div class="file-name">plum-blossom-latest.json</div>
-                    <div class="file-meta">v1.0.0 &nbsp;·&nbsp; Latest &nbsp;·&nbsp; SillyTavern Preset &nbsp;·&nbsp; JSON</div>
+                    <div class="file-meta">v1.1.0 &nbsp;·&nbsp; Latest &nbsp;·&nbsp; SillyTavern Preset &nbsp;·&nbsp; JSON</div>
                 </div>
                 <a href="../../downloads/presets/plum-blossom-latest.json" download class="btn" style="margin-top:0;">Download</a>
+            </div>
+            <div class="older-versions">
+                <a href="plum-blossom-changelog.html">Changelog</a> &nbsp;|&nbsp; Previous: <a href="../../downloads/presets/Plum Blossom [1.0.0].json" download>v1.0.0</a>
             </div>
             <div class="readme-link">
                 <a href="plum-blossom-readme.html">Full README →</a>
